@@ -12,16 +12,13 @@ import { Achievement } from '../data-access.service';
 
 export class HomeComponent implements OnInit {
 
-  apicall$: Achievement;
+  achievements$: Achievement;
 
   constructor(private data: DataAccessService) { }
 
   ngOnInit() {
     this.data.getAchievements().subscribe(
-      (data: Achievement) => {
-        this.apicall$ = data;
-        console.log(data.name);
-      }
+      (data: Achievement) => this.achievements$ = data;
     )
   }
 

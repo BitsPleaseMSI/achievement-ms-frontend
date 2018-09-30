@@ -28,13 +28,14 @@ export interface Posts{
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataAccessService {
 
   constructor(private client: HttpClient) { }
-
+  //debug function below
   posts(){
     //return this.client.post('http://127.0.0.1:8090/achievements/add')
-    return this.client.get<Posts>('https://jsonplaceholder.typicode.com/posts')
+    return this.client.get('https://jsonplaceholder.typicode.com/posts', { observe: 'response' })
   }
 
   addAchievement(){
@@ -42,6 +43,6 @@ export class DataAccessService {
   }
 
   getAchievements(){
-    return this.client.get<Achievement>('http://127.0.0.1:8090/achievements/all?department=Education')
+    return this.client.get<Achievement>('http://localhost:8090/achievements/all?department=Education')
   }
 }
