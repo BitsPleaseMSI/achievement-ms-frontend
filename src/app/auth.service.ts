@@ -30,6 +30,9 @@ export class AuthService {
       .post('http://localhost:8090/users/auth', body.toString(), options)
       .subscribe(response => {
       console.log('server response: ' + JSON.stringify(response));
+      if(response['bool']){
+        localStorage.setItem('token', response['token'].toString());
+      }
     });
   }
 
