@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { User } from './user';
 
+//interfaces for json data from server
 export interface Achievement{
   eventName: string;
   name: string;
@@ -18,13 +22,6 @@ export interface Achievement{
   venue: string;
 }
 
-export interface Posts{
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,17 +29,34 @@ export interface Posts{
 export class DataAccessService {
 
   constructor(private client: HttpClient) { }
-  //debug function below
-  posts(){
-    //return this.client.post('http://127.0.0.1:8090/achievements/add')
-    return this.client.get('https://jsonplaceholder.typicode.com/posts', { observe: 'response' })
-  }
 
+  //TODO
   addAchievement(){
     return this.client.get('http://127.0.0.1:8090/')
   }
 
   getAchievements(){
     return this.client.get<Achievement>('http://localhost:8090/achievements/all?department=Education')
+      .pipe(
+        retry(3) // retry a failed request up to 3 times
+      );
   }
+
+  //TODO
+  addUser(user: Object): Observable<any>{
+    console.log("Data service console " + JSON.stringify(user));
+    return this.client.post<any>('http://localhost:8090/users/add', user, {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data'
+      })
+    })
+    .pipe(catchError(this.handleError))
+  }
+
+  //error hangling block
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
+  }
+
 }

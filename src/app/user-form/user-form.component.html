@@ -1,0 +1,43 @@
+<div class="container">
+    <h1>User Form</h1>
+    <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+
+      {{ diagnostic }}
+
+      <div class="form-group">
+        <label for="firstName">firstName</label>
+        <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #name="ngModel">
+        <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger">
+             firstName is not valid
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">lastName</label>
+        <input type="text" class="form-control" id="lastName" required  [(ngModel)]="model.lastName" name="lastName">
+      </div>
+      <div class="form-group">
+        <label for="department">department</label>
+        <input type="text" class="form-control" id="department" required  [(ngModel)]="model.department" name="department">
+      </div>
+      <div class="form-group">
+        <label for="email">email</label>
+        <input type="text" class="form-control" id="email" required  [(ngModel)]="model.email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="password">password</label>
+        <input type="text" class="form-control" id="password" required  [(ngModel)]="model.password" name="password">
+      </div>
+      <div class="form-group">
+        <label for="password2">retype password</label>
+        <input type="text" class="form-control" id="password2" required  [(ngModel)]="model.password2" name="password2">
+      </div>
+      <div class="form-group">
+        <label for="code">invite code</label>
+        <input type="text" class="form-control" id="code" required  [(ngModel)]="model.code" name="code">
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="userForm.reset()">Reset form</button>
+    </form>
+</div>

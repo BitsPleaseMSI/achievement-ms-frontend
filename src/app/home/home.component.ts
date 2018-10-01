@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataAccessService } from '../data-access.service';
-import { Posts } from '../data-access.service';
 import { Achievement } from '../data-access.service';
 
 @Component({
@@ -17,9 +16,10 @@ export class HomeComponent implements OnInit {
   constructor(private data: DataAccessService) { }
 
   ngOnInit() {
-    this.data.getAchievements().subscribe(
-      (data: Achievement) => this.achievements$ = data;
-    )
+    this.data.getAchievements()
+    .subscribe(
+      (data: Achievement) => this.achievements$ = data
+    );
   }
 
 }

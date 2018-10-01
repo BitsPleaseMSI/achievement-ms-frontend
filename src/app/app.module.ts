@@ -7,18 +7,25 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AddAchievementComponent } from './add-achievement/add-achievement.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { UserFormComponent } from './user-form/user-form.component';
+
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    AddAchievementComponent
+    AddAchievementComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
