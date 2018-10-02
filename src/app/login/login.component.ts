@@ -6,7 +6,11 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent implements OnInit {
+  error$: string;
+  saveUser$: boolean;
 
   constructor(private auth: AuthService) { }
 
@@ -15,7 +19,6 @@ export class LoginComponent implements OnInit {
 
   loginUser(event){
     event.preventDefault();
-
     const target = event.target;
 
     this.auth.login(
@@ -23,14 +26,17 @@ export class LoginComponent implements OnInit {
       target.querySelector('#password').value
     ).subscribe(
       (data) => {
+        // Successful login
         if(data.bool){
-          console.log(data.message)
-          // Success redrect location
-          window.location.href = "/"
+          if(this.saveUser$){
+            console.log('save')
+          }
           localStorage.setItem('token', data['token'].toString());
+          window.location.href = "/"
         }else{
-          window.alert('Incorrect credentials.')
-          console.log(data.message)
+          // Access denied
+          console.log(data.message.toString())
+          this.error$ = "Incorrect credentials"
         }
       }
     )

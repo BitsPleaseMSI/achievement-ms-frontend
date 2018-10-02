@@ -23,7 +23,7 @@
             <!-- Sidebar Holder -->
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>Bootstrap Sidebar</h3>
+                    <h3>Achievement Management System</h3>
                     <h4 *ngIf="userData$">Logged in as:<br>{{ userData$['firstName'] }}</h4>
                 </div>
 
@@ -32,7 +32,7 @@
                   <li *ngIf="!userData$"><a routerLink="/teacherLogin">Teacher Login</a></li>
                   <li (click)="logout()" *ngIf="userData$"><a routerLink="">Logout</a></li>
                   <li><a routerLink="/myNewAchievement">Add your achievement</a></li>
-                  <li><a routerLink="/userRegistration">Add new user</a></li>
+                  <li><a routerLink="/userRegistration">Register user</a></li>
                 </ul>
             </nav>
 

@@ -8,9 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { AddAchievementComponent } from './add-achievement/add-achievement.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { UserFormComponent } from './user-form/user-form.component';
 
 import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     LoginComponent,
     AddAchievementComponent,
-    UserFormComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
