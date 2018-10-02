@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataAccessService } from '../data-access.service';
+import { AuthService } from '../auth.service';
 import { Achievement } from '../data-access.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   achievements$: Achievement;
 
-  constructor(private data: DataAccessService) { }
+  constructor(private data: DataAccessService, private auth: AuthService) { }
 
   ngOnInit() {
     this.data.getAchievements()
