@@ -29,10 +29,11 @@
 
                 <ul class="list-unstyled components">
                   <li><a routerLink="">Home</a></li>
-                  <li *ngIf="!userData$"><a routerLink="/teacherLogin">Teacher Login</a></li>
+                  <li *ngIf="!userData$"><a routerLink="/login">Faculty Login</a></li>
                   <li (click)="logout()" *ngIf="userData$"><a routerLink="">Logout</a></li>
-                  <li><a routerLink="/myNewAchievement">Add your achievement</a></li>
-                  <li><a routerLink="/userRegistration">Register user</a></li>
+                  <li *ngIf="userData$"><a routerLink="/passwordreset">Reset password</a></li>
+                  <li><a routerLink="/achievement/add">Add achievement</a></li>
+                  <li><a *ngIf="!userData$" routerLink="/user/register">Register user</a></li>
                 </ul>
             </nav>
 

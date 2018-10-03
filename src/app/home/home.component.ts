@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataAccessService } from '../data-access.service';
 import { AuthService } from '../auth.service';
-import { Achievement } from '../data-access.service';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +11,17 @@ import { Achievement } from '../data-access.service';
 
 export class HomeComponent implements OnInit {
 
-  achievements$: Achievement;
+  achievements$: Object;
 
   constructor(private data: DataAccessService, private auth: AuthService) { }
 
   ngOnInit() {
     this.data.getAchievements()
     .subscribe(
-      (data: Achievement) => this.achievements$ = data
-    );
+      (data) => {
+        console.log("the data " + data)
+        this.achievements$ = data
+      });
   }
 
 }

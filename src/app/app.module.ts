@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
+import { ResetPassComponent } from './reset-pass/reset-pass.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     AddAchievementComponent,
     RegisterComponent,
+    ResetPassComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
 import { AddAchievementComponent } from './add-achievement/add-achievement.component'
+import { ResetPassComponent } from './reset-pass/reset-pass.component'
 import { RegisterComponent } from './register/register.component'
 
 const routes: Routes = [
@@ -12,16 +13,20 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'teacherLogin',
+    path: 'login',
     component: LoginComponent,
   },
   {
-    path: 'myNewAchievement',
+    path: 'achievement/add',
     component: AddAchievementComponent,
   },
   {
-    path: 'userRegistration',
+    path: 'user/register',
     component: RegisterComponent,
+  },
+  {
+    path: 'passwordreset',
+    component: ResetPassComponent,
   },
 ];
 

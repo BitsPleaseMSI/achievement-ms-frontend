@@ -1,16 +1,16 @@
-<h1>Teacher Registration</h1>
+<h1>Faculty Registration</h1>
 
 <div *ngIf="error$" class="alert alert-danger" >
   <p>Error: {{ error$ }}</p>
 </div>
 
-<form (submit)="registerUser($event)" class="form-signin" action="/userRegistration">
+<form (submit)="registerUser($event)" class="form-signin" action="/user/register">
 
 
     <label for="lastName">First name</label>
     <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"  autofocus required>
     <label for="lastName">Last name</label>
-    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required >
+    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required>
     <label for="lastName">Department</label>
     <input type="text" id="department" name="department" class="form-control" placeholder="Department" required>
     <label for="lastName">E-mail</label>

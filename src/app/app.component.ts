@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './auth.service';
-import { Achievement } from './data-access.service';
+import { Achievement } from './achievement';
 
 
 @Component({
@@ -32,9 +32,7 @@ export class AppComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('token');
-    window.location.href = "/"
-    window.alert("Logged out successfully");
+    window.location.href='/'
   }
-
 
 }

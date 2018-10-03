@@ -5,7 +5,7 @@ import { Headers, Response, Http, RequestOptions  } from '@angular/http';
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 import { catchError, retry } from 'rxjs/operators';
-import { User } from './user'
+// import { User } from './user'
 import { safe } from './sanitise';
 
 export interface resp{
@@ -34,10 +34,7 @@ export class AuthService {
       return new Observable((data) => {})
     }
 
-    return this.http.post('http://localhost:8090/users/auth', body.toString(), options)
-      .pipe(
-        retry(3) // retry a failed request up to 3 times
-      );
+    return this.http.post('http://localhost:8090/users/auth', body.toString(), options);
   }
 
   isValid(token: string){
@@ -52,12 +49,11 @@ export class AuthService {
       );
   }
 
-  register(user: User): Observable<any>{
+  register(user: Object): Observable<any>{
     let body = new URLSearchParams();
 
     for(let key in user)
       body.append(key, user[key]);
-
 
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
@@ -65,12 +61,27 @@ export class AuthService {
 
     console.log("This one " + body.toString())
 
-    if(!safe(body.toString())){
+    if(!safe(body.toString()))
       return new Observable((data) => {})
-    }
 
     return this.http.post('http://localhost:8090/users/add', body.toString(), options);
 
   }
+
+  reset(email, currentpass, newpass): Observable<any>{
+    let body = new URLSearchParams();
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+
+    body.set('email', email);
+    body.set('currentpass', currentpass);
+    body.set('newpass', newpass);
+
+    if(!safe(body.toString()))
+      return new Observable((data) => {})
+
+    return this.http.post('http://localhost:8090/users/resetpass', body.toString(), options)
+    }
 
 }
