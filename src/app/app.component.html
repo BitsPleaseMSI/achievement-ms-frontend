@@ -24,7 +24,7 @@
             <nav id="sidebar">
                 <div class="sidebar-header">
                     <h3>Achievement Management System</h3>
-                    <h4 *ngIf="userData$">Logged in as:<br>{{ userData$['firstName'] }}</h4>
+                    <h4 *ngIf="userData$">Welcome: <br>{{ userData$['firstName'] }}</h4>
                 </div>
 
                 <ul class="list-unstyled components">
@@ -39,7 +39,7 @@
             </nav>
 
             <div id="content">
-                
+
                 <!-- MAIN APP ROUTUING -->
                 <router-outlet></router-outlet>
 

@@ -1,20 +1,25 @@
 <h1>Home</h1>
 
 <h2>List of approved achievements</h2>
-<ul *ngFor="let achievement of achievements$">
-  <li>approved   ==  {{ achievement.approved }}</li>
-  <li>name   ==  {{ achievement.name }}</li>
-  <li>participated   ==  {{ achievement.participated }}</li>
-  <li>rollno   ==  {{ achievement.rollno }}</li>
-  <li>event name   ==  {{ achievement.eventName }}</li>
-  <li>event name   ==  {{ achievement.eventName }}</li>
-  <li>description   ==  {{ achievement.description }}</li>
-  <li>_id   ==  {{ achievement._id }}</li>
-  <li>year   ==  {{ achievement.year }}</li>
-  <li>department   ==  {{ achievement.department }}</li>
-  <li>date   ==  {{ achievement.date }}</li>
-  <li>rating   ==  {{ achievement.rating }}</li>
-  <li>category   ==  {{ achievement.category }}</li>
-  <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
-  <li>venue   ==  {{ achievement.venue }}</li>
-</ul>
+<ol>
+  <li *ngFor="let achievement of achievements$">
+    <ul>
+      <li>approved   ==  {{ achievement.approved }}</li>
+      <li>name   ==  {{ achievement.name }}</li>
+      <li>participated   ==  {{ achievement.participated }}</li>
+      <li>rollno   ==  {{ achievement.rollno }}</li>
+      <li>event name   ==  {{ achievement.eventName }}</li>
+      <li>event name   ==  {{ achievement.eventName }}</li>
+      <li>description   ==  {{ achievement.description }}</li>
+      <li>_id   ==  {{ achievement._id }}</li>
+      <li>year   ==  {{ achievement.year }}</li>
+      <li>department   ==  {{ achievement.department }}</li>
+      <li>date   ==  {{ achievement.date }}</li>
+      <li>rating   ==  {{ achievement.rating }}</li>
+      <li>category   ==  {{ achievement.category }}</li>
+      <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
+      <li>venue   ==  {{ achievement.venue }}</li>
+    </ul>
+    <br>__________________________________________________________________________
+  </li>
+</ol>

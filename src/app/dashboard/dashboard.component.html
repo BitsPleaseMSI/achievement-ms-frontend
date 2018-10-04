@@ -1,21 +1,33 @@
 <h1>Teacher Dashboard</h1>
 
+<h2>List of approved achievements</h2>
+<ol>
+  <li *ngFor="let achievement of approvedAchievements$">
+    <ul>
+      <li>approved   ==  {{ achievement.approved }}</li>
+      <li>_id   ==  {{ achievement._id }}</li>
+      <li>department   ==  {{ achievement.department }}</li>
+      <li>name   ==  {{ achievement.name }}</li>
+      <li>participated   ==  {{ achievement.participated }}</li>
+      <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
+    </ul>
+    <button type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
+    <br>________________________________________________________________________
+  </li>
+</ol>
+
 <h2>List of unapproved achievements</h2>
-<ul *ngFor="let achievement of achievements$">
-  <li>approved   ==  {{ achievement.approved }}</li>
-  <li>name   ==  {{ achievement.name }}</li>
-  <li>participated   ==  {{ achievement.participated }}</li>
-  <li>rollno   ==  {{ achievement.rollno }}</li>
-  <li>event name   ==  {{ achievement.eventName }}</li>
-  <li>event name   ==  {{ achievement.eventName }}</li>
-  <li>description   ==  {{ achievement.description }}</li>
-  <li>_id   ==  {{ achievement._id }}</li>
-  <li>year   ==  {{ achievement.year }}</li>
-  <li>department   ==  {{ achievement.department }}</li>
-  <li>date   ==  {{ achievement.date }}</li>
-  <li>rating   ==  {{ achievement.rating }}</li>
-  <li>category   ==  {{ achievement.category }}</li>
-  <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
-  <li>venue   ==  {{ achievement.venue }}</li>
-  <button type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
-</ul>
+<ol>
+  <li *ngFor="let achievement of unapprovedAchievements$">
+    <ul>
+      <li>approved   ==  {{ achievement.approved }}</li>
+      <li>_id   ==  {{ achievement._id }}</li>
+      <li>department   ==  {{ achievement.department }}</li>
+      <li>name   ==  {{ achievement.name }}</li>
+      <li>participated   ==  {{ achievement.participated }}</li>
+      <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
+    </ul>
+    <button type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
+    <br>________________________________________________________________________
+  </li>
+</ol>

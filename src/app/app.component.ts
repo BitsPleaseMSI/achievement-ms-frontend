@@ -10,10 +10,13 @@ import { Achievement } from './achievement';
   styleUrls: ['./app.component.css']
 })
 
+
 export class AppComponent implements OnInit {
-  title = 'achievement-ms-front';
+
+  constructor(private auth: AuthService) { }
 
   userData$: Object;
+  title = 'achievement-ms-front';
 
   getdata(){
     if( localStorage.getItem('token') ) {
@@ -25,8 +28,6 @@ export class AppComponent implements OnInit {
     }else{ this.userData$ = null; }
 
   }
-
-  constructor(private auth: AuthService) { }
 
   ngOnInit() {
     this.getdata();

@@ -21,6 +21,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(email, password): Observable<any>{
+    console.log('[login]')
     let body = new URLSearchParams();
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -37,7 +38,7 @@ export class AuthService {
   }
 
   isValid(token: string){
-
+    console.log('[isValid]')
     if(!safe(token)){
       return new Observable((data) => {});
     }
@@ -49,6 +50,8 @@ export class AuthService {
   }
 
   register(user: Object): Observable<any>{
+    console.log('[register]')
+
     let body = new URLSearchParams();
 
     for(let key in user)
@@ -58,8 +61,6 @@ export class AuthService {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
     };
 
-    console.log("This one " + body.toString())
-
     if(!safe(body.toString()))
       return new Observable((data) => {})
 
@@ -68,6 +69,8 @@ export class AuthService {
   }
 
   reset(email, currentpass, newpass): Observable<any>{
+    console.log('[reset]')
+
     let body = new URLSearchParams();
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -83,17 +86,28 @@ export class AuthService {
     return this.http.post('http://localhost:8090/users/resetpass', body.toString(), options)
     }
 
-    approveAchievement(id: string, token: string){
-      let options = {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-      };
+  approveAchievement(id: string, token: string){
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
 
-      let url = 'http://localhost:8090/achievements/approve'
+    let url = 'http://localhost:8090/achievements/approve'
+    url += ('?id=' + id)
+    url += ('&token=' + token)
 
-      url += ('?id=' + id)
-      url += ('&token=' + token)
+    return this.http.post(url, '', options)
+  }
 
-      return this.http.post(url, '', options)
-    }
+  unapproveAchievement(id: string, token: string){
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+
+    let url = 'http://localhost:8090/achievements/unapprove'
+    url += ('?id=' + id)
+    url += ('&token=' + token)
+
+    return this.http.post(url, '', options)
+  }
 
 }

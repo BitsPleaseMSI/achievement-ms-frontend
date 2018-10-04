@@ -1,6 +1,6 @@
 export function safe(str: string): boolean{
 
-    console.log("[CHECKING] " + str)
+//    console.log("[CHECKING] " + str)
 
     if(
       str.includes('%3F') ||
@@ -12,6 +12,6 @@ export function safe(str: string): boolean{
       return false;
     }
 
-    console.log("[ITS OK]")
+//    console.log("[ITS OK]")
     return true;
 }
