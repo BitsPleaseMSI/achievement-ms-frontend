@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataAccessService } from '../data-access.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +10,7 @@ import { DataAccessService } from '../data-access.service';
 export class DashboardComponent implements OnInit {
   achievements$: Object;
 
-  constructor(private data: DataAccessService) { }
-
-  ngOnInit() {
+  getdata(){
     this.data.getUnapprovedAchievements()
     .subscribe(
       (data) => {
@@ -19,31 +18,31 @@ export class DashboardComponent implements OnInit {
         this.achievements$ = data['data']
       });
   }
-  /*
-  approve(event){
+
+  constructor(private data: DataAccessService, private auth: AuthService) { }
+
+  ngOnInit() {
+    this.getdata();
+  }
+
+  approve(event, id: string){
     event.preventDefault();
     const target = event.target;
 
-    this.auth.approveAchievement(
-      target.querySelector('#email').value,
-      target.querySelector('#password').value
-    ).subscribe(
+    let token: string;
+    token = localStorage.getItem('token');
+
+    this.auth.approveAchievement(id, token).subscribe(
       (data) => {
-        // Successful login
-        if(data.bool){
-          if(this.saveUser$){
-            console.log('save')
-          }
-          localStorage.setItem('token', data['token'].toString());
-          window.location.href = "/"
+        if(data['bool']){
+          window.alert("Successfully approved!")
+          this.getdata();
         }else{
-          // Access denied
-          console.log(data.message.toString())
-          this.error$ = "Incorrect credentials"
+          window.alert(data['messsage'])
         }
       }
     )
 
   }
-  */
+
 }

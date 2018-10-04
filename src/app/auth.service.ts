@@ -83,4 +83,17 @@ export class AuthService {
     return this.http.post('http://localhost:8090/users/resetpass', body.toString(), options)
     }
 
+    approveAchievement(id: string, token: string){
+      let options = {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      };
+
+      let url = 'http://localhost:8090/achievements/approve'
+
+      url += ('?id=' + id)
+      url += ('&token=' + token)
+
+      return this.http.post(url, '', options)
+    }
+
 }

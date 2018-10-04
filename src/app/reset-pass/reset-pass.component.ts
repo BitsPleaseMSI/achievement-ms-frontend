@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-pass',
@@ -9,10 +10,9 @@ import { AuthService } from '../auth.service';
 export class ResetPassComponent implements OnInit {
   error$: string;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   resetPass(event){
     event.preventDefault();
@@ -29,7 +29,8 @@ export class ResetPassComponent implements OnInit {
         (data) => {
           // Successful login
           if(data.bool){
-            window.location.href = "/"
+            window.alert('Password reset successful!');
+            this.router.navigate(['dashboard']);
           }else{
             // Access denied
             this.error$ = data.message.toString()

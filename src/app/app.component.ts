@@ -15,23 +15,26 @@ export class AppComponent implements OnInit {
 
   userData$: Object;
 
-  constructor(private auth: AuthService) { }
-
-  ngOnInit() {
-
+  getdata(){
     if( localStorage.getItem('token') ) {
       this.auth.isValid(localStorage.getItem('token')).subscribe(
         (data) => {
           this.userData$ = data;
         }
       )
-    }
+    }else{ this.userData$ = null; }
 
+  }
+
+  constructor(private auth: AuthService) { }
+
+  ngOnInit() {
+    this.getdata();
   }
 
   logout(){
     localStorage.removeItem('token');
-    window.location.href='/'
+    this.getdata();
   }
 
 }

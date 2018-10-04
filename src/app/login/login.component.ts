@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
   error$: string;
   saveUser$: boolean;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private ac: AppComponent, private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,11 +29,10 @@ export class LoginComponent implements OnInit {
       (data) => {
         // Successful login
         if(data.bool){
-          if(this.saveUser$){
-            console.log('save')
-          }
+        //  if(this.saveUser$)
           localStorage.setItem('token', data['token'].toString());
-          window.location.href = "/"
+          this.router.navigate(['dashboard']);
+          this.ac.getdata()
         }else{
           // Access denied
           console.log(data.message.toString())

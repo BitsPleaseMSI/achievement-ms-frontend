@@ -13,14 +13,18 @@ export class HomeComponent implements OnInit {
 
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService) { }
-
-  ngOnInit() {
+  getdata(){
     this.data.getApprovedAchievements()
     .subscribe(
       (data) => {
         this.achievements$ = data
       });
+  }
+
+  constructor(private data: DataAccessService, private auth: AuthService) { }
+
+  ngOnInit() {
+    this.getdata()
   }
 
 }
