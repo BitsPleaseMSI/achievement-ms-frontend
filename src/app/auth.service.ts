@@ -5,7 +5,6 @@ import { Headers, Response, Http, RequestOptions  } from '@angular/http';
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 import { catchError, retry } from 'rxjs/operators';
-// import { User } from './user'
 import { safe } from './sanitise';
 
 export interface resp{
