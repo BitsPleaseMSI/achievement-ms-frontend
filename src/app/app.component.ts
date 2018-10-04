@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
       this.auth.isValid(localStorage.getItem('token')).subscribe(
         (data) => {
           this.userData$ = data;
-          console.log(data)
         }
       )
     }

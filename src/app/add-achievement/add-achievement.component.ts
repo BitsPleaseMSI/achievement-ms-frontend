@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Achievement } from '../achievement';
 import { DataAccessService } from '../data-access.service';
+import { Achievement } from '../achievement';
 
 @Component({
   selector: 'app-add-achievement',
@@ -17,15 +17,16 @@ export class AddAchievementComponent implements OnInit {
 
   }
 
-  addAchievement($event){
+  addAchievement(event){
     event.preventDefault();
     const target = event.target;
 
-/*  form sanitisation block
-    if(){
-      error$ = ""
-    }
-*/
+    /*  form sanitisation block
+      if(){
+        error$ = ""
+      }
+    */
+
     let achievement = new Achievement(
       target.querySelector('#name').value,
       target.querySelector('#rollNo').value,
@@ -36,15 +37,16 @@ export class AddAchievementComponent implements OnInit {
       target.querySelector('#department').value,
       target.querySelector('#shift').value,
       target.querySelector('#eventName').value,
-      target.querySelector('#year').value,
       target.querySelector('#date').value,
       target.querySelector('#title').value,
       target.querySelector('#venue').value,
       target.querySelector('#category').value,
       target.querySelector('#participated').value,
       target.querySelector('#description').value,
-      target.querySelector('#image').value,
+      target.querySelector('#imageUrl').value,
     )
+
+    console.log('almost there')
 
     this.data.addAchievement(achievement).subscribe(
       (data) => {
@@ -57,6 +59,7 @@ export class AddAchievementComponent implements OnInit {
           this.error$ = data.message.toString()
         }
       }
+
     )
 
   }

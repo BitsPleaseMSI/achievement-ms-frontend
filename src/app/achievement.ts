@@ -9,13 +9,12 @@ export class Achievement{
     public department: string,
     public shift: string,
     public eventName: string,
-    public year: number,
     public date: string,
     public title: string,
     public venue: string,
     public category: string,
     public participated: boolean,
     public description: string,
-    public image: string,
+    public imageUrl: string,
   ){ }
 }
