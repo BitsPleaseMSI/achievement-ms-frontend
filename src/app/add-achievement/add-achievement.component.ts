@@ -43,7 +43,7 @@ export class AddAchievementComponent implements OnInit {
       target.querySelector('#category').value,
       target.querySelector('#participated').value,
       target.querySelector('#description').value,
-      target.querySelector('#imageUrl').value,
+      target.querySelector('#image').value,
     )
 
     console.log('almost there')

@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component'
 import { AddAchievementComponent } from './add-achievement/add-achievement.component'
 import { ResetPassComponent } from './reset-pass/reset-pass.component'
 import { RegisterComponent } from './register/register.component'
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'passwordreset',
     component: ResetPassComponent,
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
   },
 ];
 

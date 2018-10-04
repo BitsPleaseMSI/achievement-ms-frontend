@@ -12,8 +12,13 @@ export class DataAccessService {
 
   constructor(private http: HttpClient) { }
 
-  getAchievements(): Observable<any>{
+  getApprovedAchievements(): Observable<any>{
     return this.http.get<any>('http://localhost:8090/achievements/all?department=Education')
+    .pipe( retry(3) );
+  }
+
+  getUnapprovedAchievements(): Observable<any>{
+    return this.http.get<any>('http://localhost:8090/achievements/unapproved?token=' + localStorage.getItem('token'))
     .pipe( retry(3) );
   }
 

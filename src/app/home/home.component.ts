@@ -16,10 +16,9 @@ export class HomeComponent implements OnInit {
   constructor(private data: DataAccessService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.data.getAchievements()
+    this.data.getApprovedAchievements()
     .subscribe(
       (data) => {
-        console.log("the data " + data)
         this.achievements$ = data
       });
   }

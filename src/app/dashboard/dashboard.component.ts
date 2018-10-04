@@ -1,26 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { DataAccessService } from '../data-access.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
+export class DashboardComponent implements OnInit {
+  achievements$: Object;
 
-export class LoginComponent implements OnInit {
-  error$: string;
-  saveUser$: boolean;
-
-  constructor(private auth: AuthService) { }
+  constructor(private data: DataAccessService) { }
 
   ngOnInit() {
+    this.data.getUnapprovedAchievements()
+    .subscribe(
+      (data) => {
+        console.log("the data " + data)
+        this.achievements$ = data['data']
+      });
   }
-
-  loginUser(event){
+  /*
+  approve(event){
     event.preventDefault();
     const target = event.target;
 
-    this.auth.login(
+    this.auth.approveAchievement(
       target.querySelector('#email').value,
       target.querySelector('#password').value
     ).subscribe(
@@ -41,5 +45,5 @@ export class LoginComponent implements OnInit {
     )
 
   }
-
+  */
 }

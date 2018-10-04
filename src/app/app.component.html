@@ -31,27 +31,17 @@
                   <li><a routerLink="">Home</a></li>
                   <li *ngIf="!userData$"><a routerLink="/login">Faculty Login</a></li>
                   <li (click)="logout()" *ngIf="userData$"><a routerLink="">Logout</a></li>
+                  <li *ngIf="userData$"><a routerLink="/dashboard">Dashboard</a></li>
                   <li *ngIf="userData$"><a routerLink="/passwordreset">Reset password</a></li>
                   <li><a routerLink="/achievement/add">Add achievement</a></li>
                   <li><a *ngIf="!userData$" routerLink="/user/register">Register user</a></li>
                 </ul>
             </nav>
 
-            <!-- Page Content Holder -->
             <div id="content">
-
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-
-                        <div class="navbar-header">
-                        <!-- MAIN APP ROUTUING -->
-                            <router-outlet></router-outlet>
-
-                        </div>
-                    </div>
-                </nav>
-
-
+                
+                <!-- MAIN APP ROUTUING -->
+                <router-outlet></router-outlet>
 
             </div>
         </div>
