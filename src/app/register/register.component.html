@@ -1,3 +1,4 @@
+<div id="mainContent">
 <h1>Faculty Registration</h1>
 
 <div *ngIf="error$" class="alert alert-danger" >
@@ -7,21 +8,28 @@
 <form (submit)="registerUser($event)" class="form-signin" action="/user/register">
 
 
-    <label for="lastName">First name</label>
+    <label for="first Name">First name</label>
     <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"  autofocus required>
-    <label for="lastName">Last name</label>
+    <br>
+    <label for="Last Name">Last name</label>
     <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required>
-    <label for="lastName">Department</label>
+    <br>
+    <label for="Department">Department</label>
     <input type="text" id="department" name="department" class="form-control" placeholder="Department" required>
-    <label for="lastName">E-mail</label>
+    <br>
+    <label for="E-mail">E-mail</label>
     <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required>
-    <label for="lastName">Password</label>
+    <br>
+    <label for="Password">Password</label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    <label for="lastName">Re-type password</label>
+    <br>
+    <label for="Re-type">Re-type password</label>
     <input type="password" id="password2" name="password2" class="form-control" placeholder="Re-type password" required>
-    <label for="code">Invite code</label>
+    <br>
+    <label for="Invite Code">Invite code</label>
     <input type="password" id="code" name="code" class="form-control" placeholder="Invite code" required>
-
+    <br>
 
     <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Register</button>
 </form>
+</div>
