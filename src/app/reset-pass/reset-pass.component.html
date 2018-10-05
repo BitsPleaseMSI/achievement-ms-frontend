@@ -6,11 +6,16 @@
 </div>
 
 <form (submit)="resetPass($event)" class="form-signin" action="/passwordreset">
-    <span id="reauth-email" class="reauth-email"></span>
-    <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
-    <input type="password" id="currentpass" name="psw" class="form-control" placeholder="Current password" required>
-    <input type="password" id="newpass" name="psw" class="form-control" placeholder="New Password" required>
+
+    <label for="currentpass">Current password</label>
+    <input type="password" id="currentpass" name="psw" class="form-control" placeholder="Enter your current password" required>
+
+    <label for="newpass">New password</label>
+    <input type="password" id="newpass" name="psw" class="form-control" placeholder="Enter new password" required>
+
+    <label for="newpass1">Confirm new password</label>
     <input type="password" id="newpass1" name="psw" class="form-control" placeholder="Confirm new Password" required>
+    <br>
     <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Submit</button>
-</form><!-- /form -->
+</form>
 </div>

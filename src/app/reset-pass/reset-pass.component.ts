@@ -17,30 +17,52 @@ export class ResetPassComponent implements OnInit {
   resetPass(event){
     event.preventDefault();
     const target = event.target;
+    let email = undefined;
 
-    if(
-      target.querySelector('#newpass').value == target.querySelector('#newpass1').value
-    ){
-      this.auth.reset(
-        target.querySelector('#email').value,
-        target.querySelector('#currentpass').value,
-        target.querySelector('#newpass').value
-      ).subscribe(
+    if( target.querySelector('#newpass').value != target.querySelector('#newpass1').value ){
+      this.error$ = "New passwords do not match!"
+      return;
+    }
+
+    // Do we have a token?
+    if( localStorage.getItem('token') ) {
+
+      // Is the token valid?
+      this.auth.isValid(localStorage.getItem('token')).subscribe(
         (data) => {
-          // Successful login
-          if(data.bool){
-            window.alert('Password reset successful!');
-            this.router.navigate(['dashboard']);
-          }else{
-            // Access denied
-            this.error$ = data.message.toString()
+
+          // Get email from user's token
+          email = data['email']
+
+          if( !(email) ){
+            this.error$ = 'User not authenticated! Please log in again.'
+            return;
           }
+
+          // Reseting password
+          this.auth.reset(
+            email,
+            target.querySelector('#currentpass').value,
+            target.querySelector('#newpass').value
+          ).subscribe(
+            (data) => {
+              if(data.bool){
+                window.alert('Password reset successful!');
+                this.router.navigate(['dashboard']);
+              }else{
+                // Error while password reset
+                this.error$ = data.message.toString()
+              }
+            }
+          )
+
         }
       )
     }else{
-      this.error$ = "New passwords do not match!"
+      // User does not have a token!
+      this.error$ = 'User not authenticated! Please log in again.'
+      return;
     }
-
 
   }
 

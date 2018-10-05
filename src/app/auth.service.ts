@@ -31,6 +31,7 @@ export class AuthService {
     body.set('password', password);
 
     if(!safe(body.toString())){
+      console.log('[UNSAFE DATA!]');
       return new Observable((data) => {})
     }
 
@@ -39,7 +40,9 @@ export class AuthService {
 
   isValid(token: string){
     console.log('[isValid]')
+
     if(!safe(token)){
+      console.log('[UNSAFE DATA!]');
       return new Observable((data) => {});
     }
 
@@ -61,8 +64,10 @@ export class AuthService {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
     };
 
-    if(!safe(body.toString()))
+    if(!safe(body.toString())){
+      console.log('[UNSAFE DATA!]');
       return new Observable((data) => {})
+    }
 
     return this.http.post('http://localhost:8090/users/add', body.toString(), options);
 
@@ -80,8 +85,10 @@ export class AuthService {
     body.set('currentpass', currentpass);
     body.set('newpass', newpass);
 
-    if(!safe(body.toString()))
+    if(!safe(body.toString())){
+      console.log('[UNSAFE DATA!]');
       return new Observable((data) => {})
+    }
 
     return this.http.post('http://localhost:8090/users/resetpass', body.toString(), options)
     }
@@ -94,6 +101,8 @@ export class AuthService {
     let url = 'http://localhost:8090/achievements/approve'
     url += ('?id=' + id)
     url += ('&token=' + token)
+
+
 
     return this.http.post(url, '', options)
   }
