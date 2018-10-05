@@ -24,45 +24,31 @@ export class ResetPassComponent implements OnInit {
       return;
     }
 
-    // Do we have a token?
-    if( localStorage.getItem('token') ) {
+    this.auth.currentUser().subscribe(
+      (data) => {
 
-      // Is the token valid?
-      this.auth.isValid(localStorage.getItem('token')).subscribe(
-        (data) => {
-
-          // Get email from user's token
-          email = data['email']
-
-          if( !(email) ){
-            this.error$ = 'User not authenticated! Please log in again.'
-            return;
+          if(!data['email']){
+            this.auth.redirect('login', 'Unauthenticated user. Login again.')
+          }else{
+            this.auth.reset(
+              data['email'],
+              target.querySelector('#currentpass').value,
+              target.querySelector('#newpass').value
+            ).subscribe(
+              (data) => {
+                if(data.bool){
+                  this.auth.redirect('login', 'Password reset successful!')
+                  this.router.navigate(['dashboard']);
+                }else{
+                  // Error while password reset
+                  this.error$ = data.message.toString()
+                }
+              }
+            )
           }
 
-          // Reseting password
-          this.auth.reset(
-            email,
-            target.querySelector('#currentpass').value,
-            target.querySelector('#newpass').value
-          ).subscribe(
-            (data) => {
-              if(data.bool){
-                window.alert('Password reset successful!');
-                this.router.navigate(['dashboard']);
-              }else{
-                // Error while password reset
-                this.error$ = data.message.toString()
-              }
-            }
-          )
-
-        }
-      )
-    }else{
-      // User does not have a token!
-      this.error$ = 'User not authenticated! Please log in again.'
-      return;
-    }
+      }
+    )
 
   }
 

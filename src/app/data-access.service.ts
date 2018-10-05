@@ -20,7 +20,15 @@ export class DataAccessService {
 
   getUnapprovedAchievements(): Observable<any>{
     console.log('[getUnapprovedAchievements]')
-    return this.http.get<any>('http://localhost:8090/achievements/unapproved?token=' + localStorage.getItem('token'))
+    let token = '';
+
+    if(localStorage.getItem('token')){
+      token = localStorage.getItem('token');
+    }else{
+      token = sessionStorage.getItem('token');
+    }
+
+    return this.http.get<any>('http://localhost:8090/achievements/unapproved?token=' + token)
     .pipe( retry(3) );
   }
 

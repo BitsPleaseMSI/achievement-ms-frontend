@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   error$: string;
-  saveUser$: boolean;
 
   constructor(private auth: AuthService, private ac: AppComponent, private router: Router) { }
 
@@ -29,8 +28,11 @@ export class LoginComponent implements OnInit {
       (data) => {
         // Successful login
         if(data.bool){
-        //  if(this.saveUser$)
-          localStorage.setItem('token', data['token'].toString());
+          if(target.querySelector('#saveUser').checked){
+            localStorage.setItem('token', data['token'].toString());
+          }else{
+            sessionStorage.setItem('token', data['token'].toString());
+          }
           this.router.navigate(['dashboard']);
           this.ac.getdata()
         }else{

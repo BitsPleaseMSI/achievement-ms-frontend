@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './auth.service';
 import { Achievement } from './achievement';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,21 +13,18 @@ import { Achievement } from './achievement';
 
 
 export class AppComponent implements OnInit {
-
-  constructor(private auth: AuthService) { }
-
   userData$: Object;
   title = 'achievement-ms-front';
 
-  getdata(){
-    if( localStorage.getItem('token') ) {
-      this.auth.isValid(localStorage.getItem('token')).subscribe(
-        (data) => {
-          this.userData$ = data;
-        }
-      )
-    }else{ this.userData$ = null; }
+  constructor(private auth: AuthService, private router: Router) { }
 
+  getdata(){
+    this.auth.currentUser().subscribe(
+      (data) => {
+        if( data['email'] )
+          this.userData$ = data;
+      }
+    )
   }
 
   ngOnInit() {
@@ -35,7 +33,9 @@ export class AppComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('token');
-    this.getdata();
+    sessionStorage.removeItem('token');
+    this.userData$ = undefined;
+    this.router.navigate(['']);
   }
 
 }

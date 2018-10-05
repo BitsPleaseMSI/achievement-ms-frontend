@@ -6,10 +6,13 @@ import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 import { catchError, retry } from 'rxjs/operators';
 import { safe } from './sanitise';
+import { Router } from '@angular/router';
 
-export interface resp{
-  bool: boolean;
-  message: string;
+interface User{
+  email: string;
+  firstName: string;
+  lastName: string;
+  department: string;
 }
 
 @Injectable({
@@ -18,7 +21,27 @@ export interface resp{
 
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
+
+  redirect(route: string, message: string){
+    window.alert(message)
+    this.router.navigate([route]);
+  }
+
+  currentUser(): Observable<any>{
+    console.log('[currentUser]')
+    let token = ''
+
+    if(localStorage.getItem('token')){
+      token = localStorage.getItem('token');
+    }else{
+      token = sessionStorage.getItem('token');
+    }
+
+    console.log('token')
+    console.log(token)
+    return this.http.get('http://localhost:8090/users/isvalid?token=' + token)
+  }
 
   login(email, password): Observable<any>{
     console.log('[login]')
@@ -38,19 +61,6 @@ export class AuthService {
     return this.http.post('http://localhost:8090/users/auth', body.toString(), options);
   }
 
-  isValid(token: string){
-    console.log('[isValid]')
-
-    if(!safe(token)){
-      console.log('[UNSAFE DATA!]');
-      return new Observable((data) => {});
-    }
-
-    return this.http.get('http://localhost:8090/users/isvalid?token=' + token)
-      .pipe(
-        retry(3) // retry a failed request up to 3 times
-      );
-  }
 
   register(user: Object): Observable<any>{
     console.log('[register]')
@@ -93,10 +103,17 @@ export class AuthService {
     return this.http.post('http://localhost:8090/users/resetpass', body.toString(), options)
     }
 
-  approveAchievement(id: string, token: string){
+  approveAchievement(id: string){
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
+    let token = '';
+
+    if(localStorage.getItem('token')){
+      token = localStorage.getItem('token');
+    }else{
+      token = sessionStorage.getItem('token');
+    }
 
     let url = 'http://localhost:8090/achievements/approve'
     url += ('?id=' + id)
@@ -107,10 +124,17 @@ export class AuthService {
     return this.http.post(url, '', options)
   }
 
-  unapproveAchievement(id: string, token: string){
+  unapproveAchievement(id: string){
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
+    let token = '';
+
+    if(localStorage.getItem('token')){
+      token = localStorage.getItem('token');
+    }else{
+      token = sessionStorage.getItem('token');
+    }
 
     let url = 'http://localhost:8090/achievements/unapprove'
     url += ('?id=' + id)
