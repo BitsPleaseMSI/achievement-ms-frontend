@@ -38,8 +38,6 @@ export class AuthService {
       token = sessionStorage.getItem('token');
     }
 
-    console.log('token')
-    console.log(token)
     return this.http.get('http://localhost:8090/users/isvalid?token=' + token)
   }
 

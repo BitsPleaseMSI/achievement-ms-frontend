@@ -12,10 +12,30 @@ export class DataAccessService {
 
   constructor(private http: HttpClient) { }
 
-  getApprovedAchievements(): Observable<any>{
+  getApprovedAchievements(params?: Object): Observable<any>{
     console.log('[getApprovedAchievements]')
-    return this.http.get<any>('http://localhost:8090/achievements/all')
-    .pipe( retry(3) );
+
+    let filters = new URLSearchParams();
+
+/*
+  department
+  semester
+  dateFrom
+  dateTo
+  shift
+  section
+  sessionFrom
+  sessionto
+  category
+*/
+
+    for(let key in params)
+      filters.append(key, params[key]);
+
+    console.log('filters.toString()')
+    console.log(filters.toString())
+
+    return this.http.get<any>('http://localhost:8090/achievements/all\?' + filters.toString())
   }
 
   getUnapprovedAchievements(): Observable<any>{

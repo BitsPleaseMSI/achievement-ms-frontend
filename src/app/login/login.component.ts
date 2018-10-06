@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
           this.ac.getdata()
         }else{
           // Access denied
-          console.log(data.message.toString())
+          console.log(data)
           this.error$ = "Incorrect credentials"
         }
       }

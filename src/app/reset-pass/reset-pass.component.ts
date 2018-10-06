@@ -38,7 +38,6 @@ export class ResetPassComponent implements OnInit {
               (data) => {
                 if(data.bool){
                   this.auth.redirect('login', 'Password reset successful!')
-                  this.router.navigate(['dashboard']);
                 }else{
                   // Error while password reset
                   this.error$ = data.message.toString()

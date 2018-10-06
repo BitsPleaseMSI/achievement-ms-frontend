@@ -68,7 +68,6 @@ export class DashboardComponent implements OnInit {
       }
     )
 
-
   }
 
   unapprove(event, id: string){
@@ -88,7 +87,7 @@ export class DashboardComponent implements OnInit {
                 window.alert("Successfully unapproved!")
                 this.getdata();
               }else{
-                window.alert(data['messsage'])
+                window.alert(data['message'])
               }
             }
           )

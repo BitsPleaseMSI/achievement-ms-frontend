@@ -1,16 +1,57 @@
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
 <h1>Home</h1>
 
 <h2>List of approved achievements</h2>
+
+<table border="true">
+  <tr>
+    <th>ID</th>
+    <th>Approved</th>
+    <th>Participated</th>
+    <th>Roll no.</th>
+    <th>Section</th>
+    <th>Shift</th>
+    <th>Department</th>
+    <th>Date</th>
+    <th>category</th>
+  </tr>
+  <tr *ngFor="let achievement of achievements$">
+    <td>{{ achievement._id }}</td>
+    <td>{{ achievement.approved }}</td>
+    <td>{{ achievement.participated }}</td>
+    <td>{{ achievement.rollNo }}</td>
+    <td>{{ achievement.section }}</td>
+    <td>{{ achievement.shift }}</td>
+    <td>{{ achievement.department }}</td>
+    <td>{{ achievement.date }}</td>
+    <td>{{ achievement.category }}</td>
+  </tr>
+</table>
+
+<!--
 <ol>
   <li *ngFor="let achievement of achievements$">
     <ul>
-      <li>approved   ==  {{ achievement.approved }}</li>
-      <li>name   ==  {{ achievement.name }}</li>
-      <li>participated   ==  {{ achievement.participated }}</li>
-      <li>rollno   ==  {{ achievement.rollno }}</li>
       <li>event name   ==  {{ achievement.eventName }}</li>
-      <li>event name   ==  {{ achievement.eventName }}</li>
-      <li>description   ==  {{ achievement.description }}</li>
+      <li>section   ==  {{ achievement.section }}</li>
+      <li>shift   ==  {{ achievement.shift }}</li>
       <li>_id   ==  {{ achievement._id }}</li>
       <li>year   ==  {{ achievement.year }}</li>
       <li>department   ==  {{ achievement.department }}</li>
@@ -20,6 +61,6 @@
       <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
       <li>venue   ==  {{ achievement.venue }}</li>
     </ul>
-    <br>__________________________________________________________________________
+    <hr style="border-top: 1px solid">
   </li>
-</ol>
+</ol> -->

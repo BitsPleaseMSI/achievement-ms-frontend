@@ -13,8 +13,11 @@ export class HomeComponent implements OnInit {
 
   achievements$: Object;
 
-  getdata(){
-    this.data.getApprovedAchievements()
+  getdata(params?: Object, sortBy?: string){
+    if(!params)
+      params = {};
+
+    this.data.getApprovedAchievements(params)
     .subscribe(
       (data) => {
         this.achievements$ = data
@@ -25,6 +28,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getdata()
+  }
+
+  filter(event){
+    event.preventDefault();
+    let params = {};
+
+
+
+    this.getdata(params);
   }
 
 }
