@@ -117,8 +117,6 @@ export class AuthService {
     url += ('?id=' + id)
     url += ('&token=' + token)
 
-
-
     return this.http.post(url, '', options)
   }
 
