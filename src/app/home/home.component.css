@@ -6,3 +6,10 @@ h2{
 span{
     font-size: 50px;
 }
+
+.sortingDiv{
+    border:2px solid dodgerblue;
+    padding:5px;
+    border-radius: 5px;
+
+}
