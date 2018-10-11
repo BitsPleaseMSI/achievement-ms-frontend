@@ -27,7 +27,7 @@ export class AddAchievementComponent implements OnInit {
   }
 
   addAchievement(event){
-    console.log(this.fileName + " " + console.log(this.selectedFiles))
+    // console.log(this.fileName + " " + console.log(this.selectedFiles))
     event.preventDefault();
     const target = event.target;
 
@@ -36,6 +36,7 @@ export class AddAchievementComponent implements OnInit {
         error$ = ""
       }
     */
+
     let achievement = new Achievement(
       target.querySelector('#name').value,
       target.querySelector('#rollNo').value,
@@ -55,7 +56,8 @@ export class AddAchievementComponent implements OnInit {
       this.selectedFiles.item(0),
     )
 
-    console.log('almost there')
+    console.log('achievement')
+    console.log(achievement)
 
     // console.log('Our image is' + target.querySelector('#image').value);
     let req = this.data.addAchievement(achievement)
@@ -63,15 +65,15 @@ export class AddAchievementComponent implements OnInit {
 
     req.subscribe(
       (res) => {
-        console.log("hola!" + this.error$.toString());
-        // console.log(data.message.toString())
-        if(res.bool){
+        console.log('res');
+        console.log(res);
+        /*if(res.bool){
           // Successful addition
           window.alert("Successfully added achievement!");
         }else{
-          console.log("not added");
+          window.alert("not added");
           console.log("errors -> " + this.error$ + " " + res.toLocaleString() + " " + res.toString());
-        }
+        }*/
       }
 
     );
