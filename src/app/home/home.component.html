@@ -32,7 +32,7 @@
 </div>
 <br>
 <div class="sortingDiv" id="filterDivTwo">
-  
+
   <label for="Department">Department: &nbsp;</label>
   <select>
     <option>Education</option>
@@ -86,7 +86,7 @@
 <table border="true">
   <tr>
     <th>Name</th>
-    <th>Participated</th>
+    <th>Role</th>
     <th>Roll no.</th>
     <th>Section</th>
     <th>Shift</th>
@@ -97,60 +97,14 @@
   </tr>
   <tr *ngFor="let achievement of achievements$">
     <td>{{ achievement._id }}</td>
-    <td>{{ achievement.participated }}</td>
+    <td *ngIf="achievement.participated">Participant</td>
+    <td *ngIf="!achievement.participated">Organiser</td>
     <td>{{ achievement.rollNo }}</td>
     <td>{{ achievement.section }}</td>
-    <td>{{ achievement.shift }}</td>
-    <td>{{ achievement.department }}</td>
+    <td>{{ achievement.shift | uppercase }}</td>
+    <td>{{ achievement.department | uppercase }}</td>
     <td>{{ achievement.date }}</td>
-    <td>{{ achievement.category }}</td>
-    <td><a routerLink="">View Details</a></td>
+    <td>{{ achievement.category | uppercase }}</td>
+    <td><a routerLink="/achievement/{{ achievement._id }}">View Details</a></td>
   </tr>
 </table>
-
-<!--
-<ol>
-  <li *ngFor="let achievement of achievements$">
-    <ul>
-      <li>event name   ==  {{ achievement.eventName }}</li>
-      <li>section   ==  {{ achievement.section }}</li>
-      <li>shift   ==  {{ achievement.shift }}</li>
-      <li>_id   ==  {{ achievement._id }}</li>
-      <li>year   ==  {{ achievement.year }}</li>
-      <li>department   ==  {{ achievement.department }}</li>
-      <li>date   ==  {{ achievement.date }}</li>
-      <li>rating   ==  {{ achievement.rating }}</li>
-      <li>category   ==  {{ achievement.category }}</li>
-      <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
-      <li>venue   ==  {{ achievement.venue }}</li>
-    </ul>
-    <hr style="border-top: 1px solid">
-  </li>
-</ol> -->
-
-<!-- <script>
-console.log("I am working");
-alert("Hey there");
-    $(document).ready(function(){
-  $("input[name$='studentName'").click(function(){
-  
-  
-  alert("Radio button one selected");
-    $('fiterDivOne').show();
-    $('filterDivTwo').hide();
-  
-  });
-  
-  
-  $("input[name$='details'").click(function(){
-    alert("Radio button two selected");
-  $('fiterDivOne').hide();
-  $('filterDivTwo').show();
-  
-  });
-  
-  });
-  
-  
-  
-  </script> -->

@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { ResetPassComponent } from './reset-pass/reset-pass.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RegisterComponent,
     ResetPassComponent,
     DashboardComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

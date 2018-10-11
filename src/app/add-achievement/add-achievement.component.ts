@@ -15,10 +15,7 @@ export class AddAchievementComponent implements OnInit {
 
   constructor(private data: DataAccessService) { }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() { }
 
   detectFiles(event) {
     this.selectedFiles = event.target.files;
@@ -27,15 +24,16 @@ export class AddAchievementComponent implements OnInit {
   }
 
   addAchievement(event){
-    // console.log(this.fileName + " " + console.log(this.selectedFiles))
     event.preventDefault();
     const target = event.target;
 
-    /*  form sanitisation block
-      if(){
-        error$ = ""
-      }
-    */
+    try {
+        this.selectedFiles.item(0);
+    }
+    catch(err) {
+        window.alert('Image upload error!');
+        return;
+    }
 
     let achievement = new Achievement(
       target.querySelector('#name').value,
@@ -51,32 +49,21 @@ export class AddAchievementComponent implements OnInit {
       target.querySelector('#title').value,
       target.querySelector('#venue').value,
       target.querySelector('#category').value,
-      target.querySelector('#participated').value,
+      target.querySelector('#participated').checked,
       target.querySelector('#description').value,
       this.selectedFiles.item(0),
     )
 
-    console.log('achievement')
-    console.log(achievement)
-
-    // console.log('Our image is' + target.querySelector('#image').value);
-    let req = this.data.addAchievement(achievement)
-    console.log(req.forEach(console.log))
-
-    req.subscribe(
-      (res) => {
-        console.log('res');
-        console.log(res);
-        /*if(res.bool){
-          // Successful addition
-          window.alert("Successfully added achievement!");
-        }else{
-          window.alert("not added");
-          console.log("errors -> " + this.error$ + " " + res.toLocaleString() + " " + res.toString());
-        }*/
+    this.data.addAchievement(achievement).subscribe(
+      data => {
+        if(data['partialText']){
+          if(JSON.parse(data['partialText'])['bool']){
+            window.alert('Achievement added Successfully.');
+          }
+        }
+        console.log(data['partialText']);
       }
-
-    );
+    )
 
   }
 

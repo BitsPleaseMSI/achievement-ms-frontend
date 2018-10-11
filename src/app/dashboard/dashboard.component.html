@@ -11,6 +11,7 @@
       <li>participated   ==  {{ achievement.participated }}</li>
       <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
     </ul>
+    <a routerLink="/achievement/{{ achievement._id }}">View Details</a>
     <button type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
     <br>________________________________________________________________________
   </li>
@@ -27,6 +28,7 @@
       <li>participated   ==  {{ achievement.participated }}</li>
       <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
     </ul>
+    <a routerLink="/achievement/{{ achievement._id }}">View Details</a>
     <button type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
     <br>________________________________________________________________________
   </li>

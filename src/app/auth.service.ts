@@ -8,13 +8,6 @@ import { catchError, retry } from 'rxjs/operators';
 import { safe } from './sanitise';
 import { Router } from '@angular/router';
 
-interface User{
-  email: string;
-  firstName: string;
-  lastName: string;
-  department: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -102,6 +95,7 @@ export class AuthService {
     }
 
   approveAchievement(id: string){
+    console.log('[approveAchievement]')
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
@@ -121,6 +115,7 @@ export class AuthService {
   }
 
   unapproveAchievement(id: string){
+    console.log('[unapproveAchievement]')
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };

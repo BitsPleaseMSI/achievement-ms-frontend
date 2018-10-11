@@ -7,6 +7,7 @@ import { AddAchievementComponent } from './add-achievement/add-achievement.compo
 import { ResetPassComponent } from './reset-pass/reset-pass.component'
 import { RegisterComponent } from './register/register.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
+import { DetailsComponent } from './details/details.component'
 
 const routes: Routes = [
   {
@@ -34,9 +35,13 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'achievement/:id',
+    component: DetailsComponent,
+  },
+  {
     path: '**',
     component: HomeComponent,
-  }
+  },
 ];
 
 @NgModule({

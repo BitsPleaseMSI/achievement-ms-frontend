@@ -12,7 +12,9 @@ import { AppComponent } from '../app.component';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private data: DataAccessService, private auth: AuthService) {}
+  constructor(private data: DataAccessService, private auth: AuthService) {
+    this.getdata();
+  }
 
   unapprovedAchievements$: Object;
   approvedAchievements$: Object;
@@ -20,14 +22,14 @@ export class DashboardComponent implements OnInit {
   getdata(){
 
     this.auth.currentUser().subscribe(
-      (data) => {
+      (user) => {
         this.data.getUnapprovedAchievements()
           .subscribe(
           (data) => {
           this.unapprovedAchievements$ = data['data']
         });
 
-        this.data.getApprovedAchievements()
+        this.data.getApprovedAchievements({'department':user.department})
           .subscribe(
           (data) => {
           this.approvedAchievements$ = data
@@ -58,7 +60,6 @@ export class DashboardComponent implements OnInit {
           this.auth.approveAchievement(id).subscribe(
             (data) => {
               if(data['bool']){
-                window.alert("Successfully approved!")
                 this.getdata();
               }else{
                 window.alert(data['messsage'])
@@ -84,7 +85,6 @@ export class DashboardComponent implements OnInit {
           this.auth.unapproveAchievement(id).subscribe(
             (data) => {
               if(data['bool']){
-                window.alert("Successfully unapproved!")
                 this.getdata();
               }else{
                 window.alert(data['message'])

@@ -13,6 +13,11 @@ export class DataAccessService {
 
   constructor(private http: HttpClient) { }
 
+  getAchievement(id: string): Observable<any>{
+    console.log('[getAchievement]')
+    return this.http.get<any>('http://localhost:8090/achievements/get/' + id)
+  }
+
   getApprovedAchievements(params?: Object): Observable<any>{
     console.log('[getApprovedAchievements]')
 
@@ -59,33 +64,43 @@ export class DataAccessService {
     const data: FormData = new FormData();
 
     for(let key in achievement){
-      // if(key == 'image'){
-      //   console.log(key);
-      //   console.log("amit")
-      //   console.log(achievement[key]);
-      //   data.append(key, achievement[key]);
-      //   continue;
-      // }
-      // // console.log('ki ' + key)
-      // // console.log('valu ' + achievement[key].toString())
 
-      console.log("image" + achievement[key])
+      // Sanitising data
+      if((achievement[key] == '') || (!safe(achievement[key].toString()))){
+        console.log('[UNSAFE DATA!]');
+        console.log('Input error for ' + key);
+        return new Observable((data) => {})
+      }
+
       data.append(key, achievement[key]);
     }
-
-    console.log("my image1011 -> " +data.get('image'));
-    console.log("my image " +achievement.image)
-
-    console.log('achievement ' + achievement);
 
     const req = new HttpRequest('POST', 'http://localhost:8090/achievements/add', data, {
       reportProgress: true,
       responseType: 'text'
     });
 
-
     return this.http.request(req);
+  }
 
+  deleteAchievement(id: string): Observable<any>{
+    console.log('[deleteAchievement]')
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    let token = '';
+
+    if(localStorage.getItem('token')){
+      token = localStorage.getItem('token');
+    }else{
+      token = sessionStorage.getItem('token');
+    }
+
+    let url = 'http://localhost:8090/achievements/delete'
+    url += ('?id=' + id)
+    url += ('&token=' + token)
+
+    return this.http.post(url, '', options)
   }
 
 }
