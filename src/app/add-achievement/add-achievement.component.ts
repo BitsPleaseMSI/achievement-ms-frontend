@@ -36,27 +36,6 @@ export class AddAchievementComponent implements OnInit {
         error$ = ""
       }
     */
-
-    let files: FileList = target.files;
-
-    console.log(files)
-
-    // console.log("event.target.files " + event.target.getAll())
-    let reader = new FileReader();
-    if(event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      console.log("files " +event.target.files.length)
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.form.get('avatar').setValue({
-          filename: file.name,
-          filetype: file.type,
-          value: reader.result.split(',')[1]
-        });
-      };
-    }
-
-
     let achievement = new Achievement(
       target.querySelector('#name').value,
       target.querySelector('#rollNo').value,
