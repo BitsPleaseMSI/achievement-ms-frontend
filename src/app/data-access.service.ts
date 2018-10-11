@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { safe } from './sanitise';
+import {Achievement} from './achievement';
 
 @Injectable({
   providedIn: 'root'
@@ -52,27 +53,36 @@ export class DataAccessService {
     .pipe( retry(3) );
   }
 
-  addAchievement(achievement: Object): Observable<any>{
+  addAchievement(achievement: Achievement): Observable<any>{
     console.log('[addAchievement]')
 
     const data: FormData = new FormData();
 
     for(let key in achievement){
-      if(key == 'image'){
-        console.log(key);
-        console.log(achievement[key]);
-        data.append(key, achievement[key], achievement[key]);
-        continue;
-      }
-      console.log('ki ' + key)
-      console.log('valu ' + achievement[key].toString())
+      // if(key == 'image'){
+      //   console.log(key);
+      //   console.log("amit")
+      //   console.log(achievement[key]);
+      //   data.append(key, achievement[key]);
+      //   continue;
+      // }
+      // // console.log('ki ' + key)
+      // // console.log('valu ' + achievement[key].toString())
+
+      console.log("image" + achievement[key])
       data.append(key, achievement[key]);
     }
+
+    console.log("my image1011 -> " +data.get('image'));
+    console.log("my image " +achievement.image)
+
+    console.log('achievement ' + achievement);
 
     const req = new HttpRequest('POST', 'http://localhost:8090/achievements/add', data, {
       reportProgress: true,
       responseType: 'text'
     });
+
 
     return this.http.request(req);
 

@@ -9,12 +9,12 @@
 
     <div class="form-group">
       <label for="name" class="control-label">Name</label>
-      <input type="text" id="name" name="name" class="form-control" placeholder="Your name" autofocus required>
+      <input type="text" id="name" name="name" value="12" class="form-control" placeholder="Your name" autofocus required>
     </div>
     <br>
     <div class="form-group">
       <label for="rollNo" class="control-label">Roll number</label>
-      <input type="text" id="rollNo" name="rollNo" class="form-control" placeholder="Roll number" required>
+      <input type="text" id="rollNo" name="rollNo" value="12" class="form-control" placeholder="Roll number" required>
     </div>
     <br>
     <div class="form-group">
@@ -29,13 +29,13 @@
     <br>
     <div class="form-group">
       <label for="sessionFrom" class="control-label">Session start year</label>
-      <input type="number" id="sessionFrom" name="sessionFrom" class="form-control" placeholder="Session start yearr"
+      <input type="number" id="sessionFrom" value="12" name="sessionFrom" class="form-control" placeholder="Session start yearr"
         required>
     </div>
     <br>
     <div class="form-group">
       <label for="sessionTo" class="control-label">Session end year</label>
-      <input type="text" id="sessionTo" name="sessionTo" class="form-control" placeholder="Session end year" required>
+      <input type="text" id="sessionTo" value="12" name="sessionTo" class="form-control" placeholder="Session end year" required>
     </div>
     <br>
     <div class="form-group">
@@ -48,13 +48,13 @@
         <option>5</option>
         <option>6</option>
       </select>
-    
+
     </div>
     <br>
     <div class="form-group">
       <label for="department" class="control-label">Department</label>
       <select  id="department" name="department" class="form-control" placeholder="Section">
-        <option>Education</option>
+        <option>education</option>
         <option>Computer Science</option>
         <option>Management</option>
       </select>
@@ -63,13 +63,13 @@
     <div class="form-group">
       <label for="shift" class="control-label">Shift</label>
       <select  id="shift" name="shift" class="form-control" placeholder="Section">
-        <option>Morning</option>
+        <option>morning</option>
         <option>Evening</option>
       </select>
     </div><br>
     <div class="form-group">
       <label for="eventName" class="control-label">Name of the event</label>
-      <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Name of the event" required>
+      <input type="text" id="eventName"value="12" name="eventName" class="form-control" placeholder="Name of the event" required>
     </div><br>
     <div class="form-group">
       <label for="date" class="control-label">Date</label>
@@ -77,15 +77,15 @@
     </div><br>
     <div class="form-group">
       <label for="title" class="control-label">Title awarded</label>
-      <input type="text" id="title" name="title" class="form-control" placeholder="Title awarded" required>
+      <input type="text" id="title" value="12" name="title" class="form-control" placeholder="Title awarded" required>
     </div> <br>
     <div class="form-group">
       <label for="venue" class="control-label">Venue</label>
-      <input type="text" id="venue" name="venue" class="form-control" placeholder="Venue of event" required>
+      <input type="text" id="venue"value="12"  name="venue" class="form-control" placeholder="Venue of event" required>
     </div> <br>
     <div class="form-group">
       <label for="category" class="control-label">Category</label>
-      <input type="text" id="category" name="category" class="form-control" placeholder="Category" required>
+      <input type="text" id="category" value="12" name="category" class="form-control" placeholder="Category" required>
     </div><br>
     <div class="form-group">
       <input type="radio" id="participated" name="group1">Participated
@@ -96,11 +96,11 @@
     </div> <br>
     <div class="form-group">
       <label for="description" class="control-label">Description</label>
-      <input type="text" id="description" name="description" class="form-control" placeholder="Description" required>
+      <input type="text" id="description" value="12" name="description" class="form-control" placeholder="Description" required>
     </div> <br>
     <div class="form-group">
       <label for="image" class="control-label">Select a file to upload</label>
-      <input type="file" id="image" name="image" class="form-control-file" value="fileupload">
+      <input type="file" id="image" name="image" class="form-control-file" value="fileupload" (change)="detectFiles($event)">
    </div>   <br>
       <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Add achievement</button>
   </form>

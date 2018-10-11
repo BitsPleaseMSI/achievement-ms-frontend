@@ -15,6 +15,6 @@ export class Achievement{
     public category: string,
     public participated: boolean,
     public description: string,
-    public image: string,
-  ){ }
+    public image: File,
+  ) { }
 }

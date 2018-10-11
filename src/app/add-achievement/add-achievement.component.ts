@@ -10,6 +10,8 @@ import { Achievement } from '../achievement';
 
 export class AddAchievementComponent implements OnInit {
   error$: string;
+  selectedFiles: FileList;
+  fileName: string;
 
   constructor(private data: DataAccessService) { }
 
@@ -17,7 +19,15 @@ export class AddAchievementComponent implements OnInit {
 
   }
 
+
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
+    this.fileName = this.selectedFiles[0].name;
+    console.log('selectedFiles: ' + this.fileName );
+  }
+
   addAchievement(event){
+    console.log(this.fileName + " " + console.log(this.selectedFiles))
     event.preventDefault();
     const target = event.target;
 
@@ -26,6 +36,26 @@ export class AddAchievementComponent implements OnInit {
         error$ = ""
       }
     */
+
+    let files: FileList = target.files;
+
+    console.log(files)
+
+    // console.log("event.target.files " + event.target.getAll())
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      console.log("files " +event.target.files.length)
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.form.get('avatar').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        });
+      };
+    }
+
 
     let achievement = new Achievement(
       target.querySelector('#name').value,
@@ -43,24 +73,29 @@ export class AddAchievementComponent implements OnInit {
       target.querySelector('#category').value,
       target.querySelector('#participated').value,
       target.querySelector('#description').value,
-      target.querySelector('#image').value,
+      this.selectedFiles.item(0),
     )
 
     console.log('almost there')
 
-    this.data.addAchievement(achievement).subscribe(
-      (data) => {
-        console.log("hola!")
-        console.log(data.message.toString())
-        if(data.bool){
+    // console.log('Our image is' + target.querySelector('#image').value);
+    let req = this.data.addAchievement(achievement)
+    console.log(req.forEach(console.log))
+
+    req.subscribe(
+      (res) => {
+        console.log("hola!" + this.error$.toString());
+        // console.log(data.message.toString())
+        if(res.bool){
           // Successful addition
-          window.alert("Successfully added achievement!")
+          window.alert("Successfully added achievement!");
         }else{
-          this.error$ = data.message.toString()
+          console.log("not added");
+          console.log("errors -> " + this.error$ + " " + res.toLocaleString() + " " + res.toString());
         }
       }
 
-    )
+    );
 
   }
 
