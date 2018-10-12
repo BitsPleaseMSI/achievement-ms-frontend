@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataAccessService } from '../data-access.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-details',
@@ -10,12 +11,29 @@ import { Router } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
   achievement$: Object;
-  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router) { }
+  user$: boolean;
+  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
+    this.auth.currentUser().subscribe(
+      (data) => {
+        console.log(data)
+        if(data['email']){
+          this.user$ = true;
+          console.log('trued')
+        }else{
+          this.user$ = false;
+          console.log('falsed')
+        }
+      }
+    )
+
     this.data.getAchievement( this.route.snapshot.params['id'] ).subscribe(
       (data) => {
-        this.achievement$ = data;
+        if(data)
+          this.achievement$ = data;
+        else
+          this.router.navigate(['home']);
       }
     )
   }
