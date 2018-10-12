@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataAccessService } from '../data-access.service';
 import { Achievement } from '../achievement';
+import { safe } from '../sanitise';
 
 @Component({
   selector: 'app-add-achievement',
@@ -27,12 +28,11 @@ export class AddAchievementComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
-    try {
-        this.selectedFiles.item(0);
-    }
-    catch(err) {
-        window.alert('Image upload error!');
-        return;
+    try{
+      this.selectedFiles.item(0);
+    }catch(err){
+      this.error$ = 'Image upload error!';
+      return;
     }
 
     let achievement = new Achievement(
@@ -54,6 +54,14 @@ export class AddAchievementComponent implements OnInit {
       this.selectedFiles.item(0),
     )
 
+    // Sanitising data
+    for(let key in achievement){
+      if((achievement[key] == '') || (!safe(achievement[key].toString()))){
+        this.error$ = 'Input error. Please check ' + key;
+        return;
+      }
+    }
+
     this.data.addAchievement(achievement).subscribe(
       data => {
         if(data['partialText']){
@@ -61,6 +69,7 @@ export class AddAchievementComponent implements OnInit {
             window.alert('Achievement added Successfully.');
           }
         }
+        this.error$ = 'Error uploading achievement. Please try again later.';
         console.log(data['partialText']);
       }
     )

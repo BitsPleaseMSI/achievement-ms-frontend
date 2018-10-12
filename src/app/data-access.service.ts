@@ -63,17 +63,8 @@ export class DataAccessService {
 
     const data: FormData = new FormData();
 
-    for(let key in achievement){
-
-      // Sanitising data
-      if((achievement[key] == '') || (!safe(achievement[key].toString()))){
-        console.log('[UNSAFE DATA!]');
-        console.log('Input error for ' + key);
-        return new Observable((data) => {})
-      }
-
+    for(let key in achievement)
       data.append(key, achievement[key]);
-    }
 
     const req = new HttpRequest('POST', 'http://localhost:8090/achievements/add', data, {
       reportProgress: true,
