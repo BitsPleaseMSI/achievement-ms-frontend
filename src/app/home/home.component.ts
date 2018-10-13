@@ -13,43 +13,47 @@ export class HomeComponent implements OnInit {
 
   achievements$: Object;
 
-  getdata(params?: Object, sortBy?: string){
+  constructor(private data: DataAccessService, private auth: AuthService){
+    this.achievements$ = [];
+  }
+
+  ngOnInit() {
+    console.log()
+    this.getdata();
+  }
+
+  getdata(params?: Object){
     if(!params)
-      params = {};
+    params = {};
 
     this.data.getApprovedAchievements(params)
     .subscribe(
       (data) => {
+        console.log(data)
         this.achievements$ = data;
       });
-  }
+    }
 
-  constructor(private data: DataAccessService, private auth: AuthService) { }
-
-  ngOnInit() {
-    this.getdata()
+  resetFilters(event){
+    event.preventDefault();
+    const target = event.target;
+    document.getElementById('filter').reset();
   }
 
   filter(event){
     event.preventDefault();
     const target = event.target;
     let params = {};
-
-    if(target.querySelector('#sectionFilter').checked)
-      params['section'] = target.querySelector('#section').value
-
-    if(target.querySelector('#semesterFilter').checked)
-      params['semester'] = target.querySelector('#semester').value
-
-    if(target.querySelector('#shiftFilter').checked)
-      params['shift'] = target.querySelector('#shift').value
-
-    if(target.querySelector('#categoryFilter').checked)
-      params['category'] = target.querySelector('#category').value
-
-    if(target.querySelector('#departmentFilter').checked)
-      params['department'] = target.querySelector('#department').value
-
+    params['sessionFrom'] = target.querySelector('#sessionFrom').value
+    params['sessionTo'] = target.querySelector('#sessionTo').value
+    params['dateFrom'] = target.querySelector('#dateFrom').value
+    params['dateTo'] = target.querySelector('#dateTo').value
+    params['rollno'] = target.querySelector('#rollNo').value
+    params['section'] = target.querySelector('#section').value
+    params['semester'] = target.querySelector('#semester').value
+    params['shift'] = target.querySelector('#shift').value
+    params['category'] = target.querySelector('#category').value
+    params['department'] = target.querySelector('#department').value
     this.getdata(params);
   }
 

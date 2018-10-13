@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { safe } from './sanitise';
-import {Achievement} from './achievement';
+import { Achievement } from './achievement';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {Achievement} from './achievement';
 
 export class DataAccessService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getAchievement(id: string): Observable<any>{
     console.log('[getAchievement]')
@@ -23,8 +24,10 @@ export class DataAccessService {
 
     let filters = new URLSearchParams();
 
-    for(let key in params)
-      filters.append(key, params[key]);
+    for(let key in params){
+      if(params[key] != '')
+        filters.append(key, params[key]);
+    }
 
     console.log('http://localhost:8090/achievements/all\?' + filters.toString())
     // return;

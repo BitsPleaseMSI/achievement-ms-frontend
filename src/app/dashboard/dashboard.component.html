@@ -1,14 +1,59 @@
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+
 <h1>Teacher Dashboard</h1>
 
-<h2>Approved achievements</h2>
 
-
-<div style="color:black;padding:20px;">
-<form (submit)="filter($event)" class="form-signin" action="">
+<div style="border:solid black;padding: 10px;">
+<h3>Filter options</h3>
+<form (submit)="filter($event)" class="form-signin" action="" id="filter">
   <div class="form-group">
-    <input type="checkbox" id="sectionFilter" class="" name="sectionFilter">
-    &nbsp;<label for="section" class="control-label">Section</label>
-    &nbsp;<select  id="section" name="section" class="" placeholder="Section">
+    <input (change)="refresh()" type="radio" id="listUnapproved" name="list" checked>
+    &nbsp;<label for="list" class="control-label">Show list of unapproved achievements</label>
+    <br>
+    <input (change)="refresh()" type="radio" id="listApproved" name="list" >
+    &nbsp;<label for="list" class="control-label">Show list of approved achievements</label>
+  </div>
+  <div class="form-group">
+  <label for="rollNo" class="control-label">Roll number:</label>
+    &nbsp;<input type="text" id="rollNo" name="rollNo" placeholder="Roll number" autofocus>
+  </div>
+  <div class="form-group">
+    <label for="dateFrom" class="control-label">Starting from date:</label>
+    &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date">
+  </div>
+  <div class="form-group">
+    <label for="dateTo" class="control-label">Till date:</label>
+    &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date">
+  </div>
+  <div class="form-group">
+    <label for="sessionFrom" class="control-label">Session start year</label>
+    &nbsp;<input type="number" id="sessionFrom"  name="sessionFrom" placeholder="Session start year">
+  </div>
+  <div class="form-group">
+    <label for="sessionTo" class="control-label">Session end year</label>
+    &nbsp;<input type="number" id="sessionTo"  name="sessionTo" placeholder="Session end year">
+  </div>
+  <div class="form-group">
+  <label for="section" class="control-label">Section:</label>
+    &nbsp;<select  id="section" name="section" placeholder="Section">
+      <option value="">Select section</option>
       <option>A</option>
       <option>B</option>
       <option>C</option>
@@ -16,9 +61,9 @@
     </select>
   </div>
   <div class="form-group">
-    <input type="checkbox" id="semesterFilter" class="" name="semesterFilter">
-    &nbsp;<label for="semester">Semester</label>
-    &nbsp;<select  id="semester" name="semester" class="" placeholder="Section">
+    <label for="semester">Semester:</label>
+    &nbsp;<select  id="semester" name="semester" placeholder="Section">
+      <option value="">Select semester</option>
       <option>1</option>
       <option>2</option>
       <option>3</option>
@@ -28,17 +73,26 @@
     </select>
   </div>
   <div class="form-group">
-    <input type="checkbox" id="shiftFilter" class="" name="shiftFilter">
-    &nbsp;<label for="shift" class="control-label">Shift</label>
-    &nbsp;<select  id="shift" name="shift" class="" placeholder="Shift">
+    <label for="department" class="control-label">Department:</label>
+    &nbsp;<select  id="department" name="department" placeholder="Section">
+      <option value="">Select department</option>
+      <option value="education">Education</option>
+      <option value="computerscience">Computer Science</option>
+      <option value="management">Management</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="shift" class="control-label">Shift:</label>
+    &nbsp;<select  id="shift" name="shift" placeholder="Shift">
+      <option value="">Select shift</option>
       <option value="morning">Morning</option>
       <option value="evening">Evening</option>
     </select>
   </div>
   <div class="form-group">
-    <input type="checkbox" id="categoryFilter" class="" name="categoryFilter">
-    &nbsp;<label for="category" class="control-label">Category</label>
-    &nbsp;<select  id="category" name="category" class="" placeholder="Category">
+    <label for="category" class="control-label">Category:</label>
+    &nbsp;<select  id="category" name="category" placeholder="Category">
+      <option value="">Select category</option>
       <option value="sports">Sports</option>
       <option value="cultural">Cultural</option>
       <option value="technical">Technical</option>
@@ -46,26 +100,47 @@
     </select>
   </div>
     <button class="btn btn-primary" type="submit">Apply filter</button>
+    &nbsp;<button class="btn btn-primary" (click)="resetFilters($event)">Reset filter</button>
 </form>
 </div>
 
-<ol>
-  <li *ngFor="let achievement of approvedAchievements$">
-    <ul>
-      <li>approved   ==  {{ achievement.approved }}</li>
-      <li>_id   ==  {{ achievement._id }}</li>
-      <li>department   ==  {{ achievement.department }}</li>
-      <li>name   ==  {{ achievement.name }}</li>
-      <li>participated   ==  {{ achievement.participated }}</li>
-      <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
-    </ul>
-    <a routerLink="/achievement/{{ achievement._id }}">View Details</a>
-    &nbsp;<button type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
-    <br>________________________________________________________________________
-  </li>
-</ol>
+<h2>Achievements</h2>
 
-<h2>Unapproved achievements</h2>
+<h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
+<table border="true" *ngIf="achievements$.length != 0">
+  <tr>
+    <th>Index</th>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Roll no.</th>
+    <th>Section</th>
+    <th>Shift</th>
+    <th>Department</th>
+    <th>Date</th>
+    <th>category</th>
+    <th>Details</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let achievement of achievements$; let i=index">
+    <td>{{ i+1 }}</td>
+    <td>{{ achievement.name }}</td>
+    <td *ngIf="achievement.participated">Participant</td>
+    <td *ngIf="!achievement.participated">Organiser</td>
+    <td>{{ achievement.rollNo }}</td>
+    <td>{{ achievement.section }}</td>
+    <td>{{ achievement.shift | uppercase }}</td>
+    <td>{{ achievement.department | uppercase }}</td>
+    <td>{{ achievement.date }}</td>
+    <td>{{ achievement.category | uppercase }}</td>
+    <td><a routerLink="/achievement/{{ achievement._id }}">View Details</a></td>
+    <td>
+      <button *ngIf="achievement.approved" type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
+      <button *ngIf="!achievement.approved" type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
+  </td>
+  </tr>
+</table>
+
+<!-- <h2>Unapproved achievements</h2>
 <ol>
   <li *ngFor="let achievement of unapprovedAchievements$">
     <ul>
@@ -80,4 +155,4 @@
     &nbsp;<button type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
     <br>________________________________________________________________________
   </li>
-</ol>
+</ol> -->

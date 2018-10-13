@@ -1,4 +1,3 @@
-
 <style>
   table {
     font-family: arial, sans-serif;
@@ -20,14 +19,34 @@
 
 <h1><span>H</span>ome</h1>
 
-<h2>List of approved achievements</h2>
+<div style="border:solid black;padding: 10px;">
 
-<div style="color:black;padding:20px;">
-<form (submit)="filter($event)" class="form-signin" action="">
+<h3>Filter options</h3>
+<form (submit)="filter($event)" class="form-signin" action="" id="filter">
   <div class="form-group">
-    <input type="checkbox" id="sectionFilter" class="" name="sectionFilter">
-    &nbsp;<label for="section" class="control-label">Section</label>
-    &nbsp;<select  id="section" name="section" class="" placeholder="Section">
+  <label for="rollNo" class="control-label">Roll number:</label>
+    &nbsp;<input type="text" id="rollNo" name="rollNo" placeholder="Roll number" autofocus>
+  </div>
+  <div class="form-group">
+    <label for="dateFrom" class="control-label">Starting from date:</label>
+    &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date">
+  </div>
+  <div class="form-group">
+    <label for="dateTo" class="control-label">Till date:</label>
+    &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date">
+  </div>
+  <div class="form-group">
+    <label for="sessionFrom" class="control-label">Session start year</label>
+    &nbsp;<input type="number" id="sessionFrom"  name="sessionFrom" placeholder="Session start year">
+  </div>
+  <div class="form-group">
+    <label for="sessionTo" class="control-label">Session end year</label>
+    &nbsp;<input type="number" id="sessionTo"  name="sessionTo" placeholder="Session end year">
+  </div>
+  <div class="form-group">
+  <label for="section" class="control-label">Section:</label>
+    &nbsp;<select  id="section" name="section" placeholder="Section">
+      <option value="">Select section</option>
       <option>A</option>
       <option>B</option>
       <option>C</option>
@@ -35,9 +54,9 @@
     </select>
   </div>
   <div class="form-group">
-    <input type="checkbox" id="semesterFilter" class="" name="semesterFilter">
-    &nbsp;<label for="semester">Semester</label>
-    &nbsp;<select  id="semester" name="semester" class="" placeholder="Section">
+    <label for="semester">Semester:</label>
+    &nbsp;<select  id="semester" name="semester" placeholder="Section">
+      <option value="">Select semester</option>
       <option>1</option>
       <option>2</option>
       <option>3</option>
@@ -47,89 +66,40 @@
     </select>
   </div>
   <div class="form-group">
-    <input type="checkbox" id="departmentFilter" class="" name="departmentFilter">
-    &nbsp;<label for="department" class="control-label">Department</label>
-    &nbsp;<select  id="department" name="department" class="" placeholder="Section">
+    <label for="department" class="control-label">Department:</label>
+    &nbsp;<select  id="department" name="department" placeholder="Section">
+      <option value="">Select department</option>
       <option value="education">Education</option>
       <option value="computerscience">Computer Science</option>
       <option value="management">Management</option>
     </select>
   </div>
   <div class="form-group">
-    <input type="checkbox" id="shiftFilter" class="" name="shiftFilter">
-    &nbsp;<label for="shift" class="control-label">Shift</label>
-    &nbsp;<select  id="shift" name="shift" class="" placeholder="Shift">
+    <label for="shift" class="control-label">Shift:</label>
+    &nbsp;<select  id="shift" name="shift" placeholder="Shift">
+      <option value="">Select shift</option>
       <option value="morning">Morning</option>
       <option value="evening">Evening</option>
     </select>
   </div>
   <div class="form-group">
-    <input type="checkbox" id="categoryFilter" class="" name="categoryFilter">
-    &nbsp;<label for="category" class="control-label">Category</label>
-    &nbsp;<select  id="category" name="category" class="" placeholder="Category">
+    <label for="category" class="control-label">Category:</label>
+    &nbsp;<select  id="category" name="category" placeholder="Category">
+      <option value="">Select category</option>
       <option value="sports">Sports</option>
       <option value="cultural">Cultural</option>
       <option value="technical">Technical</option>
       <option value="others">Others</option>
     </select>
   </div>
-    <button class="btn btn-primary" type="submit">Apply filter</button>
+  <button class="btn btn-primary" type="submit">Apply filter</button>
+  &nbsp;<button class="btn btn-primary" (click)="resetFilters($event)">Reset filter</button>
 </form>
 </div>
 
-<!-- <h4>Filter by:</h4>
-<input type="radio" name="group" value="StudentName" selected="true" id="radioOne">Student Name
-<input type="radio" name="group" value="Details" selected="false" id="radioTwo">Details
-<div class="sortingDiv" id="filterDivOne">
-
-<input type="text" name="searchByName" placeholder="Search by Name">
-
-</div>
-<br>
-<div class="sortingDiv" id="filterDivTwo">
-
-  <label for="Department">Department: &nbsp;</label>
-  <select>
-    <option value="education">Education</option>
-    <option value="computerscience">Computer Science</option>
-    <option value="management">Management</option>
-  </select>
-
-  <label for="Achivement Category">Achivement Category :&nbsp;</label>
-  <select>
-    <option value="sports">Sports</option>
-    <option value="cultural">Cultural</option>
-    <option value="techinical">Technical</option>
-    <option value="others">Others</option>
-  </select>
-  <br><br>
-  <label for="Shift">Shift :&nbsp;</label>
-  <select>
-    <option value="morning">Morning</option>
-    <option value="evening">Evening</option>
-  </select>
-
-  <label for="Section">Section :&nbsp;</label>
-  <select>
-    <option>A</option>
-    <option>B</option>
-    <option>C</option>
-    <option>D</option>
-  </select>
-
-  <label for="Semester">Semester:&nbsp;</label>
-  <select>
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    <option>6</option>
-  </select>
-
-</div>
-<br> -->
-<table border="true">
+<h2>List of approved achievements</h2>
+<h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
+<table border="true" *ngIf="achievements$.length > 0">
   <tr>
     <th>Index</th>
     <th>Name</th>

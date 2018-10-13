@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
     this.userData$ = undefined;
-    this.router.navigate(['']);
+    this.router.navigate(['home']);
   }
 
 }

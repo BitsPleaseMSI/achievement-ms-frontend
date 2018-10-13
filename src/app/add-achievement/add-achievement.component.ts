@@ -56,7 +56,9 @@ export class AddAchievementComponent implements OnInit {
 
     // Sanitising data
     for(let key in achievement){
-      if((achievement[key] == '') || (!safe(achievement[key].toString()))){
+      if(key == 'participated'){
+
+      }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
         this.error$ = 'Input error. Please check ' + key;
         return;
       }
