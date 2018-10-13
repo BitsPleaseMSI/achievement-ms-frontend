@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
     params['sessionTo'] = target.querySelector('#sessionTo').value
     params['dateFrom'] = target.querySelector('#dateFrom').value
     params['dateTo'] = target.querySelector('#dateTo').value
-    params['rollno'] = target.querySelector('#rollNo').value
+    params['rollNo'] = target.querySelector('#rollNo').value
     params['section'] = target.querySelector('#section').value
     params['semester'] = target.querySelector('#semester').value
     params['shift'] = target.querySelector('#shift').value

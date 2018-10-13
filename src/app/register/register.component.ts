@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 
 export class RegisterComponent implements OnInit {
   error$: string;
+  info$: string;
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -36,9 +37,9 @@ export class RegisterComponent implements OnInit {
       this.auth.register(user).subscribe(
         (data) => {
           if(data.bool){
-            // Successful registration
             this.router.navigate(['login']);
-            window.alert("Successfully added new user!")
+            this.info$ = "Successfully added new user!";
+            this.error$ = undefined;
           }else{
             console.log(data)
             this.error$ = data.message.toString()
@@ -46,7 +47,8 @@ export class RegisterComponent implements OnInit {
         }
       )
     }else{
-      this.error$ = "New passwords do not match!"
+      this.error$ = "New passwords do not match!";
+      this.info$ = undefined;
     }
 
   }

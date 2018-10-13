@@ -30,23 +30,28 @@ export class DataAccessService {
     }
 
     console.log('http://localhost:8090/achievements/all\?' + filters.toString())
-    // return;
 
     return this.http.get<any>('http://localhost:8090/achievements/all\?' + filters.toString())
   }
 
-  getUnapprovedAchievements(): Observable<any>{
+  getUnapprovedAchievements(params?: Object): Observable<any>{
     console.log('[getUnapprovedAchievements]')
-    let token = '';
+    let filters = new URLSearchParams();
 
-    if(localStorage.getItem('token')){
-      token = localStorage.getItem('token');
-    }else{
-      token = sessionStorage.getItem('token');
+    for(let key in params){
+      if(params[key] != '')
+        filters.append(key, params[key]);
     }
 
-    return this.http.get<any>('http://localhost:8090/achievements/unapproved?token=' + token)
-    .pipe( retry(3) );
+    if(localStorage.getItem('token')){
+      filters.append('token', localStorage.getItem('token'));
+    }else{
+      filters.append('token', sessionStorage.getItem('token'));
+    }
+
+    console.log('http://localhost:8090/achievements/all\?' + filters.toString())
+
+    return this.http.get<any>('http://localhost:8090/achievements/unapproved\?' + filters.toString())
   }
 
   addAchievement(achievement: Achievement): Observable<any>{

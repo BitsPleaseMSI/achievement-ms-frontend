@@ -5,6 +5,10 @@
     <p>Error: {{ error$ }}</p>
   </div>
 
+  <div *ngIf="info$" class="alert alert-success" >
+    <p>{{ info$ }}</p>
+  </div>
+
   <form (submit)="addAchievement($event)" class="form-horizontal" action="achievement/add">
 
     <div class="form-group">

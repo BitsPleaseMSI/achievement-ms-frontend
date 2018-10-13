@@ -11,6 +11,7 @@ import { safe } from '../sanitise';
 
 export class AddAchievementComponent implements OnInit {
   error$: string;
+  info$: string;
   selectedFiles: FileList;
   fileName: string;
 
@@ -32,6 +33,7 @@ export class AddAchievementComponent implements OnInit {
       this.selectedFiles.item(0);
     }catch(err){
       this.error$ = 'Image upload error!';
+      this.error$ = undefined;
       return;
     }
 
@@ -60,21 +62,32 @@ export class AddAchievementComponent implements OnInit {
 
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
         this.error$ = 'Input error. Please check ' + key;
+        this.info$ = undefined;
         return;
       }
     }
 
+    let error = true;
     this.data.addAchievement(achievement).subscribe(
       data => {
+        console.log(data);
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
-            window.alert('Achievement added Successfully.');
+            error = false;
+            this.info$ = 'Achievement added Successfully.';
+            this.error$ = undefined;
           }
         }
-        this.error$ = 'Error uploading achievement. Please try again later.';
-        console.log(data['partialText']);
       }
     )
+
+    setTimeout(function () {
+      if(error){
+        setTimeout('', 5000);
+        this.info$ = undefined;
+        this.error$ = 'Error uploading achievement. Please try again later.';
+      }
+    }, 8000);
 
   }
 

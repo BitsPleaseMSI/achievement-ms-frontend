@@ -16,12 +16,14 @@ export class DashboardComponent implements OnInit {
   }
 
   refresh(params?: Object){
+    if(!params){
+      console.log('No params, passing empty params.')
+      params = {};
+    }
     let target = document.getElementById('listUnapproved') as HTMLInputElement;
     if(target.checked){
-      this.getUnapprovedAchievements();
+      this.getUnapprovedAchievements(params);
     }else{
-      if(!params)
-        params = {};
       this.getApprovedAchievements(params);
     }
   }
@@ -44,10 +46,10 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  getUnapprovedAchievements(){
+  getUnapprovedAchievements(params?: Object){
     this.auth.currentUser().subscribe(
       (user) => {
-        this.data.getUnapprovedAchievements()
+        this.data.getUnapprovedAchievements(params)
         .subscribe(
           (data) => {
             this.achievements$ = data['data']
@@ -105,7 +107,7 @@ export class DashboardComponent implements OnInit {
     params['sessionTo'] = target.querySelector('#sessionTo').value
     params['dateFrom'] = target.querySelector('#dateFrom').value
     params['dateTo'] = target.querySelector('#dateTo').value
-    params['rollno'] = target.querySelector('#rollNo').value
+    params['rollNo'] = target.querySelector('#rollNo').value
     params['section'] = target.querySelector('#section').value
     params['semester'] = target.querySelector('#semester').value
     params['shift'] = target.querySelector('#shift').value
@@ -146,7 +148,7 @@ export class DashboardComponent implements OnInit {
               if(data['bool']){
                 this.refresh();
               }else{
-                window.alert(data['messsage'])
+                window.alert(data['message'])
               }
             }
           )
