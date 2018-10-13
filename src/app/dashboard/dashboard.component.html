@@ -1,6 +1,54 @@
 <h1>Teacher Dashboard</h1>
 
 <h2>Approved achievements</h2>
+
+
+<div style="color:black;padding:20px;">
+<form (submit)="filter($event)" class="form-signin" action="">
+  <div class="form-group">
+    <input type="checkbox" id="sectionFilter" class="" name="sectionFilter">
+    &nbsp;<label for="section" class="control-label">Section</label>
+    &nbsp;<select  id="section" name="section" class="" placeholder="Section">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+      <option>D</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="checkbox" id="semesterFilter" class="" name="semesterFilter">
+    &nbsp;<label for="semester">Semester</label>
+    &nbsp;<select  id="semester" name="semester" class="" placeholder="Section">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="checkbox" id="shiftFilter" class="" name="shiftFilter">
+    &nbsp;<label for="shift" class="control-label">Shift</label>
+    &nbsp;<select  id="shift" name="shift" class="" placeholder="Shift">
+      <option value="morning">Morning</option>
+      <option value="evening">Evening</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="checkbox" id="categoryFilter" class="" name="categoryFilter">
+    &nbsp;<label for="category" class="control-label">Category</label>
+    &nbsp;<select  id="category" name="category" class="" placeholder="Category">
+      <option value="sports">Sports</option>
+      <option value="cultural">Cultural</option>
+      <option value="technical">Technical</option>
+      <option value="others">Others</option>
+    </select>
+  </div>
+    <button class="btn btn-primary" type="submit">Apply filter</button>
+</form>
+</div>
+
 <ol>
   <li *ngFor="let achievement of approvedAchievements$">
     <ul>
@@ -12,7 +60,7 @@
       <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
     </ul>
     <a routerLink="/achievement/{{ achievement._id }}">View Details</a>
-    <button type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
+    &nbsp;<button type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
     <br>________________________________________________________________________
   </li>
 </ol>
@@ -29,7 +77,7 @@
       <li><a href="  ==  {{ achievement.imageUrl }}"></a>imageUrl   ==  {{ achievement.imageUrl }}</li>
     </ul>
     <a routerLink="/achievement/{{ achievement._id }}">View Details</a>
-    <button type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
+    &nbsp;<button type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
     <br>________________________________________________________________________
   </li>
 </ol>

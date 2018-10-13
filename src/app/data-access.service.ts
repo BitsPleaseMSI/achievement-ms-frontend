@@ -23,23 +23,11 @@ export class DataAccessService {
 
     let filters = new URLSearchParams();
 
-/*
-  department
-  semester
-  dateFrom
-  dateTo
-  shift
-  section
-  sessionFrom
-  sessionto
-  category
-*/
-
     for(let key in params)
       filters.append(key, params[key]);
 
-    console.log('filters.toString()')
-    console.log(filters.toString())
+    console.log('http://localhost:8090/achievements/all\?' + filters.toString())
+    // return;
 
     return this.http.get<any>('http://localhost:8090/achievements/all\?' + filters.toString())
   }

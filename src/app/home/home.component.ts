@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     this.data.getApprovedAchievements(params)
     .subscribe(
       (data) => {
-        this.achievements$ = data
+        this.achievements$ = data;
       });
   }
 
@@ -32,9 +32,23 @@ export class HomeComponent implements OnInit {
 
   filter(event){
     event.preventDefault();
+    const target = event.target;
     let params = {};
 
+    if(target.querySelector('#sectionFilter').checked)
+      params['section'] = target.querySelector('#section').value
 
+    if(target.querySelector('#semesterFilter').checked)
+      params['semester'] = target.querySelector('#semester').value
+
+    if(target.querySelector('#shiftFilter').checked)
+      params['shift'] = target.querySelector('#shift').value
+
+    if(target.querySelector('#categoryFilter').checked)
+      params['category'] = target.querySelector('#category').value
+
+    if(target.querySelector('#departmentFilter').checked)
+      params['department'] = target.querySelector('#department').value
 
     this.getdata(params);
   }

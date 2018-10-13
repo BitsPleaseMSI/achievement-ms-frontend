@@ -19,7 +19,9 @@ export class DashboardComponent implements OnInit {
   unapprovedAchievements$: Object;
   approvedAchievements$: Object;
 
-  getdata(){
+  getdata(params?: Object, sortBy?: string){
+    if(!params)
+      params = {};
 
     this.auth.currentUser().subscribe(
       (user) => {
@@ -29,7 +31,9 @@ export class DashboardComponent implements OnInit {
           this.unapprovedAchievements$ = data['data']
         });
 
-        this.data.getApprovedAchievements({'department':user.department})
+        params['department'] = user.department
+
+        this.data.getApprovedAchievements(params)
           .subscribe(
           (data) => {
           this.approvedAchievements$ = data
@@ -44,6 +48,26 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getdata();
+  }
+
+  filter(event){
+    event.preventDefault();
+    const target = event.target;
+    let params = {};
+
+    if(target.querySelector('#sectionFilter').checked)
+      params['section'] = target.querySelector('#section').value
+
+    if(target.querySelector('#semesterFilter').checked)
+      params['semester'] = target.querySelector('#semester').value
+
+    if(target.querySelector('#shiftFilter').checked)
+      params['shift'] = target.querySelector('#shift').value
+
+    if(target.querySelector('#categoryFilter').checked)
+      params['category'] = target.querySelector('#category').value
+
+    this.getdata(params);
   }
 
   approve(event, id: string){

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   error$: string;
+  info$: string;
 
   constructor(private auth: AuthService, private ac: AppComponent, private router: Router) { }
 
@@ -18,6 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(event){
+    this.info$ = "Logging in, Please wait."
+
     event.preventDefault();
     const target = event.target;
 
@@ -43,6 +46,7 @@ export class LoginComponent implements OnInit {
       }
     )
 
+    this.info$ = undefined;
   }
 
 }
