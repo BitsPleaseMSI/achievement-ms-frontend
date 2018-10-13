@@ -5,6 +5,10 @@
   <p>Error: {{ error$ }}</p>
 </div>
 
+<div *ngIf="info$" class="alert alert-success" >
+  <p>{{ info$ }}</p>
+</div>
+
 <form (submit)="resetPass($event)" class="form-signin" action="/passwordreset">
 
     <label for="currentpass">Current password</label>

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ResetPassComponent implements OnInit {
   error$: string;
+  info$: string;
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -37,9 +38,11 @@ export class ResetPassComponent implements OnInit {
             ).subscribe(
               (data) => {
                 if(data.bool){
-                  this.auth.redirect('login', 'Password reset successful!')
+                  this.info$ = data.message.toString();
+                  this.error$ = undefined;
                 }else{
                   // Error while password reset
+                  this.error$ = undefined;
                   this.error$ = data.message.toString()
                 }
               }
