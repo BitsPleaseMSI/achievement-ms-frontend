@@ -36,8 +36,8 @@ export class HomeComponent implements OnInit {
 
   resetFilters(event){
     event.preventDefault();
-    const target = event.target;
-    document.getElementById('filter').reset();
+    let target = document.getElementById('filter') as HTMLFormElement;
+    target.reset();
   }
 
   filter(event){

@@ -3,8 +3,6 @@ import { DataAccessService } from '../data-access.service';
 import { AuthService } from '../auth.service';
 import { AppComponent } from '../app.component';
 
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,7 +16,8 @@ export class DashboardComponent implements OnInit {
   }
 
   refresh(params?: Object){
-    if(document.getElementById('listUnapproved').checked){
+    let target = document.getElementById('listUnapproved') as HTMLInputElement;
+    if(target.checked){
       this.getUnapprovedAchievements();
     }else{
       if(!params)
@@ -94,8 +93,8 @@ export class DashboardComponent implements OnInit {
 
   resetFilters(event){
     event.preventDefault();
-    const target = event.target;
-    document.getElementById('filter').reset();
+    let target = document.getElementById('filter') as HTMLFormElement;
+    target.reset();
   }
 
   filter(event){
