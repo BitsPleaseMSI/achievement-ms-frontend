@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
           }else{
             sessionStorage.setItem('token', data['token'].toString());
           }
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['/dashboard/unapproved']);
           this.ac.getdata()
         }else{
           // Access denied

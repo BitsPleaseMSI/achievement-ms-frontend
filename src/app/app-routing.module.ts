@@ -31,7 +31,11 @@ const routes: Routes = [
     component: ResetPassComponent,
   },
   {
-    path: 'dashboard',
+    path: 'dashboard/approved',
+    component: DashboardComponent,
+  },
+  {
+    path: 'dashboard/unapproved',
     component: DashboardComponent,
   },
   {

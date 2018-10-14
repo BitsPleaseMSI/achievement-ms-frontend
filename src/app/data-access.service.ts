@@ -19,39 +19,25 @@ export class DataAccessService {
     return this.http.get<any>('http://localhost:8090/achievements/get/' + id)
   }
 
-  getApprovedAchievements(params?: Object): Observable<any>{
+  getApprovedAchievements(params?: string): Observable<any>{
     console.log('[getApprovedAchievements]')
-
-    let filters = new URLSearchParams();
-
-    for(let key in params){
-      if(params[key] != '')
-        filters.append(key, params[key]);
-    }
-
-    console.log('http://localhost:8090/achievements/all\?' + filters.toString())
-
-    return this.http.get<any>('http://localhost:8090/achievements/all\?' + filters.toString())
+    console.log('http://localhost:8090/achievements/all' + params)
+    return this.http.get<any>('http://localhost:8090/achievements/all' + params)
   }
 
-  getUnapprovedAchievements(params?: Object): Observable<any>{
+  getUnapprovedAchievements(params?: string): Observable<any>{
     console.log('[getUnapprovedAchievements]')
-    let filters = new URLSearchParams();
-
-    for(let key in params){
-      if(params[key] != '')
-        filters.append(key, params[key]);
-    }
+    if(!params)
+      params = '?'
 
     if(localStorage.getItem('token')){
-      filters.append('token', localStorage.getItem('token'));
+      params += '&token=' + localStorage.getItem('token');
     }else{
-      filters.append('token', sessionStorage.getItem('token'));
+      params += '&token=' + sessionStorage.getItem('token');
     }
 
-    console.log('http://localhost:8090/achievements/all\?' + filters.toString())
-
-    return this.http.get<any>('http://localhost:8090/achievements/unapproved\?' + filters.toString())
+    console.log('http://localhost:8090/achievements/unapproved' + params)
+    return this.http.get<any>('http://localhost:8090/achievements/unapproved' + params)
   }
 
   addAchievement(achievement: Achievement): Observable<any>{

@@ -17,19 +17,11 @@
   }
 </style>
 
-<h1>Teacher Dashboard</h1>
-
+<h1><span>T</span>eacher Dashboard</h1>
 
 <div style="border:solid black;padding: 10px;">
 <h3>Filter options</h3>
 <form (submit)="filter($event)" class="form-signin" action="" id="filter">
-  <div class="form-group">
-    <input (change)="refresh()" type="radio" id="listUnapproved" name="list" checked>
-    &nbsp;<label for="list" class="control-label">Show list of unapproved achievements</label>
-    <br>
-    <input (change)="refresh()" type="radio" id="listApproved" name="list" >
-    &nbsp;<label for="list" class="control-label">Show list of approved achievements</label>
-  </div>
   <div class="form-group">
   <label for="rollNo" class="control-label">Roll number:</label>
     &nbsp;<input type="text" id="rollNo" name="rollNo" placeholder="Roll number" autofocus>
@@ -73,15 +65,6 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="department" class="control-label">Department:</label>
-    &nbsp;<select  id="department" name="department" placeholder="Section">
-      <option value="">Select department</option>
-      <option value="education">Education</option>
-      <option value="computerscience">Computer Science</option>
-      <option value="management">Management</option>
-    </select>
-  </div>
-  <div class="form-group">
     <label for="shift" class="control-label">Shift:</label>
     &nbsp;<select  id="shift" name="shift" placeholder="Shift">
       <option value="">Select shift</option>
@@ -110,6 +93,7 @@
 <table border="true" *ngIf="achievements$.length != 0">
   <tr>
     <th>Index</th>
+    <th>Approved</th>
     <th>Name</th>
     <th>Role</th>
     <th>Roll no.</th>
@@ -123,6 +107,7 @@
   </tr>
   <tr *ngFor="let achievement of achievements$; let i=index">
     <td>{{ i+1 }}</td>
+    <td>{{ achievement.approved }}</td>
     <td>{{ achievement.name }}</td>
     <td *ngIf="achievement.participated">Participant</td>
     <td *ngIf="!achievement.participated">Organiser</td>

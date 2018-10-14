@@ -47,7 +47,7 @@ export class DetailsComponent implements OnInit {
         (data) => {
           if(data['bool']){
             window.alert('Deleted Successfully.')
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['/dashboard/unapproved']);
           }else{
             console.log(data)
             window.alert('Deletion unsuccessful.')

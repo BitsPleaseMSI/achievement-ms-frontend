@@ -15,25 +15,22 @@ export class DashboardComponent implements OnInit {
     this.achievements$ = [];
   }
 
-  refresh(params?: Object){
-    if(!params){
-      console.log('No params, passing empty params.')
-      params = {};
-    }
-    let target = document.getElementById('listUnapproved') as HTMLInputElement;
-    if(target.checked){
-      this.getUnapprovedAchievements(params);
+  refresh(){
+    if(window.location.pathname == '/dashboard/unapproved'){
+      this.getUnapprovedAchievements(window.location.search);
     }else{
-      this.getApprovedAchievements(params);
+      this.getApprovedAchievements(window.location.search);
     }
   }
 
-  getApprovedAchievements(params?: Object){
+  getApprovedAchievements(params?: string){
+    if(!params)
+      params='?'
     this.auth.currentUser().subscribe(
       (user) => {
-        console.log('params')
-        console.log(params)
-        params['department'] = user.department
+        params += '&department=' +  user.department;
+        console.log('Params for approved in dashboard')
+        console.log(params.toString())
         this.data.getApprovedAchievements(params)
           .subscribe(
           (data) => {
@@ -46,7 +43,9 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  getUnapprovedAchievements(params?: Object){
+  getUnapprovedAchievements(params?: string){
+    if(!params)
+      params=''
     this.auth.currentUser().subscribe(
       (user) => {
         this.data.getUnapprovedAchievements(params)
@@ -58,35 +57,8 @@ export class DashboardComponent implements OnInit {
         (error) => {
           this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
         }
-      )
-    }
-
-  // getdata(params?: Object, sortBy?: string){
-  //   if(!params)
-  //     params = {};
-  //
-  //   this.auth.currentUser().subscribe(
-  //     (user) => {
-  //       this.data.getUnapprovedAchievements()
-  //         .subscribe(
-  //         (data) => {
-  //         this.unapprovedAchievements$ = data['data']
-  //       });
-  //
-  //       params['department'] = user.department
-  //
-  //       this.data.getApprovedAchievements(params)
-  //         .subscribe(
-  //         (data) => {
-  //         this.approvedAchievements$ = data
-  //       });
-  //     },
-  //     (error) => {
-  //       this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
-  //     }
-  //   )
-  //
-  // }
+    )
+  }
 
   ngOnInit(){
     this.achievements$ = [];
@@ -112,25 +84,16 @@ export class DashboardComponent implements OnInit {
     params['semester'] = target.querySelector('#semester').value
     params['shift'] = target.querySelector('#shift').value
     params['category'] = target.querySelector('#category').value
-    params['department'] = target.querySelector('#department').value
-    this.refresh(params);
-  }
 
-  // filter(event){
-  //   event.preventDefault();
-  //   const target = event.target;
-  //   let params = {};
-  //   if(target.querySelector('#sectionFilter').checked)
-  //     params['section'] = target.querySelector('#section').value
-  //   if(target.querySelector('#semesterFilter').checked)
-  //     params['semester'] = target.querySelector('#semester').value
-  //   if(target.querySelector('#shiftFilter').checked)
-  //     params['shift'] = target.querySelector('#shift').value
-  //   if(target.querySelector('#categoryFilter').checked)
-  //     params['category'] = target.querySelector('#category').value
-  //
-  //   this.refresh(params);
-  // }
+    let filters = new URLSearchParams();
+
+    for(let key in params){
+      if(params[key] != '')
+        filters.append(key, params[key]);
+    }
+    window.location.href = window.location.pathname + '?' + filters.toString();
+
+  }
 
   approve(event, id: string){
     event.preventDefault();

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataAccessService } from '../data-access.service';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { safe } from '../sanitise';
 
 @Component({
   selector: 'app-home',
@@ -10,29 +12,24 @@ import { AuthService } from '../auth.service';
 })
 
 export class HomeComponent implements OnInit {
-
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService){
+  constructor(private data: DataAccessService, private auth: AuthService, private router: Router){
     this.achievements$ = [];
   }
 
   ngOnInit() {
-    console.log()
-    this.getdata();
+    this.getdata(window.location.search);
   }
 
-  getdata(params?: Object){
-    if(!params)
-    params = {};
-
+  getdata(params?: string){
     this.data.getApprovedAchievements(params)
     .subscribe(
       (data) => {
         console.log(data)
         this.achievements$ = data;
       });
-    }
+  }
 
   resetFilters(event){
     event.preventDefault();
@@ -54,7 +51,14 @@ export class HomeComponent implements OnInit {
     params['shift'] = target.querySelector('#shift').value
     params['category'] = target.querySelector('#category').value
     params['department'] = target.querySelector('#department').value
-    this.getdata(params);
+
+    let filters = new URLSearchParams();
+    for(let key in params){
+      if((params[key] != '') || (!safe(params[key].toString())))
+        filters.append(key, params[key]);
+    }
+
+    window.location.href = '/home?' + filters.toString();
   }
 
 }
