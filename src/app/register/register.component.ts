@@ -22,6 +22,19 @@ export class RegisterComponent implements OnInit {
 
     const target = event.target;
 
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    if(!validateEmail(target.querySelector('#email').value)){
+      this.info$ = undefined;
+      this.error$ = "Invalid Email";
+      return;
+    }else{
+      this.error$ = undefined;
+    }
+
     if(
       target.querySelector('#password').value == target.querySelector('#password2').value
     ){

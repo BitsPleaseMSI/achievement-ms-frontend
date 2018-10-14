@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataAccessService } from '../data-access.service';
 import { AuthService } from '../auth.service';
 import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,64 +12,74 @@ import { AppComponent } from '../app.component';
 export class DashboardComponent implements OnInit {
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService) {
+  constructor(private data: DataAccessService, private auth: AuthService, private router: Router) {
     this.achievements$ = [];
   }
 
-  refresh(){
-    if(window.location.pathname == '/dashboard/unapproved'){
-      this.getUnapprovedAchievements(window.location.search);
-    }else{
-      this.getApprovedAchievements(window.location.search);
-    }
-  }
+  refresh(arg?: string){
+    let params = '';
+    if(arg)
+      params = arg;
 
-  getApprovedAchievements(params?: string){
-    if(!params)
-      params='?'
-    this.auth.currentUser().subscribe(
-      (user) => {
-        params += '&department=' +  user.department;
-        console.log('Params for approved in dashboard')
-        console.log(params.toString())
-        this.data.getApprovedAchievements(params)
-          .subscribe(
-          (data) => {
-            this.achievements$ = data
-          });
-      },
-      (error) => {
-        this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
+    console.log('params')
+    console.log(params)
+
+    if(window.location.pathname == '/dashboard/approved'){
+      if(params==''){
+        params='?';
       }
-    )
-  }
 
-  getUnapprovedAchievements(params?: string){
-    if(!params)
-      params=''
-    this.auth.currentUser().subscribe(
-      (user) => {
-        this.data.getUnapprovedAchievements(params)
-        .subscribe(
-          (data) => {
-            this.achievements$ = data['data']
+      this.auth.currentUser().subscribe(
+        (user) => {
+          params += '&department=' +  user.department;
+          console.log('Params for approved in dashboard')
+          console.log(params.toString())
+          this.data.getApprovedAchievements(params)
+          .subscribe(
+            (data) => {
+              this.achievements$ = data
           });
         },
         (error) => {
           this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
         }
-    )
+      )
+
+    }else if(window.location.pathname == '/dashboard/unapproved'){
+      // this.getApprovedAchievements(window.location.search);
+      if(params==''){
+        params='?';
+      }
+
+      console.log('2params')
+      console.log(params)
+      this.auth.currentUser().subscribe(
+        (user) => {
+          this.data.getUnapprovedAchievements(params)
+          .subscribe(
+            (data) => {
+              this.achievements$ = data['data']
+            });
+        },
+        (error) => {
+          this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
+        }
+      )
+    }
+
   }
 
   ngOnInit(){
     this.achievements$ = [];
-    this.refresh();
+    this.refresh(window.location.search);
   }
 
   resetFilters(event){
     event.preventDefault();
     let target = document.getElementById('filter') as HTMLFormElement;
     target.reset();
+    this.router.navigate([window.location.pathname]);
+    this.refresh();
   }
 
   filter(event){
@@ -91,7 +102,10 @@ export class DashboardComponent implements OnInit {
       if(params[key] != '')
         filters.append(key, params[key]);
     }
-    window.location.href = window.location.pathname + '?' + filters.toString();
+    Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
+    this.router.navigate([window.location.pathname], { queryParams: params });
+    this.refresh('?'+filters.toString());
+    // window.location.href = window.location.pathname + '?' + filters.toString();
 
   }
 
