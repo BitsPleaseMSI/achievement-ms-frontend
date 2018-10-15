@@ -40,7 +40,7 @@ export class ResetPassComponent implements OnInit {
               (data) => {
                 if(data.bool){
                   this.router.navigate(['/dashboard/unapproved']);
-                  this.ac.snackbar('Logged in Successfully!');
+                  this.ac.snackbar('Password changed successfully!');
                   this.error$ = undefined;
                 }else{
                   // Error while password reset
