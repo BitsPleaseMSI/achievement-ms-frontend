@@ -14,12 +14,16 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+
+
 h4{
     text-align: left;
 }
 
 h2{
     margin-top: 10px;
+    color: #dfe6e9;
+
 }
 
 .highlight{

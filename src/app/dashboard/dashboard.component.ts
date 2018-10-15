@@ -5,7 +5,7 @@ import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 import { safe } from '../sanitise';
 import { ActivatedRoute } from '@angular/router';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -84,6 +84,12 @@ export class DashboardComponent implements OnInit {
         target.value = params[key];
       }
     }
+
+    $('#filters').hide();
+
+    $('#b').click(function(){
+      $('#filters').toggle('fadeout');
+    });
   }
 
   resetFilters(event){

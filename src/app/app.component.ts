@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   userData$: Object;
   message$: string;
   title = 'achievement-ms-front';
-
+  date= new Date();
   constructor(private auth: AuthService, private router: Router) { }
 
   public snackbar(message: string){

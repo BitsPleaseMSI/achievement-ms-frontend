@@ -1,103 +1,99 @@
-<style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  td,
-  th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-</style>
-
 <h1><span>H</span>ome</h1>
-
-<div style="border:solid black;padding: 10px;">
-
-<h3>Filter options</h3>
-<form (submit)="filter($event)" class="form-signin" action="" id="filter">
-  <div class="form-group">
-  <label for="rollNo" class="control-label">Roll number:</label>
-    &nbsp;<input type="text" id="rollNo" name="rollNo" placeholder="Roll number" autofocus>
-  </div>
-  <div class="form-group">
-    <label for="dateFrom" class="control-label">Starting from date:</label>
-    &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date">
-  </div>
-  <div class="form-group">
-    <label for="dateTo" class="control-label">Till date:</label>
-    &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date">
-  </div>
-  <div class="form-group">
-    <label for="sessionFrom" class="control-label">Session start year</label>
-    &nbsp;<input type="number" id="sessionFrom"  name="sessionFrom" placeholder="Session start year">
-  </div>
-  <div class="form-group">
-    <label for="sessionTo" class="control-label">Session end year</label>
-    &nbsp;<input type="number" id="sessionTo"  name="sessionTo" placeholder="Session end year">
-  </div>
-  <div class="form-group">
-  <label for="section" class="control-label">Section:</label>
-    &nbsp;<select  id="section" name="section" placeholder="Section">
-      <option value="">Select section</option>
-      <option>A</option>
-      <option>B</option>
-      <option>C</option>
-      <option>D</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="semester">Semester:</label>
-    &nbsp;<select  id="semester" name="semester" placeholder="Section">
-      <option value="">Select semester</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      <option>6</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="department" class="control-label">Department:</label>
-    &nbsp;<select  id="department" name="department" placeholder="Section">
-      <option value="">Select department</option>
-      <option value="education">Education</option>
-      <option value="computerscience">Computer Science</option>
-      <option value="management">Management</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="shift" class="control-label">Shift:</label>
-    &nbsp;<select  id="shift" name="shift" placeholder="Shift">
-      <option value="">Select shift</option>
-      <option value="morning">Morning</option>
-      <option value="evening">Evening</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="category" class="control-label">Category:</label>
-    &nbsp;<select  id="category" name="category" placeholder="Category">
-      <option value="">Select category</option>
-      <option value="sports">Sports</option>
-      <option value="cultural">Cultural</option>
-      <option value="technical">Technical</option>
-      <option value="others">Others</option>
-    </select>
-  </div>
-  <button class="btn btn-primary" type="submit">Apply filter</button>
-  &nbsp;<button class="btn btn-primary" (click)="resetFilters($event)">Reset filter</button>
-</form>
-</div>
-
 <h2>List of approved achievements</h2>
+
+<input type="checkbox" id="b" >Filter By
+<br>
+<div id="filters">
+
+  <h5>Filter options</h5>
+  <form (submit)="filter($event)" class="form-signin" action="" id="filter">
+    <div id="filter-area-one">
+      <div class="home-filters">
+        <label for="rollNo">Roll number:</label>
+        &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Roll number" autofocus>
+        &nbsp;
+        <label for="dateFrom" class="control-label">Starting from date:</label>
+        &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date">
+        &nbsp;</div>
+      <div class="home-filters">
+        <label for="dateTo" class="control-label">Till date:</label>
+        &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date">
+      </div>
+      </div>
+      <div id="filter-area-two">
+      <div class="home-filters">
+        <label for="sessionFrom" class="control-label">Session start year:</label>
+        &nbsp;<input type="number" id="sessionFrom" name="sessionFrom" placeholder="Session start year">
+      </div>
+      &nbsp;&nbsp;
+      <div class="home-filters">
+        <label for="sessionTo" class="control-label">Session end year:</label>
+        &nbsp;<input type="number" id="sessionTo" name="sessionTo" placeholder="Session end year">
+      </div>
+      </div>
+    <div  id="filter-area-three">
+      <div class="home-filters">
+        <label for="section">Section:</label>
+        <select id="section" name="section" placeholder="Section">&nbsp;
+          <option value="">Select section</option>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+          <option>D</option>
+        </select>
+      </div>
+      &nbsp;
+      <div class="home-filters">
+        <label for="semester">Semester:</label>
+        <select id="semester" name="semester" placeholder="Section">&nbsp;
+          <option value="">Select semester</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+        </select>
+      </div>
+      &nbsp;
+      <div class="home-filters">
+        <label for="department" class="control-label">Department:</label>&nbsp;
+        <select id="department" name="department" placeholder="Section">
+          <option value="">Select department</option>
+          <option value="Education">Education</option>
+          <option value="Computerscience">Computer Science</option>
+          <option value="Management">Management</option>
+        </select>
+      </div>
+      &nbsp;
+      <div class="home-filters">
+        <label for="shift" class="control-label">Shift:</label>&nbsp;
+        <select id="shift" name="shift" placeholder="Shift">
+          <option value="">Select shift</option>
+          <option value="morning">Morning</option>
+          <option value="evening">Evening</option>
+        </select>
+      </div>
+      &nbsp;
+      <div class="home-filters">
+        <label for="category" class="control-label">Category:</label>&nbsp;
+        <select id="category" name="category" placeholder="Category">
+          <option value="">category</option>
+          <option value="Sports">Sports</option>
+          <option value="Cultural">Cultural</option>
+          <option value="Technical">Technical</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+    </div>
+    <div id="button-area">
+      <button class="btn btn-primary" type="submit">Apply filter</button>
+      &nbsp;<button class="btn btn-primary" (click)="resetFilters($event)">Reset filter</button>
+    </div>
+  </form>
+</div>
+<br>
+
 <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
 <table border="true" *ngIf="achievements$.length > 0">
   <tr>

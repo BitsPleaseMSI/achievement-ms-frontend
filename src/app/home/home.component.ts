@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { safe } from '../sanitise';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -33,6 +33,13 @@ export class HomeComponent implements OnInit {
     }
 
     this.getdata('?' + filters.toString());
+
+    $('#filters').hide();
+
+    $('#b').click(function(){
+      $('#filters').toggle('fadeout');
+    });
+
 
   }
 

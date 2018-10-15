@@ -12,24 +12,30 @@
     </head>
     <body>
 
-      <div id="snackbar"><h3>{{ message$ }}</h3></div>
+      <div id="snackbar"><h4>{{ message$ }}</h4></div>
         <div class="wrapper">
             <!-- Sidebar Holder -->
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>Achievement Management System</h3>
-                    <h4 *ngIf="userData$">Welcome: <br>{{ userData$['firstName'] }}</h4>
+                                            <p id="date">{{date | date:'medium'}}</p>
+                    <h2>Achievement Management System</h2><br>
+                    <h5 *ngIf="userData$">Welcome <span class="highlight">{{userData$['firstName'] | uppercase}}</span></h5>
+                    <h5 *ngIf="userData$">Department: <span class="highlight">{{ userData$['department'] | uppercase}}</span></h5>
+
                 </div>
 
                 <ul class="list-unstyled components">
                   <li><a routerLink="/home">Home</a></li>
                   <li *ngIf="!userData$"><a routerLink="/login">Faculty Login</a></li>
-                  <li (click)="logout()" *ngIf="userData$"><a routerLink="home">Logout</a></li>
-                  <li *ngIf="userData$"><a routerLink="/dashboard/unapproved">Dashboard Unpproved</a></li>
                   <li *ngIf="userData$"><a routerLink="/dashboard/approved">Dashboard Approved</a></li>
-                  <li *ngIf="userData$"><a routerLink="/passwordreset">Reset password</a></li>
+                  <li *ngIf="userData$"><a routerLink="/dashboard/unapproved">Dashboard Unpproved</a></li>
                   <li><a routerLink="/achievement/add">Add achievement</a></li>
+                  <li *ngIf="userData$"><a routerLink="/passwordreset">Reset password</a></li>
+
+                  <li (click)="logout()" *ngIf="userData$"><a routerLink="home">Logout</a></li>
+
                   <li><a *ngIf="!userData$" routerLink="/user/register">Register user</a></li>
+
                 </ul>
             </nav>
 

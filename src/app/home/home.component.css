@@ -1,15 +1,76 @@
-h2{
 
-    color:dodgerblue;
-}
-
-span{
-    font-size: 50px;
-}
-
-.sortingDiv{
-    border:2px solid dodgerblue;
-    padding:5px;
+#filters{
+    border:1px solid #636e72;
     border-radius: 5px;
+    padding:5px;
+}
 
+.home-filters{
+    grid-template-columns: 1fr, 1fr;
+    display: inline-block;
+    padding:10px 0;
+}
+
+#filter-area-one{
+    grid-template-columns: 1fr, 1fr, 1fr;
+
+    display:inline-block;
+
+}
+
+
+table{
+    display: flex;
+    width:100%;
+    flex-wrap: wrap;
+    margin: 0 0 3em 0;
+    padding: 0;
+    border:none;
+    overflow-x: auto;
+  }
+
+
+  
+  td,th{
+      text-align: left;
+      padding:10px;
+      border:none;
+  }
+  
+  #table-heading{
+      background-color: #636e72;
+      color: #25CCF7;
+  }
+  
+
+  
+  tr:nth-child(odd) {
+      background-color: #dfe6e9;
+    }
+  
+    .table-hover:hover{
+        background-color: lightblue;
+    }
+    
+  
+    a{
+        color:#636e72;
+        font-weight: bold;
+    }
+
+option{
+    width:10px;
+}
+
+#button-area{
+    text-align:center;
+}
+
+#rollNo{
+    width:130px;;
+}
+
+#dateTo,#dateFrom, #sessionTo, #sessionFrom{
+    width:140px;
+    text-align: center;
 }
