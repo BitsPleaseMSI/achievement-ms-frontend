@@ -13,7 +13,9 @@ import { AppComponent } from '../app.component';
 export class DetailsComponent implements OnInit {
   achievement$: Object;
   user$: boolean;
-  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private ac: AppComponent) { }
+  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private ac: AppComponent) {
+    this.achievement$ = {};
+  }
 
   ngOnInit() {
     this.auth.currentUser().subscribe(

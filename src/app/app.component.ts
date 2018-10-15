@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
     this.userData$ = undefined;
+    this.snackbar('Logged out successfully!');
     this.router.navigate(['home']);
   }
 
