@@ -37,6 +37,9 @@ export class DetailsComponent implements OnInit {
           this.achievement$ = data;
         else
           this.router.navigate(['home']);
+      },
+      (error) =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
       }
     )
   }
@@ -52,8 +55,11 @@ export class DetailsComponent implements OnInit {
             this.router.navigate(['/dashboard/unapproved']);
           }else{
             console.log(data);
-            this.ac.snackbar('Deleted unsuccessful!');
+            this.ac.snackbar('Delete unsuccessful!');
           }
+        },
+        (error) =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
         }
       )
     }

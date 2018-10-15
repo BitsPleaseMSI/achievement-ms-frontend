@@ -60,6 +60,10 @@ export class RegisterComponent implements OnInit {
             console.log(data)
             this.error$ = data.message.toString()
           }
+        },
+        (error) =>{
+          this.info$ = undefined;
+          this.ac.snackbar('Server is not responding, Please try later.');
         }
       )
     }else{

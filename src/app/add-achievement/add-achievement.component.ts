@@ -80,6 +80,10 @@ export class AddAchievementComponent implements OnInit {
             this.error$ = undefined;
           }
         }
+      },
+      (error) =>{
+        this.info$ = undefined;
+        this.ac.snackbar('Server is not responding, Please try later.');
       }
     )
 

@@ -46,6 +46,10 @@ export class ResetPassComponent implements OnInit {
                   // Error while password reset
                   this.error$ = data.message.toString()
                 }
+              },
+              (error) =>{
+                this.info$ = undefined;
+                this.ac.snackbar('Server is not responding, Please try later.');
               }
             )
           }

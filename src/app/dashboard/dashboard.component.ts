@@ -35,9 +35,12 @@ export class DashboardComponent implements OnInit {
           .subscribe(
             (data) => {
               this.achievements$ = data
+          },
+          (error) =>{
+            this.ac.snackbar('Server is not responding, Please try later.');
           });
         },
-        (error) => {
+        (error) =>{
           this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
         }
       )
@@ -53,9 +56,12 @@ export class DashboardComponent implements OnInit {
           .subscribe(
             (data) => {
               this.achievements$ = data['data']
+            },
+            (error) =>{
+              this.ac.snackbar('Server is not responding, Please try later.');
             });
         },
-        (error) => {
+        (error) =>{
           this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
         }
       )
@@ -134,6 +140,9 @@ export class DashboardComponent implements OnInit {
               }else{
                 this.ac.snackbar(data['message'])
               }
+            },
+            (error) =>{
+              this.ac.snackbar('Server is not responding, Please try later.');
             }
           )
       }
@@ -160,6 +169,9 @@ export class DashboardComponent implements OnInit {
               }else{
                 this.ac.snackbar(data['message'])
               }
+            },
+            (error) =>{
+              this.ac.snackbar('Server is not responding, Please try later.');
             }
           )
       }

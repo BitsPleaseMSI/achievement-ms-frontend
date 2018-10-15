@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { safe } from '../sanitise';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute){
+  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent){
     this.achievements$ = [];
   }
 
@@ -41,6 +42,9 @@ export class HomeComponent implements OnInit {
       (data) => {
         console.log(data)
         this.achievements$ = data;
+      },
+      (error) =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
       });
   }
 

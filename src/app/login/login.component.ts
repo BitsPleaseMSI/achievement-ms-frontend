@@ -12,10 +12,14 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   error$: string;
   info$: string;
+  trylater: boolean;
 
-  constructor(private auth: AuthService, private ac: AppComponent, private router: Router) { }
+  constructor(private auth: AuthService, private ac: AppComponent, private router: Router) {
+    this.trylater = true;
+  }
 
   ngOnInit() {
+    this.trylater = true;
   }
 
   loginUser(event){
@@ -29,6 +33,8 @@ export class LoginComponent implements OnInit {
       target.querySelector('#password').value
     ).subscribe(
       (data) => {
+        console.log('got data')
+        this.trylater = false;
         // Successful login
         if(data.bool){
           if(target.querySelector('#saveUser').checked){
@@ -42,11 +48,16 @@ export class LoginComponent implements OnInit {
         }else{
           // Access denied
           console.log(data)
-          this.error$ = "Incorrect credentials"
+          this.info$ = undefined;
+          this.error$ = "Incorrect credentials";
         }
+      },
+      (error) =>{
+        this.info$ = undefined;
+        this.ac.snackbar('Server is not responding, Please try later.');
       }
     )
-    this.info$ = undefined;
+
   }
 
 }
