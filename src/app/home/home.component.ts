@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  getdata(params?: string){
+  getdata(params: string){
     this.data.getApprovedAchievements(params)
     .subscribe(
       (data) => {
@@ -52,6 +52,8 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     let target = document.getElementById('filter') as HTMLFormElement;
     target.reset();
+    this.router.navigate(['/home']);
+    this.getdata('');
   }
 
   filter(event){
