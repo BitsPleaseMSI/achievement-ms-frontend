@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Achievement } from './achievement';
 import { Router } from '@angular/router';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +29,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getdata();
+
+    $('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active');   
+      
+    });
   }
 
   logout(){

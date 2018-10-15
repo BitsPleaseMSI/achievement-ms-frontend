@@ -4,17 +4,8 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
-body {
+*{
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-}
-
-p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
 }
 
 a, a:hover, a:focus {
@@ -23,9 +14,20 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+h4{
+    text-align: left;
+}
+
+h2{
+    margin-top: 10px;
+}
+
+.highlight{
+    color: #25CCF7;
+}
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+    background: rgba(0, 0, 0, 0.5);
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -38,47 +40,47 @@ a, a:hover, a:focus {
     border: none;
 }
 
-.line {
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
-}
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
 .wrapper {
     display: flex;
+    width:100%;
     align-items: stretch;
+
 }
 
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #0376a3;
-    color: #fff;
     transition: all 0.3s;
+    background-color: #636e72;
 }
-
+#date{
+    text-align: right;
+    margin-bottom: 0;
+    color:#25CCF7;
+}
+ul{
+    background-color: #dfe6e9;
+}
 #sidebar.active {
     margin-left: -250px;
 }
 
+
 #sidebar .sidebar-header {
-    padding: 20px;
-    background: #0290c9;
+    padding: 10px;
+    color: #dfe6e9;
+    background: #636e72;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #0376a3;
+    border-bottom: 1px solid black;;
 }
 
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
-}
 
 #sidebar ul li a {
     padding: 10px;
@@ -86,8 +88,11 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #0290c9;
-    background: #fff;
+    color: #25CCF7;
+    background: black;
+    transform: translateX(5%);
+
+
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
@@ -112,6 +117,13 @@ a[aria-expanded="true"]::before {
     content: '\e260';
 }
 
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
 
 ul ul a {
     font-size: 0.9em !important;
@@ -136,11 +148,18 @@ a.download {
     color: #0290c9;
 }
 
+
+
 a.article, a.article:hover {
     background: #0290c9 !important;
     color: #fff !important;
 }
 
+#sidebarCollapse{
+    position: absolute;
+    z-index: 1;
+
+}
 
 
 /* ---------------------------------------------------
@@ -150,6 +169,10 @@ a.article, a.article:hover {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    background-color:white;;
+    width:100%;
+    top:50%;
+    left:50%;
 }
 
 /* ---------------------------------------------------
