@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   error$: string;
   info$: string;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private ac: AppComponent) { }
 
   ngOnInit() {}
 
@@ -51,7 +52,9 @@ export class RegisterComponent implements OnInit {
         (data) => {
           if(data.bool){
             this.router.navigate(['login']);
-            this.info$ = "Successfully added new user!";
+            this.error$ = undefined;
+            this.info$ = undefined;
+            this.ac.snackbar('User successfully registered!')
             this.error$ = undefined;
           }else{
             console.log(data)

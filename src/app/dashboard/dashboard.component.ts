@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DashboardComponent implements OnInit {
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
     this.achievements$ = [];
   }
 
@@ -130,8 +130,9 @@ export class DashboardComponent implements OnInit {
             (data) => {
               if(data['bool']){
                 this.refresh();
+                this.ac.snackbar('Approved successfully!')
               }else{
-                window.alert(data['message'])
+                this.ac.snackbar(data['message'])
               }
             }
           )
@@ -155,8 +156,9 @@ export class DashboardComponent implements OnInit {
             (data) => {
               if(data['bool']){
                 this.refresh();
+                this.ac.snackbar('Unapproved successfully!')
               }else{
-                window.alert(data['message'])
+                this.ac.snackbar(data['message'])
               }
             }
           )

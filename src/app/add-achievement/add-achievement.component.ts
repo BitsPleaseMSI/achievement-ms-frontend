@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataAccessService } from '../data-access.service';
 import { Achievement } from '../achievement';
 import { safe } from '../sanitise';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-add-achievement',
@@ -15,7 +16,7 @@ export class AddAchievementComponent implements OnInit {
   selectedFiles: FileList;
   fileName: string;
 
-  constructor(private data: DataAccessService) { }
+  constructor(private data: DataAccessService, private ac: AppComponent) { }
 
   ngOnInit() { }
 
@@ -74,6 +75,7 @@ export class AddAchievementComponent implements OnInit {
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             error = false;
+            this.ac.snackbar('Achievement added Successfully!');
             this.info$ = 'Achievement added Successfully.';
             this.error$ = undefined;
           }

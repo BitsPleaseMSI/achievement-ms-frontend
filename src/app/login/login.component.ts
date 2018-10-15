@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
           }else{
             sessionStorage.setItem('token', data['token'].toString());
           }
+          this.ac.snackbar('Logged in Successfully!');
           this.router.navigate(['/dashboard/unapproved']);
           this.ac.getdata()
         }else{
@@ -45,7 +46,6 @@ export class LoginComponent implements OnInit {
         }
       }
     )
-
     this.info$ = undefined;
   }
 
