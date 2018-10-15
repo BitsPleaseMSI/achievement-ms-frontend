@@ -20,16 +20,19 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('this.route.snapshot.queryParams');
-    console.log(this.route.snapshot.queryParams);
+    let params = this.route.snapshot.queryParams;
     let filters = new URLSearchParams();
 
-    for(let key in this.route.snapshot.queryParams){
-      if((this.route.snapshot.queryParams[key] != '') || (!safe(this.route.snapshot.queryParams[key].toString())))
-        filters.append(key, this.route.snapshot.queryParams[key]);
+    for(let key in params){
+      if((params[key] != '') || (!safe(params[key].toString()))){
+        filters.append(key, params[key]);
+        let target = document.getElementById(key) as HTMLFormElement;
+        target.value = params[key];
+      }
     }
 
     this.getdata('?' + filters.toString());
+
   }
 
   getdata(params?: string){

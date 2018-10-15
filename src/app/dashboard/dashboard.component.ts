@@ -3,6 +3,8 @@ import { DataAccessService } from '../data-access.service';
 import { AuthService } from '../auth.service';
 import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
+import { safe } from '../sanitise';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService, private router: Router) {
+  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute) {
     this.achievements$ = [];
   }
 
@@ -20,9 +22,6 @@ export class DashboardComponent implements OnInit {
     let params = '';
     if(arg)
       params = arg;
-
-    console.log('params')
-    console.log(params)
 
     if(window.location.pathname == '/dashboard/approved'){
       if(params==''){
@@ -32,8 +31,6 @@ export class DashboardComponent implements OnInit {
       this.auth.currentUser().subscribe(
         (user) => {
           params += '&department=' +  user.department;
-          console.log('Params for approved in dashboard')
-          console.log(params.toString())
           this.data.getApprovedAchievements(params)
           .subscribe(
             (data) => {
@@ -46,13 +43,10 @@ export class DashboardComponent implements OnInit {
       )
 
     }else if(window.location.pathname == '/dashboard/unapproved'){
-      // this.getApprovedAchievements(window.location.search);
       if(params==''){
         params='?';
       }
 
-      console.log('2params')
-      console.log(params)
       this.auth.currentUser().subscribe(
         (user) => {
           this.data.getUnapprovedAchievements(params)
@@ -70,8 +64,20 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(){
+    console.log(window.location.search)
+    console.log(this.route.snapshot.queryParams)
     this.achievements$ = [];
     this.refresh(window.location.search);
+
+    let params = this.route.snapshot.queryParams;
+    let filters = new URLSearchParams();
+
+    for(let key in params){
+      if((params[key] != '') || (!safe(params[key].toString()))){
+        let target = document.getElementById(key) as HTMLFormElement;
+        target.value = params[key];
+      }
+    }
   }
 
   resetFilters(event){
