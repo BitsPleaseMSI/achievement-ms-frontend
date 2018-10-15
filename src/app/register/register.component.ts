@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   error$: string;
   info$: string;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private ac: AppComponent) { }
 
   ngOnInit() {}
 
@@ -21,6 +22,19 @@ export class RegisterComponent implements OnInit {
     event.preventDefault();
 
     const target = event.target;
+
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    if(!validateEmail(target.querySelector('#email').value)){
+      this.info$ = undefined;
+      this.error$ = "Invalid Email";
+      return;
+    }else{
+      this.error$ = undefined;
+    }
 
     if(
       target.querySelector('#password').value == target.querySelector('#password2').value
@@ -38,12 +52,18 @@ export class RegisterComponent implements OnInit {
         (data) => {
           if(data.bool){
             this.router.navigate(['login']);
-            this.info$ = "Successfully added new user!";
+            this.error$ = undefined;
+            this.info$ = undefined;
+            this.ac.snackbar('User successfully registered!')
             this.error$ = undefined;
           }else{
             console.log(data)
             this.error$ = data.message.toString()
           }
+        },
+        (error) =>{
+          this.info$ = undefined;
+          this.ac.snackbar('Server is not responding, Please try later.');
         }
       )
     }else{

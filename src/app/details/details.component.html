@@ -21,7 +21,7 @@
 
 <ul>
   <h3>Name</h3>
-  <li>{{ achievement$._id }}</li>
+  <li>{{ achievement$.name }}</li>
   <h3>Role</h3>
   <li *ngIf="achievement$.participated">Participant</li>
   <li *ngIf="!achievement$.participated">Organiser</li>
@@ -31,12 +31,28 @@
   <li>{{ achievement$.section }}</li>
   <h3>Shift</h3>
   <li>{{ achievement$.shift | uppercase }}</li>
-  <h3>Departmentt</h3>
+  <h3>Department</h3>
   <li>{{ achievement$.department | uppercase }}</li>
   <h3>Datet</h3>
   <li>{{ achievement$.date }}</li>
-  <h3>Categoryt</h3>
+  <h3>Category</h3>
   <li>{{ achievement$.category | uppercase }}</li>
+  <h3>Semester</h3>
+  <li>{{ achievement$.semester }}</li>
+  <h3>Session starting year</h3>
+  <li>{{ achievement$.sessionFrom }}</li>
+  <h3>Session ending year</h3>
+  <li>{{ achievement$.sessionTo }}</li>
+  <h3>Event name</h3>
+  <li>{{ achievement$.event }}</li>
+  <h3>Description</h3>
+  <li>{{ achievement$.description }}</li>
+  <h3>Rating</h3>
+  <li>{{ achievement$.rating }}</li>
+  <h3>Title</h3>
+  <li>{{ achievement$.title }}</li>
+  <h3>Venue</h3>
+  <li>{{ achievement$.venue }}</li>
   <h3>Certificate image</h3>
   <li>
     <img length="100" height="100" src="http://localhost:8000/{{ achievement$.imageUrl }}">

@@ -4,6 +4,8 @@ import { DataAccessService } from '../data-access.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { safe } from '../sanitise';
+import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -14,20 +16,35 @@ import { safe } from '../sanitise';
 export class HomeComponent implements OnInit {
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService, private router: Router){
+  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent){
     this.achievements$ = [];
   }
 
   ngOnInit() {
-    this.getdata(window.location.search);
+    let params = this.route.snapshot.queryParams;
+    let filters = new URLSearchParams();
+
+    for(let key in params){
+      if((params[key] != '') || (!safe(params[key].toString()))){
+        filters.append(key, params[key]);
+        let target = document.getElementById(key) as HTMLFormElement;
+        target.value = params[key];
+      }
+    }
+
+    this.getdata('?' + filters.toString());
+
   }
 
-  getdata(params?: string){
+  getdata(params: string){
     this.data.getApprovedAchievements(params)
     .subscribe(
       (data) => {
         console.log(data)
         this.achievements$ = data;
+      },
+      (error) =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
       });
   }
 
@@ -35,6 +52,8 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     let target = document.getElementById('filter') as HTMLFormElement;
     target.reset();
+    this.router.navigate(['/home']);
+    this.getdata('');
   }
 
   filter(event){
@@ -58,7 +77,12 @@ export class HomeComponent implements OnInit {
         filters.append(key, params[key]);
     }
 
-    window.location.href = '/home?' + filters.toString();
+    Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
+    this.router.navigate(['/home'], { queryParams: params });
+    this.getdata('?' + filters.toString());
+    //this.router.navigate(['/home', { queryParams: { page: 1 } });
+    // this.router.navigate(['/home', filters.toString()]);
+    // window.location.href = '/home?' + filters.toString();
   }
 
 }
