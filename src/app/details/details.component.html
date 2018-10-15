@@ -58,4 +58,4 @@
     <img length="100" height="100" src="http://localhost:8000/{{ achievement$.imageUrl }}">
   </li>
 </ul>
-<button *ngIf="user$" type="button" name="delete" (click)="delete($event, achievement$._id)">Delete</button>
+<button *ngIf="user$.department == achievement$.department" type="button" name="delete" (click)="delete($event, achievement$._id)">Delete</button>
