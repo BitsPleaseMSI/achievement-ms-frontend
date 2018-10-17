@@ -1,18 +1,50 @@
 <div id="studentDetails">
 
 
-    <h1>Details of <span class="highlight">{{achievement$.name | uppercase}}</span></h1>
-  <div id="imgArea">
-    <img src="">
-  
-    <h5>Name :<span  class="highlight">{{achievement$.name | uppercase}}</span></h5>
-    <h5>Section :<span  class="highlight">{{achievement$.section | uppercase}}</span></h5>
-    <h5>Enrolment No. :<span  class="highlight">{{achievement$.rollNo | uppercase}}</span></h5>
-    <h5>Shift :<span  class="highlight">{{achievement$.shift | uppercase}}</span></h5>
-    <h5>Category:<span  class="highlight">{{achievement$.category | uppercase}}</span></h5>
-    <h5>Date :<span  class="highlight">{{achievement$.date | uppercase}}</span></h5>
-    <h5>Department :<span  class="highlight">{{achievement$.department | uppercase}}</span></h5>
-  
-  </div>
-  
-  </div>
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+
+<h1><span>D</span>etails of {{ achievement$._id }}</h1>
+
+<ul>
+  <h3>Name</h3>
+  <li>{{ achievement$.name }}</li>
+  <h3>Role</h3>
+  <li *ngIf="achievement$.participated">Participant</li>
+  <li *ngIf="!achievement$.participated">Organiser</li>
+  <h3>Roll No.</h3>
+  <li>{{ achievement$.rollNo }}</li>
+  <h3>Section</h3>
+  <li>{{ achievement$.section }}</li>
+  <h3>Shift</h3>
+  <li>{{ achievement$.shift | uppercase }}</li>
+  <h3>Department</h3>
+  <li>{{ achievement$.department | uppercase }}</li>
+  <h3>Datet</h3>
+  <li>{{ achievement$.date }}</li>
+  <h3>Category</h3>
+  <li>{{ achievement$.category | uppercase }}</li>
+  <h3>Semester</h3>
+  <li>{{ achievement$.semester }}</li>
+  <h3>Session starting year</h3>
+  <li>{{ achievement$.sessionFrom }}</li>
+  <h3>Session ending year</h3>
+  <li>{{ achievement$.sessionTo }}</li>
+  <h3>Event name</h3>
+  <li>{{ achievement$.event }}</li>
+  <h3>Description</h3>
+  <li>{{ achievement$.description }}</li>
+  <h3>Rating</h3>
+  <li>{{ achievement$.rating }}</li>
+  <h3>Title</h3>
+  <li>{{ achievement$.title }}</li>
+  <h3>Venue</h3>
+  <li>{{ achievement$.venue }}</li>
+  <h3>Certificate image</h3>
+  <li>
+    <img length="100" height="100" src="http://localhost:8000/{{ achievement$.imageUrl }}">
+  </li>
+</ul>
+<button *ngIf="user$.department == achievement$.department" type="button" name="delete" (click)="delete($event, achievement$._id)">Delete</button>

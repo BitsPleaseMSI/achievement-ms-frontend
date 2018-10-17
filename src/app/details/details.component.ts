@@ -12,22 +12,16 @@ import { AppComponent } from '../app.component';
 })
 export class DetailsComponent implements OnInit {
   achievement$: Object;
-  user$: boolean;
+  user$: Object;
   constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private ac: AppComponent) {
     this.achievement$ = {};
+    this.user$ = {};
   }
 
   ngOnInit() {
     this.auth.currentUser().subscribe(
       (data) => {
-        console.log(data)
-        if(data['email']){
-          this.user$ = true;
-          console.log('trued')
-        }else{
-          this.user$ = false;
-          console.log('falsed')
-        }
+        this.user$ = data;
       }
     )
 
