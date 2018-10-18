@@ -63,12 +63,3 @@ form{
 #btn-area{
 width:auto;
 }
-
-#detail-link{
-    color:black;
-    text-decoration: underline;
-}
-
-#detail-link:hover{
-    color:darkgray;
-}
