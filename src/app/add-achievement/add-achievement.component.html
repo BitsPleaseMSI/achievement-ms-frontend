@@ -1,4 +1,5 @@
 <div id="mainContent">
+  <div id="form-area">
   <h1>Add achievement</h1>
 
   <div *ngIf="error$" class="alert alert-danger">
@@ -102,6 +103,10 @@
       <label for="image" class="control-label">Upload an image of your certificate.</label>
       <input type="file" id="image" name="image" class="form-control-file" value="fileupload" (change)="detectFiles($event)" required>
    </div>
-      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Add achievement</button>
-  </form>
+   <div id="btn-area">
+
+      <button class="btn btn-crimson btn-block" type="submit">Add achievement</button>
+  </div>
+    </form>
+</div>
 </div>

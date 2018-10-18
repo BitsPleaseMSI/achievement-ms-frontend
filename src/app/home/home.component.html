@@ -1,4 +1,6 @@
+
 <h1><span>H</span>ome</h1>
+<div id="mainContent">
 <h2>List of approved achievements</h2>
 
 <input type="checkbox" id="b" >Filter By
@@ -87,38 +89,40 @@
       </div>
     </div>
     <div id="button-area">
-      <button class="btn btn-primary" type="submit">Apply filter</button>
-      &nbsp;<button class="btn btn-primary" (click)="resetFilters($event)">Reset filter</button>
+      <button class="btn btn-crimson" type="submit">Apply filter</button>
+      &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
     </div>
   </form>
 </div>
 <br>
 
 <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
-<table border="true" *ngIf="achievements$.length > 0">
-  <tr>
-    <th>Index</th>
-    <th>Name</th>
-    <th>Role</th>
+<table *ngIf="achievements$.length > 0">
+  <tr id="table-heading">
+    <th>S.No.</th>
     <th>Roll no.</th>
-    <th>Section</th>
-    <th>Shift</th>
+    <th>Name</th>
     <th>Department</th>
-    <th>Date</th>
-    <th>category</th>
+    <th>Sem</th>
+    <th>Section</th>
+    <th>Event Name</th>
+    <th>Category</th>
+    <th>Role</th>
     <th>Details</th>
   </tr>
-  <tr *ngFor="let achievement of achievements$; let i = index">
+  <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
     <td>{{ i+1 }}</td>
-    <td>{{ achievement.name }}</td>
-    <td *ngIf="achievement.participated">Participant</td>
-    <td *ngIf="!achievement.participated">Organiser</td>
-    <td>{{ achievement.rollNo }}</td>
-    <td>{{ achievement.section }}</td>
-    <td>{{ achievement.shift | uppercase }}</td>
+    <td>{{ achievement.rollNo |uppercase}}</td>
+    <td>{{ achievement.name | uppercase}}</td>
     <td>{{ achievement.department | uppercase }}</td>
-    <td>{{ achievement.date }}</td>
+    <td>{{achievement.semester}}</td>
+     <td>{{ achievement.section | uppercase}}</td>
+    <td>{{ achievement.eventName |uppercase }}</td>
+    <td *ngIf="achievement.participated">PARTICIPANT</td>
+    <td *ngIf="!achievement.participated">ORGANISER</td>
     <td>{{ achievement.category | uppercase }}</td>
-    <td><a routerLink="/achievement/{{ achievement._id }}">View Details</a></td>
+    <td><a routerLink="/achievement/{{ achievement._id }}" id="detail-link">VIEW DETAILS</a></td>
   </tr>
 </table>
+
+</div>

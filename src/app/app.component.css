@@ -22,16 +22,16 @@ h4{
 
 h2{
     margin-top: 10px;
-    color: #dfe6e9;
+    color: white;
 
 }
 
 .highlight{
-    color: #25CCF7;
+    color: wheat;
 }
 .navbar {
     padding: 15px 10px;
-    background: rgba(0, 0, 0, 0.5);
+    background: crimson;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -59,12 +59,12 @@ h2{
     min-width: 250px;
     max-width: 250px;
     transition: all 0.3s;
-    background-color: #636e72;
+    background-color: crimson;
 }
 #date{
     text-align: right;
     margin-bottom: 0;
-    color:#25CCF7;
+    color:wheat;
 }
 ul{
     background-color: #dfe6e9;
@@ -77,7 +77,7 @@ ul{
 #sidebar .sidebar-header {
     padding: 10px;
     color: #dfe6e9;
-    background: #636e72;
+    background: crimson;
 }
 
 #sidebar ul.components {
@@ -92,7 +92,7 @@ ul{
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #25CCF7;
+    color: crimson;
     background: black;
     transform: translateX(5%);
 
@@ -101,7 +101,7 @@ ul{
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #0290c9;
+    background: crimson;
 }
 
 
@@ -132,7 +132,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #0290c9;
+    background: crimson;
 }
 
 ul.CTAs {
@@ -149,13 +149,13 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #0290c9;
+    color: crimson;
 }
 
 
 
 a.article, a.article:hover {
-    background: #0290c9 !important;
+    background: crimson !important;
     color: #fff !important;
 }
 

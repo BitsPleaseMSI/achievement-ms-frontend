@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
     $('#filters').hide();
 
     $('#b').click(function(){
-      $('#filters').slideToggle( "slow" );
+      $('#filters').slideToggle( 400 );
     });
   }
 

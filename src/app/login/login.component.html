@@ -1,6 +1,8 @@
 <div id="mainContent">
-<h1>Faculty Login</h1>
 
+<div id="form-area">
+        <h1>Faculty Login</h1>
+<p class="icon-para"><i class="material-icons md-56">person </i></p>
 <div *ngIf="error$" class="alert alert-danger" >
   <p>Error: {{ error$ }}</p>
 </div>
@@ -9,15 +11,19 @@
   <p>Info: {{ info$ }}</p>
 </div>
 
-<form (submit)="loginUser($event)" class="form-signin" action="/login">
+<form (submit)="loginUser($event)" action="/login">
     <span id="reauth-email" class="reauth-email"></span>
-    <input type="email" id="email" name="email" class="form-control" placeholder="Email address">
-    <input type="password" id="password" name="psw" class="form-control" placeholder="Password">
+    <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required><br>
+    <input type="password" id="password" name="psw" class="form-control" placeholder="Password" required>
     <div id="remember" class="checkbox">
         <label>
             <input id="saveUser" [checked]="saveUser$" (change)="saveUser$ = !saveUser$" type="checkbox" value="remember-me" checked> Remember me
         </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-</form><!-- /form -->
+    <div id="btn-area">
+
+    <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
+</div>
+</form>
+</div>
 </div>

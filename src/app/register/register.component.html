@@ -1,4 +1,5 @@
 <div id="mainContent">
+  <div id="form-area">
 <h1>Faculty Registration</h1>
 
 <div *ngIf="error$" class="alert alert-danger" >
@@ -36,7 +37,9 @@
     <label for="Invite Code">Invite code</label>
     <input type="password" id="code" name="code" class="form-control" placeholder="Invite code" required>
     <br>
-
-    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Register</button>
+    <div id="btn-area">
+    <button class="btn btn-crimson btn-block" type="submit">Register</button>
+    </div>
 </form>
+</div>
 </div>

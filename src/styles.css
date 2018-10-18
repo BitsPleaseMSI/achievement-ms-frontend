@@ -1,6 +1,74 @@
-h1{
-    color: #636e72;
+#table-heading{
+    background-color:;
+    color: firebrick;
 }
-h2{
-    color: #25CCF7;
+
+tr:nth-child(even){
+    background-color: beige
+}
+
+.tr-hover:hover{
+    background-color: gainsboro;
+}
+
+
+#mainContent{
+
+    padding: 20px;
+    /* border:2px solid crimson; */
+    border-radius: 5px;
+    width: auto;
+    margin: 0 auto;
+    box-shadow: 0 0 5px #000;
+
+}
+
+.material-icons.md-56{
+    font-size: 10em;
+    color: crimson;
+    text-align: center;
+}
+
+.icon-para{
+    text-align: center;
+}
+
+form{
+    width:80%;
+    margin: 0 auto;
+
+}
+
+.btn.btn-block{
+    display:block;
+   
+    width: auto;
+    margin: 0 auto;
+}
+
+.btn.btn-crimson{
+    font-size: 16px;   
+    background-color: crimson;
+    color:white;
+   
+
+}
+
+.btn:hover.btn-crimson:hover{
+    background-color: white;
+    color:black;
+    border:1px solid crimson;
+    transition: 800ms;
+}
+#btn-area{
+width:auto;
+}
+
+#detail-link{
+    color:black;
+    text-decoration: underline;
+}
+
+#detail-link:hover{
+    color:darkgray;
 }
