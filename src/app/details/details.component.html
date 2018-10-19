@@ -10,8 +10,10 @@
  <h5>Category:<span  class="highlight">{{achievement$.category | uppercase}}</span></h5>
  <h5>Date :<span  class="highlight">{{achievement$.date | uppercase}}</span></h5>
  <h5>Department :<span  class="highlight">{{achievement$.department | uppercase}}</span></h5>
+ <h5 *ngIf="achievement$.approved">Approved by :<span  class="highlight">{{achievement$.approvedBy | uppercase}}</span></h5>
+ <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span  class="highlight">{{achievement$.approvedBy | uppercase}}</span></h5>
 
 </div>
 <button *ngIf="user$.department == achievement$.department" type="button" name="delete" (click)="delete($event, achievement$._id)">Delete</button>
 
-</div> 
+</div>
