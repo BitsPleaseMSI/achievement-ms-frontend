@@ -6,8 +6,12 @@
   <p>{{ info$ }}</p>
 </div>
 
-<h2>Profile settings</h2>
+<h1>Profile settings</h1>
 
+
+<p><a routerLink="/passwordreset">Reset password</a></p>
+
+<h2>Profile detils</h2>
 <h5><i>Note: Only change values that you want to update.</i></h5>
 <form (submit)="update($event)" class="form-horizontal" action="user/settings">
 

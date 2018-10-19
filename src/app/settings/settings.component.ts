@@ -34,8 +34,8 @@ export class SettingsComponent implements OnInit {
     this.error$ = undefined;
     this.auth.currentUser().subscribe(
       (data) => {
-        (document.getElementById('lastName') as HTMLInputElement).value = data['firstName'];
-        (document.getElementById('firstName') as HTMLInputElement).value = data['lastName'];
+        (document.getElementById('firstName') as HTMLInputElement).value = data['firstName'];
+        (document.getElementById('lastName') as HTMLInputElement).value = data['lastName'];
         (document.getElementById('newEmail') as HTMLInputElement).value = data['email'];
         (document.getElementById('password') as HTMLInputElement).value = '';
       },

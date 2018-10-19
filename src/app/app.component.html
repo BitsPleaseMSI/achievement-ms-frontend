@@ -32,8 +32,7 @@
                   <li *ngIf="userData$"><a routerLink="/dashboard/unapproved">Dashboard Unpproved</a></li>
                   <li *ngIf="userData$"><a routerLink="/user/settings">Settings</a></li>
                   <li><a routerLink="/achievement/add">Add achievement</a></li>
-                  <li *ngIf="userData$"><a routerLink="/passwordreset">Reset password</a></li>
-
+                  
                   <li (click)="logout()" *ngIf="userData$"><a routerLink="home">Logout</a></li>
 
                   <li><a *ngIf="!userData$" routerLink="/user/register">Register user</a></li>
