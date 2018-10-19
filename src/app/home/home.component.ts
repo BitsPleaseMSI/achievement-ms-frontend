@@ -87,9 +87,6 @@ export class HomeComponent implements OnInit {
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate(['/home'], { queryParams: params });
     this.getdata('?' + filters.toString());
-    //this.router.navigate(['/home', { queryParams: { page: 1 } });
-    // this.router.navigate(['/home', filters.toString()]);
-    // window.location.href = '/home?' + filters.toString();
   }
 
 }

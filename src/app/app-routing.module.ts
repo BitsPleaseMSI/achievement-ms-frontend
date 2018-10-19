@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { DetailsComponent } from './details/details.component'
 import { AboutComponent } from './about/about.component'
+import { SettingsComponent } from './settings/settings.component'
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'user/register',
     component: RegisterComponent,
+  },
+  {
+    path: 'user/settings',
+    component: SettingsComponent,
   },
   {
     path: 'passwordreset',

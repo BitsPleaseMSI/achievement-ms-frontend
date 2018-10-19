@@ -15,6 +15,7 @@ import { ResetPassComponent } from './reset-pass/reset-pass.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
 import { AboutComponent } from './about/about.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AboutComponent } from './about/about.component';
     DashboardComponent,
     DetailsComponent,
     AboutComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

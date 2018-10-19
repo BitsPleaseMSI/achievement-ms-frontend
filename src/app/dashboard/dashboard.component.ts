@@ -13,9 +13,41 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements OnInit {
   achievements$: Object;
+  user: Object;
 
   constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
     this.achievements$ = [];
+    this.auth.currentUser().subscribe(
+      (user) => {
+      },
+      (error) =>{
+        this.auth.redirect('home', 'You are not authorised. Please login to continue!')
+        return;
+      }
+    )
+  }
+
+  ngOnInit(){
+    console.log(window.location.search)
+    console.log(this.route.snapshot.queryParams)
+    this.achievements$ = [];
+    this.refresh(window.location.search);
+
+    let params = this.route.snapshot.queryParams;
+    let filters = new URLSearchParams();
+
+    for(let key in params){
+      if((params[key] != '') || (!safe(params[key].toString()))){
+        let target = document.getElementById(key) as HTMLFormElement;
+        target.value = params[key];
+      }
+    }
+
+    $('#filters').hide();
+
+    $('#b').click(function(){
+      $('#filters').slideToggle( 400 );
+    });
   }
 
   refresh(arg?: string){
@@ -41,7 +73,7 @@ export class DashboardComponent implements OnInit {
           });
         },
         (error) =>{
-          this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
+          this.auth.redirect('home', 'You are not authorised. Please login to continue!')
         }
       )
 
@@ -62,34 +94,11 @@ export class DashboardComponent implements OnInit {
             });
         },
         (error) =>{
-          this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
+          this.auth.redirect('home', 'You are not authorised. Please login to continue!')
         }
       )
     }
 
-  }
-
-  ngOnInit(){
-    console.log(window.location.search)
-    console.log(this.route.snapshot.queryParams)
-    this.achievements$ = [];
-    this.refresh(window.location.search);
-
-    let params = this.route.snapshot.queryParams;
-    let filters = new URLSearchParams();
-
-    for(let key in params){
-      if((params[key] != '') || (!safe(params[key].toString()))){
-        let target = document.getElementById(key) as HTMLFormElement;
-        target.value = params[key];
-      }
-    }
-
-    $('#filters').hide();
-
-    $('#b').click(function(){
-      $('#filters').slideToggle( 400 );
-    });
   }
 
   resetFilters(event){
@@ -134,7 +143,7 @@ export class DashboardComponent implements OnInit {
     this.auth.currentUser().subscribe(
       (data) => {
           if(!data['email']){
-            this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
+            this.auth.redirect('home', 'You are not authorised. Please login to continue!')
             return;
           }
 
@@ -163,7 +172,7 @@ export class DashboardComponent implements OnInit {
     this.auth.currentUser().subscribe(
       (data) => {
           if(!data['email']){
-            this.auth.redirect('home', 'Unauthenticated user. Illegal activity logged!')
+            this.auth.redirect('home', 'You are not authorised. Please login to continue!')
             return;
           }
 

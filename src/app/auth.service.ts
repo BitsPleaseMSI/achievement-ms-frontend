@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 
 import { Headers, Response, Http, RequestOptions  } from '@angular/http';
 import { Observable } from "rxjs";
@@ -132,6 +132,39 @@ export class AuthService {
     url += ('&token=' + token)
 
     return this.http.post(url, '', options)
+  }
+
+  updateUser(params: Object){
+    console.log('[updateUser]')
+    const data: FormData = new FormData();
+
+    for(let key in params)
+      data.append(key, params[key]);
+
+    const req = new HttpRequest('PUT', 'http://localhost:8090/users/reset', data, {
+      reportProgress: false,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+
+    // let body = new URLSearchParams();
+    //
+    // for(let key in params)
+    //   body.append(key, params[key]);
+    //
+    // let options = {
+    //   headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+    // };
+    //
+    // if(!safe(body.toString())){
+    //   console.log('[UNSAFE DATA!]');
+    //   return new Observable((data) => {})
+    // }
+    //
+    // return this.http.put('http://localhost:8090/users/reset', params, options);
+    // // return this.http.put('http://localhost:8090/users/reset', body.toString(), options);
+
   }
 
 }
