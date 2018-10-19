@@ -19,8 +19,10 @@
                 <div class="sidebar-header">
                                             <p id="date">{{date | date:'medium'}}</p>
                     <h2>Achievement Management System</h2><br>
-                    <h5 *ngIf="userData$">Welcome <span class="highlight">{{userData$['firstName'] | uppercase}}</span></h5>
-                    <h5 *ngIf="userData$">Department: <span class="highlight">{{ userData$['department'] | uppercase}}</span></h5>
+                    <h5 *ngIf="userData$">Welcome, <span class="highlight">{{userData$['firstName']}} {{userData$['lastName']}}</span></h5>
+                    <h5 *ngIf="userData$ && userData$['department']=='management'">Department: <span class="highlight">Management</span></h5>
+                    <h5 *ngIf="userData$ && userData$['department']=='computerscience'">Department: <span class="highlight">Computer Science</span></h5>
+                    <h5 *ngIf="userData$ && userData$['department']=='education'">Department: <span class="highlight">Education</span></h5>
 
                 </div>
 
@@ -32,7 +34,7 @@
                   <li *ngIf="userData$"><a routerLink="/dashboard/unapproved">Dashboard Unpproved</a></li>
                   <li *ngIf="userData$"><a routerLink="/user/settings">Settings</a></li>
                   <li><a routerLink="/achievement/add">Add achievement</a></li>
-                  
+
                   <li (click)="logout()" *ngIf="userData$"><a routerLink="home">Logout</a></li>
 
                   <li><a *ngIf="!userData$" routerLink="/user/register">Register user</a></li>
