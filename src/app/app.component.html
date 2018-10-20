@@ -28,16 +28,14 @@
 
                 <ul class="list-unstyled components">
                   <li><a routerLink="/home">Home</a></li>
+                  <li><a routerLink="/achievement/add">Add achievement</a></li>
                   <li><a routerLink="/about">About</a></li>
-                  <li *ngIf="!userData$"><a routerLink="/login">Faculty Login</a></li>
                   <li *ngIf="userData$"><a routerLink="/dashboard/approved">Dashboard Approved</a></li>
                   <li *ngIf="userData$"><a routerLink="/dashboard/unapproved">Dashboard Unpproved</a></li>
                   <li *ngIf="userData$"><a routerLink="/user/settings">Settings</a></li>
-                  <li><a routerLink="/achievement/add">Add achievement</a></li>
-
-                  <li (click)="logout()" *ngIf="userData$"><a routerLink="home">Logout</a></li>
-
-                  <li><a *ngIf="!userData$" routerLink="/user/register">Register user</a></li>
+                  <li><a *ngIf="!userData$" routerLink="/user/register">Register new user</a></li>
+                  <li *ngIf="!userData$"><a routerLink="/login"><strong>Faculty Login</strong></a></li>
+                  <li (click)="logout()" *ngIf="userData$"><a routerLink="home"><strong>Logout</strong></a></li>
 
                 </ul>
             </nav>
