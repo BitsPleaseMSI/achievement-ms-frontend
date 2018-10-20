@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
     }else if(window.location.pathname == '/home/academic'){
 
-      this.data.getAcademic(params)
+      this.data.getAcademic()
       .subscribe(
         (data) => {
           this.achievements$ = data;
