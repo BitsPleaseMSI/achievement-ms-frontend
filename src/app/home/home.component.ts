@@ -58,7 +58,14 @@ export class HomeComponent implements OnInit {
 
     }else if(window.location.pathname == '/home/academic'){
 
-      // Academic achievements api call
+      this.data.getAcademic(params)
+      .subscribe(
+        (data) => {
+          this.achievements$ = data;
+        },
+        (error) =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
+      });
 
     }
 

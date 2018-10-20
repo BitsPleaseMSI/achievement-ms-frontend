@@ -106,7 +106,7 @@
 <br>
 
 <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
-<table *ngIf="achievements$.length > 0">
+<table *ngIf="w$.location.pathname == '/home/achievements' && achievements$.length > 0">
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Roll no.</th>
@@ -131,6 +131,23 @@
     <td *ngIf="!achievement.participated">ORGANISER</td>
     <td>{{ achievement.category | uppercase }}</td>
     <td><a routerLink="/achievement/{{ achievement._id }}" id="detail-link">VIEW DETAILS</a></td>
+  </tr>
+</table>
+
+<table *ngIf="w$.location.pathname == '/home/academic' && achievements$.length > 0">
+  <tr id="table-heading">
+    <th>S.No.</th>
+    <th>Roll No</th>
+    <th>Name</th>
+    <th>Batch</th>
+    <th>Programme</th>
+  </tr>
+  <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
+    <td>{{ i+1 }}</td>
+    <td>{{ achievement.rollNo }}</td>
+    <td>{{ achievement.name }}</td>
+    <td>{{ achievement.batch }}</td>
+    <td>{{ achievement.programme }}</td>
   </tr>
 </table>
 
