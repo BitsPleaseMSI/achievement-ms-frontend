@@ -3,6 +3,8 @@ export function safe(str: string): boolean{
 //    console.log("[CHECKING] " + str)
 
     if(
+      str.includes('<') ||
+      str.includes('>') ||
       str.includes('%3F') ||
       str.includes('%3C') ||
       str.includes('%3E')

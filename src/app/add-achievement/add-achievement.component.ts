@@ -30,11 +30,13 @@ export class AddAchievementComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
+    console.log('hi')
     try{
       this.selectedFiles.item(0);
     }catch(err){
       this.error$ = 'Image upload error!';
-      this.error$ = undefined;
+      this.ac.snackbar('Image upload error!');
+      this.info$ = undefined;
       return;
     }
 
@@ -56,7 +58,6 @@ export class AddAchievementComponent implements OnInit {
       target.querySelector('#description').value,
       this.selectedFiles.item(0),
     )
-
     // Sanitising data
     for(let key in achievement){
       if(key == 'participated'){

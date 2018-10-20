@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { safe } from '../sanitise';
 
 @Component({
   selector: 'app-register',
@@ -47,6 +48,15 @@ export class RegisterComponent implements OnInit {
         target.querySelector('#password').value,
         target.querySelector('#code').value,
       );
+
+      // Sanitising data
+      for(let key in user){
+        if((user[key] == '') || (!safe(user[key].toString()))){
+          this.error$ = 'Input error. Please check ' + key;
+          this.info$ = undefined;
+          return;
+        }
+      }
 
       this.auth.register(user).subscribe(
         (data) => {

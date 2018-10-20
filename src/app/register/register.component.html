@@ -1,7 +1,7 @@
 <div id="mainContent">
   <div id="form-area">
 <h1>Faculty Registration</h1>
-
+<br>
 <div *ngIf="error$" class="alert alert-danger" >
   <p>Error: {{ error$ }}</p>
 </div>
@@ -11,8 +11,6 @@
 </div>
 
 <form (submit)="registerUser($event)" class="form-signin" action="/user/register">
-
-
     <label for="first Name">First name</label>
     <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"  autofocus required>
     <br>
