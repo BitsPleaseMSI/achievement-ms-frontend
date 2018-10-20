@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { DetailsComponent } from './details/details.component'
 import { AboutComponent } from './about/about.component'
 import { SettingsComponent } from './settings/settings.component'
+import { AcademicComponent } from './academic/academic.component'
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'dashboard/unapproved',
     component: DashboardComponent,
+  },
+  {
+    path: 'home/academic',
+    component: AcademicComponent,
   },
   {
     path: 'achievement/:id',
