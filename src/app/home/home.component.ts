@@ -14,6 +14,7 @@ import * as $ from 'jquery';
 
 export class HomeComponent implements OnInit {
   achievements$: Object;
+  w$: Object = window;
 
   constructor(private data: DataAccessService, private router: Router, private route: ActivatedRoute, private ac: AppComponent){
     this.achievements$ = [];
@@ -43,15 +44,24 @@ export class HomeComponent implements OnInit {
   }
 
   getdata(params: string){
-    this.data.getApprovedAchievements(params)
-    .subscribe(
-      (data) => {
-        console.log(data)
-        this.achievements$ = data;
-      },
-      (error) =>{
-        this.ac.snackbar('Server is not responding, Please try later.');
+
+    if(window.location.pathname == '/home/achievements'){
+
+      this.data.getApprovedAchievements(params)
+      .subscribe(
+        (data) => {
+          this.achievements$ = data;
+        },
+        (error) =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
       });
+
+    }else if(window.location.pathname == '/home/academic'){
+
+      // Academic achievements api call
+
+    }
+
   }
 
   resetFilters(event){
@@ -84,7 +94,7 @@ export class HomeComponent implements OnInit {
     }
 
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
-    this.router.navigate(['/home'], { queryParams: params });
+    this.router.navigate([(this.route.snapshot.routeConfig['path'])], { queryParams: params });
     this.getdata('?' + filters.toString());
   }
 

@@ -14,6 +14,15 @@ import { SettingsComponent } from './settings/settings.component'
 const routes: Routes = [
   {
     path: 'home',
+    redirectTo: 'home/achievements',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home/achievements',
+    component: HomeComponent,
+  },
+  {
+    path: 'home/academic',
     component: HomeComponent,
   },
   {
@@ -54,7 +63,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: HomeComponent,
+    redirectTo: 'home/achievements',
+    pathMatch: 'full'
   },
 ];
 
