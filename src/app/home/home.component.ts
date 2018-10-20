@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataAccessService } from '../data-access.service';
-import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { safe } from '../sanitise';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +15,7 @@ import * as $ from 'jquery';
 export class HomeComponent implements OnInit {
   achievements$: Object;
 
-  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent){
+  constructor(private data: DataAccessService, private router: Router, private route: ActivatedRoute, private ac: AppComponent){
     this.achievements$ = [];
   }
 
@@ -37,7 +36,7 @@ export class HomeComponent implements OnInit {
     $('#filters').hide();
 
     $('#b').click(function(){
-      $('#filters').toggle('fadeout');
+      $('#filters').toggle('fast');
     });
 
 

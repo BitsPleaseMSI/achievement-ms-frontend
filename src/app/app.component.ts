@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './auth.service';
-import { Achievement } from './achievement';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 

@@ -16,7 +16,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
 import { AboutComponent } from './about/about.component';
 import { SettingsComponent } from './settings/settings.component';
-import { AcademicComponent } from './academic/academic.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { AcademicComponent } from './academic/academic.component';
     DetailsComponent,
     AboutComponent,
     SettingsComponent,
-    AcademicComponent,
   ],
   imports: [
     BrowserModule,

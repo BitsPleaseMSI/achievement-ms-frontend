@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit {
     this.refresh(window.location.search);
 
     let params = this.route.snapshot.queryParams;
-    let filters = new URLSearchParams();
 
     for(let key in params){
       if((params[key] != '') || (!safe(params[key].toString()))){

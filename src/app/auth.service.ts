@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-
-import { Headers, Response, Http, RequestOptions  } from '@angular/http';
 import { Observable } from "rxjs";
-import { map } from 'rxjs/operators';
-import { catchError, retry } from 'rxjs/operators';
 import { safe } from './sanitise';
 import { Router } from '@angular/router';
 
