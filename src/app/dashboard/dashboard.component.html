@@ -1,14 +1,21 @@
 <h1><span>T</span>eacher Dashboard</h1>
+
+<ul>
+  <li><a routerLink="/achievement/add">New achievement</a></li>
+  <li><a routerLink="/academic/add">New academic achievement</a></li>
+  <li><a routerLink="/user/settings">Settings</a></li>
+</ul>
+
 <div id="mainContent">
 
-<p *ngIf="w$.location.pathname == '/dashboard/approved'">
-  Showing non-academic achievements.<br>
-  Click <a routerLink="/dashboard/unapproved">here</a> for academic achievements.
-</p>
-<p *ngIf="w$.location.pathname == '/dashboard/unapproved'">
-  Showing academic achievements.<br>
-  Click <a routerLink="/dashboard/approved">here</a> for non-academic achievements.
-</p>
+<h3 *ngIf="w$.location.pathname == '/dashboard/approved'">
+  Showing approved achievements.<br>
+  Click <a routerLink="/dashboard/unapproved">here</a> for unapproved achievements.
+</h3>
+<h3 *ngIf="w$.location.pathname == '/dashboard/unapproved'">
+  Showing unapproved achievements.<br>
+  Click <a routerLink="/dashboard/approved">here</a> for approved achievements.
+</h3>
 
 <input type="checkbox" id="b">Filter By
 <br>
