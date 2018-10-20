@@ -14,8 +14,12 @@ export class AppComponent implements OnInit {
   userData$: Object;
   message$: string;
   title = 'achievement-ms-front';
-  date= new Date();
-  constructor(private auth: AuthService, private router: Router) { }
+  date = new Date();
+  constructor(private auth: AuthService, private router: Router) {
+    setInterval(() => {
+      this.date = new Date();
+    }, 1000)
+  }
 
   public snackbar(message: string){
     var x = document.getElementById("snackbar");
@@ -37,8 +41,8 @@ export class AppComponent implements OnInit {
     this.getdata();
 
     $('#sidebarCollapse').on('click', function () {
-      $('#sidebar').toggleClass('active');   
-      
+      $('#sidebar').toggleClass('active');
+
     });
   }
 
