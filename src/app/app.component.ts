@@ -46,7 +46,15 @@ export class AppComponent implements OnInit {
     });
   }
 
+  // Very inefficient but does the job!
+  sleep(seconds)
+  {
+    var e = new Date().getTime() + (seconds * 1000);
+    while (new Date().getTime() <= e) {}
+  }
+
   logout(){
+    this.sleep(2);
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
     this.userData$ = undefined;
