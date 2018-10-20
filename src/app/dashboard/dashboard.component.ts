@@ -14,6 +14,7 @@ import * as $ from 'jquery';
 export class DashboardComponent implements OnInit {
   achievements$: Object;
   user: Object;
+  w$: Object = window;
 
   constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
     this.achievements$ = [];
@@ -28,8 +29,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log(window.location.search)
-    console.log(this.route.snapshot.queryParams)
     this.achievements$ = [];
     this.refresh(window.location.search);
 
@@ -123,7 +122,6 @@ export class DashboardComponent implements OnInit {
     params['category'] = target.querySelector('#category').value
 
     let filters = new URLSearchParams();
-
     for(let key in params){
       if(params[key] != '')
         filters.append(key, params[key]);

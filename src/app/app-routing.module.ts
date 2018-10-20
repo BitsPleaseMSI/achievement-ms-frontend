@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { DetailsComponent } from './details/details.component'
 import { AboutComponent } from './about/about.component'
 import { SettingsComponent } from './settings/settings.component'
+import { AddAcademicComponent } from './add-academic/add-academic.component'
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'achievement/add',
     component: AddAchievementComponent,
+  },
+  {
+    path: 'academic/add',
+    component: AddAcademicComponent,
   },
   {
     path: 'user/register',

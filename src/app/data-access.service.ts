@@ -21,7 +21,6 @@ export class DataAccessService {
 
   getApprovedAchievements(params?: string): Observable<any>{
     console.log('[getApprovedAchievements]')
-    console.log('http://localhost:8090/achievements/all' + params)
     return this.http.get<any>('http://localhost:8090/achievements/all' + params)
   }
 
@@ -36,7 +35,6 @@ export class DataAccessService {
       params += '&token=' + sessionStorage.getItem('token');
     }
 
-    console.log('http://localhost:8090/achievements/unapproved' + params)
     return this.http.get<any>('http://localhost:8090/achievements/unapproved' + params)
   }
 
@@ -74,6 +72,33 @@ export class DataAccessService {
     url += ('&token=' + token)
 
     return this.http.post(url, '', options)
+  }
+
+  addAcademic(achievement: Object): Observable<any>{
+    console.log('[addAchievement]')
+    let token = '';
+
+    const data: FormData = new FormData();
+
+    for(let key in achievement){
+      console.log('data {}')
+      console.log(key)
+      console.log(achievement[key])
+      data.append(key, achievement[key]);
+    }
+
+    if(localStorage.getItem('token')){
+      data.append('token', localStorage.getItem('token'));
+    }else{
+      data.append('token', sessionStorage.getItem('token'));
+    }
+
+    const req = new HttpRequest('POST', 'http://localhost:8090/academic/add', data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
   }
 
 }

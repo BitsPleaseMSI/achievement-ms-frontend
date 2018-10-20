@@ -30,10 +30,6 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
-    console.log('values:')
-    console.log(target.querySelector('#email').value.toString())
-    console.log(target.querySelector('#password').value.toString())
-
     // Sanitising data
     if((target.querySelector('#email').value == '') || (!safe(target.querySelector('#email').value.toString()))){
       this.error$ = 'Input error. Please check username';
@@ -51,7 +47,6 @@ export class LoginComponent implements OnInit {
       target.querySelector('#password').value
     ).subscribe(
       (data) => {
-        console.log('got data')
         this.trylater = false;
         // Successful login
         if(data.bool){
@@ -64,8 +59,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard/unapproved']);
           this.ac.getdata()
         }else{
-          // Access denied
-          console.log(data)
           this.info$ = undefined;
           this.error$ = "Incorrect credentials";
         }

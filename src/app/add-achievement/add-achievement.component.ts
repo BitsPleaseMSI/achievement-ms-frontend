@@ -23,14 +23,12 @@ export class AddAchievementComponent implements OnInit {
   detectFiles(event) {
     this.selectedFiles = event.target.files;
     this.fileName = this.selectedFiles[0].name;
-    console.log('selectedFiles: ' + this.fileName );
   }
 
   addAchievement(event){
     event.preventDefault();
     const target = event.target;
 
-    console.log('hi')
     try{
       this.selectedFiles.item(0);
     }catch(err){
@@ -72,7 +70,6 @@ export class AddAchievementComponent implements OnInit {
     let error = true;
     this.data.addAchievement(achievement).subscribe(
       data => {
-        console.log(data);
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             error = false;

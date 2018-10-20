@@ -1,5 +1,15 @@
 <h1><span>T</span>eacher Dashboard</h1>
 <div id="mainContent">
+
+<p *ngIf="w$.location.pathname == '/dashboard/approved'">
+  Showing non-academic achievements.<br>
+  Click <a routerLink="/dashboard/unapproved">here</a> for academic achievements.
+</p>
+<p *ngIf="w$.location.pathname == '/dashboard/unapproved'">
+  Showing academic achievements.<br>
+  Click <a routerLink="/dashboard/approved">here</a> for non-academic achievements.
+</p>
+
 <input type="checkbox" id="b">Filter By
 <br>
 <div id="filters">

@@ -46,7 +46,6 @@ export class SettingsComponent implements OnInit {
   }
 
   update(event){
-    console.log('update')
     event.preventDefault();
     const target = event.target;
     let params = {};
@@ -77,8 +76,6 @@ export class SettingsComponent implements OnInit {
             let error = true;
             this.auth.updateUser(params).subscribe(
               (data) => {
-                console.log('data');
-                console.log(data);
                 if(data['body']){
                   if(JSON.parse(data['body'])['bool']){
                     error = false;
@@ -94,8 +91,6 @@ export class SettingsComponent implements OnInit {
                 }
               },
               (error) =>{
-                console.log('error')
-                console.log(error)
                 this.info$ = undefined;
                 this.ac.snackbar('Server is not responding, Please try later.');
               }

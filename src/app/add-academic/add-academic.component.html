@@ -1,0 +1,44 @@
+<div id="mainContent">
+  <div id="form-area">
+  <h1>Add achievement</h1>
+
+  <div *ngIf="error$" class="alert alert-danger">
+    <p>Error: {{ error$ }}</p>
+  </div>
+
+  <div *ngIf="info$" class="alert alert-success" >
+    <p>{{ info$ }}</p>
+  </div>
+
+  <form (submit)="addAcademic($event)" class="form-horizontal">
+
+    <div class="form-group">
+      <label for="name" class="control-label">Name</label>
+      <input type="text" id="name" name="name"  class="form-control" placeholder="Your name" autofocus>
+    </div>
+    <div class="form-group">
+      <label for="rollNo" class="control-label">Roll number</label>
+      <input type="text" id="rollNo" name="rollNo"  class="form-control" placeholder="Roll number">
+    </div>
+    <div class="form-group">
+      <label for="batch" class="control-label">Batch</label>
+      <input type="text" id="batch" name="batch"  class="form-control" placeholder="Batch">
+    </div>
+    <div class="form-group">
+      <label for="programme" class="control-label">Programme</label>
+      <select  id="programme" name="programme" class="form-control" placeholder="Programme">
+        <option>B. Ed.</option>
+        <option>BBA (H) 4 year</option>
+        <option>BBA (General)</option>
+        <option>BBA (B&I)</option>
+        <option>BBA (T&TM)</option>
+        <option>BCA</option>
+      </select>
+    </div>
+   <div id="btn-area">
+
+      <button class="btn btn-crimson btn-block" type="submit">Add achievement</button>
+  </div>
+    </form>
+</div>
+</div>

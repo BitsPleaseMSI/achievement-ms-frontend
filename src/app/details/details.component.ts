@@ -41,14 +41,12 @@ export class DetailsComponent implements OnInit {
   delete(event, id: string){
     event.preventDefault();
     if(window.confirm('Sure you want to delete this?')){
-      console.log('deleteing')
       this.data.deleteAchievement(id).subscribe(
         (data) => {
           if(data['bool']){
             this.ac.snackbar('Deleted successfully!')
             this.router.navigate(['/dashboard/unapproved']);
           }else{
-            console.log(data);
             this.ac.snackbar('Delete unsuccessful!');
           }
         },

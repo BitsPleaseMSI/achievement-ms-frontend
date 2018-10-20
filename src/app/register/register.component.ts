@@ -67,7 +67,6 @@ export class RegisterComponent implements OnInit {
             this.ac.snackbar('User successfully registered!')
             this.error$ = undefined;
           }else{
-            console.log(data)
             this.error$ = data.message.toString()
           }
         },
