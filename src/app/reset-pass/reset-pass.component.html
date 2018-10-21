@@ -10,16 +10,21 @@
 </div>
 
 <form (submit)="resetPass($event)" class="form-signin" action="/passwordreset">
-
-    <label for="currentpass">Current password</label>
+  <div class="input-group">
+    <span class="input-group-addon">Current password</span>
     <input type="password" id="currentpass" name="psw" class="form-control" placeholder="Enter your current password" required>
-<br>
-    <label for="newpass">New password</label>
+  </div>
+  <br>
+  <div class="input-group">
+    <span class="input-group-addon">New password</span>
     <input type="password" id="newpass" name="psw" class="form-control" placeholder="Enter new password" required>
-<br>
-    <label for="newpass1">Confirm new password</label>
+  </div>
+  <br>
+  <div class="input-group">
+    <span class="input-group-addon">Confirm new password</span>
     <input type="password" id="newpass1" name="psw" class="form-control" placeholder="Confirm new Password" required>
-    <br>
-    <button class="btn btn-crimson" type="submit">Submit</button>
+  </div>
+  <br>
+  <button class="btn btn-crimson" type="submit">Submit</button>
 </form>
 </div>

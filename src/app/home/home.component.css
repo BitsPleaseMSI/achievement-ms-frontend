@@ -26,6 +26,7 @@ table{
   padding: 0;
   border:none;
   overflow-x: auto;
+  overflow-y: scroll;
 }
 
 td,th{

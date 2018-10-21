@@ -11,29 +11,44 @@
 </div>
 
 <form (submit)="registerUser($event)" class="form-signin" action="/user/register">
-    <label for="first Name">First name</label>
-    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"  autofocus required>
+    <div class="input-group">
+      <span class="input-group-addon">First name</span>
+      <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"  autofocus required>
+    </div>
     <br>
-    <label for="Last Name">Last name</label>
-    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required>
+    <div class="input-group">
+      <span class="input-group-addon" >Last name</span>
+      <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required>
+    </div>
     <br>
-    <label for="department" class="control-label">Department</label>
-    <select  id="department" name="department" class="form-control" placeholder="Section">
-      <option value="education">Education</option>
-      <option value="computerscience">Computer Science</option>
-      <option value="management">Management</option>
-    </select>    <br>
-    <label for="E-mail">E-mail</label>
-    <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required>
+    <div class="input-group">
+      <span class="input-group-addon">Department</span>
+      <select  id="department" name="department" class="form-control" placeholder="Section">
+        <option value="education">Education</option>
+        <option value="computerscience">Computer Science</option>
+        <option value="management">Management</option>
+      </select>
+    </div>
     <br>
-    <label for="Password">Password</label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    <div class="input-group">
+      <span class="input-group-addon" >E-mail</span>
+      <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required>
+    </div>
     <br>
-    <label for="Re-type">Re-type password</label>
-    <input type="password" id="password2" name="password2" class="form-control" placeholder="Re-type password" required>
+    <div class="input-group">
+      <span class="input-group-addon" >Password</span>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    </div>
     <br>
-    <label for="Invite Code">Invite code</label>
-    <input type="password" id="code" name="code" class="form-control" placeholder="Invite code" required>
+    <div class="input-group">
+      <span class="input-group-addon">Re-type password</span>
+      <input type="password" id="password2" name="password2" class="form-control" placeholder="Re-type password" required>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Invite code</span>
+      <input type="password" id="code" name="code" class="form-control" placeholder="Invite code">
+    </div>
     <br>
     <div id="btn-area">
     <button class="btn btn-crimson btn-block" type="submit">Register</button>

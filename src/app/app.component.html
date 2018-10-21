@@ -12,7 +12,6 @@
     </head>
     <body>
 
-      <div id="snackbar"><h4>{{ message$ }}</h4></div>
         <div class="wrapper">
             <!-- Sidebar Holder -->
             <nav id="sidebar">
@@ -39,6 +38,7 @@
             </nav>
 
             <div id="content">
+              <div id="snackbar"><h4>{{ message$ }}</h4></div>
                 <!-- MAIN APP ROUTUING -->
                 <router-outlet></router-outlet>
             </div>

@@ -20,21 +20,25 @@
             </div>
 
             <form (submit)="editAcademic($event)" class="form-horizontal">
-              <div class="form-group">
-                <label for="nameA" class="control-label">Name</label>
-                <input type="text" id="nameA" name="nameA"  class="form-control" placeholder="Your name" autofocus>
+              <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input type="text" id="nameA" class="form-control" placeholder="Your name">
               </div>
-              <div class="form-group">
-                <label for="rollNoA" class="control-label">Roll number</label>
-                <input type="text" id="rollNoA" name="rollNoA"  class="form-control" placeholder="Roll number">
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon">Roll number</span>
+                <input type="text" id="rollNoA" class="form-control" placeholder="Roll number">
               </div>
-              <div class="form-group">
-                <label for="batch" class="control-label">Batch</label>
-                <input type="number" id="from" name="from"  class="form-control" placeholder="Batch start year (yyyy)">
-                <input type="number" id="to" name="to"  class="form-control" placeholder="Batch start year (yyyy)">
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon">Batch</span>
+                <input type="number" id="from" class="form-control" placeholder="YYYY">
+                <span class="input-group-addon">-</span>
+                <input type="number" id="to" class="form-control" placeholder="YYYY">
               </div>
-              <div class="form-group">
-                <label for="programme" class="control-label">Programme</label>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon">Programme</span>
                 <select  id="programme" name="programme" class="form-control" placeholder="Programme">
                   <option>B. Ed.</option>
                   <option>BBA (H) 4 year</option>
@@ -44,11 +48,11 @@
                   <option>BCA</option>
                 </select>
               </div>
+              <br>
              <div id="btn-area">
-
-                <button class="btn btn-crimson btn-block" type="submit">Edit achievement</button>
-            </div>
-              </form>
+                <button class="btn btn-crimson btn-block" type="submit">Update achievement</button>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

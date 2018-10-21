@@ -35,9 +35,6 @@ export class AddAcademicComponent implements OnInit {
       }
     }
 
-    console.log(achievement)
-    return
-
     let error = true;
     this.data.addAcademic(achievement).subscribe(
       data => {
