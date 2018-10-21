@@ -12,11 +12,12 @@
 
 <h2>List of approved achievements</h2>
 
-<input type="checkbox" id="b" >Filter By
-<br>
-<div id="filters">
-
 <h4>Filter options</h4>
+<label class="switch">
+  <input id="b" type="checkbox">
+  <span class="slider round"></span>
+</label>
+<div id="filters">
   <form (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
       <div class="home-filters">
