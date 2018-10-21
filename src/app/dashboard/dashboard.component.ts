@@ -13,8 +13,11 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements OnInit {
   achievements$: Object;
+  editId$: string;
   user: Object;
   w$: Object = window;
+  error$: string;
+  info$: string;
 
   constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
     this.achievements$ = [];
@@ -231,6 +234,66 @@ export class DashboardComponent implements OnInit {
       )
       this.refresh();
     }
+  }
+
+  editAcademicForm(event, achievement: Object){
+    event.preventDefault();
+    (document.getElementById('nameA') as HTMLInputElement).value = achievement['name'];
+    (document.getElementById('rollNoA') as HTMLInputElement).value = achievement['rollNo'];
+    (document.getElementById('from') as HTMLInputElement).value = achievement['batch'].split('-')[0];
+    (document.getElementById('to') as HTMLInputElement).value = achievement['batch'].split('-')[1];
+    (document.getElementById('programme') as HTMLInputElement).value = achievement['programme'];
+    this.editId$ = achievement['_id'];
+  }
+
+  editAcademic(event){
+    event.preventDefault();
+    const target = event.target;
+
+    let achievement = new Object;
+    achievement['name'] = target.querySelector('#nameA').value;
+    achievement['rollNo'] = target.querySelector('#rollNoA').value;
+    achievement['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
+    achievement['programme'] = target.querySelector('#programme').value;
+    achievement['id'] = this.editId$;
+
+    // Sanitising data
+    for(let key in achievement){
+      if((achievement[key] == '') || (!safe(achievement[key].toString()))){
+        this.error$ = 'Input error. Please check ' + key;
+        this.info$ = undefined;
+        return;
+      }
+    }
+
+    let error = true;
+    this.data.editAcademic(achievement).subscribe(
+      data => {
+        console.log(data);
+        if(data['partialText']){
+          if(JSON.parse(data['partialText'])['bool']){
+            error = false;
+            this.ac.snackbar('Achievement edited Successfully!');
+            this.info$ = 'Achievement edited Successfully.';
+            this.error$ = undefined;
+          }
+        }
+      },
+      (error) =>{
+        this.info$ = undefined;
+        this.ac.snackbar('Server is not responding, Please try later.');
+      }
+    )
+
+    setTimeout(function () {
+      if(error){
+        setTimeout('', 5000);
+        this.info$ = undefined;
+        this.error$ = 'Error uploading data. Please try again later.';
+      }
+    }, 8000);
+
+    this.refresh();
   }
 
 }

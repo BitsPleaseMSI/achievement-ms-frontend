@@ -1,6 +1,63 @@
 <h1><span>T</span>eacher Dashboard</h1>
 <div id="mainContent">
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+
+            <div *ngIf="error$" class="alert alert-danger">
+              <p>Error: {{ error$ }}</p>
+            </div>
+
+            <div *ngIf="info$" class="alert alert-success" >
+              <p>{{ info$ }}</p>
+            </div>
+
+            <form (submit)="editAcademic($event)" class="form-horizontal">
+              <div class="form-group">
+                <label for="nameA" class="control-label">Name</label>
+                <input type="text" id="nameA" name="nameA"  class="form-control" placeholder="Your name" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="rollNoA" class="control-label">Roll number</label>
+                <input type="text" id="rollNoA" name="rollNoA"  class="form-control" placeholder="Roll number">
+              </div>
+              <div class="form-group">
+                <label for="batch" class="control-label">Batch</label>
+                <input type="number" id="from" name="from"  class="form-control" placeholder="Batch start year (yyyy)">
+                <input type="number" id="to" name="to"  class="form-control" placeholder="Batch start year (yyyy)">
+              </div>
+              <div class="form-group">
+                <label for="programme" class="control-label">Programme</label>
+                <select  id="programme" name="programme" class="form-control" placeholder="Programme">
+                  <option>B. Ed.</option>
+                  <option>BBA (H) 4 year</option>
+                  <option>BBA (General)</option>
+                  <option>BBA (B&I)</option>
+                  <option>BBA (T&TM)</option>
+                  <option>BCA</option>
+                </select>
+              </div>
+             <div id="btn-area">
+
+                <button class="btn btn-crimson btn-block" type="submit">Edit achievement</button>
+            </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <h4>Taskbar</h4>
 <ul class="nav nav-pills">
   <li><a routerLink="/achievement/add">New achievement</a></li>
@@ -144,6 +201,7 @@
       <th>Name</th>
       <th>Batch</th>
       <th>Programme</th>
+      <th>Edit</th>
       <th>Delete</th>
     </tr>
     <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
@@ -152,7 +210,12 @@
       <td>{{ achievement.name }}</td>
       <td>{{ achievement.batch }}</td>
       <td>{{ achievement.programme }}</td>
-      <button class="btn btn-danger" type="button" name="delete" (click)="deleteAcademic($event, achievement._id)">Delete</button>
+      <td>
+        <button class="btn btn-danger" type="button" name="delete" data-toggle="modal" data-target="#myModal" (click)="editAcademicForm($event, achievement)">Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" type="button" name="delete" (click)="deleteAcademic($event, achievement._id)">Delete</button>
+      </td>
     </tr>
 </table>
 

@@ -86,9 +86,6 @@ export class DataAccessService {
     const data: FormData = new FormData();
 
     for(let key in achievement){
-      console.log('data {}')
-      console.log(key)
-      console.log(achievement[key])
       data.append(key, achievement[key]);
     }
 
@@ -126,6 +123,30 @@ export class DataAccessService {
     });
 
     return this.http.request(req);
+  }
+
+  editAcademic(achievement: Object){
+    console.log('[editAcademic]');
+
+    const data: FormData = new FormData();
+    for(let key in achievement){
+      data.append(key, achievement[key]);
+    }
+
+    let token = '';
+    if(localStorage.getItem('token')){
+      data.append('token', localStorage.getItem('token'));
+    }else{
+      data.append('token', sessionStorage.getItem('token'));
+    }
+
+    const req = new HttpRequest('PUT', 'http://localhost:8090/academic/edit', data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+
   }
 
 }
