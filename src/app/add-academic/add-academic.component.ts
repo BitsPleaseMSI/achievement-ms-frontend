@@ -23,7 +23,7 @@ export class AddAcademicComponent implements OnInit {
     let achievement = new Object;
     achievement['name'] = target.querySelector('#name').value;
     achievement['rollNo'] = target.querySelector('#rollNo').value;
-    achievement['batch'] = target.querySelector('#batch').value;
+    achievement['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
     achievement['programme'] = target.querySelector('#programme').value;
 
     // Sanitising data
