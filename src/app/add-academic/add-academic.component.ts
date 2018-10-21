@@ -20,6 +20,17 @@ export class AddAcademicComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
+    if(
+      target.querySelector('#from').value == '' ||
+      target.querySelector('#from').value.length != 4 ||
+      target.querySelector('#to').value == '' ||
+      target.querySelector('#to').value.length != 4
+    ){
+      this.error$ = 'Input error. Please check batch';
+      this.info$ = undefined;
+      return;
+    }
+
     let achievement = new Object;
     achievement['name'] = target.querySelector('#name').value;
     achievement['rollNo'] = target.querySelector('#rollNo').value;
