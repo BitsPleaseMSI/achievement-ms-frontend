@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
     this.achievements$ = [];
     this.auth.currentUser().subscribe(
       (user) => {
+
       },
       (error) =>{
         this.auth.redirect('home', 'You are not authorised. Please login to continue!')
@@ -49,6 +50,7 @@ export class DashboardComponent implements OnInit {
   }
 
   refresh(arg?: string){
+    this.achievements$ = [];
     let params = '';
     if(arg)
       params = arg;
@@ -64,7 +66,7 @@ export class DashboardComponent implements OnInit {
           this.data.getApprovedAchievements(params)
           .subscribe(
             (data) => {
-              this.achievements$ = data
+              this.achievements$ = data;
           },
           (error) =>{
             this.ac.snackbar('Server is not responding, Please try later.');
@@ -85,7 +87,7 @@ export class DashboardComponent implements OnInit {
           this.data.getUnapprovedAchievements(params)
           .subscribe(
             (data) => {
-              this.achievements$ = data['data']
+              this.achievements$ = data['data'];
             },
             (error) =>{
               this.ac.snackbar('Server is not responding, Please try later.');
@@ -95,6 +97,27 @@ export class DashboardComponent implements OnInit {
           this.auth.redirect('home', 'You are not authorised. Please login to continue!')
         }
       )
+    }else if(window.location.pathname == '/dashboard/academic'){
+      if(params==''){
+        params='?';
+      }
+
+      this.auth.currentUser().subscribe(
+        (user) => {
+          this.data.getAcademic()
+          .subscribe(
+            (data) => {
+              this.achievements$ = data;
+            },
+            (error) =>{
+              this.ac.snackbar('Server is not responding, Please try later.');
+          });
+        },
+        (error) =>{
+          this.auth.redirect('home', 'You are not authorised. Please login to continue!')
+        }
+      )
+
     }
 
   }
@@ -189,6 +212,25 @@ export class DashboardComponent implements OnInit {
       }
     )
 
+  }
+
+  deleteAcademic(event, id: string){
+    event.preventDefault();
+    if(window.confirm('Sure you want to delete this?')){
+      this.data.deleteAcademic(id).subscribe(
+        (data) => {
+          if(data['partialText']){
+            if(JSON.parse(data['partialText'])['bool']){
+              this.ac.snackbar('Achievement deleted Successfully!');
+            }
+          }
+        },
+        (error) =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
+        }
+      )
+      this.refresh();
+    }
   }
 
 }

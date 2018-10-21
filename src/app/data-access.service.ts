@@ -106,4 +106,26 @@ export class DataAccessService {
     return this.http.request(req);
   }
 
+  deleteAcademic(id: string){
+    console.log('[deleteAcademic]')
+    let token = '';
+
+    const data: FormData = new FormData();
+
+    data.append('id', id);
+
+    if(localStorage.getItem('token')){
+      data.append('token', localStorage.getItem('token'));
+    }else{
+      data.append('token', sessionStorage.getItem('token'));
+    }
+
+    const req = new HttpRequest('POST', 'http://localhost:8090/academic/delete', data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+  }
+
 }

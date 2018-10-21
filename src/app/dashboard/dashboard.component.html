@@ -1,29 +1,29 @@
 <h1><span>T</span>eacher Dashboard</h1>
+<div id="mainContent">
 
-<ul>
+<h4>Taskbar</h4>
+<ul class="nav nav-pills">
   <li><a routerLink="/achievement/add">New achievement</a></li>
   <li><a routerLink="/academic/add">New academic achievement</a></li>
   <li><a routerLink="/user/settings">Settings</a></li>
 </ul>
 
-<div id="mainContent">
+<br>
+<h4>Achievements</h4>
+<ul class="nav nav-pills nav-fill">
+  <li [class.active]="w$.location.pathname == '/dashboard/approved'"><a routerLink="/dashboard/approved">Approved achievements</a></li>
+  <li [class.active]="w$.location.pathname == '/dashboard/unapproved'"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
+  <li [class.active]="w$.location.pathname == '/dashboard/academic'"><a routerLink="/dashboard/academic">Academic achievements</a></li>
+</ul>
 
-<h3 *ngIf="w$.location.pathname == '/dashboard/approved'">
-  Showing approved achievements.<br>
-  Click <a routerLink="/dashboard/unapproved">here</a> for unapproved achievements.
-</h3>
-<h3 *ngIf="w$.location.pathname == '/dashboard/unapproved'">
-  Showing unapproved achievements.<br>
-  Click <a routerLink="/dashboard/approved">here</a> for approved achievements.
-</h3>
-
+<br>
+<h4>Filter options</h4>
 <label class="switch">
   <input id="b" type="checkbox">
   <span class="slider round"></span>
 </label>
 <div id="filters">
 
-  <h4>Filter options</h4>
   <form (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
       <div class="home-filters">
@@ -103,7 +103,7 @@
 <h2>Achievements</h2>
 
 <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
-<table class="danger" *ngIf="achievements$.length != 0">
+<table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname == '/dashboard/approved' || w$.location.pathname == '/dashboard/unapproved')">
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Name</th>
@@ -112,7 +112,6 @@
     <th>Section</th>
     <th>Shift</th>
     <th>Role</th>
-
     <th>Date</th>
     <th>Category</th>
     <th>Details</th>
@@ -136,4 +135,25 @@
     </td>
   </tr>
 </table>
+
+<table class="danger" *ngIf="achievements$.length != 0 && w$.location.pathname == '/dashboard/academic'">
+  <tr id="table-heading">
+    <tr id="table-heading">
+      <th>S.No.</th>
+      <th>Roll No</th>
+      <th>Name</th>
+      <th>Batch</th>
+      <th>Programme</th>
+      <th>Delete</th>
+    </tr>
+    <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ achievement.rollNo }}</td>
+      <td>{{ achievement.name }}</td>
+      <td>{{ achievement.batch }}</td>
+      <td>{{ achievement.programme }}</td>
+      <button class="btn btn-danger" type="button" name="delete" (click)="deleteAcademic($event, achievement._id)">Delete</button>
+    </tr>
+</table>
+
 </div>

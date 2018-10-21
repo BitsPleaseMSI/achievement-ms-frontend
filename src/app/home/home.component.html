@@ -1,14 +1,12 @@
 
 <h1><span>H</span>ome</h1>
 <div id="mainContent">
-<h3 *ngIf="w$.location.pathname == '/home/achievements'">
-  Showing non-academic achievements.<br>
-  Click <a routerLink="/home/academic">here</a> for academic achievements.
-</h3>
-<h3 *ngIf="w$.location.pathname == '/home/academic'">
-  Showing academic achievements.<br>
-  Click <a routerLink="/home/achievements">here</a> for non-academic achievements.
-</h3>
+
+<h4>Select view</h4>
+<ul class="nav nav-pills nav-fill">
+  <li [class.active]="w$.location.pathname == '/home/achievements'"><a routerLink="/home/achievements">Non Academic achievements</a></li>
+  <li [class.active]="w$.location.pathname == '/home/academic'"><a routerLink="/home/academic">Academic achievements</a></li>
+</ul>
 
 <h2>List of approved achievements</h2>
 

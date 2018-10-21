@@ -63,6 +63,10 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'dashboard/academic',
+    component: DashboardComponent,
+  },
+  {
     path: 'achievement/:id',
     component: DetailsComponent,
   },
