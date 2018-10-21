@@ -269,7 +269,6 @@ export class DashboardComponent implements OnInit {
     let error = true;
     this.data.editAcademic(achievement).subscribe(
       data => {
-        console.log(data);
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             error = false;

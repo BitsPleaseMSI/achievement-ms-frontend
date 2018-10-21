@@ -30,6 +30,20 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
+    // Uncomment when going to production
+    // function validateEmail(email) {
+    //   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //   return re.test(String(email).toLowerCase());
+    // }
+    //
+    // if(!validateEmail(target.querySelector('#email').value)){
+    //   this.info$ = undefined;
+    //   this.error$ = "Invalid Email";
+    //   return;
+    // }else{
+    //   this.error$ = undefined;
+    // }
+
     // Sanitising data
     if((target.querySelector('#email').value == '') || (!safe(target.querySelector('#email').value.toString()))){
       this.error$ = 'Input error. Please check username';
