@@ -33,7 +33,7 @@
                   <li *ngIf="!userData$"><a routerLink="/user/register">Register new user</a></li>
                   <li *ngIf="!userData$"><a routerLink="/login"><strong>Faculty Login</strong></a></li>
                   <li><a routerLink="/about">About</a></li>
-                  <li *ngIf="userData$" (click)="logout()"><a href="/home/achievements"><strong>Logout</strong></a></li>
+                  <li *ngIf="userData$" (click)="logout()"><a routerLink="/home/achievements"><strong>Logout</strong></a></li>
 
                 </ul>
             </nav>
