@@ -21,17 +21,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    let params = this.route.snapshot.queryParams;
+    let params = this.route.snapshot.queryParams as Object;
     this.getdata(window.location.search);
 
-    console.log('the params')
-    console.log(params)
+    console.log('Debug')
+    console.log(document.getElementById('semester'))
+    let target = document.getElementById('semester') as HTMLFormElement;
+    target.value = '2';
 
     for(let key in params){
-      console.log('document.getElementById(params[\'semester\'])')
-      console.log(key)
-      console.log(document.getElementById('semester'))
-
       if((params[key] != '') || (!safe(params[key].toString()))){
         if (key=='batch'){
           let target = document.getElementById('from') as HTMLFormElement;
