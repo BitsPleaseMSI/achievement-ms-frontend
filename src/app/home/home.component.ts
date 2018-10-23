@@ -6,15 +6,24 @@ import { safe } from '../sanitise';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component';
 import * as $ from 'jquery';
+
+interface Window {
+    length: any;
+    location: any;
+}
+
+interface Achievement {
+    length: any;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-
 export class HomeComponent implements OnInit {
-  achievements$: Object;
-  w$: Object = window;
+  achievements$: Achievement;
+  w$: Window = window;
 
   constructor(private data: DataAccessService, private router: Router, private route: ActivatedRoute, private ac: AppComponent){
     this.achievements$ = [];

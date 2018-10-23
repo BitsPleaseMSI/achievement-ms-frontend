@@ -6,16 +6,26 @@ import { Router } from '@angular/router';
 import { safe } from '../sanitise';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
+
+interface Window {
+    length: any;
+    location: any;
+}
+
+interface Achievement {
+    length: any;
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  achievements$: Object;
+  achievements$: Achievement;
   editId$: string;
   user: Object;
-  w$: Object = window;
+  w$: Window = window;
   error$: string;
   info$: string;
 
