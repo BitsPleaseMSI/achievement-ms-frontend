@@ -243,6 +243,7 @@ export class DashboardComponent implements OnInit {
     (document.getElementById('from') as HTMLInputElement).value = achievement['batch'].split('-')[0];
     (document.getElementById('to') as HTMLInputElement).value = achievement['batch'].split('-')[1];
     (document.getElementById('programme') as HTMLInputElement).value = achievement['programme'];
+    (document.getElementById('category') as HTMLInputElement).value = achievement['category'];
     this.editId$ = achievement['_id'];
   }
 
@@ -255,6 +256,7 @@ export class DashboardComponent implements OnInit {
     achievement['rollNo'] = target.querySelector('#rollNoA').value;
     achievement['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
     achievement['programme'] = target.querySelector('#programme').value;
+    achievement['category'] = target.querySelector('#category').value;
     achievement['id'] = this.editId$;
 
     // Sanitising data
