@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
     $('#filters').hide();
 
     $('#b').click(function(){
-      $('#filters').slideToggle( 400 );
+      $('#filters').toggle('fast');
     });
   }
 
@@ -102,12 +102,13 @@ export class DashboardComponent implements OnInit {
       )
     }else if(window.location.pathname == '/dashboard/academic'){
       if(params==''){
-        params='?';
+        params='';
       }
 
       this.auth.currentUser().subscribe(
         (user) => {
-          this.data.getAcademic()
+          console.log('run')
+          this.data.getAcademic(params)
           .subscribe(
             (data) => {
               this.achievements$ = data;
@@ -137,21 +138,49 @@ export class DashboardComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
     let params = {};
-    params['sessionFrom'] = target.querySelector('#sessionFrom').value
-    params['sessionTo'] = target.querySelector('#sessionTo').value
-    params['dateFrom'] = target.querySelector('#dateFrom').value
-    params['dateTo'] = target.querySelector('#dateTo').value
-    params['rollNo'] = target.querySelector('#rollNo').value
-    params['section'] = target.querySelector('#section').value
-    params['semester'] = target.querySelector('#semester').value
-    params['shift'] = target.querySelector('#shift').value
-    params['category'] = target.querySelector('#category').value
+
+    if (window.location.pathname != '/dashboard/academic') {
+      params['sessionFrom'] = target.querySelector('#sessionFrom').value
+      params['sessionTo'] = target.querySelector('#sessionTo').value
+      params['dateFrom'] = target.querySelector('#dateFrom').value
+      params['dateTo'] = target.querySelector('#dateTo').value
+      params['rollNo'] = target.querySelector('#rollNo').value
+      params['section'] = target.querySelector('#section').value
+      params['semester'] = target.querySelector('#semester').value
+      params['shift'] = target.querySelector('#shift').value
+      params['category'] = target.querySelector('#category').value
+
+    }else if(window.location.pathname == '/dashboard/academic'){
+      if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
+
+      }else if(
+        (target.querySelector('#from').value == '' && target.querySelector('#to').value != '') ||
+        (target.querySelector('#to').value == '' && target.querySelector('#from').value != '')
+      ){
+        this.ac.snackbar('Clear or fill both fields for Batch!');
+      }else if(
+        target.querySelector('#from').value.length != 4 ||
+        target.querySelector('#to').value.length != 4
+      ){
+        this.ac.snackbar('Check Batch filter!');
+        return;
+      }else{
+        params['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
+      }
+
+      params['category'] = target.querySelector('#categoryA').value
+      params['programme'] = target.querySelector('#programme').value
+    }
 
     let filters = new URLSearchParams();
     for(let key in params){
       if(params[key] != '')
         filters.append(key, params[key]);
     }
+
+    console.log('params');
+    console.log(params);
+
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
     this.refresh('?'+filters.toString());

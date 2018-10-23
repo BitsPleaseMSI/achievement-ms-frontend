@@ -16,7 +16,8 @@
   <span class="slider round"></span>
 </label>
 <div id="filters">
-  <form (submit)="filter($event)" class="form-signin" action="" id="filter">
+
+  <form *ngIf="w$.location.pathname == '/home/achievements'" (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
       <div class="home-filters">
         <label for="rollNo">Enrollment No.</label>
@@ -88,9 +89,9 @@
       <div class="home-filters">
         <label for="category" class="control-label">Category:</label>&nbsp;
         <select id="category" name="category" placeholder="Category">
-          <option value="">category</option>
+          <option value="">Select Category</option>
           <option value="sports">Sports</option>
-          <option value="Cultural">Cultural</option>
+          <option value="cultural">Cultural</option>
           <option value="technical">Technical</option>
           <option value="others">Others</option>
         </select>
@@ -101,6 +102,44 @@
       &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
     </div>
   </form>
+
+  <form *ngIf="w$.location.pathname == '/home/academic'" (submit)="filter($event)" class="form-signin" action="" id="filter">
+      <div id="filter-area-one">
+      <div class="home-filters">
+        <label for="section">Batch:</label>
+        <input type="number" id="from" class="form-control" placeholder="Begining year">
+        <input type="number" id="to" class="form-control" placeholder="Ending year">
+      </div>
+      &nbsp;
+      <div class="home-filters">
+        <label for="semester">Programme:</label>
+        <select  id="programme" name="programme" class="form-control">
+          <option value="">Select Programme</option>
+          <option>B. Ed.</option>
+          <option>BBA (H) 4 year</option>
+          <option>BBA (General)</option>
+          <option>BBA (B&I)</option>
+          <option>BBA (T&TM)</option>
+          <option>BCA</option>
+        </select>
+      </div>
+      &nbsp;
+      <div class="home-filters">
+        <label for="categoryA" class="control-label">Category:</label>&nbsp;
+        <select id="categoryA" name="categoryA" class="form-control">
+          <option value="">Select Category</option>
+          <option value="exemplary">Exemplary Performance</option>
+          <option value="goldmedalist">Gold Medalist</option>
+          <option value="both">Gold Medalist & Exemplary Performance</option>
+        </select>
+      </div>
+    <div id="button-area">
+      <button class="btn btn-crimson" type="submit">Apply filter</button>
+      &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
+    </div>
+  </div>
+  </form>
+
 </div>
 <br>
 

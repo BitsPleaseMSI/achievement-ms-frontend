@@ -19,13 +19,19 @@ export class DataAccessService {
     return this.http.get<any>('http://localhost:8090/achievements/get/' + id)
   }
 
-  getAcademic(): Observable<any>{
-    console.log('[getApprovedAchievements]')
-    return this.http.get<any>('http://localhost:8090/academic/getall')
+  getAcademic(params?: string): Observable<any>{
+    console.log('[getAcademicAchievements]')
+    if(!params){
+      params = ''
+    }
+    return this.http.get<any>('http://localhost:8090/academic/getall' + params)
   }
 
   getApprovedAchievements(params?: string): Observable<any>{
     console.log('[getApprovedAchievements]')
+    if(!params){
+      params = ''
+    }
     return this.http.get<any>('http://localhost:8090/achievements/all' + params)
   }
 

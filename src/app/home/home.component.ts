@@ -22,17 +22,32 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     let params = this.route.snapshot.queryParams;
-    let filters = new URLSearchParams();
+    this.getdata(window.location.search);
+
+    console.log('the params')
+    console.log(params)
 
     for(let key in params){
+      console.log('document.getElementById(params[\'semester\'])')
+      console.log(key)
+      console.log(document.getElementById('semester'))
+
       if((params[key] != '') || (!safe(params[key].toString()))){
-        filters.append(key, params[key]);
-        let target = document.getElementById(key) as HTMLFormElement;
-        target.value = params[key];
+        if (key=='batch'){
+          let target = document.getElementById('from') as HTMLFormElement;
+          target.value = params['batch'].split('-')[0];
+          target = document.getElementById('to') as HTMLFormElement;
+          target.value = params['batch'].split('-')[1];
+        }else if (key=='category' && window.location.pathname=='/home/academic') {
+          console.log('run?')
+          let target = document.getElementById('categoryA') as HTMLFormElement;
+          target.value = params['category'];
+        }else{
+          let target = document.getElementById(key) as HTMLFormElement;
+          target.value = params[key];
+        }
       }
     }
-
-    this.getdata('?' + filters.toString());
 
     $('#filters').hide();
 
@@ -40,11 +55,9 @@ export class HomeComponent implements OnInit {
       $('#filters').toggle('fast');
     });
 
-
   }
 
   getdata(params: string){
-
     if(window.location.pathname == '/home/achievements'){
 
       this.data.getApprovedAchievements(params)
@@ -58,7 +71,7 @@ export class HomeComponent implements OnInit {
 
     }else if(window.location.pathname == '/home/academic'){
 
-      this.data.getAcademic()
+      this.data.getAcademic(params)
       .subscribe(
         (data) => {
           this.achievements$ = data;
@@ -75,7 +88,7 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     let target = document.getElementById('filter') as HTMLFormElement;
     target.reset();
-    this.router.navigate(['/home']);
+    this.router.navigate([window.location.pathname]);
     this.getdata('');
   }
 
@@ -83,16 +96,41 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
     let params = {};
-    params['sessionFrom'] = target.querySelector('#sessionFrom').value
-    params['sessionTo'] = target.querySelector('#sessionTo').value
-    params['dateFrom'] = target.querySelector('#dateFrom').value
-    params['dateTo'] = target.querySelector('#dateTo').value
-    params['rollNo'] = target.querySelector('#rollNo').value
-    params['section'] = target.querySelector('#section').value
-    params['semester'] = target.querySelector('#semester').value
-    params['shift'] = target.querySelector('#shift').value
-    params['category'] = target.querySelector('#category').value
-    params['department'] = target.querySelector('#department').value
+
+    if(window.location.pathname == '/home/achievements'){
+      params['sessionFrom'] = target.querySelector('#sessionFrom').value
+      params['sessionTo'] = target.querySelector('#sessionTo').value
+      params['dateFrom'] = target.querySelector('#dateFrom').value
+      params['dateTo'] = target.querySelector('#dateTo').value
+      params['rollNo'] = target.querySelector('#rollNo').value
+      params['section'] = target.querySelector('#section').value
+      params['semester'] = target.querySelector('#semester').value
+      params['shift'] = target.querySelector('#shift').value
+      params['category'] = target.querySelector('#category').value
+      params['department'] = target.querySelector('#department').value
+
+    }else if(window.location.pathname == '/home/academic'){
+
+      if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
+
+      }else if(
+        (target.querySelector('#from').value == '' && target.querySelector('#to').value != '') ||
+        (target.querySelector('#to').value == '' && target.querySelector('#from').value != '')
+      ){
+        this.ac.snackbar('Clear or fill both fields for Batch!');
+      }else if(
+        target.querySelector('#from').value.length != 4 ||
+        target.querySelector('#to').value.length != 4
+      ){
+        this.ac.snackbar('Check Batch filter!');
+        return;
+      }else{
+        params['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
+      }
+      params['category'] = target.querySelector('#categoryA').value
+      params['programme'] = target.querySelector('#programme').value
+    }
+
 
     let filters = new URLSearchParams();
     for(let key in params){
