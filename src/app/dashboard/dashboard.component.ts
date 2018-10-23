@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
     if(arg)
       params = arg;
 
-    if(window.location.pathname == '/dashboard/approved'){
+    if(window.location.pathname.includes('/dashboard/approved')){
       if(params==''){
         params='?';
       }
@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
         }
       )
 
-    }else if(window.location.pathname == '/dashboard/unapproved'){
+    }else if(window.location.pathname.includes('/dashboard/unapproved')){
       if(params==''){
         params='?';
       }
@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
           this.auth.redirect('home', 'You are not authorised. Please login to continue!')
         }
       )
-    }else if(window.location.pathname == '/dashboard/academic'){
+    }else if(window.location.pathname.includes('/dashboard/academic')){
       if(params==''){
         params='';
       }
@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
     const target = event.target;
     let params = {};
 
-    if (window.location.pathname != '/dashboard/academic') {
+    if (!window.location.pathname.includes('/dashboard/academic')) {
       params['sessionFrom'] = target.querySelector('#sessionFrom').value
       params['sessionTo'] = target.querySelector('#sessionTo').value
       params['dateFrom'] = target.querySelector('#dateFrom').value
@@ -151,7 +151,7 @@ export class DashboardComponent implements OnInit {
       params['shift'] = target.querySelector('#shift').value
       params['category'] = target.querySelector('#category').value
 
-    }else if(window.location.pathname == '/dashboard/academic'){
+    }else if(window.location.pathname.includes('/dashboard/academic')){
       if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
 
       }else if(

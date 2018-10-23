@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   getdata(params: string){
-    if(window.location.pathname == '/home/achievements'){
+    if(window.location.pathname.includes('/home/achievements')){
 
       this.data.getApprovedAchievements(params)
       .subscribe(
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
           this.ac.snackbar('Server is not responding, Please try later.');
       });
 
-    }else if(window.location.pathname == '/home/academic'){
+    }else if(window.location.pathname.includes('/home/academic')){
 
       this.data.getAcademic(params)
       .subscribe(
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
     const target = event.target;
     let params = {};
 
-    if(window.location.pathname == '/home/achievements'){
+    if(window.location.pathname.includes('/home/achievements')){
       params['sessionFrom'] = target.querySelector('#sessionFrom').value
       params['sessionTo'] = target.querySelector('#sessionTo').value
       params['dateFrom'] = target.querySelector('#dateFrom').value
@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
       params['category'] = target.querySelector('#category').value
       params['department'] = target.querySelector('#department').value
 
-    }else if(window.location.pathname == '/home/academic'){
+    }else if(window.location.pathname.includes('/home/academic')){
 
       if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
 

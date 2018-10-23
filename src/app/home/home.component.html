@@ -3,8 +3,8 @@
 
 <h4>Select view</h4>
 <ul class="nav nav-pills nav-fill">
-  <li [class.active]="w$.location.pathname == '/home/achievements'"><a routerLink="/home/achievements">Non Academic achievements</a></li>
-  <li [class.active]="w$.location.pathname == '/home/academic'"><a routerLink="/home/academic">Academic achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/home/achievements')"><a routerLink="/home/achievements">Non Academic achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/home/academic')"><a routerLink="/home/academic">Academic achievements</a></li>
 </ul>
 
 <h2>List of approved achievements</h2>
@@ -16,7 +16,7 @@
 </label>
 <div id="filters">
 
-  <form *ngIf="w$.location.pathname == '/home/achievements'" (submit)="filter($event)" class="form-signin" action="" id="filter">
+  <form *ngIf="w$.location.pathname.includes('/home/achievements')" (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
       <div class="home-filters">
         <label for="rollNo">Enrollment No.</label>
@@ -101,7 +101,7 @@
       &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
     </div>
   </form>
-  <form *ngIf="w$.location.pathname == '/home/academic'" (submit)="filter($event)" class="form-signin" action="" id="filter">
+  <form *ngIf="w$.location.pathname.includes('/home/academic')" (submit)="filter($event)" class="form-signin" action="" id="filter">
       <div id="filter-area-one">
       <div class="home-filters">
         <label for="section">Batch:</label>
@@ -142,7 +142,7 @@
 <br>
 
 <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
-<table *ngIf="w$.location.pathname == '/home/achievements' && achievements$.length > 0">
+<table *ngIf="w$.location.pathname.includes('/home/achievements') && achievements$.length > 0">
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Enrollment No.</th>
@@ -170,7 +170,7 @@
   </tr>
 </table>
 
-<table *ngIf="w$.location.pathname == '/home/academic' && achievements$.length > 0">
+<table *ngIf="w$.location.pathname.includes('/home/academic') && achievements$.length > 0">
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Enrollment No.</th>

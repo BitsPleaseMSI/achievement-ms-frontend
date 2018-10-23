@@ -81,9 +81,9 @@
 <br>
 <h4>Achievements</h4>
 <ul class="nav nav-pills nav-fill">
-  <li [class.active]="w$.location.pathname == '/dashboard/approved'"><a routerLink="/dashboard/approved">Approved achievements</a></li>
-  <li [class.active]="w$.location.pathname == '/dashboard/unapproved'"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
-  <li [class.active]="w$.location.pathname == '/dashboard/academic'"><a routerLink="/dashboard/academic">Academic achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/dashboard/approved')"><a routerLink="/dashboard/approved">Approved achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/dashboard/unapproved')"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/dashboard/academic')"><a routerLink="/dashboard/academic">Academic achievements</a></li>
 </ul>
 
 <br>
@@ -94,7 +94,7 @@
 </label>
 <div id="filters">
 
-  <form *ngIf="w$.location.pathname != '/dashboard/academic'" (submit)="filter($event)" class="form-signin" action="" id="filter">
+  <form *ngIf="!w$.location.pathname.includes('/dashboard/academic')" (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
       <div class="home-filters">
         <label for="rollNo">Enrollment No.</label>
@@ -169,7 +169,7 @@
     </div>
   </form>
 
-  <form *ngIf="w$.location.pathname == '/dashboard/academic'" (submit)="filter($event)" class="form-signin" action="" id="filter">
+  <form *ngIf="w$.location.pathname.includes('/dashboard/academic')" (submit)="filter($event)" class="form-signin" action="" id="filter">
       <div id="filter-area-one">
       <div class="home-filters">
         <label for="section">Batch:</label>
@@ -210,7 +210,7 @@
 <h2>Achievements</h2>
 
 <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
-<table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname == '/dashboard/approved' || w$.location.pathname == '/dashboard/unapproved')">
+<table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname.includes('/dashboard/approved') || w$.location.pathname.includes('/dashboard/unapproved'))">
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Name</th>
@@ -243,7 +243,7 @@
   </tr>
 </table>
 
-<table class="danger" *ngIf="achievements$.length != 0 && w$.location.pathname == '/dashboard/academic'">
+<table class="danger" *ngIf="achievements$.length != 0 && w$.location.pathname.includes('/dashboard/academic')">
   <tr id="table-heading">
     <tr id="table-heading">
       <th>S.No.</th>
