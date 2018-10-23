@@ -7,7 +7,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Modal Header</h4>
+            <h4 class="modal-title">Edit academic achievement</h4>
           </div>
           <div class="modal-body">
 
@@ -205,6 +205,7 @@
       <th>Name</th>
       <th>Batch</th>
       <th>Programme</th>
+      <th>Category</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -214,6 +215,9 @@
       <td>{{ achievement.name }}</td>
       <td>{{ achievement.batch }}</td>
       <td>{{ achievement.programme }}</td>
+      <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
+      <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
+      <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
       <td>
         <button class="btn btn-danger" type="button" name="delete" data-toggle="modal" data-target="#myModal" (click)="editAcademicForm($event, achievement)">Edit</button>
       </td>

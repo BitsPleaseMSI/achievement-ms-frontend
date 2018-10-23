@@ -80,7 +80,7 @@ export class DataAccessService {
   }
 
   addAcademic(achievement: Object): Observable<any>{
-    console.log('[addAchievement]')
+    console.log('[addAcademic]')
     let token = '';
 
     const data: FormData = new FormData();

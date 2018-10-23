@@ -144,23 +144,6 @@ export class AuthService {
 
     return this.http.request(req);
 
-    // let body = new URLSearchParams();
-    //
-    // for(let key in params)
-    //   body.append(key, params[key]);
-    //
-    // let options = {
-    //   headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-    // };
-    //
-    // if(!safe(body.toString())){
-    //   console.log('[UNSAFE DATA!]');
-    //   return new Observable((data) => {})
-    // }
-    //
-    // return this.http.put('http://localhost:8090/users/reset', params, options);
-    // // return this.http.put('http://localhost:8090/users/reset', body.toString(), options);
-
   }
 
 }

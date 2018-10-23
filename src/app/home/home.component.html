@@ -140,6 +140,7 @@
     <th>Name</th>
     <th>Batch</th>
     <th>Programme</th>
+    <th>Category</th>
   </tr>
   <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
     <td>{{ i+1 }}</td>
@@ -147,6 +148,9 @@
     <td>{{ achievement.name }}</td>
     <td>{{ achievement.batch }}</td>
     <td>{{ achievement.programme }}</td>
+    <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
+    <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
+    <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
   </tr>
 </table>
 
