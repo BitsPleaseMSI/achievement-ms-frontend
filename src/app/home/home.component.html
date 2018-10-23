@@ -19,8 +19,8 @@
   <form (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
       <div class="home-filters">
-        <label for="rollNo">Roll number:</label>
-        &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Roll number" autofocus>
+        <label for="rollNo">Enrollment No.</label>
+        &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Enrollment No." autofocus>
         &nbsp;
         <label for="dateFrom" class="control-label">Starting from date:</label>
         &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date">
@@ -108,7 +108,7 @@
 <table *ngIf="w$.location.pathname == '/home/achievements' && achievements$.length > 0">
   <tr id="table-heading">
     <th>S.No.</th>
-    <th>Roll no.</th>
+    <th>Enrollment No.</th>
     <th>Name</th>
     <th>Department</th>
     <th>Sem</th>
@@ -136,7 +136,7 @@
 <table *ngIf="w$.location.pathname == '/home/academic' && achievements$.length > 0">
   <tr id="table-heading">
     <th>S.No.</th>
-    <th>Roll No</th>
+    <th>Enrollment No.</th>
     <th>Name</th>
     <th>Batch</th>
     <th>Programme</th>
