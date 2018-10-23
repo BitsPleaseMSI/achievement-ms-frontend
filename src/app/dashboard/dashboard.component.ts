@@ -36,15 +36,6 @@ export class DashboardComponent implements OnInit {
     this.achievements$ = [];
     this.refresh(window.location.search);
 
-    let params = this.route.snapshot.queryParams;
-
-    for(let key in params){
-      if((params[key] != '') || (!safe(params[key].toString()))){
-        let target = document.getElementById(key) as HTMLFormElement;
-        target.value = params[key];
-      }
-    }
-
     $('#filters').hide();
 
     $('#b').click(function(){
@@ -184,7 +175,6 @@ export class DashboardComponent implements OnInit {
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
     this.refresh('?'+filters.toString());
-    // window.location.href = window.location.pathname + '?' + filters.toString();
 
   }
 

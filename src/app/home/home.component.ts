@@ -21,31 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    let params = this.route.snapshot.queryParams as Object;
     this.getdata(window.location.search);
-
-    console.log('Debug')
-    console.log(document.getElementById('semester'))
-    let target = document.getElementById('semester') as HTMLFormElement;
-    target.value = '2';
-
-    for(let key in params){
-      if((params[key] != '') || (!safe(params[key].toString()))){
-        if (key=='batch'){
-          let target = document.getElementById('from') as HTMLFormElement;
-          target.value = params['batch'].split('-')[0];
-          target = document.getElementById('to') as HTMLFormElement;
-          target.value = params['batch'].split('-')[1];
-        }else if (key=='category' && window.location.pathname=='/home/academic') {
-          console.log('run?')
-          let target = document.getElementById('categoryA') as HTMLFormElement;
-          target.value = params['category'];
-        }else{
-          let target = document.getElementById(key) as HTMLFormElement;
-          target.value = params[key];
-        }
-      }
-    }
 
     $('#filters').hide();
 

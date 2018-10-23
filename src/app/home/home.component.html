@@ -1,4 +1,3 @@
-
 <h1><span>H</span>ome</h1>
 <div id="mainContent">
 
@@ -21,31 +20,31 @@
     <div id="filter-area-one">
       <div class="home-filters">
         <label for="rollNo">Enrollment No.</label>
-        &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Enrollment No." autofocus>
+        &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Enrollment No." value="{{this.route.snapshot.queryParams['rollNo']}}">
         &nbsp;
         <label for="dateFrom" class="control-label">Starting from date:</label>
-        &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date">
+        &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date" value="{{this.route.snapshot.queryParams['dateFrom']}}">
         &nbsp;</div>
       <div class="home-filters">
         <label for="dateTo" class="control-label">Till date:</label>
-        &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date">
+        &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date" value="{{this.route.snapshot.queryParams['dateTo']}}">
       </div>
       </div>
       <div id="filter-area-two">
       <div class="home-filters">
         <label for="sessionFrom" class="control-label">Batch:</label>
-        &nbsp;<input type="number" id="sessionFrom" name="sessionFrom" placeholder="Begining year">
+        &nbsp;<input type="number" id="sessionFrom" name="sessionFrom" placeholder="Begining year" value="{{this.route.snapshot.queryParams['from']}}">
       <!-- </div>
       &nbsp;&nbsp;
       <div class="home-filters">
         <label for="sessionTo" class="control-label">Session end year:</label> -->
-        &nbsp;<input type="number" id="sessionTo" name="sessionTo" placeholder="Ending year">
+        &nbsp;<input type="number" id="sessionTo" name="sessionTo" placeholder="Ending year" value="{{this.route.snapshot.queryParams['to']}}">
       </div>
       </div>
     <div  id="filter-area-three">
       <div class="home-filters">
         <label for="section">Section:</label>
-        <select id="section" name="section">&nbsp;
+        <select id="section" name="section" value="{{this.route.snapshot.queryParams['section']}}">&nbsp;
           <option value="">Select section</option>
           <option>A</option>
           <option>B</option>
@@ -55,7 +54,7 @@
       &nbsp;
       <div class="home-filters">
         <label for="semester">Semester:</label>
-        <select id="semester" name="semester">&nbsp;
+        <select id="semester" name="semester" value="{{this.route.snapshot.queryParams['semester']}}">&nbsp;
           <option value="">Select semester</option>
           <option>1</option>
           <option>2</option>
@@ -68,7 +67,7 @@
       &nbsp;
       <div class="home-filters">
         <label for="department" class="control-label">Department:</label>&nbsp;
-        <select id="department" name="department">
+        <select id="department" name="department" value="{{this.route.snapshot.queryParams['department']}}">
           <option value="">Select department</option>
           <option value="education">Education</option>
           <option value="computerscience">Computer Science</option>
@@ -79,7 +78,7 @@
       &nbsp;
       <div class="home-filters">
         <label for="shift" class="control-label">Shift:</label>&nbsp;
-        <select id="shift" name="shift" placeholder="Shift">
+        <select id="shift" name="shift" placeholder="Shift" value="{{this.route.snapshot.queryParams['shift']}}">
           <option value="">Select shift</option>
           <option value="morning">Morning</option>
           <option value="evening">Evening</option>
@@ -88,7 +87,7 @@
       &nbsp;
       <div class="home-filters">
         <label for="category" class="control-label">Category:</label>&nbsp;
-        <select id="category" name="category" placeholder="Category">
+        <select id="category" name="category" placeholder="Category" value="{{this.route.snapshot.queryParams['category']}}">
           <option value="">Select Category</option>
           <option value="sports">Sports</option>
           <option value="cultural">Cultural</option>
@@ -102,18 +101,17 @@
       &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
     </div>
   </form>
-
   <form *ngIf="w$.location.pathname == '/home/academic'" (submit)="filter($event)" class="form-signin" action="" id="filter">
       <div id="filter-area-one">
       <div class="home-filters">
         <label for="section">Batch:</label>
-        <input type="number" id="from" class="form-control" placeholder="Begining year">
-        <input type="number" id="to" class="form-control" placeholder="Ending year">
+        <input type="number" id="from" class="form-control" placeholder="Begining year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[0]:''}}">
+        <input type="number" id="to" class="form-control" placeholder="Ending year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[1]:''}}">
       </div>
       &nbsp;
       <div class="home-filters">
         <label for="semester">Programme:</label>
-        <select  id="programme" name="programme" class="form-control">
+        <select  id="programme" name="programme" class="form-control" value="{{this.route.snapshot.queryParams['programme']}}">
           <option value="">Select Programme</option>
           <option>B. Ed.</option>
           <option>BBA (H) 4 year</option>
@@ -126,7 +124,7 @@
       &nbsp;
       <div class="home-filters">
         <label for="categoryA" class="control-label">Category:</label>&nbsp;
-        <select id="categoryA" name="categoryA" class="form-control">
+        <select id="categoryA" name="categoryA" class="form-control" value="{{this.route.snapshot.queryParams['category']}}">
           <option value="">Select Category</option>
           <option value="exemplary">Exemplary Performance</option>
           <option value="goldmedalist">Gold Medalist</option>
