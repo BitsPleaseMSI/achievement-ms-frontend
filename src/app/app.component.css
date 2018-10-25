@@ -29,7 +29,7 @@ h2{
 }
 .navbar {
     padding: 15px 10px;
-    background: crimson;
+    background: darkorchid;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -57,7 +57,7 @@ h2{
     min-width: 250px;
     max-width: 250px;
     transition: all 0.3s;
-    background-color: crimson;
+    background-color: darkorchid;
 }
 #date{
     text-align: right;
@@ -75,7 +75,7 @@ ul{
 #sidebar .sidebar-header {
     padding: 10px;
     color: #dfe6e9;
-    background: crimson;
+    background: darkorchid;
 }
 
 #sidebar ul.components {
@@ -90,7 +90,7 @@ ul{
     display: block;
 }
 #sidebar ul li a:hover {
-    color: crimson;
+    color: darkorchid;
     background: black;
     transform: translateX(5%);
 
@@ -99,7 +99,7 @@ ul{
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: crimson;
+    background: darkorchid;
 }
 
 
@@ -130,7 +130,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: crimson;
+    background: darkorchid;
 }
 
 ul.CTAs {
@@ -147,13 +147,13 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: crimson;
+    color: darkorchid;
 }
 
 
 
 a.article, a.article:hover {
-    background: crimson !important;
+    background: darkorchid !important;
     color: #fff !important;
 }
 
@@ -253,3 +253,6 @@ a.article, a.article:hover {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 } */
+
+
+
