@@ -50,12 +50,16 @@ export class AddAcademicComponent implements OnInit {
     let error = true;
     this.data.addAcademic(achievement).subscribe(
       data => {
+        console.log(data)
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             error = false;
             this.ac.snackbar('Achievement added Successfully!');
             this.info$ = 'Achievement added Successfully.';
             this.error$ = undefined;
+          }else{
+            this.error$ = JSON.parse(data['partialText'])['message'];
+            this.info$ = undefined;
           }
         }
       },

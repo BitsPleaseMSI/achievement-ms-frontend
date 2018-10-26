@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { safe } from './sanitise';
 import { Achievement } from './achievement';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
@@ -88,7 +86,9 @@ export class DataAccessService {
   }
 
   addAcademic(achievement: Object): Observable<any>{
-    console.log('[addAcademic]')
+    console.log('[addAcademic]');
+    console.log(achievement);
+
     let token = '';
 
     const data: FormData = new FormData();

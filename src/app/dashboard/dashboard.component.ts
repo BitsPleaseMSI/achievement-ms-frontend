@@ -108,7 +108,6 @@ export class DashboardComponent implements OnInit {
 
       this.auth.currentUser().subscribe(
         (user) => {
-          console.log('run')
           this.data.getAcademic(params)
           .subscribe(
             (data) => {

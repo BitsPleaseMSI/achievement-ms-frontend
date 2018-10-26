@@ -30,19 +30,18 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
-    // Uncomment when going to production
-    // function validateEmail(email) {
-    //   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //   return re.test(String(email).toLowerCase());
-    // }
-    //
-    // if(!validateEmail(target.querySelector('#email').value)){
-    //   this.info$ = undefined;
-    //   this.error$ = "Invalid Email";
-    //   return;
-    // }else{
-    //   this.error$ = undefined;
-    // }
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    if(!validateEmail(target.querySelector('#email').value)){
+      this.info$ = undefined;
+      this.error$ = "Invalid Email";
+      return;
+    }else{
+      this.error$ = undefined;
+    }
 
     // Sanitising data
     if((target.querySelector('#email').value == '') || (!safe(target.querySelector('#email').value.toString()))){
@@ -62,7 +61,6 @@ export class LoginComponent implements OnInit {
     ).subscribe(
       (data) => {
         this.trylater = false;
-        // Successful login
         if(data.bool){
           if(target.querySelector('#saveUser').checked){
             localStorage.setItem('token', data['token'].toString());
@@ -70,8 +68,8 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('token', data['token'].toString());
           }
           this.ac.snackbar('Logged in Successfully!');
+          this.ac.getdata();
           this.router.navigate(['/dashboard/unapproved']);
-          this.ac.getdata()
         }else{
           this.info$ = undefined;
           this.error$ = "Incorrect credentials";
