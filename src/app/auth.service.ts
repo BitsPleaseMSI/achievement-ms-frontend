@@ -34,6 +34,32 @@ export class AuthService {
     return this.http.get(api + '/users/isvalid?token=' + token)
   }
 
+  validUser(): Promise<boolean>{
+    console.log('[currentUser]')
+    let token = ''
+
+    if(localStorage.getItem('token')){
+      token = localStorage.getItem('token');
+    }else{
+      token = sessionStorage.getItem('token');
+    }
+
+    // console.log(api + '/users/isvalid?token=' + token)
+    return this.http.get(api + '/users/isvalid?token=' + token).toPromise().then(
+      (data) => {
+        if(data['email']){
+          return true;
+        }else{
+          return false;
+        }
+      },
+      () => {
+        return false;
+      }
+    )
+
+  }
+
   login(email, password): Observable<any>{
     console.log('[login]')
     let body = new URLSearchParams();
@@ -46,7 +72,7 @@ export class AuthService {
 
     if(!safe(body.toString())){
       console.log('[UNSAFE DATA!]');
-      return new Observable((data) => {})
+      return new Observable(() => {})
     }
 
     return this.http.post(api + '/users/auth', body.toString(), options);
@@ -67,7 +93,7 @@ export class AuthService {
 
     if(!safe(body.toString())){
       console.log('[UNSAFE DATA!]');
-      return new Observable((data) => {})
+      return new Observable(() => {})
     }
 
     return this.http.post(api + '/users/add', body.toString(), options);
@@ -88,7 +114,7 @@ export class AuthService {
 
     if(!safe(body.toString())){
       console.log('[UNSAFE DATA!]');
-      return new Observable((data) => {})
+      return new Observable(() => {})
     }
 
     return this.http.post(api + '/users/resetpass', body.toString(), options)

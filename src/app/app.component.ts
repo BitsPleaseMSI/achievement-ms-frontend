@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './auth.service';
-import { Router } from '@angular/router';
 import * as $ from 'jquery';
 
 @Component({
@@ -14,7 +13,7 @@ export class AppComponent implements OnInit {
   message$: string;
   title = 'achievement-ms-front';
   date = new Date();
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService) {
     setInterval(() => {
       this.date = new Date();
     }, 1000)
@@ -43,7 +42,7 @@ export class AppComponent implements OnInit {
       $('#sidebar').toggleClass('active');
     });
 
-  
+
 
   }
 

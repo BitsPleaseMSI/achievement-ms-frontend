@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
           this.error$ = "Incorrect credentials";
         }
       },
-      (error) =>{
+      () =>{
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
       }

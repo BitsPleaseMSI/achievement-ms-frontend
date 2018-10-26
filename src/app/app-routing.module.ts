@@ -11,6 +11,7 @@ import { DetailsComponent } from './details/details.component'
 import { AboutComponent } from './about/about.component'
 import { SettingsComponent } from './settings/settings.component'
 import { AddAcademicComponent } from './add-academic/add-academic.component'
+import { AuthGuard as AG } from './auth.guard'
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
   {
     path: 'academic/add',
     component: AddAcademicComponent,
+    canActivate: [AG],
   },
   {
     path: 'user/register',
@@ -49,22 +51,27 @@ const routes: Routes = [
   {
     path: 'user/settings',
     component: SettingsComponent,
+    canActivate: [AG],
   },
   {
     path: 'passwordreset',
     component: ResetPassComponent,
+    canActivate: [AG],
   },
   {
     path: 'dashboard/approved',
     component: DashboardComponent,
+    canActivate: [AG],
   },
   {
     path: 'dashboard/unapproved',
     component: DashboardComponent,
+    canActivate: [AG],
   },
   {
     path: 'dashboard/academic',
     component: DashboardComponent,
+    canActivate: [AG],
   },
   {
     path: 'achievement/:id',

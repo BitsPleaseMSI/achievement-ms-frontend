@@ -13,8 +13,7 @@ export class AddAcademicComponent implements OnInit {
   info$: string;
   constructor(private data: DataAccessService, private ac: AppComponent) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addAcademic(event){
     event.preventDefault();
@@ -50,7 +49,6 @@ export class AddAcademicComponent implements OnInit {
     let error = true;
     this.data.addAcademic(achievement).subscribe(
       data => {
-        console.log(data)
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             error = false;
@@ -63,7 +61,7 @@ export class AddAcademicComponent implements OnInit {
           }
         }
       },
-      (error) =>{
+      () =>{
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
       }

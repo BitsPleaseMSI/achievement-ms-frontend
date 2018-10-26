@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataAccessService } from '../data-access.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { safe } from '../sanitise';
-import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../app.component';
 import * as $ from 'jquery';
 
@@ -25,7 +24,7 @@ export class HomeComponent implements OnInit {
   achievements$: Achievement;
   w$: Window = window;
 
-  constructor(private data: DataAccessService, private router: Router, private route: ActivatedRoute, private ac: AppComponent){
+  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private ac: AppComponent){
     this.achievements$ = [];
   }
 
@@ -48,7 +47,7 @@ export class HomeComponent implements OnInit {
         (data) => {
           this.achievements$ = data;
         },
-        (error) =>{
+        () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
       });
 
@@ -59,7 +58,7 @@ export class HomeComponent implements OnInit {
         (data) => {
           this.achievements$ = data;
         },
-        (error) =>{
+        () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
       });
 

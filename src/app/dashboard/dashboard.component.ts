@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataAccessService } from '../data-access.service';
 import { AuthService } from '../auth.service';
 import { AppComponent } from '../app.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { safe } from '../sanitise';
-import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 
 interface Window {
@@ -31,15 +30,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
     this.achievements$ = [];
-    this.auth.currentUser().subscribe(
-      (user) => {
-
-      },
-      (error) =>{
-        this.auth.redirect('home', 'You are not authorised. Please login to continue!')
-        return;
-      }
-    )
   }
 
   ngOnInit(){
@@ -55,7 +45,7 @@ export class DashboardComponent implements OnInit {
 
   refresh(arg?: string){
     this.achievements$ = [];
-    let params = '';
+    let params = window.location.search;
     if(arg)
       params = arg;
 
@@ -72,12 +62,9 @@ export class DashboardComponent implements OnInit {
             (data) => {
               this.achievements$ = data;
           },
-          (error) =>{
+          () =>{
             this.ac.snackbar('Server is not responding, Please try later.');
           });
-        },
-        (error) =>{
-          this.auth.redirect('home', 'You are not authorised. Please login to continue!')
         }
       )
 
@@ -86,41 +73,25 @@ export class DashboardComponent implements OnInit {
         params='?';
       }
 
-      this.auth.currentUser().subscribe(
-        (user) => {
-          this.data.getUnapprovedAchievements(params)
-          .subscribe(
-            (data) => {
-              this.achievements$ = data['data'];
-            },
-            (error) =>{
-              this.ac.snackbar('Server is not responding, Please try later.');
-            });
+      this.data.getUnapprovedAchievements(params)
+      .subscribe(
+        (data) => {
+          this.achievements$ = data['data'];
         },
-        (error) =>{
-          this.auth.redirect('home', 'You are not authorised. Please login to continue!')
-        }
-      )
-    }else if(window.location.pathname.includes('/dashboard/academic')){
-      if(params==''){
-        params='';
-      }
+        () =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
+        });
 
-      this.auth.currentUser().subscribe(
-        (user) => {
-          this.data.getAcademic(params)
-          .subscribe(
-            (data) => {
-              this.achievements$ = data;
-            },
-            (error) =>{
-              this.ac.snackbar('Server is not responding, Please try later.');
-          });
+    }else if(window.location.pathname.includes('/dashboard/academic')){
+
+      this.data.getAcademic(params)
+      .subscribe(
+        (data) => {
+          this.achievements$ = data;
         },
-        (error) =>{
-          this.auth.redirect('home', 'You are not authorised. Please login to continue!')
-        }
-      )
+        () =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
+      });
 
     }
 
@@ -128,10 +99,12 @@ export class DashboardComponent implements OnInit {
 
   resetFilters(event){
     event.preventDefault();
-    let target = document.getElementById('filter') as HTMLFormElement;
-    target.reset();
-    this.router.navigate([window.location.pathname]);
-    this.refresh();
+    (document.getElementById('filter') as HTMLFormElement).reset();
+    this.router.navigate([window.location.pathname]).then(
+      () => {
+        this.refresh('');
+      }
+    );
   }
 
   filter(event){
@@ -189,28 +162,18 @@ export class DashboardComponent implements OnInit {
 
   approve(event, id: string){
     event.preventDefault();
-    const target = event.target;
 
-    this.auth.currentUser().subscribe(
+    this.auth.approveAchievement(id).subscribe(
       (data) => {
-          if(!data['email']){
-            this.auth.redirect('home', 'You are not authorised. Please login to continue!')
-            return;
-          }
-
-          this.auth.approveAchievement(id).subscribe(
-            (data) => {
-              if(data['bool']){
-                this.refresh();
-                this.ac.snackbar('Approved successfully!')
-              }else{
-                this.ac.snackbar(data['message'])
-              }
-            },
-            (error) =>{
-              this.ac.snackbar('Server is not responding, Please try later.');
-            }
-          )
+        if(data['bool']){
+          this.refresh();
+          this.ac.snackbar('Approved successfully!')
+        }else{
+          this.ac.snackbar(data['message'])
+        }
+      },
+      () =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
       }
     )
 
@@ -218,28 +181,18 @@ export class DashboardComponent implements OnInit {
 
   unapprove(event, id: string){
     event.preventDefault();
-    const target = event.target;
 
-    this.auth.currentUser().subscribe(
+    this.auth.unapproveAchievement(id).subscribe(
       (data) => {
-          if(!data['email']){
-            this.auth.redirect('home', 'You are not authorised. Please login to continue!')
-            return;
-          }
-
-          this.auth.unapproveAchievement(id).subscribe(
-            (data) => {
-              if(data['bool']){
-                this.refresh();
-                this.ac.snackbar('Unapproved successfully!')
-              }else{
-                this.ac.snackbar(data['message'])
-              }
-            },
-            (error) =>{
-              this.ac.snackbar('Server is not responding, Please try later.');
-            }
-          )
+        if(data['bool']){
+          this.refresh();
+          this.ac.snackbar('Unapproved successfully!')
+        }else{
+          this.ac.snackbar(data['message'])
+        }
+      },
+      () =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
       }
     )
 
@@ -256,7 +209,7 @@ export class DashboardComponent implements OnInit {
             }
           }
         },
-        (error) =>{
+        () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
         }
       )
@@ -308,7 +261,7 @@ export class DashboardComponent implements OnInit {
           }
         }
       },
-      (error) =>{
+      () =>{
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
       }

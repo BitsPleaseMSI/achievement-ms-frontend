@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Achievement } from './achievement';
-import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
 
 let api = environment.baseUrl;
@@ -12,11 +11,11 @@ let api = environment.baseUrl;
 
 export class DataAccessService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
-  getAchievement(id: string): Observable<any>{
+  getAchievement(id: string): Promise<any>{
     console.log('[getAchievement]')
-    return this.http.get<any>( api + '/achievements/get/' + id)
+    return this.http.get<any>( api + '/achievements/get/' + id).toPromise()
   }
 
   getAcademic(params?: string): Observable<any>{
@@ -87,9 +86,6 @@ export class DataAccessService {
 
   addAcademic(achievement: Object): Observable<any>{
     console.log('[addAcademic]');
-    console.log(achievement);
-
-    let token = '';
 
     const data: FormData = new FormData();
 
@@ -113,7 +109,6 @@ export class DataAccessService {
 
   deleteAcademic(id: string){
     console.log('[deleteAcademic]')
-    let token = '';
 
     const data: FormData = new FormData();
 
@@ -141,7 +136,6 @@ export class DataAccessService {
       data.append(key, achievement[key]);
     }
 
-    let token = '';
     if(localStorage.getItem('token')){
       data.append('token', localStorage.getItem('token'));
     }else{

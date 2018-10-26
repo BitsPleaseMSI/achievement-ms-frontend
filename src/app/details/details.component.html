@@ -20,6 +20,7 @@
  <h5 *ngIf="achievement$.approved">Approved by :<span  class="highlight">{{achievement$.approvedBy }}</span></h5>
  <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span  class="highlight">{{achievement$.approvedBy }}</span></h5>
 </div>
-<button *ngIf="user$.department == achievement$.department" type="button" name="delete" (click)="delete($event, achievement$._id)">Delete</button>
+
+<button *ngIf="user$ && user$.department == achievement$.department" type="button" name="delete" (click)="delete($event, achievement$._id)">Delete</button>
 
 </div>

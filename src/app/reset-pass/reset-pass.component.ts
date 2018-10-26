@@ -19,7 +19,6 @@ export class ResetPassComponent implements OnInit {
   resetPass(event){
     event.preventDefault();
     const target = event.target;
-    let email = undefined;
 
     if( target.querySelector('#newpass').value != target.querySelector('#newpass1').value ){
       this.error$ = "New passwords do not match!"
@@ -47,7 +46,7 @@ export class ResetPassComponent implements OnInit {
                   this.error$ = data.message.toString()
                 }
               },
-              (error) =>{
+              () =>{
                 this.info$ = undefined;
                 this.ac.snackbar('Server is not responding, Please try later.');
               }
