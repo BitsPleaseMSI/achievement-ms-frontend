@@ -1,21 +1,45 @@
-
 #filters{
-    border:1px solid #636e72;
-    border-radius: 5px;
-    padding:5px;
+  border:1px solid #636e72;
+  border-radius: 5px;
+  width: 100%;
+  padding:10px;
 }
 
 .home-filters{
-    grid-template-columns: 1fr, 1fr;
-    display: inline-block;
-    padding:10px 0;
+  display: inline-block;
+  padding:10px,5px;
+  margin:10px;
+
 }
 
 #filter-area-one{
-    grid-template-columns: 1fr, 1fr, 1fr;
+  display: inline-block;
+}
 
-    display:inline-block;
 
+#filter-area-two{
+  display: inline-block;
+}
+
+#filter-area-three{
+  display: inline-block;
+
+
+}
+
+
+
+#button-area{
+  text-align:center;
+}
+
+#rollNo{
+  width:140px;
+}
+
+#dateTo,#dateFrom, #sessionTo, #sessionFrom{
+  width:140px;
+  text-align: center;
 }
 
 table{
@@ -26,7 +50,7 @@ table{
   padding: 0;
   border:none;
   overflow-x: auto;
-  overflow-y: scroll;
+  height:300px;
 }
 
 td,th{
@@ -36,9 +60,10 @@ td,th{
 }
 
 a{
-  color:#636e72;
+  color: #F3875D;
   font-weight: bold;
 }
+
 .switch {
   position: relative;
   display: inline-block;
@@ -97,4 +122,15 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+  background-color:#F3875D;
+  color:white;
+}
+
+a:hover{
+  color:#636e72;
 }

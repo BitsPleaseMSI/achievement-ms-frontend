@@ -14,24 +14,25 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+
 h4{
     text-align: left;
 }
 
-h2{
+h1{
+    font-size: 32px;
     margin-top: 10px;
-    color: white;
+color: #F3875D;
 
 }
 
 .highlight{
-    color: wheat;
+    color:#F3875D;
 }
+
 .navbar {
     padding: 15px 10px;
-    background: darkorchid;
-    border: none;
-    border-radius: 0;
+    border-radius: 5px;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -41,6 +42,7 @@ h2{
     outline: none !important;
     border: none;
 }
+
 
 
 /* ---------------------------------------------------
@@ -56,16 +58,25 @@ h2{
 #sidebar {
     min-width: 250px;
     max-width: 250px;
+     position: -webkit-sticky;
+  position: sticky;
+  top: 0;
     transition: all 0.3s;
-    background-color: darkorchid;
+    border-right: 2px solid #F3875D;
+    background-color: #605D53 ; 
+    box-shadow: 3px 3px 5px #ccc;
+
+
 }
 #date{
     text-align: right;
     margin-bottom: 0;
-    color:wheat;
+    color: #fff;
 }
 ul{
-    background-color: #dfe6e9;
+    background-color: rgb(241, 237, 233);
+    vertical-align:0.8em;
+
 }
 #sidebar.active {
     margin-left: -250px;
@@ -74,8 +85,8 @@ ul{
 
 #sidebar .sidebar-header {
     padding: 10px;
-    color: #dfe6e9;
-    background: darkorchid;
+    background:#605D53;
+
 }
 
 #sidebar ul.components {
@@ -90,16 +101,19 @@ ul{
     display: block;
 }
 #sidebar ul li a:hover {
-    color: darkorchid;
-    background: black;
+    color: #F3875D;
+    background-color: black;
     transform: translateX(5%);
 
 
 }
 
+h5{
+    color:white;
+}
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: darkorchid;
+    background: #F3875D;
 }
 
 
@@ -130,7 +144,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: darkorchid;
+    background:#F3875D;
 }
 
 ul.CTAs {
@@ -147,13 +161,13 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: darkorchid;
+    color: #F3875D;
 }
 
 
 
 a.article, a.article:hover {
-    background: darkorchid !important;
+    background: #F3875D !important;
     color: #fff !important;
 }
 

@@ -1,18 +1,24 @@
-<div id="studentDetails">
-  <h1>Details of <span class="highlight">{{achievement$.name | uppercase}}</span></h1>
-<div id="imgArea">
- <img src="">
+<div id="mainContent">
+  <h1>Details of <span class="highlight">{{achievement$.name }}</span></h1>
 
- <h5>Name :<span  class="highlight">{{achievement$.name | uppercase}}</span></h5>
- <h5>Section :<span  class="highlight">{{achievement$.section | uppercase}}</span></h5>
- <h5>Enrolment No. :<span  class="highlight">{{achievement$.rollNo | uppercase}}</span></h5>
- <h5>Shift :<span  class="highlight">{{achievement$.shift | uppercase}}</span></h5>
- <h5>Category:<span  class="highlight">{{achievement$.category | uppercase}}</span></h5>
- <h5>Date :<span  class="highlight">{{achievement$.date | uppercase}}</span></h5>
- <h5>Department :<span  class="highlight">{{achievement$.department | uppercase}}</span></h5>
- <h5 *ngIf="achievement$.approved">Approved by :<span  class="highlight">{{achievement$.approvedBy | uppercase}}</span></h5>
- <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span  class="highlight">{{achievement$.approvedBy | uppercase}}</span></h5>
+  <div id="student-details">
 
+    <div class="detail">
+      <strong>Name</strong><p>{{achievement$.name}}</p>
+      <strong>Name</strong><p>{{achievement$.name}}</p>
+      <strong>Name</strong><p>{{achievement$.name}}</p>
+      <strong>Name</strong><p>{{achievement$.name}}</p>
+    </div>
+
+    <div class="detail">
+        <strong>Name</strong><p>{{achievement$.name}}</p>
+        <strong>Name</strong><p>{{achievement$.name}}</p>
+        <strong>Name</strong><p>{{achievement$.name}}</p>
+        <strong>Name</strong><p>{{achievement$.name}}</p>
+      </div>
+
+ <h5 *ngIf="achievement$.approved">Approved by :<span  class="highlight">{{achievement$.approvedBy }}</span></h5>
+ <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span  class="highlight">{{achievement$.approvedBy }}</span></h5>
 </div>
 <button *ngIf="user$.department == achievement$.department" type="button" name="delete" (click)="delete($event, achievement$._id)">Delete</button>
 

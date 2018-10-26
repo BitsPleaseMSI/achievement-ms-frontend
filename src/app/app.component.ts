@@ -41,8 +41,10 @@ export class AppComponent implements OnInit {
 
     $('#sidebarCollapse').on('click', function () {
       $('#sidebar').toggleClass('active');
-
     });
+
+  
+
   }
 
   logout(){
@@ -50,8 +52,6 @@ export class AppComponent implements OnInit {
     sessionStorage.removeItem('token');
     this.userData$ = undefined;
     this.snackbar('Logged out successfully!');
-    // window.location.href = '';
-    // this.router.navigate(['home']);
   }
 
 }

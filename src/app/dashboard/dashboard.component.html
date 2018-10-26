@@ -1,5 +1,6 @@
-<h1><span>T</span>eacher Dashboard</h1>
 <div id="mainContent">
+
+<h1><span>T</span>eacher Dashboard</h1>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -7,7 +8,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Modal Header</h4>
+            <h4 class="modal-title">Edit academic achievement</h4>
           </div>
           <div class="modal-body">
 
@@ -26,8 +27,8 @@
               </div>
               <br>
               <div class="input-group">
-                <span class="input-group-addon">Roll number</span>
-                <input type="text" id="rollNoA" class="form-control" placeholder="Roll number">
+                <span class="input-group-addon">Enrollment No.</span>
+                <input type="text" id="rollNoA" class="form-control" placeholder="Enrollment No.">
               </div>
               <br>
               <div class="input-group">
@@ -46,6 +47,15 @@
                   <option>BBA (B&I)</option>
                   <option>BBA (T&TM)</option>
                   <option>BCA</option>
+                </select>
+              </div>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon">Category</span>
+                <select  id="category" name="category" class="form-control" placeholder="Category">
+                  <option value="exemplary">Exemplary Performance</option>
+                  <option value="goldmedalist">Gold Medalist</option>
+                  <option value="both">Gold Medalist & Exemplary Performance</option>
                 </select>
               </div>
               <br>
@@ -72,9 +82,9 @@
 <br>
 <h4>Achievements</h4>
 <ul class="nav nav-pills nav-fill">
-  <li [class.active]="w$.location.pathname == '/dashboard/approved'"><a routerLink="/dashboard/approved">Approved achievements</a></li>
-  <li [class.active]="w$.location.pathname == '/dashboard/unapproved'"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
-  <li [class.active]="w$.location.pathname == '/dashboard/academic'"><a routerLink="/dashboard/academic">Academic achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/dashboard/approved')"><a routerLink="/dashboard/approved">Approved achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/dashboard/unapproved')"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/dashboard/academic')"><a routerLink="/dashboard/academic">Academic achievements</a></li>
 </ul>
 
 <br>
@@ -85,90 +95,108 @@
 </label>
 <div id="filters">
 
-  <form (submit)="filter($event)" class="form-signin" action="" id="filter">
+  <form *ngIf="!w$.location.pathname.includes('/dashboard/academic')" (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
-      <div class="home-filters">
-        <label for="rollNo">Roll number:</label>
-        &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Roll number" autofocus>
+        <div class="home-filters">
+          <label for="rollNo">Enrollment No.</label>
+          &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Enrollment No." value="{{this.route.snapshot.queryParams['rollNo']}}">
+        </div>
+        <div class="home-filters">
+          <label for="department" class="control-label">Department:</label>&nbsp;
+          <select id="department" name="department" value="{{this.route.snapshot.queryParams['department']}}">
+            <option value="">Select department</option>
+            <option value="education">Education</option>
+            <option value="computerscience">Computer Science</option>
+            <option value="management">Management</option>
+            <option value="commerce">Commerce</option>
+          </select>
+        </div>
+        <div class="home-filters">
+          <label for="semester">Semester:</label>&nbsp;
+          <select id="semester" name="semester" value="{{this.route.snapshot.queryParams['semester']}}">&nbsp;
+            <option value="">Select Sem</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+        </div>
+
+        <div class="home-filters">
+          <label for="section">Section:</label>
+          <select id="section" name="section" value="{{this.route.snapshot.queryParams['section']}}">&nbsp;
+            <option value="">Select section</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
+        </div>
+        <div class="home-filters">
+            <label for="shift" class="control-label">Shift:</label>&nbsp;
+            <select id="shift" name="shift" placeholder="Shift" value="{{this.route.snapshot.queryParams['shift']}}">
+              <option value="">Select shift</option>
+              <option value="morning">Morning</option>
+              <option value="evening">Evening</option>
+            </select>
+          </div>
+
+      </div>
+
+
+
+      <div id="filter-area-two">
+
+       
+
+        <div class="home-filters">
+          <label for="sessionFrom" class="control-label">Batch:</label>
+          &nbsp;<input type="number" id="sessionFrom" name="sessionFrom" placeholder="Begining year" value="{{this.route.snapshot.queryParams['from']}}">
+          &nbsp;<input type="number" id="sessionTo" name="sessionTo" placeholder="Ending year" value="{{this.route.snapshot.queryParams['to']}}">
+        </div>
+
+      </div>
+
+
+
+      <div id="filter-area-three">
+          <div class="home-filters">
+        <label for="dateFrom" class="control-label">Starting from:</label>
+        &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date" value="{{this.route.snapshot.queryParams['dateFrom']}}">
         &nbsp;
-        <label for="dateFrom" class="control-label">Starting from date:</label>
-        &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date">
-        &nbsp;</div>
-      <div class="home-filters">
+          </div>
+          <div class="home-filters">
         <label for="dateTo" class="control-label">Till date:</label>
-        &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date">
+        &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date" value="{{this.route.snapshot.queryParams['dateTo']}}">
+          </div>
+
+        <div class="home-filters">
+          <label for="category" class="control-label">Category:</label>&nbsp;
+          <select id="category" name="category" placeholder="Category" value="{{this.route.snapshot.queryParams['category']}}">
+            <option value="">Select Category</option>
+            <option value="sports">Sports</option>
+            <option value="cultural">Cultural</option>
+            <option value="technical">Technical</option>
+            <option value="others">Others</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div id="filter-area-two">
-      <div class="home-filters">
-        <label for="sessionFrom" class="control-label">Session start year:</label>
-        &nbsp;<input type="number" id="sessionFrom" name="sessionFrom" placeholder="Session start year">
+      <div id="button-area">
+        <button class="btn btn-crimson" type="submit">Apply filter</button>
+        &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
       </div>
-      &nbsp;&nbsp;
-      <div class="home-filters">
-        <label for="sessionTo" class="control-label">Session end year:</label>
-        &nbsp;<input type="number" id="sessionTo" name="sessionTo" placeholder="Session end year">
-      </div>
-    </div>
-    <div id="filter-area-three">
-      <div class="home-filters">
-        <label for="section">Section:</label>
-        <select id="section" name="section" placeholder="Section">&nbsp;
-          <option value="">Select section</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
-          <option>D</option>
-        </select>
-      </div>
-      &nbsp;
-      <div class="home-filters">
-        <label for="semester">Semester:</label>
-        <select id="semester" name="semester" placeholder="Section">&nbsp;
-          <option value="">Select semester</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-        </select>
-      </div>
-      &nbsp;
-      <div class="home-filters">
-        <label for="shift" class="control-label">Shift:</label>&nbsp;
-        <select id="shift" name="shift" placeholder="Shift">
-          <option value="">Select shift</option>
-          <option value="morning">Morning</option>
-          <option value="evening">Evening</option>
-        </select>
-      </div>
-      &nbsp;
-      <div class="home-filters">
-        <label for="category" class="control-label">Category:</label>&nbsp;
-        <select id="category" name="category" placeholder="Category">
-          <option value="">Category</option>
-          <option value="sports">Sports</option>
-          <option value="cultural">Cultural</option>
-          <option value="technical">Technical</option>
-          <option value="others">Others</option>
-        </select>
-      </div>
-    </div>
-    <div id="button-area">
-      <button class="btn btn-crimson" type="submit">Apply filter</button>
-      &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
-    </div>
   </form>
+
 </div>
 <h2>Achievements</h2>
 
 <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
-<table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname == '/dashboard/approved' || w$.location.pathname == '/dashboard/unapproved')">
+<table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname.includes('/dashboard/approved') || w$.location.pathname.includes('/dashboard/unapproved'))">
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Name</th>
-    <th>Roll no.</th>
+    <th>Enrollment No.</th>
     <th>Department</th>
     <th>Section</th>
     <th>Shift</th>
@@ -197,14 +225,15 @@
   </tr>
 </table>
 
-<table class="danger" *ngIf="achievements$.length != 0 && w$.location.pathname == '/dashboard/academic'">
+<table class="danger" *ngIf="achievements$.length != 0 && w$.location.pathname.includes('/dashboard/academic')">
   <tr id="table-heading">
     <tr id="table-heading">
       <th>S.No.</th>
-      <th>Roll No</th>
+      <th>Enrollment No.</th>
       <th>Name</th>
       <th>Batch</th>
       <th>Programme</th>
+      <th>Category</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -214,6 +243,9 @@
       <td>{{ achievement.name }}</td>
       <td>{{ achievement.batch }}</td>
       <td>{{ achievement.programme }}</td>
+      <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
+      <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
+      <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
       <td>
         <button class="btn btn-danger" type="button" name="delete" data-toggle="modal" data-target="#myModal" (click)="editAcademicForm($event, achievement)">Edit</button>
       </td>

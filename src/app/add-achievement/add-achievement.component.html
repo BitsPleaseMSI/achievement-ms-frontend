@@ -17,33 +17,23 @@
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Roll number</span>
-      <input type="text" id="rollNo" class="form-control" placeholder="Roll number">
+      <span class="input-group-addon">Enrollment No.</span>
+      <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No.">
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Section</span>
-      <select id="section" name="section" class="form-control" placeholder="Section">
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
-        <option>D</option>
+      <span class="input-group-addon">Department</span>
+      <select id="department" name="department" class="form-control">
+        <option value="education">Education</option>
+        <option value="computerscience">Computer Science</option>
+        <option value="management">Management</option>
+        <option value="commerce">Commerce</option>
       </select>
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Session start year</span>
-      <input type="number" id="sessionFrom"  name="sessionFrom" class="form-control" placeholder="Session start year">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Session end year</span>
-      <input type="number" id="sessionTo"  name="sessionTo" class="form-control" placeholder="Session end year" required>
-    </div>
-    <br>
-    <div class="input-group">
       <span class="input-group-addon">Current semester</span>
-      <select  id="semester" name="semester" class="form-control" placeholder="Section">
+      <select id="semester" name="semester" class="form-control">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -54,44 +44,33 @@
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Department</span>
-      <select  id="department" name="department" class="form-control" placeholder="Section">
-        <option value="education">Education</option>
-        <option value="computerscience">Computer Science</option>
-        <option value="management">Management</option>
+      <span class="input-group-addon">Section</span>
+      <select id="section" name="section" class="form-control" placeholder="Section">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
       </select>
     </div>
     <br>
+
     <div class="input-group">
       <span class="input-group-addon">Shift</span>
-      <select  id="shift" name="shift" class="form-control" placeholder="Shift">
+      <select id="shift" name="shift" class="form-control" placeholder="Shift">
         <option value="morning">Morning</option>
         <option value="evening">Evening</option>
       </select>
     </div>
     <br>
+
     <div class="input-group">
-      <span class="input-group-addon">Event name</span>
-      <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Name of the event" required>
+      <span class="input-group-addon">Batch</span>
+      <input type="number" id="sessionFrom" class="form-control" placeholder="Begining year">
+      <span class="input-group-addon">-</span>
+      <input type="number" id="sessionTo" class="form-control" placeholder="Ending year">
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Date</span>
-      <input type="date" id="date" name="date" class="form-control" placeholder="Date" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Title awarded</span>
-      <input type="text" id="title"  name="title" class="form-control" placeholder="Title awarded">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Venue</span>
-      <input type="text" id="venue"  name="venue" class="form-control" placeholder="Venue of event" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Category</span>
+      <span class="input-group-addon">Event Category</span>
       <select  id="category" name="category" class="form-control" placeholder="Category">
         <option value="sports">Sports</option>
         <option value="cultural">Cultural</option>
@@ -100,6 +79,29 @@
       </select>
     </div>
     <br>
+    <div class="input-group">
+      <span class="input-group-addon">Event name</span>
+      <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Name of the event" required>
+    </div>
+    <br>
+
+    <div class="input-group">
+      <span class="input-group-addon">Date</span>
+      <input type="date" id="date" name="date" class="form-control" placeholder="Date" required>
+    </div>
+    <br>
+  
+    <div class="input-group">
+      <span class="input-group-addon">Venue</span>
+      <input type="text" id="venue"  name="venue" class="form-control" placeholder="Venue of event" required>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Title awarded</span>
+      <input type="text" id="title"  name="title" class="form-control" placeholder="Title awarded">
+    </div>
+    <br>
+   
     <div class="input-group">
       <input type="radio" id="participated" name="group1" checked>Participated
       <br>
@@ -113,7 +115,7 @@
     <br>
     <div class="input-group">
       <span class="input-group-addon">Upload an image of your certificate.</span>
-      <input type="file" id="image" name="image" class="form-control-file" value="fileupload" (change)="detectFiles($event)" required>
+      <input type="file" id="image" name="image" class="form-control" value="fileupload" (change)="detectFiles($event)" required>
    </div>
    <br>
   <div id="btn-area">

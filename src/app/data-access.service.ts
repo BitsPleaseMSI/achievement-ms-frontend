@@ -5,7 +5,9 @@ import { catchError, retry } from 'rxjs/operators';
 import { safe } from './sanitise';
 import { Achievement } from './achievement';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
+let api = environment.baseUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -16,17 +18,23 @@ export class DataAccessService {
 
   getAchievement(id: string): Observable<any>{
     console.log('[getAchievement]')
-    return this.http.get<any>('http://localhost:8090/achievements/get/' + id)
+    return this.http.get<any>( api + '/achievements/get/' + id)
   }
 
-  getAcademic(): Observable<any>{
-    console.log('[getApprovedAchievements]')
-    return this.http.get<any>('http://localhost:8090/academic/getall')
+  getAcademic(params?: string): Observable<any>{
+    console.log('[getAcademicAchievements]')
+    if(!params){
+      params = ''
+    }
+    return this.http.get<any>(api + '/academic/getall' + params)
   }
 
   getApprovedAchievements(params?: string): Observable<any>{
     console.log('[getApprovedAchievements]')
-    return this.http.get<any>('http://localhost:8090/achievements/all' + params)
+    if(!params){
+      params = ''
+    }
+    return this.http.get<any>(api + '/achievements/all' + params)
   }
 
   getUnapprovedAchievements(params?: string): Observable<any>{
@@ -40,7 +48,7 @@ export class DataAccessService {
       params += '&token=' + sessionStorage.getItem('token');
     }
 
-    return this.http.get<any>('http://localhost:8090/achievements/unapproved' + params)
+    return this.http.get<any>(api + '/achievements/unapproved' + params)
   }
 
   addAchievement(achievement: Achievement): Observable<any>{
@@ -51,7 +59,7 @@ export class DataAccessService {
     for(let key in achievement)
       data.append(key, achievement[key]);
 
-    const req = new HttpRequest('POST', 'http://localhost:8090/achievements/add', data, {
+    const req = new HttpRequest('POST', api + '/achievements/add', data, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -72,7 +80,7 @@ export class DataAccessService {
       token = sessionStorage.getItem('token');
     }
 
-    let url = 'http://localhost:8090/achievements/delete'
+    let url = api + '/achievements/delete'
     url += ('?id=' + id)
     url += ('&token=' + token)
 
@@ -80,7 +88,7 @@ export class DataAccessService {
   }
 
   addAcademic(achievement: Object): Observable<any>{
-    console.log('[addAchievement]')
+    console.log('[addAcademic]')
     let token = '';
 
     const data: FormData = new FormData();
@@ -95,7 +103,7 @@ export class DataAccessService {
       data.append('token', sessionStorage.getItem('token'));
     }
 
-    const req = new HttpRequest('POST', 'http://localhost:8090/academic/add', data, {
+    const req = new HttpRequest('POST', api + '/academic/add', data, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -117,7 +125,7 @@ export class DataAccessService {
       data.append('token', sessionStorage.getItem('token'));
     }
 
-    const req = new HttpRequest('POST', 'http://localhost:8090/academic/delete', data, {
+    const req = new HttpRequest('POST', api + '/academic/delete', data, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -140,7 +148,7 @@ export class DataAccessService {
       data.append('token', sessionStorage.getItem('token'));
     }
 
-    const req = new HttpRequest('PUT', 'http://localhost:8090/academic/edit', data, {
+    const req = new HttpRequest('PUT', api + '/academic/edit', data, {
       reportProgress: true,
       responseType: 'text'
     });

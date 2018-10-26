@@ -36,6 +36,7 @@ export class AddAcademicComponent implements OnInit {
     achievement['rollNo'] = target.querySelector('#rollNo').value;
     achievement['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
     achievement['programme'] = target.querySelector('#programme').value;
+    achievement['category'] = target.querySelector('#category').value;
 
     // Sanitising data
     for(let key in achievement){

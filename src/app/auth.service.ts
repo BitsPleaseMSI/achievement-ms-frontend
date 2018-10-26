@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { safe } from './sanitise';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
+
+let api = environment.baseUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +30,7 @@ export class AuthService {
       token = sessionStorage.getItem('token');
     }
 
-    return this.http.get('http://localhost:8090/users/isvalid?token=' + token)
+    return this.http.get(api + '/users/isvalid?token=' + token)
   }
 
   login(email, password): Observable<any>{
@@ -45,7 +48,7 @@ export class AuthService {
       return new Observable((data) => {})
     }
 
-    return this.http.post('http://localhost:8090/users/auth', body.toString(), options);
+    return this.http.post(api + '/users/auth', body.toString(), options);
   }
 
 
@@ -66,7 +69,7 @@ export class AuthService {
       return new Observable((data) => {})
     }
 
-    return this.http.post('http://localhost:8090/users/add', body.toString(), options);
+    return this.http.post(api + '/users/add', body.toString(), options);
 
   }
 
@@ -87,7 +90,7 @@ export class AuthService {
       return new Observable((data) => {})
     }
 
-    return this.http.post('http://localhost:8090/users/resetpass', body.toString(), options)
+    return this.http.post(api + '/users/resetpass', body.toString(), options)
     }
 
   approveAchievement(id: string){
@@ -103,7 +106,7 @@ export class AuthService {
       token = sessionStorage.getItem('token');
     }
 
-    let url = 'http://localhost:8090/achievements/approve'
+    let url = api + '/achievements/approve'
     url += ('?id=' + id)
     url += ('&token=' + token)
 
@@ -123,7 +126,7 @@ export class AuthService {
       token = sessionStorage.getItem('token');
     }
 
-    let url = 'http://localhost:8090/achievements/unapprove'
+    let url = api + '/achievements/unapprove'
     url += ('?id=' + id)
     url += ('&token=' + token)
 
@@ -137,29 +140,12 @@ export class AuthService {
     for(let key in params)
       data.append(key, params[key]);
 
-    const req = new HttpRequest('PUT', 'http://localhost:8090/users/reset', data, {
+    const req = new HttpRequest('PUT', api + '/users/reset', data, {
       reportProgress: false,
       responseType: 'text'
     });
 
     return this.http.request(req);
-
-    // let body = new URLSearchParams();
-    //
-    // for(let key in params)
-    //   body.append(key, params[key]);
-    //
-    // let options = {
-    //   headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-    // };
-    //
-    // if(!safe(body.toString())){
-    //   console.log('[UNSAFE DATA!]');
-    //   return new Observable((data) => {})
-    // }
-    //
-    // return this.http.put('http://localhost:8090/users/reset', params, options);
-    // // return this.http.put('http://localhost:8090/users/reset', body.toString(), options);
 
   }
 

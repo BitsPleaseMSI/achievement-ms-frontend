@@ -5,18 +5,33 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { AppComponent } from '../app.component';
 
+interface Achievement {
+    length: any;
+    name: any;
+    section: any;
+    rollNo: any;
+    shift: any;
+    category: any;
+    department: any;
+    approved: any;
+    approvedBy: any;
+    date: any;
+}
+
+interface User {
+    department: any;
+}
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-  achievement$: Object;
-  user$: Object;
-  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private ac: AppComponent) {
-    this.achievement$ = {};
-    this.user$ = {};
-  }
+  achievement$: Achievement;
+  user$: User;
+
+  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private ac: AppComponent){}
 
   ngOnInit() {
     this.auth.currentUser().subscribe(

@@ -6,16 +6,26 @@ import { Router } from '@angular/router';
 import { safe } from '../sanitise';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
+
+interface Window {
+    length: any;
+    location: any;
+}
+
+interface Achievement {
+    length: any;
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  achievements$: Object;
+  achievements$: Achievement;
   editId$: string;
   user: Object;
-  w$: Object = window;
+  w$: Window = window;
   error$: string;
   info$: string;
 
@@ -36,19 +46,10 @@ export class DashboardComponent implements OnInit {
     this.achievements$ = [];
     this.refresh(window.location.search);
 
-    let params = this.route.snapshot.queryParams;
-
-    for(let key in params){
-      if((params[key] != '') || (!safe(params[key].toString()))){
-        let target = document.getElementById(key) as HTMLFormElement;
-        target.value = params[key];
-      }
-    }
-
     $('#filters').hide();
 
     $('#b').click(function(){
-      $('#filters').slideToggle( 400 );
+      $('#filters').toggle('fast');
     });
   }
 
@@ -58,7 +59,7 @@ export class DashboardComponent implements OnInit {
     if(arg)
       params = arg;
 
-    if(window.location.pathname == '/dashboard/approved'){
+    if(window.location.pathname.includes('/dashboard/approved')){
       if(params==''){
         params='?';
       }
@@ -80,7 +81,7 @@ export class DashboardComponent implements OnInit {
         }
       )
 
-    }else if(window.location.pathname == '/dashboard/unapproved'){
+    }else if(window.location.pathname.includes('/dashboard/unapproved')){
       if(params==''){
         params='?';
       }
@@ -100,14 +101,15 @@ export class DashboardComponent implements OnInit {
           this.auth.redirect('home', 'You are not authorised. Please login to continue!')
         }
       )
-    }else if(window.location.pathname == '/dashboard/academic'){
+    }else if(window.location.pathname.includes('/dashboard/academic')){
       if(params==''){
-        params='?';
+        params='';
       }
 
       this.auth.currentUser().subscribe(
         (user) => {
-          this.data.getAcademic()
+          console.log('run')
+          this.data.getAcademic(params)
           .subscribe(
             (data) => {
               this.achievements$ = data;
@@ -137,25 +139,52 @@ export class DashboardComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
     let params = {};
-    params['sessionFrom'] = target.querySelector('#sessionFrom').value
-    params['sessionTo'] = target.querySelector('#sessionTo').value
-    params['dateFrom'] = target.querySelector('#dateFrom').value
-    params['dateTo'] = target.querySelector('#dateTo').value
-    params['rollNo'] = target.querySelector('#rollNo').value
-    params['section'] = target.querySelector('#section').value
-    params['semester'] = target.querySelector('#semester').value
-    params['shift'] = target.querySelector('#shift').value
-    params['category'] = target.querySelector('#category').value
+
+    if (!window.location.pathname.includes('/dashboard/academic')) {
+      params['sessionFrom'] = target.querySelector('#sessionFrom').value
+      params['sessionTo'] = target.querySelector('#sessionTo').value
+      params['dateFrom'] = target.querySelector('#dateFrom').value
+      params['dateTo'] = target.querySelector('#dateTo').value
+      params['rollNo'] = target.querySelector('#rollNo').value
+      params['section'] = target.querySelector('#section').value
+      params['semester'] = target.querySelector('#semester').value
+      params['shift'] = target.querySelector('#shift').value
+      params['category'] = target.querySelector('#category').value
+
+    }else if(window.location.pathname.includes('/dashboard/academic')){
+      if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
+
+      }else if(
+        (target.querySelector('#from').value == '' && target.querySelector('#to').value != '') ||
+        (target.querySelector('#to').value == '' && target.querySelector('#from').value != '')
+      ){
+        this.ac.snackbar('Clear or fill both fields for Batch!');
+      }else if(
+        target.querySelector('#from').value.length != 4 ||
+        target.querySelector('#to').value.length != 4
+      ){
+        this.ac.snackbar('Check Batch filter!');
+        return;
+      }else{
+        params['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
+      }
+
+      params['category'] = target.querySelector('#categoryA').value
+      params['programme'] = target.querySelector('#programme').value
+    }
 
     let filters = new URLSearchParams();
     for(let key in params){
       if(params[key] != '')
         filters.append(key, params[key]);
     }
+
+    console.log('params');
+    console.log(params);
+
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
     this.refresh('?'+filters.toString());
-    // window.location.href = window.location.pathname + '?' + filters.toString();
 
   }
 
@@ -243,6 +272,7 @@ export class DashboardComponent implements OnInit {
     (document.getElementById('from') as HTMLInputElement).value = achievement['batch'].split('-')[0];
     (document.getElementById('to') as HTMLInputElement).value = achievement['batch'].split('-')[1];
     (document.getElementById('programme') as HTMLInputElement).value = achievement['programme'];
+    (document.getElementById('category') as HTMLInputElement).value = achievement['category'];
     this.editId$ = achievement['_id'];
   }
 
@@ -255,6 +285,7 @@ export class DashboardComponent implements OnInit {
     achievement['rollNo'] = target.querySelector('#rollNoA').value;
     achievement['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
     achievement['programme'] = target.querySelector('#programme').value;
+    achievement['category'] = target.querySelector('#category').value;
     achievement['id'] = this.editId$;
 
     // Sanitising data
