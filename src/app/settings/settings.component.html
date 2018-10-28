@@ -1,3 +1,5 @@
+<h1>Profile settings</h1>
+<div id="mainContent">
 <div *ngIf="error$" class="alert alert-danger" >
   <p>Error: {{ error$ }}</p>
 </div>
@@ -6,13 +8,15 @@
   <p>{{ info$ }}</p>
 </div>
 
-<h1>Profile settings</h1>
 
 
-<h4><a routerLink="/passwordreset">Reset password</a></h4>
 
-<h2>Profile detils</h2>
-<h5><i>Note: Only change values that you want to update.</i></h5>
+
+<h2>Profile details</h2>
+Click here to change your password:
+<button class="btn btn-crimson" routerLink="/passwordreset">Reset password</button>
+
+<h5><i>Note: Change only those values that you want to update.</i></h5>
 <form (submit)="update($event)" class="form-horizontal" action="user/settings">
   <div class="input-group">
     <span class="input-group-addon">First name</span>
@@ -37,6 +41,8 @@
   <div id="btn-area">
     <button class="btn btn-crimson" type="submit">Update</button>
     &nbsp;<button class="btn btn-crimson" (click)="resetForm($event);">Reset</button>
+
   </div>
   <br>
 </form>
+</div>

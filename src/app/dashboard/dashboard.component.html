@@ -1,8 +1,26 @@
-<div id="mainContent">
 
 <h1><span>T</span>eacher Dashboard</h1>
 
-    <!-- Modal -->
+    <div id="dashboard-taskbar">
+        <h4>Taskbar</h4>
+        <ul class="nav nav-pills">
+          <li><a routerLink="/achievement/add">New achievement</a></li>
+          <li><a routerLink="/academic/add">New academic achievement</a></li>
+          <li><a routerLink="/user/settings">Settings</a></li>
+        </ul>
+        </div>
+        
+        <div id="dashboard-achievements">
+        <h4>Achievements</h4>
+        <ul class="nav nav-pills nav-fill">
+          <li [class.active]="w$.location.pathname.includes('/dashboard/approved')"><a routerLink="/dashboard/approved">Approved achievements</a></li>
+          <li [class.active]="w$.location.pathname.includes('/dashboard/unapproved')"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
+          <li [class.active]="w$.location.pathname.includes('/dashboard/academic')"><a routerLink="/dashboard/academic">Academic achievements</a></li>
+        </ul>
+        </div>
+<div id="mainContent">
+
+
     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -73,22 +91,7 @@
     </div>
 
 
-<h4>Taskbar</h4>
-<ul class="nav nav-pills">
-  <li><a routerLink="/achievement/add">New achievement</a></li>
-  <li><a routerLink="/academic/add">New academic achievement</a></li>
-  <li><a routerLink="/user/settings">Settings</a></li>
-</ul>
-
-<br>
-<h4>Achievements</h4>
-<ul class="nav nav-pills nav-fill">
-  <li [class.active]="w$.location.pathname.includes('/dashboard/approved')"><a routerLink="/dashboard/approved">Approved achievements</a></li>
-  <li [class.active]="w$.location.pathname.includes('/dashboard/unapproved')"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
-  <li [class.active]="w$.location.pathname.includes('/dashboard/academic')"><a routerLink="/dashboard/academic">Academic achievements</a></li>
-</ul>
-
-<br>
+   
 <h4>Filter options</h4>
 <label class="switch">
   <input id="b" type="checkbox">
@@ -101,16 +104,6 @@
         <div class="home-filters">
           <label for="rollNo">Enrollment No.</label>
           &nbsp;<input type="number" id="rollNo" name="rollNo" placeholder="Enrollment No." value="{{this.route.snapshot.queryParams['rollNo']}}">
-        </div>
-        <div class="home-filters">
-          <label for="department" class="control-label">Department:</label>&nbsp;
-          <select id="department" name="department" value="{{this.route.snapshot.queryParams['department']}}">
-            <option value="">Select department</option>
-            <option value="education">Education</option>
-            <option value="computerscience">Computer Science</option>
-            <option value="management">Management</option>
-            <option value="commerce">Commerce</option>
-          </select>
         </div>
         <div class="home-filters">
           <label for="semester">Semester:</label>&nbsp;
@@ -218,7 +211,7 @@
     <td *ngIf="!achievement.participated">ORGANISER</td>
     <td>{{ achievement.date }}</td>
     <td>{{ achievement.category | uppercase }}</td>
-    <td><a routerLink="/achievement/{{ achievement._id }}">View Details</a></td>
+    <td><button class="btn btn-primary" routerLink="/achievement/{{ achievement._id }}">View Details</button></td>
     <td>
       <button *ngIf="achievement.approved" class="btn btn-danger" type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
       <button *ngIf="!achievement.approved" class="btn btn-success" type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>

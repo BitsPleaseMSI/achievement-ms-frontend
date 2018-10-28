@@ -1,12 +1,14 @@
+<h1><span>H</span>ome</h1>
+<h4>Select view</h4>
+<ul class="nav nav-pills nav-fill">
+  <li [class.active]="w$.location.pathname.includes('/home/achievements')"><a routerLink="/home/achievements">Non
+      Academic achievements</a></li>
+  <li [class.active]="w$.location.pathname.includes('/home/academic')"><a routerLink="/home/academic">Academic
+      achievements</a></li>
+</ul>
+<br>
+
 <div id="mainContent">
-  <h1><span>H</span>ome</h1>
-  <h4>Select view</h4>
-  <ul class="nav nav-pills nav-fill">
-    <li [class.active]="w$.location.pathname.includes('/home/achievements')"><a routerLink="/home/achievements">Non
-        Academic achievements</a></li>
-    <li [class.active]="w$.location.pathname.includes('/home/academic')"><a routerLink="/home/academic">Academic
-        achievements</a></li>
-  </ul>
 
   <h2>List of approved achievements</h2>
 
@@ -58,13 +60,13 @@
           </select>
         </div>
         <div class="home-filters">
-            <label for="shift" class="control-label">Shift:</label>&nbsp;
-            <select id="shift" name="shift" placeholder="Shift" value="{{this.route.snapshot.queryParams['shift']}}">
-              <option value="">Select shift</option>
-              <option value="morning">Morning</option>
-              <option value="evening">Evening</option>
-            </select>
-          </div>
+          <label for="shift" class="control-label">Shift:</label>&nbsp;
+          <select id="shift" name="shift" placeholder="Shift" value="{{this.route.snapshot.queryParams['shift']}}">
+            <option value="">Select shift</option>
+            <option value="morning">Morning</option>
+            <option value="evening">Evening</option>
+          </select>
+        </div>
 
       </div>
 
@@ -85,15 +87,15 @@
 
 
       <div id="filter-area-three">
-          <div class="home-filters">
-        <label for="dateFrom" class="control-label">Starting from:</label>
-        &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date" value="{{this.route.snapshot.queryParams['dateFrom']}}">
-        &nbsp;
-          </div>
-          <div class="home-filters">
-        <label for="dateTo" class="control-label">Till date:</label>
-        &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date" value="{{this.route.snapshot.queryParams['dateTo']}}">
-          </div>
+        <div class="home-filters">
+          <label for="dateFrom" class="control-label">Starting from:</label>
+          &nbsp;<input type="date" id="dateFrom" name="dateFrom" placeholder="Starting from date" value="{{this.route.snapshot.queryParams['dateFrom']}}">
+          &nbsp;
+        </div>
+        <div class="home-filters">
+          <label for="dateTo" class="control-label">Till date:</label>
+          &nbsp;<input type="date" id="dateTo" name="dateTo" placeholder="Till date" value="{{this.route.snapshot.queryParams['dateTo']}}">
+        </div>
 
         <div class="home-filters">
           <label for="category" class="control-label">Category:</label>&nbsp;
@@ -118,98 +120,106 @@
 
 
 
-    <form *ngIf="w$.location.pathname.includes('/home/academic')" (submit)="filter($event)" class="form-signin" action=""
+    <form *ngIf="w$.location.pathname.includes('/home/academic')" (submit)="filter($event)" class="form-inline" action=""
       id="filter">
-      <div id="filter-area-one">
+<div id="filter-area-one">
         <div class="home-filters">
-          <label for="section">Batch:</label>
-          <input type="number" id="from" class="form-control" placeholder="Begining year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[0]:''}}">
-          <input type="number" id="to" class="form-control" placeholder="Ending year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[1]:''}}">
-        </div>
-        &nbsp;
-        <div class="home-filters">
-          <label for="semester">Programme:</label>
-          <select id="programme" name="programme" class="form-control" value="{{this.route.snapshot.queryParams['programme']}}">
-            <option value="">Select Programme</option>
-            <option>B. Ed.</option>
-            <option>BBA (H) 4 year</option>
-            <option>BBA (General)</option>
-            <option>BBA (B&I)</option>
-            <option>BBA (T&TM)</option>
-            <option>BCA</option>
-            <option>B.Com (H)</option>
-          </select>
-        </div>
-        &nbsp;
-
-
-        <div class="home-filters">
-          <label for="categoryA" class="control-label">Category:</label>&nbsp;
-          <select id="categoryA" name="categoryA" class="form-control" value="{{this.route.snapshot.queryParams['category']}}">
-            <option value="">Select Category</option>
-            <option value="exemplary">Exemplary Performance</option>
-            <option value="goldmedalist">Gold Medalist</option>
-            <option value="both">Gold Medalist & Exemplary Performance</option>
-          </select>
-        </div>
+        <label for="section" class="">Batch:</label>&nbsp;
+        <input type="number" id="from"  placeholder="Begining year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[0]:''}}">&nbsp;
+        <input type="number" id="to" placeholder="Ending year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[1]:''}}">
       </div>
-      <div id="button-area">
-        <button class="btn btn-crimson" type="submit">Apply filter</button>
-        &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
-      </div>
-  </form>
+    </div>
+    
+    <div id="filter-area-two">
 
+      <div class="home-filters">
+        <label for="semester">Programme:</label>
+        <select id="programme" name="programme"  value="{{this.route.snapshot.queryParams['programme']}}">
+          <option value="">Select Programme</option>
+          <option>B. Ed.</option>
+          <option>BBA (H) 4 year</option>
+          <option>BBA (General)</option>
+          <option>BBA (B&I)</option>
+          <option>BBA (T&TM)</option>
+          <option>BCA</option>
+          <option>B.Com (H)</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="filter-area-three">
+
+      <div class="home-filters">
+        <label for="categoryA">Category:</label>
+        <select id="categoryA" name="categoryA" value="{{this.route.snapshot.queryParams['category']}}">
+          <option value="">Select Category</option>
+          <option value="exemplary">Exemplary Performance</option>
+          <option value="goldmedalist">Gold Medalist</option>
+          <option value="both">Gold Medalist & Exemplary Performance</option>
+        </select>
+      </div>
 </div>
-<br>
+      <br>
+      <div class="form-group-row">
+        <div id="button-area">
+          <button class="btn btn-crimson" type="submit">Apply filter</button>
+          &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
+        </div>
+      </div>
+    </form>
 
-<h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
-<table class="my-table" *ngIf="w$.location.pathname.includes('/home/achievements') && achievements$.length > 0">
-  <tr id="table-heading">
-    <th>S.No.</th>
-    <th>Enrollment No.</th>
-    <th>Name</th>
-    <th>Department</th>
-    <th>Sem</th>
-    <th>Section</th>
-    <th>Event Name</th>
-    <th>Role</th>
-    <th>Category</th>
-    <th>Details</th>
-  </tr>
-  <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
-    <td>{{ i+1 }}</td>
-    <td>{{ achievement.rollNo |uppercase}}</td>
-    <td>{{ achievement.name | uppercase}}</td>
-    <td>{{ achievement.department | uppercase }}</td>
-    <td>{{achievement.semester}}</td>
-    <td>{{ achievement.section | uppercase}}</td>
-    <td>{{ achievement.eventName |uppercase }}</td>
-    <td *ngIf="achievement.participated">PARTICIPANT</td>
-    <td *ngIf="!achievement.participated">ORGANISER</td>
-    <td>{{ achievement.category | uppercase }}</td>
-    <td><a routerLink="/achievement/{{ achievement._id }}" id="detail-link">VIEW DETAILS</a></td>
-  </tr>
-</table>
+  </div>
+  <br>
 
-<table *ngIf="w$.location.pathname.includes('/home/academic') && achievements$.length > 0">
-  <tr id="table-heading">
-    <th>S.No.</th>
-    <th>Enrollment No.</th>
-    <th>Name</th>
-    <th>Batch</th>
-    <th>Programme</th>
-    <th>Category</th>
-  </tr>
-  <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
-    <td>{{ i+1 }}</td>
-    <td>{{ achievement.rollNo }}</td>
-    <td>{{ achievement.name }}</td>
-    <td>{{ achievement.batch }}</td>
-    <td>{{ achievement.programme }}</td>
-    <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
-    <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
-    <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
-  </tr>
-</table>
+  <h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
+  <div class="table-container">
+  <table class="table-responsive" *ngIf="w$.location.pathname.includes('/home/achievements') && achievements$.length > 0">
+    <tr id="table-heading">
+      <th>S.No.</th>
+      <th>Enrollment No.</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Sem</th>
+      <th>Section</th>
+      <th>Event Name</th>
+      <th>Role</th>
+      <th>Category</th>
+      <th>Details</th>
+    </tr>
+    <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ achievement.rollNo |uppercase}}</td>
+      <td>{{ achievement.name | uppercase}}</td>
+      <td>{{ achievement.department | uppercase }}</td>
+      <td>{{achievement.semester}}</td>
+      <td>{{ achievement.section | uppercase}}</td>
+      <td>{{ achievement.eventName |uppercase }}</td>
+      <td *ngIf="achievement.participated">PARTICIPANT</td>
+      <td *ngIf="!achievement.participated">ORGANISER</td>
+      <td>{{ achievement.category | uppercase }}</td>
+      <td><button class="btn btn-primary" routerLink="/achievement/{{ achievement._id }}" id="detail-link">VIEW DETAILS</button></td>
+    </tr>
+  </table>
+</div>
+  <table *ngIf="w$.location.pathname.includes('/home/academic') && achievements$.length > 0">
+    <tr id="table-heading">
+      <th>S.No.</th>
+      <th>Enrollment No.</th>
+      <th>Name</th>
+      <th>Batch</th>
+      <th>Programme</th>
+      <th>Category</th>
+    </tr>
+    <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ achievement.rollNo }}</td>
+      <td>{{ achievement.name }}</td>
+      <td>{{ achievement.batch }}</td>
+      <td>{{ achievement.programme }}</td>
+      <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
+      <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
+      <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
+    </tr>
+  </table>
 
 </div>

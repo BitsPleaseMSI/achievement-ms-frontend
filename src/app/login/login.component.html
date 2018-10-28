@@ -1,8 +1,9 @@
+<h1>Faculty Login</h1>
 <div id="mainContent">
-
 <div id="form-area">
-        <h1>Faculty Login</h1>
 <p class="icon-para"><i class="material-icons md-56">person </i></p>
+
+
 <div *ngIf="error$" class="alert alert-danger" >
   <p>Error: {{ error$ }}</p>
 </div>
@@ -12,6 +13,7 @@
 </div>
 
 <form (submit)="loginUser($event)" action="/login">
+  <h5><i>Please enter your credentials to login</i></h5>
   <div class="input-group">
     <span class="input-group-addon">Email</span>
     <input type="email" id="email" class="form-control" placeholder="Email">

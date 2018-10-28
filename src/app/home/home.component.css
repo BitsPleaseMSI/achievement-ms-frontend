@@ -1,5 +1,5 @@
 #filters{
-  border:1px solid #636e72;
+  border:2px solid gainsboro;
   border-radius: 5px;
   width: 100%;
   padding:10px;
@@ -23,8 +23,6 @@
 
 #filter-area-three{
   display: inline-block;
-
-
 }
 
 
@@ -37,20 +35,18 @@
   width:140px;
 }
 
-#dateTo,#dateFrom, #sessionTo, #sessionFrom{
+#dateTo,#dateFrom, #sessionTo, #sessionFrom, #from, #to{
   width:140px;
   text-align: center;
 }
 
+
 table{
-  display: block;
   width:100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 0;
-  border:none;
-  overflow-x: auto;
-  height:300px;
+  display: block;
+  margin:0 auto;
+  overflow: auto;  
+ 
 }
 
 td,th{
@@ -129,8 +125,14 @@ input:checked + .slider:before {
 .nav-pills > .active > a, .nav-pills > .active > a:hover {
   background-color:#F3875D;
   color:white;
+
 }
 
 a:hover{
   color:#636e72;
+
+}
+
+select >option{
+  border-radius: 100px;
 }

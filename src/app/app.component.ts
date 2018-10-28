@@ -40,7 +40,10 @@ export class AppComponent implements OnInit {
 
     $('#sidebarCollapse').on('click', function () {
       $('#sidebar').toggleClass('active');
-    });
+      $(this).toggleClass('active');
+  });
+
+   
 
 
 

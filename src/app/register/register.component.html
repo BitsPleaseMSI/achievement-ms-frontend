@@ -1,7 +1,9 @@
-<div id="mainContent">
-  <div id="form-area">
 <h1>Faculty Registration</h1>
-<br>
+
+<div id="mainContent">
+  <h5><i>Enter your details in the following fields to register as faculty member:</i></h5>
+  <p>*You are required to fill all the fields.*</p>
+  <div id="form-area">
 <div *ngIf="error$" class="alert alert-danger" >
   <p>Error: {{ error$ }}</p>
 </div>

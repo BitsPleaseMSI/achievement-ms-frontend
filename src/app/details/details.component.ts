@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { AppComponent } from '../app.component';
-
+import * as $ from 'jquery';
 interface User {
     department: any;
 }
@@ -40,6 +40,15 @@ export class DetailsComponent implements OnInit {
         this.user$ = data;
       }
     )
+      $("#img-details").hide();
+
+      $("#img-btn").click(function(){
+        $(this).text(function(i, text){
+          return text === "Show Certificate" ? "Hide Certificate" : "Show Certificate";
+      });
+        $("#img-details").slideToggle(50);
+        
+      });
   }
 
   delete(event, id: string){

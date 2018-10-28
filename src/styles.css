@@ -16,6 +16,13 @@
     text-align: center;
 }
 
+.material-icons.md-28{
+    font-size: 28px;
+    color:white;
+    text-align: center;
+}
+
+
 .icon-para{
     text-align: center;
 }
@@ -28,7 +35,7 @@ form{
 
 .btn.btn-block{
     display:block;
-   
+    background-color: #F3875D;
     width: auto;
     margin: 0 auto;
 }
@@ -42,9 +49,12 @@ form{
 
 .btn:hover.btn-crimson:hover{
     background-color: white;
+    border:1px solid #F3875D;
     color:black;
     transition: 800ms;
 }
+
+
 
 #btn-area{
     width:auto;
@@ -92,3 +102,4 @@ tr:nth-child(even){
 .active-class{
     font-weight: bold;
 }
+
