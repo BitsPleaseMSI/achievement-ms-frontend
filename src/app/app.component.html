@@ -56,8 +56,14 @@
                 </label>
               </div>
               <div id="btn-area">
-                <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
-                <img id="loading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
+                <div class="row" style="display:inline-block;">
+                  <div class="col-xs-6">
+                    <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
+                  </div>
+                  <div class="col-xs-6">
+                    <img id="loading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
+                  </div>
+                </div>
               </div>
             </form>
             </div>
@@ -74,7 +80,7 @@
     <nav id="sidebar">
       <div class="sidebar-header">
         <div>
-          <p id="date">version: 7</p>
+          <p id="date">version: 11</p>
           <br>
           <p id="date">{{date | date:'medium'}}</p>
 

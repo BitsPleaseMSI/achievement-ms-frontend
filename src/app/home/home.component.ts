@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   getdata(params: string){
-    $('#homeLoaded').hide(50);
+    $('#homeEmpty').hide(50);
     $('#homeLoading').show(50);
     if(window.location.pathname.includes('/home/achievements')){
 
@@ -48,6 +48,9 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (data) => {
           this.achievements$ = data;
+          if(this.achievements$.length == 0){
+            $('#homeEmpty').show(50);
+          }
         },
         () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
@@ -59,6 +62,9 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (data) => {
           this.achievements$ = data;
+          if(this.achievements$.length == 0){
+            $('#homeEmpty').show(50);
+          }
         },
         () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
@@ -66,7 +72,6 @@ export class HomeComponent implements OnInit {
 
     }
 
-    $('#homeLoaded').show(50);
     $('#homeLoading').hide(50);
   }
 
