@@ -78,7 +78,7 @@
               <br>
              <div id="btn-area">
                 <button class="btn btn-crimson btn-block" type="submit">Update achievement</button>
-                <img id="editAcademicLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
+                <img id="editAcademicLoading" src="../assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
               </div>
             </form>
           </div>
@@ -249,7 +249,7 @@
     <td>
       <button *ngIf="achievement.approved" class="btn btn-danger" type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
       <button *ngIf="!achievement.approved" class="btn btn-success" type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
-      <img id="changeApproveLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
+      <img id="changeApproveLoading" src="../assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
     </td>
   </tr>
 </table>
@@ -280,7 +280,7 @@
       </td>
       <td>
         <button class="btn btn-danger" type="button" name="delete" (click)="deleteAcademic($event, achievement._id)">Delete</button>
-        <img id="deleteAcademicLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
+        <img id="deleteAcademicLoading" src="../assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
       </td>
     </tr>
 </table>
