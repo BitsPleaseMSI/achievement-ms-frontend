@@ -15,11 +15,6 @@ import { AuthGuard as AG } from './auth.guard'
 
 const routes: Routes = [
   {
-    path: 'home',
-    redirectTo: 'home/achievements',
-    pathMatch: 'full'
-  },
-  {
     path: 'home/achievements',
     component: HomeComponent,
   },

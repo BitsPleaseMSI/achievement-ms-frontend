@@ -57,7 +57,7 @@
               </div>
               <div id="btn-area">
                 <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
-                <img id="loading" src="../assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
+                <img id="loading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
               </div>
             </form>
             </div>
@@ -74,12 +74,12 @@
     <nav id="sidebar">
       <div class="sidebar-header">
         <div>
-          <p id="date">version: 4</p>
+          <p id="date">version: 7</p>
           <br>
           <p id="date">{{date | date:'medium'}}</p>
 
         </div>
-        <div id="img-div"><img src="../assets/header.jpg"></div>
+        <div id="img-div"><img src="/assets/header.jpg"></div>
         <h1>Achievement Management System</h1><br>
         <h5 *ngIf="userData$">Welcome, <span class="highlight">{{userData$['firstName']}} {{userData$['lastName']}}</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='management'">Department: <span class="highlight">Management</span></h5>

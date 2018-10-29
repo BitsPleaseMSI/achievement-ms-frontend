@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit {
   }
 
   getdata(params: string){
+    $('#homeLoaded').hide(50);
+    $('#homeLoading').show(50);
     if(window.location.pathname.includes('/home/achievements')){
 
       this.data.getApprovedAchievements(params)
@@ -64,6 +66,8 @@ export class HomeComponent implements OnInit {
 
     }
 
+    $('#homeLoaded').show(50);
+    $('#homeLoading').hide(50);
   }
 
   resetFilters(event){
