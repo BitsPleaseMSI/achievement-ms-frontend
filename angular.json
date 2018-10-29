@@ -79,8 +79,8 @@
                         ],
             "assets": [
               "src/favicon.ico",
-              "src/assets/header.jpg"
-              "src/assets/loadingCustom.svg"
+              "src/assets/header.jpg",
+              "src/assets/loadingCustom.svg",
             ]
           }
         },
