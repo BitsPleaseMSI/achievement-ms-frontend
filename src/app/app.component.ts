@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, ElementRef} from '@angular/core';
+import { Router } from '@angular/router';
 import { safe } from './sanitise';
 
 import { AuthService } from './auth.service';
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
   message$: string;
   title = 'achievement-ms-front';
   date = new Date();
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
     setInterval(() => {
       this.date = new Date();
     }, 1000)
@@ -107,6 +108,7 @@ export class AppComponent implements OnInit {
           this.info$ = undefined;
           this.error$ = undefined;
           this.getdata();
+          this.router.navigate(['/dashboard/unapproved']);
         }else{
           this.info$ = undefined;
           this.error$ = "Incorrect credentials";

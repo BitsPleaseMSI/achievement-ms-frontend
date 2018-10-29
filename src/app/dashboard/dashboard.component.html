@@ -1,4 +1,3 @@
-
 <h1><span>T</span>eacher Dashboard</h1>
 
     <div id="dashboard-taskbar">
@@ -19,7 +18,6 @@
         </ul>
         </div>
 <div id="mainContent">
-
 
     <div class="modal fade" id="editAcademicModal" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -91,14 +89,12 @@
       </div>
     </div>
 
-
-
 <h4>Filter options</h4>
 <label class="switch">
   <input id="b" type="checkbox">
   <span class="slider round"></span>
 </label>
-<div id="filters">
+<div id="filters" hidden="true">
 
   <form *ngIf="!w$.location.pathname.includes('/dashboard/academic')" (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
@@ -118,7 +114,6 @@
             <option>6</option>
           </select>
         </div>
-
         <div class="home-filters">
           <label for="section">Section:</label>
           <select id="section" name="section" value="{{this.route.snapshot.queryParams['section']}}">&nbsp;
@@ -136,25 +131,15 @@
               <option value="evening">Evening</option>
             </select>
           </div>
-
       </div>
 
-
-
       <div id="filter-area-two">
-
-
-
         <div class="home-filters">
           <label for="sessionFrom" class="control-label">Batch:</label>
           &nbsp;<input type="number" id="sessionFrom" name="sessionFrom" placeholder="Begining year" value="{{this.route.snapshot.queryParams['from']}}">
           &nbsp;<input type="number" id="sessionTo" name="sessionTo" placeholder="Ending year" value="{{this.route.snapshot.queryParams['to']}}">
         </div>
-
       </div>
-
-
-
       <div id="filter-area-three">
           <div class="home-filters">
         <label for="dateFrom" class="control-label">Starting from:</label>
@@ -181,6 +166,54 @@
         <button class="btn btn-crimson" type="submit">Apply filter</button>
         &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
       </div>
+  </form>
+
+  <form *ngIf="w$.location.pathname.includes('/dashboard/academic')" (submit)="filter($event)" class="form-inline" action=""
+    id="filter">
+<div id="filter-area-one">
+      <div class="home-filters">
+      <label for="section" class="">Batch:</label>&nbsp;
+      <input type="number" id="from"  placeholder="Begining year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[0]:''}}">&nbsp;
+      <input type="number" id="to" placeholder="Ending year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[1]:''}}">
+    </div>
+  </div>
+
+  <div id="filter-area-two">
+
+    <div class="home-filters">
+      <label for="semester">Programme:</label>
+      <select id="programme" name="programme"  value="{{this.route.snapshot.queryParams['programme']}}">
+        <option value="">Select Programme</option>
+        <option>B. Ed.</option>
+        <option>BBA (H) 4 year</option>
+        <option>BBA (General)</option>
+        <option>BBA (B&I)</option>
+        <option>BBA (T&TM)</option>
+        <option>BCA</option>
+        <option>B.Com (H)</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="filter-area-three">
+
+    <div class="home-filters">
+      <label for="categoryA">Category:</label>
+      <select id="categoryA" name="categoryA" value="{{this.route.snapshot.queryParams['category']}}">
+        <option value="">Select Category</option>
+        <option value="exemplary">Exemplary Performance</option>
+        <option value="goldmedalist">Gold Medalist</option>
+        <option value="both">Gold Medalist & Exemplary Performance</option>
+      </select>
+    </div>
+</div>
+    <br>
+    <div class="form-group-row">
+      <div id="button-area">
+        <button class="btn btn-crimson" type="submit">Apply filter</button>
+        &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
+      </div>
+    </div>
   </form>
 
 </div>

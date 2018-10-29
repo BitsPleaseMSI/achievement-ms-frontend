@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
     $('#filters').hide('fast');
 
     $('#b').click(function(){
-      $('#filters').show('fast');
+      $('#filters').toggle('fast');
     });
   }
 
