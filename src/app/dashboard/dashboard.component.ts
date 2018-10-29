@@ -36,10 +36,10 @@ export class DashboardComponent implements OnInit {
     this.achievements$ = [];
     this.refresh(window.location.search);
 
-    $('#filters').hide();
+    $('#filters').hide('fast');
 
     $('#b').click(function(){
-      $('#filters').toggle('fast');
+      $('#filters').show('fast');
     });
   }
 
@@ -161,6 +161,7 @@ export class DashboardComponent implements OnInit {
   }
 
   approve(event, id: string){
+    $('#changeApproveLoading').show('fast');
     event.preventDefault();
 
     this.auth.approveAchievement(id).subscribe(
@@ -177,9 +178,11 @@ export class DashboardComponent implements OnInit {
       }
     )
 
+  $('#changeApproveLoading').hide('fast');
   }
 
   unapprove(event, id: string){
+    $('#changeApproveLoading').show('fast');
     event.preventDefault();
 
     this.auth.unapproveAchievement(id).subscribe(
@@ -196,9 +199,11 @@ export class DashboardComponent implements OnInit {
       }
     )
 
+  $('#changeApproveLoading').hide('fast');
   }
 
   deleteAcademic(event, id: string){
+    $('#deleteAcademicLoading').show('fast');
     event.preventDefault();
     if(window.confirm('Sure you want to delete this?')){
       this.data.deleteAcademic(id).subscribe(
@@ -214,6 +219,7 @@ export class DashboardComponent implements OnInit {
         }
       )
       this.refresh();
+      $('#deleteAcademicLoading').hide('fast');
     }
   }
 
@@ -229,6 +235,7 @@ export class DashboardComponent implements OnInit {
   }
 
   editAcademic(event){
+    $('#editAcademicLoading').show('fast');
     event.preventDefault();
     const target = event.target;
 
@@ -243,6 +250,7 @@ export class DashboardComponent implements OnInit {
     // Sanitising data
     for(let key in achievement){
       if((achievement[key] == '') || (!safe(achievement[key].toString()))){
+        $('#editAcademicLoading').hide('fast');
         this.error$ = 'Input error. Please check ' + key;
         this.info$ = undefined;
         return;
@@ -275,6 +283,7 @@ export class DashboardComponent implements OnInit {
       }
     }, 8000);
 
+    $('#editAcademicLoading').hide('fast');
     this.refresh();
   }
 

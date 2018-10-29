@@ -70,21 +70,13 @@
 
       </div>
 
-
-
       <div id="filter-area-two">
-
-
-
         <div class="home-filters">
           <label for="sessionFrom" class="control-label">Batch:</label>
           &nbsp;<input type="number" id="sessionFrom" name="sessionFrom" placeholder="Begining year" value="{{this.route.snapshot.queryParams['from']}}">
           &nbsp;<input type="number" id="sessionTo" name="sessionTo" placeholder="Ending year" value="{{this.route.snapshot.queryParams['to']}}">
         </div>
-
       </div>
-
-
 
       <div id="filter-area-three">
         <div class="home-filters">
@@ -114,12 +106,6 @@
       </div>
     </form>
 
-
-
-
-
-
-
     <form *ngIf="w$.location.pathname.includes('/home/academic')" (submit)="filter($event)" class="form-inline" action=""
       id="filter">
 <div id="filter-area-one">
@@ -129,7 +115,7 @@
         <input type="number" id="to" placeholder="Ending year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[1]:''}}">
       </div>
     </div>
-    
+
     <div id="filter-area-two">
 
       <div class="home-filters">

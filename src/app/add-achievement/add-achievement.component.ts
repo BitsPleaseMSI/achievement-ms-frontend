@@ -16,9 +16,9 @@ export class AddAchievementComponent implements OnInit {
   selectedFiles: FileList;
   fileName: string;
 
-  constructor(private data: DataAccessService, private ac: AppComponent) { }
+  constructor(private data: DataAccessService, private ac: AppComponent) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   detectFiles(event) {
     this.selectedFiles = event.target.files;
@@ -26,15 +26,20 @@ export class AddAchievementComponent implements OnInit {
   }
 
   addAchievement(event){
+    $('#addAchievementLoading').show('fast')
+    this.info$ = "Adding Achievement. Please wait.";
+    this.error$ = undefined;
+
     event.preventDefault();
     const target = event.target;
 
     try{
       this.selectedFiles.item(0);
     }catch(err){
+      $('#addAchievementLoading').hide('fast');
       this.error$ = 'Image upload error!';
-      this.ac.snackbar('Image upload error!');
       this.info$ = undefined;
+      this.ac.snackbar('Image upload error!');
       return;
     }
 
@@ -61,6 +66,7 @@ export class AddAchievementComponent implements OnInit {
       if(key == 'participated'){
 
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
+        $('#addAchievementLoading').hide('fast');
         this.error$ = 'Input error. Please check ' + key;
         this.info$ = undefined;
         return;
@@ -73,15 +79,17 @@ export class AddAchievementComponent implements OnInit {
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             error = false;
-            this.ac.snackbar('Achievement added Successfully!');
-            this.info$ = 'Achievement added Successfully.';
+            $('#addAchievementLoading').hide('fast');
             this.error$ = undefined;
+            this.info$ = 'Achievement added Successfully.';
+            this.ac.snackbar('Achievement added Successfully!');
           }
         }
       },
-      (error) =>{
+      () =>{
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
+        $('#addAchievementLoading').hide('fast');
       }
     )
 

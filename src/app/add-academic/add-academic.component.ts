@@ -11,11 +11,12 @@ import { AppComponent } from '../app.component';
 export class AddAcademicComponent implements OnInit {
   error$: string;
   info$: string;
-  constructor(private data: DataAccessService, private ac: AppComponent) { }
+  constructor(private data: DataAccessService, private ac: AppComponent) {}
 
   ngOnInit() {}
 
   addAcademic(event){
+    $('#addAcademicLoading').show('fast');
     event.preventDefault();
     const target = event.target;
 
@@ -25,6 +26,7 @@ export class AddAcademicComponent implements OnInit {
       target.querySelector('#to').value == '' ||
       target.querySelector('#to').value.length != 4
     ){
+      $('#addAcademicLoading').hide('fast');
       this.error$ = 'Input error. Please check batch';
       this.info$ = undefined;
       return;
@@ -40,6 +42,7 @@ export class AddAcademicComponent implements OnInit {
     // Sanitising data
     for(let key in achievement){
       if((achievement[key] == '') || (!safe(achievement[key].toString()))){
+        $('#addAcademicLoading').hide('fast');
         this.error$ = 'Input error. Please check ' + key;
         this.info$ = undefined;
         return;
@@ -51,10 +54,10 @@ export class AddAcademicComponent implements OnInit {
       data => {
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
-            error = false;
-            this.ac.snackbar('Achievement added Successfully!');
-            this.info$ = 'Achievement added Successfully.';
             this.error$ = undefined;
+            this.info$ = 'Achievement added Successfully.';
+            this.ac.snackbar('Achievement added Successfully!');
+            error = false;
           }else{
             this.error$ = JSON.parse(data['partialText'])['message'];
             this.info$ = undefined;
@@ -62,6 +65,7 @@ export class AddAcademicComponent implements OnInit {
         }
       },
       () =>{
+        this.error$ = undefined;
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
       }
@@ -75,6 +79,7 @@ export class AddAcademicComponent implements OnInit {
       }
     }, 8000);
 
+    $('#addAcademicLoading').hide('fast');
   }
 
 }

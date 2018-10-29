@@ -17,11 +17,14 @@ export class ResetPassComponent implements OnInit {
   ngOnInit() {}
 
   resetPass(event){
+    $('#resetPassLoading').show('fast');
     event.preventDefault();
     const target = event.target;
 
     if( target.querySelector('#newpass').value != target.querySelector('#newpass1').value ){
+      $('#resetPassLoading').hide('fast');
       this.error$ = "New passwords do not match!"
+      this.info$ = undefined;
       return;
     }
 
@@ -41,12 +44,15 @@ export class ResetPassComponent implements OnInit {
                   this.router.navigate(['/dashboard/unapproved']);
                   this.ac.snackbar('Password changed successfully!');
                   this.error$ = undefined;
+                  this.info$ = undefined;
                 }else{
                   // Error while password reset
-                  this.error$ = data.message.toString()
+                  this.error$ = 'Current password is Incorrect';
+                  this.info$ = undefined;
                 }
               },
               () =>{
+                this.error$ = undefined;
                 this.info$ = undefined;
                 this.ac.snackbar('Server is not responding, Please try later.');
               }
@@ -56,6 +62,7 @@ export class ResetPassComponent implements OnInit {
       }
     )
 
+    $('#resetPassLoading').hide('fast');
   }
 
 }

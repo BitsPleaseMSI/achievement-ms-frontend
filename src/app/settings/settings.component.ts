@@ -46,6 +46,7 @@ export class SettingsComponent implements OnInit {
   }
 
   update(event){
+    $('#updateLoading').show('fast');
     event.preventDefault();
     const target = event.target;
     let params = {};
@@ -53,25 +54,26 @@ export class SettingsComponent implements OnInit {
     this.auth.currentUser().subscribe(
       (data) => {
           if(!data['email']){
-            this.auth.redirect('login', 'Unauthenticated user. Login again.')
+            this.auth.redirect('login', 'Unauthenticated user. Login again.');
           }else{
 
-            params['firstName'] = target.querySelector('#firstName').value
-            params['lastName'] = target.querySelector('#lastName').value
-            params['email'] = data['email']
-            params['newEmail'] = target.querySelector('#newEmail').value
-            params['password'] = target.querySelector('#password').value
+            params['firstName'] = target.querySelector('#firstName').value;
+            params['lastName'] = target.querySelector('#lastName').value;
+            params['email'] = data['email'];
+            params['newEmail'] = target.querySelector('#newEmail').value;
+            params['password'] = target.querySelector('#password').value;
 
             for(let key in params){
               if((params[key] == '') || (!safe(params[key].toString()))){
-                this.info$ = undefined;
+                $('#updateLoading').hide('fast');
                 this.error$ = 'Check ' + key;
+                this.info$ = undefined;
                 return;
               }
             }
 
-            this.info$ = undefined;
             this.error$ = undefined;
+            this.info$ = undefined;
 
             let error = true;
             this.auth.updateUser(params).subscribe(
@@ -80,17 +82,17 @@ export class SettingsComponent implements OnInit {
                   if(JSON.parse(data['body'])['bool']){
                     error = false;
                     this.ac.snackbar('Profile updated successfully!');
-                    this.info$ = 'Profile updated successfully.';
                     this.error$ = undefined;
+                    this.info$ = 'Profile updated successfully.';
                   }else if(!JSON.parse(data['body'])['bool']){
                     error = false;
                     this.ac.snackbar(JSON.parse(data['body'])['message']);
-                    this.info$ = undefined;
                     this.error$ = JSON.parse(data['body'])['message'];
+                    this.info$ = undefined;
                   }
                 }
               },
-              (error) =>{
+              (error) => {
                 this.info$ = undefined;
                 this.ac.snackbar('Server is not responding, Please try later.');
               }
@@ -99,8 +101,8 @@ export class SettingsComponent implements OnInit {
             setTimeout(function () {
               if(error){
                 setTimeout('', 5000);
-                this.info$ = undefined;
                 this.error$ = 'Error updating profile. Please try again later.';
+                this.info$ = undefined;
               }
             }, 2000);
 
@@ -109,6 +111,7 @@ export class SettingsComponent implements OnInit {
       }
     )
 
+    $('#updateLoading').hide('fast');
   }
 
 }

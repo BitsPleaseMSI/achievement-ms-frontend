@@ -31,10 +31,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getdata(window.location.search);
 
-    $('#filters').hide();
+    $('#filters').hide('fast');
 
     $('#b').click(function(){
-      $('#filters').toggle('fast');
+      $('#filters').show('fast');
     });
 
   }

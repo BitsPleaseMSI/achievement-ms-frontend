@@ -23,7 +23,7 @@ a, a:hover, a:focus {
 img{
     border-radius: 50%;
     width:90%;
-    height:90%;    
+    height:90%;
 }
 
 h4{
@@ -86,7 +86,7 @@ ul{
   top: 0;
     transition: all 0.3s;
     border-right: 2px solid #F3875D;
-    background-color: #605D53 ; 
+    background-color: #605D53 ;
     box-shadow: 3px 3px 5px #ccc;
 
 
@@ -235,7 +235,7 @@ a.article, a.article:hover {
 }
 
 .btn-show-hide{
-  
+
 }
 #snackbar.show {
     visibility: visible;

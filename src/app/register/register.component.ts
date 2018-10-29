@@ -20,16 +20,19 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   registerUser(event){
+    $('#registerUserLoading').show('fast');
     event.preventDefault();
 
     const target = event.target;
 
     function validateEmail(email) {
+      $('#registerUserLoading').hide('fast');
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
     }
 
     if(!validateEmail(target.querySelector('#email').value)){
+      $('#registerUserLoading').hide('fast');
       this.info$ = undefined;
       this.error$ = "Invalid Email";
       return;
@@ -52,6 +55,7 @@ export class RegisterComponent implements OnInit {
       // Sanitising data
       for(let key in user){
         if((user[key] == '') || (!safe(user[key].toString()))){
+          $('#registerUserLoading').hide('fast');
           this.error$ = 'Input error. Please check ' + key;
           this.info$ = undefined;
           return;
@@ -61,7 +65,6 @@ export class RegisterComponent implements OnInit {
       this.auth.register(user).subscribe(
         (data) => {
           if(data.bool){
-            this.router.navigate(['login']);
             this.error$ = undefined;
             this.info$ = undefined;
             this.ac.snackbar('User successfully registered!')
@@ -80,6 +83,7 @@ export class RegisterComponent implements OnInit {
       this.info$ = undefined;
     }
 
+    $('#registerUserLoading').hide('fast');
   }
 
 }

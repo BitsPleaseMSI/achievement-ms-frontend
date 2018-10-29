@@ -17,6 +17,60 @@
 <body>
 
   <div class="wrapper">
+
+    <div class="modal fade" id="loginModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="form-area">
+            <p class="icon-para"><i class="material-icons md-56">person </i></p>
+
+
+            <div *ngIf="error$" class="alert alert-danger" >
+              <p>Error: {{ error$ }}</p>
+            </div>
+
+            <div *ngIf="info$" class="alert alert-info" >
+              <p>Info: {{ info$ }}</p>
+            </div>
+
+            <form (submit)="loginUser($event)" action="/login">
+              <h5><i>Please enter your credentials to login</i></h5>
+              <div class="input-group">
+                <span class="input-group-addon">Email</span>
+                <input type="email" id="email" class="form-control" placeholder="Email">
+              </div>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon">Password</span>
+                <input type="password" id="password" class="form-control" placeholder="Password">
+              </div>
+              <br>
+              <div id="remember" class="checkbox">
+                <label>
+                    <input id="saveUser" type="checkbox" value="remember-me" checked> Remember me
+                </label>
+              </div>
+              <div id="btn-area">
+                <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
+                <img id="loading" src="../assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
+              </div>
+            </form>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" #closeLogin>Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
@@ -42,7 +96,7 @@
         <li *ngIf="userData$"><a routerLink="/dashboard/unapproved"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
         <li *ngIf="!userData$"><a routerLink="/user/register"> <i class="material-icons">person_add</i>&nbsp;&nbsp;&nbsp;Register
             new user</a></li>
-        <li *ngIf="!userData$"><a routerLink="/login"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;<strong>Faculty
+        <li *ngIf="!userData$"><a data-toggle="modal" data-target="#loginModal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;<strong>Faculty
               Login</strong></a></li>
         <li><a routerLink="/about"><i class="material-icons">info</i>&nbsp;&nbsp;&nbsp;About</a></li>
 
@@ -57,7 +111,7 @@
           <i class="material-icons md-28" id="icon">
             reorder
           </i>
-           
+
         </button>
 
 
