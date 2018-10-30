@@ -58,7 +58,7 @@
                 <span class="input-group-addon">Programme</span>
                 <select  id="programme" name="programme" class="form-control" placeholder="Programme">
                   <option>B. Ed.</option>
-                  <option>BBA (H) 4 year</option>
+                  <option>BBA (H) 4 years</option>
                   <option>BBA (General)</option>
                   <option>BBA (B&I)</option>
                   <option>BBA (T&TM)</option>
@@ -191,7 +191,7 @@
       <select id="programme" name="programme"  value="{{this.route.snapshot.queryParams['programme']}}">
         <option value="">Select Programme</option>
         <option>B. Ed.</option>
-        <option>BBA (H) 4 year</option>
+        <option>BBA (H) 4 years</option>
         <option>BBA (General)</option>
         <option>BBA (B&I)</option>
         <option>BBA (T&TM)</option>
@@ -225,7 +225,12 @@
 </div>
 <h2>Achievements</h2>
 
-<h3 *ngIf="achievements$.length == 0">No achievements found!</h3>
+<div id="dashboardLoading" hidden="true">
+  <h3>Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;">
+</div>
+
+<h3 id="dashboardEmpty" hidden="true">No achievements found!</h3>
+
 <table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname.includes('/dashboard/approved') || w$.location.pathname.includes('/dashboard/unapproved'))">
   <tr id="table-heading">
     <th>S.No.</th>

@@ -17,12 +17,12 @@ export class ResetPassComponent implements OnInit {
   ngOnInit() {}
 
   resetPass(event){
-    $('#resetPassLoading').show('fast');
+    $('#resetPassLoading').show(50);
     event.preventDefault();
     const target = event.target;
 
     if( target.querySelector('#newpass').value != target.querySelector('#newpass1').value ){
-      $('#resetPassLoading').hide('fast');
+      $('#resetPassLoading').hide(50);
       this.error$ = "New passwords do not match!"
       this.info$ = undefined;
       return;
@@ -62,7 +62,7 @@ export class ResetPassComponent implements OnInit {
       }
     )
 
-    $('#resetPassLoading').hide('fast');
+    $('#resetPassLoading').hide(50);
   }
 
 }

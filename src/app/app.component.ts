@@ -6,6 +6,10 @@ import { safe } from './sanitise';
 import { AuthService } from './auth.service';
 import * as $ from 'jquery';
 
+interface Window {
+    length: any;
+    location: any;
+}
 
 @Component({
   selector: 'app-root',
@@ -16,6 +20,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('closeLogin') closeLogin: ElementRef;
 
+  w$: Window = window;
   error$: string;
   info$: string;
   trylater: boolean;
@@ -46,7 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    $('#loading').hide('fast');
+    $('#loading').hide(50);
     this.getdata();
 
     $('#sidebarCollapse').on('click', function () {
@@ -57,7 +62,7 @@ export class AppComponent implements OnInit {
   }
 
   loginUser(event){
-    $('#loading').show('fast');
+    $('#loading').show(50);
     this.error$ = undefined;
     this.info$ = "Logging in, Please wait.";
 
@@ -70,7 +75,7 @@ export class AppComponent implements OnInit {
     }
 
     if(!validateEmail(target.querySelector('#email').value)){
-      $('#loading').hide('fast');
+      $('#loading').hide(50);
       this.info$ = undefined;
       this.error$ = "Invalid Email";
       return;
@@ -80,13 +85,13 @@ export class AppComponent implements OnInit {
 
     // Sanitising data
     if((target.querySelector('#email').value == '') || (!safe(target.querySelector('#email').value.toString()))){
-      $('#loading').hide('fast');
+      $('#loading').hide(50);
       this.error$ = 'Input error. Please check username';
       this.info$ = undefined;
       return;
     }
     if((target.querySelector('#password').value == '') || (!safe(target.querySelector('#password').value.toString()))){
-      $('#loading').hide('fast');
+      $('#loading').hide(50);
       this.error$ = 'Input error. Please check password';
       this.info$ = undefined;
       return;
@@ -113,15 +118,15 @@ export class AppComponent implements OnInit {
           this.info$ = undefined;
           this.error$ = "Incorrect credentials";
         }
+        $('#loading').hide(50);
       },
       () =>{
         this.info$ = undefined;
-        this.error$ = "Server is not responding, Please try later.";
+        this.error$ = 'Server is not responding, Please try later.';
         this.snackbar('Server is not responding, Please try later.');
+        $('#loading').hide(50);
       }
     )
-
-    $('#loading').hide('fast');
   }
 
   logout(){

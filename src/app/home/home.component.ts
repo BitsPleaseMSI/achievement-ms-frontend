@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getdata(window.location.search);
 
-    $('#filters').hide('fast');
+    $('#filters').hide(50);
 
     $('#b').click(function(){
       $('#filters').toggle('fast');
@@ -51,8 +51,10 @@ export class HomeComponent implements OnInit {
           if(this.achievements$.length == 0){
             $('#homeEmpty').show(50);
           }
+          $('#homeLoading').hide(50);
         },
         () =>{
+          $('#homeLoading').hide(50);
           this.ac.snackbar('Server is not responding, Please try later.');
       });
 
@@ -65,14 +67,15 @@ export class HomeComponent implements OnInit {
           if(this.achievements$.length == 0){
             $('#homeEmpty').show(50);
           }
+          $('#homeLoading').hide(50);
         },
         () =>{
+          $('#homeLoading').hide(50);
           this.ac.snackbar('Server is not responding, Please try later.');
       });
 
     }
 
-    $('#homeLoading').hide(50);
   }
 
   resetFilters(event){

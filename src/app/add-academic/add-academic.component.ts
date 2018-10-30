@@ -16,7 +16,7 @@ export class AddAcademicComponent implements OnInit {
   ngOnInit() {}
 
   addAcademic(event){
-    $('#addAcademicLoading').show('fast');
+    $('#addAcademicLoading').show(50);
     event.preventDefault();
     const target = event.target;
 
@@ -26,7 +26,7 @@ export class AddAcademicComponent implements OnInit {
       target.querySelector('#to').value == '' ||
       target.querySelector('#to').value.length != 4
     ){
-      $('#addAcademicLoading').hide('fast');
+      $('#addAcademicLoading').hide(50);
       this.error$ = 'Input error. Please check batch';
       this.info$ = undefined;
       return;
@@ -42,7 +42,7 @@ export class AddAcademicComponent implements OnInit {
     // Sanitising data
     for(let key in achievement){
       if((achievement[key] == '') || (!safe(achievement[key].toString()))){
-        $('#addAcademicLoading').hide('fast');
+        $('#addAcademicLoading').hide(50);
         this.error$ = 'Input error. Please check ' + key;
         this.info$ = undefined;
         return;
@@ -79,7 +79,7 @@ export class AddAcademicComponent implements OnInit {
       }
     }, 8000);
 
-    $('#addAcademicLoading').hide('fast');
+    $('#addAcademicLoading').hide(50);
   }
 
 }

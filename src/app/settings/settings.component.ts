@@ -46,7 +46,7 @@ export class SettingsComponent implements OnInit {
   }
 
   update(event){
-    $('#updateLoading').show('fast');
+    $('#updateLoading').show(50);
     event.preventDefault();
     const target = event.target;
     let params = {};
@@ -65,7 +65,7 @@ export class SettingsComponent implements OnInit {
 
             for(let key in params){
               if((params[key] == '') || (!safe(params[key].toString()))){
-                $('#updateLoading').hide('fast');
+                $('#updateLoading').hide(50);
                 this.error$ = 'Check ' + key;
                 this.info$ = undefined;
                 return;
@@ -111,7 +111,7 @@ export class SettingsComponent implements OnInit {
       }
     )
 
-    $('#updateLoading').hide('fast');
+    $('#updateLoading').hide(50);
   }
 
 }

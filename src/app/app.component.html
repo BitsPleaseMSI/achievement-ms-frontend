@@ -97,15 +97,15 @@
       </div>
 
       <ul class="list-unstyled components">
-        <li><a routerLink="/home/achievements"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
-        <li *ngIf="!userData$"><a routerLink="/achievement/add"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;Add
+        <li [class.active]="w$.location.pathname.includes('/home/')"><a routerLink="/home/achievements"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
+        <li [class.active]="w$.location.pathname=='/achievement/add'" *ngIf="!userData$"><a routerLink="/achievement/add"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;Add
             achievement</a></li>
-        <li *ngIf="userData$"><a routerLink="/dashboard/unapproved"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
-        <li *ngIf="!userData$"><a routerLink="/user/register"> <i class="material-icons">person_add</i>&nbsp;&nbsp;&nbsp;Register
+        <li [class.active]="w$.location.pathname.includes('/dashboard/')" *ngIf="userData$"><a routerLink="/dashboard/unapproved"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+        <li [class.active]="w$.location.pathname=='/user/register'" *ngIf="!userData$"><a routerLink="/user/register"> <i class="material-icons">person_add</i>&nbsp;&nbsp;&nbsp;Register
             new user</a></li>
         <li *ngIf="!userData$"><a data-toggle="modal" data-target="#loginModal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;<strong>Faculty
               Login</strong></a></li>
-        <li><a routerLink="/about"><i class="material-icons">info</i>&nbsp;&nbsp;&nbsp;About</a></li>
+        <li [class.active]="w$.location.pathname=='/about'"><a routerLink="/about"><i class="material-icons">info</i>&nbsp;&nbsp;&nbsp;About</a></li>
 
         <li *ngIf="userData$" (click)="logout()"><a routerLink="/home/achievements"><i class="material-icons">input</i><strong>&nbsp;&nbsp;&nbsp;Logout</strong></a></li>
 

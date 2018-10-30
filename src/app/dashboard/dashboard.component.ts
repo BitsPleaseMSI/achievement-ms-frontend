@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     this.achievements$ = [];
     this.refresh(window.location.search);
 
-    $('#filters').hide('fast');
+    $('#filters').hide(50);
 
     $('#b').click(function(){
       $('#filters').toggle('fast');
@@ -44,6 +44,8 @@ export class DashboardComponent implements OnInit {
   }
 
   refresh(arg?: string){
+    $('#dashboardLoading').show(50);
+    $('#dashboardEmpty').hide(50);
     this.achievements$ = [];
     let params = window.location.search;
     if(arg)
@@ -61,9 +63,14 @@ export class DashboardComponent implements OnInit {
           .subscribe(
             (data) => {
               this.achievements$ = data;
+              if(this.achievements$.length == 0){
+                $('#dashboardEmpty').show(50);
+              }
+              $('#dashboardLoading').hide(50);
           },
           () =>{
             this.ac.snackbar('Server is not responding, Please try later.');
+            $('#dashboardLoading').hide(50);
           });
         }
       )
@@ -77,9 +84,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (data) => {
           this.achievements$ = data['data'];
+          if(this.achievements$.length == 0){
+            $('#dashboardEmpty').show(50);
+          }
+          $('#dashboardLoading').hide(50);
         },
         () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
+          $('#dashboardLoading').hide(50);
         });
 
     }else if(window.location.pathname.includes('/dashboard/academic')){
@@ -88,9 +100,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (data) => {
           this.achievements$ = data;
+          if(this.achievements$.length == 0){
+            $('#dashboardEmpty').show(50);
+          }
+          $('#dashboardLoading').hide(50);
         },
         () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
+          $('#dashboardLoading').hide(50);
       });
 
     }
@@ -161,7 +178,7 @@ export class DashboardComponent implements OnInit {
   }
 
   approve(event, id: string){
-    $('#changeApproveLoading').show('fast');
+    $('#changeApproveLoading').show(50);
     event.preventDefault();
 
     this.auth.approveAchievement(id).subscribe(
@@ -178,11 +195,11 @@ export class DashboardComponent implements OnInit {
       }
     )
 
-  $('#changeApproveLoading').hide('fast');
+  $('#changeApproveLoading').hide(50);
   }
 
   unapprove(event, id: string){
-    $('#changeApproveLoading').show('fast');
+    $('#changeApproveLoading').show(50);
     event.preventDefault();
 
     this.auth.unapproveAchievement(id).subscribe(
@@ -199,13 +216,13 @@ export class DashboardComponent implements OnInit {
       }
     )
 
-  $('#changeApproveLoading').hide('fast');
+  $('#changeApproveLoading').hide(50);
   }
 
   deleteAcademic(event, id: string){
-    $('#deleteAcademicLoading').show('fast');
     event.preventDefault();
     if(window.confirm('Sure you want to delete this?')){
+      $('#deleteAcademicLoading').show(50);
       this.data.deleteAcademic(id).subscribe(
         (data) => {
           if(data['partialText']){
@@ -213,13 +230,14 @@ export class DashboardComponent implements OnInit {
               this.ac.snackbar('Achievement deleted Successfully!');
             }
           }
+          $('#deleteAcademicLoading').hide(50);
         },
         () =>{
           this.ac.snackbar('Server is not responding, Please try later.');
+          $('#deleteAcademicLoading').hide(50);
         }
       )
       this.refresh();
-      $('#deleteAcademicLoading').hide('fast');
     }
   }
 
@@ -235,7 +253,7 @@ export class DashboardComponent implements OnInit {
   }
 
   editAcademic(event){
-    $('#editAcademicLoading').show('fast');
+    $('#editAcademicLoading').show(50);
     event.preventDefault();
     const target = event.target;
 
@@ -250,7 +268,7 @@ export class DashboardComponent implements OnInit {
     // Sanitising data
     for(let key in achievement){
       if((achievement[key] == '') || (!safe(achievement[key].toString()))){
-        $('#editAcademicLoading').hide('fast');
+        $('#editAcademicLoading').hide(50);
         this.error$ = 'Input error. Please check ' + key;
         this.info$ = undefined;
         return;
@@ -283,7 +301,7 @@ export class DashboardComponent implements OnInit {
       }
     }, 8000);
 
-    $('#editAcademicLoading').hide('fast');
+    $('#editAcademicLoading').hide(50);
     this.refresh();
   }
 

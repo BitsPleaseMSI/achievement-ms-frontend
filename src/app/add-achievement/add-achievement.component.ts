@@ -26,7 +26,7 @@ export class AddAchievementComponent implements OnInit {
   }
 
   addAchievement(event){
-    $('#addAchievementLoading').show('fast')
+    $('#addAchievementLoading').show(50)
     this.info$ = "Adding Achievement. Please wait.";
     this.error$ = undefined;
 
@@ -36,7 +36,7 @@ export class AddAchievementComponent implements OnInit {
     try{
       this.selectedFiles.item(0);
     }catch(err){
-      $('#addAchievementLoading').hide('fast');
+      $('#addAchievementLoading').hide(50);
       this.error$ = 'Image upload error!';
       this.info$ = undefined;
       this.ac.snackbar('Image upload error!');
@@ -66,7 +66,7 @@ export class AddAchievementComponent implements OnInit {
       if(key == 'participated'){
 
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
-        $('#addAchievementLoading').hide('fast');
+        $('#addAchievementLoading').hide(50);
         this.error$ = 'Input error. Please check ' + key;
         this.info$ = undefined;
         return;
@@ -79,7 +79,7 @@ export class AddAchievementComponent implements OnInit {
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             error = false;
-            $('#addAchievementLoading').hide('fast');
+            $('#addAchievementLoading').hide(50);
             this.error$ = undefined;
             this.info$ = 'Achievement added Successfully.';
             this.ac.snackbar('Achievement added Successfully!');
@@ -89,7 +89,7 @@ export class AddAchievementComponent implements OnInit {
       () =>{
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
-        $('#addAchievementLoading').hide('fast');
+        $('#addAchievementLoading').hide(50);
       }
     )
 
