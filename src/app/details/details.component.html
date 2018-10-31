@@ -20,15 +20,15 @@
       <div *ngIf="achievement$.participated"><span class="zoom">Role :</span><p>PARTICIPANT</p></div>
       <div *ngIf="!achievement$.participated"><span class="zoom">Role :</span><p>ORGANISER</p></div>
       <div class="zoom"><span>Event Category :</span><p>{{ achievement$.category | titlecase}}</p></div>
-      <div class="zoom"><span>Event description : </span><p>{{achievement$.description}}</p></div>
+      <div class="zoom"><span>Event description : </span><p>{{ achievement$.description }}</p></div>
     <br>
       <div id="btn-area"><button id="img-btn" class="btn btn-crimson">Show Certificate</button></div>
-      <div id="img-details">
-        <img src="" alt="certifiate" >
+      <div id="img-details" style="margin:auto;width:50%;border:3px solid;padding:10px;">
+        <img src="{{ achievement$.imageUrl }}" alt="Certifiate" >
       </div>
 </div>
     <h5 *ngIf="achievement$.approved">Approved by :<span class="highlight"><strong>{{achievement$.approvedBy }}</strong></span></h5>
-    <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span class="highlight">{{achievement$.approvedBy}}</span></h5>
+    <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span class="highlight">{{ achievement$.approvedBy }}</span></h5>
 
 
   <button *ngIf="user$ && user$.department == achievement$.department" type="button" name="delete" class="btn btn-crimson" (click)="delete($event, achievement$._id)">Delete</button>

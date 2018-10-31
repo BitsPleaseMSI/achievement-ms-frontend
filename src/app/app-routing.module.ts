@@ -25,10 +25,6 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent,
-  // },
   {
     path: 'achievement/add',
     component: AddAchievementComponent,
