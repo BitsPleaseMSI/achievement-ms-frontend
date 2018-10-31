@@ -1,8 +1,8 @@
 <h1>Add achievement</h1>
 
 <div id="mainContent">
-  <h5><i>Enter the following details to add your achievement</i></h5>
-  <p>*You are required to fill all the fields.*</p>
+  <h4><i>Enter the following details to add student achievement.</i></h4>
+  <p><b>You are required to fill all the fields.</b></p>
   <div id="form-area">
 
   <div *ngIf="error$" class="alert alert-danger">
@@ -117,7 +117,7 @@
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Upload an image of your certificate.</span>
+      <span class="input-group-addon">Certifiate image</span>
       <input type="file" id="image" name="image" class="form-control" value="fileupload" (change)="detectFiles($event)" required>
    </div>
    <br>
