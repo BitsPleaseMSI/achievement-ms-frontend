@@ -23,8 +23,8 @@
       <div class="zoom"><span>Event description : </span><p>{{ achievement$.description }}</p></div>
     <br>
       <div id="btn-area"><button id="img-btn" class="btn btn-crimson">Show Certificate</button></div>
-      <div id="img-details" style="margin:auto;width:50%;border:3px solid;padding:10px;">
-        <img src="http://13.59.95.13:8081/{{ achievement$.imageUrl }}" alt="Certifiate" >
+      <div id="img-details" >
+        <img src="http://13.59.95.13:8081/{{ achievement$.imageUrl }}" alt="Certifiate" style="display:block;margin-left:auto;margin-right:auto;width:40%;border:2px solid black;">
       </div>
 </div>
     <h5 *ngIf="achievement$.approved">Approved by :<span class="highlight"><strong>{{achievement$.approvedBy }}</strong></span></h5>

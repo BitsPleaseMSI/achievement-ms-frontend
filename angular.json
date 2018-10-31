@@ -79,7 +79,7 @@
                         ],
             "assets": [
               "src/favicon.ico",
-              "src/assets/header.jpg",
+              "src/assets/header.png",
               "src/assets/loadingCustom.svg",
             ]
           }
