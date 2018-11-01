@@ -23,6 +23,7 @@ interface Achievement {
 export class DashboardComponent implements OnInit {
   achievements$: Achievement;
   editId$: string;
+  deleteId$: string;
   user: Object;
   w$: Window = window;
   error$: string;
@@ -47,9 +48,12 @@ export class DashboardComponent implements OnInit {
     $('#dashboardLoading').show(50);
     $('#dashboardEmpty').hide(50);
     this.achievements$ = [];
-    let params = window.location.search;
-    if(arg)
+    let params = undefined;
+    if(arg){
       params = arg;
+    }else{
+      params = window.location.search;
+    }
 
     if(window.location.pathname.includes('/dashboard/approved')){
       if(params==''){
@@ -99,6 +103,8 @@ export class DashboardComponent implements OnInit {
       this.data.getAcademic(params)
       .subscribe(
         (data) => {
+          console.log('data.length')
+          console.log(data.length)
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#dashboardEmpty').show(50);
@@ -189,13 +195,14 @@ export class DashboardComponent implements OnInit {
         }else{
           this.ac.snackbar(data['message'])
         }
+        $('#changeApproveLoading').hide(50);
       },
       () =>{
         this.ac.snackbar('Server is not responding, Please try later.');
+        $('#changeApproveLoading').hide(50);
       }
     )
 
-  $('#changeApproveLoading').hide(50);
   }
 
   unapprove(event, id: string){
@@ -210,35 +217,43 @@ export class DashboardComponent implements OnInit {
         }else{
           this.ac.snackbar(data['message'])
         }
+        $('#changeApproveLoading').hide(50);
       },
       () =>{
         this.ac.snackbar('Server is not responding, Please try later.');
+        $('#changeApproveLoading').hide(50);
       }
     )
 
-  $('#changeApproveLoading').hide(50);
   }
 
-  deleteAcademic(event, id: string){
+  setAcademicDeleteId(event, id: string){
     event.preventDefault();
-    if(window.confirm('Sure you want to delete this?')){
-      $('#deleteAcademicLoading').show(50);
-      this.data.deleteAcademic(id).subscribe(
-        (data) => {
-          if(data['partialText']){
-            if(JSON.parse(data['partialText'])['bool']){
-              this.ac.snackbar('Achievement deleted Successfully!');
-            }
+    this.deleteId$ = id;
+  }
+
+  deleteAcademic(event){
+    $("#deleteAcademicLoading").show(50);
+    event.preventDefault();
+    this.data.deleteAcademic(this.deleteId$).subscribe(
+      (data) => {
+        console.log(data);
+        if(data['partialText']){
+          if(JSON.parse(data['partialText'])['bool']){
+            this.ac.snackbar('Achievement deleted Successfully!');
+            this.refresh();
           }
-          $('#deleteAcademicLoading').hide(50);
-        },
-        () =>{
-          this.ac.snackbar('Server is not responding, Please try later.');
-          $('#deleteAcademicLoading').hide(50);
         }
-      )
-      this.refresh();
-    }
+        $("#deleteAcademicLoading").hide(50);
+        $('#deleteAcademicModal .close').click();
+      },
+      () =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
+        $("#deleteAcademicLoading").hide(50);
+        $('#deleteAcademicModal .close').click();
+        this.refresh();
+      }
+    )
   }
 
   editAcademicForm(event, achievement: Object){
@@ -268,9 +283,9 @@ export class DashboardComponent implements OnInit {
     // Sanitising data
     for(let key in achievement){
       if((achievement[key] == '') || (!safe(achievement[key].toString()))){
-        $('#editAcademicLoading').hide(50);
         this.error$ = 'Input error. Please check ' + key;
         this.info$ = undefined;
+        $('#editAcademicLoading').hide(50);
         return;
       }
     }
@@ -286,10 +301,12 @@ export class DashboardComponent implements OnInit {
             this.error$ = undefined;
           }
         }
+        $('#editAcademicLoading').hide(50);
       },
       () =>{
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
+        $('#editAcademicLoading').hide(50);
       }
     )
 
@@ -301,7 +318,6 @@ export class DashboardComponent implements OnInit {
       }
     }, 8000);
 
-    $('#editAcademicLoading').hide(50);
     this.refresh();
   }
 

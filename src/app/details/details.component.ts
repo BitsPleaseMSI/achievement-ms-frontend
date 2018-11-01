@@ -18,13 +18,13 @@ interface User {
 export class DetailsComponent implements OnInit {
   achievement$: any = {};
   user$: User;
+  deleteId$: string;
 
   constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private ac: AppComponent, private loc: Location){
     this.data.getAchievement( this.route.snapshot.params['id'] ).then(
       (data) => {
         if(data){
           this.achievement$ = data;
-        }else{
         }
       },
       () =>{
@@ -40,34 +40,42 @@ export class DetailsComponent implements OnInit {
         this.user$ = data;
       }
     )
-      $("#img-details").hide();
 
-      $("#img-btn").click(function(){
-        $(this).text(function(i, text){
-          return text === "Show Certificate" ? "Hide Certificate" : "Show Certificate";
-      });
-        $("#img-details").slideToggle(50);
-        
-      });
+    $("#img-details").hide();
+    $("#img-btn").click(function(){
+      $(this).text(function(i, text){
+        return text === "Show Certificate" ? "Hide Certificate" : "Show Certificate";
+    });
+      $("#img-details").slideToggle(50);
+    });
   }
 
-  delete(event, id: string){
-    event.preventDefault();
-    if(window.confirm('Sure you want to delete this?')){
-      this.data.deleteAchievement(id).subscribe(
-        (data) => {
-          if(data['bool']){
-            this.ac.snackbar('Deleted successfully!')
-            this.loc.back();
-          }else{
-            this.ac.snackbar('Delete unsuccessful!');
-          }
-        },
-        () =>{
-          this.ac.snackbar('Server is not responding, Please try later.');
-        }
-      )
+  delete(event){
+
+    if(this.user$ && (this.user$.department != this.achievement$.department)){
+      this.ac.snackbar('This achievement is not under your department.');
+      return;
     }
+
+    $("#deleteAchievementLoading").show(50);
+    event.preventDefault();
+    this.data.deleteAchievement(this.achievement$._id).subscribe(
+      (data) => {
+        if(data['bool']){
+          this.ac.snackbar('Deleted successfully!')
+          this.loc.back();
+        }else{
+          this.ac.snackbar('Delete unsuccessful!');
+        }
+        $('#deleteModal .close').click();
+        $("#deleteAchievementLoading").hide(50);
+      },
+      () =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
+        $('#deleteModal .close').click();
+        $("#deleteAchievementLoading").hide(50);
+      }
+    )
 
   }
 

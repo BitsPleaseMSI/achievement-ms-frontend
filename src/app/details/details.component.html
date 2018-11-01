@@ -1,4 +1,26 @@
 <div id="mainContent">
+
+  <div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Delete achievement</h4>
+        </div>
+        <div class="modal-body">
+          <form (submit)="delete($event)" class="form">
+            <div id="btn-area">
+              <h3>Are you sure you want to delete this achievement?</h3>
+              <button type="button" name="delete" class="btn btn-crimson" (click)="delete($event)">Yes</button>
+              <img id="deleteAchievementLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
+              &nbsp;<button type="button" name="delete" class="btn btn-crimson" data-dismiss="modal">No</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <h1><span class="highlight">Achievement of {{achievement$.name |uppercase}}</span></h1>
 
   <div id="student-details">
@@ -30,7 +52,6 @@
     <h5 *ngIf="achievement$.approved">Approved by :<span class="highlight"><strong>{{achievement$.approvedBy }}</strong></span></h5>
     <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span class="highlight">{{ achievement$.approvedBy }}</span></h5>
 
-
-  <button *ngIf="user$ && user$.department == achievement$.department" type="button" name="delete" class="btn btn-crimson" (click)="delete($event, achievement$._id)">Delete</button>
+  <button *ngIf="user$ && user$.department == achievement$.department" class="btn btn-danger" type="button" name="delete" data-toggle="modal" data-target="#deleteModal">Delete ?</button>
 
 </div>
