@@ -22,7 +22,7 @@ export class AddAchievementComponent implements OnInit {
 
   ngOnInit() {}
 
-  autoBatch(){
+  autoBatch(event){
     event.preventDefault();
     let tmp = 0;
     let roll = ($('#rollNo')[0] as HTMLInputElement).value.substr(-5);
