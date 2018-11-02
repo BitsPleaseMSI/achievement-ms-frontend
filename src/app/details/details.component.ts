@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { AppComponent } from '../app.component';
 import * as $ from 'jquery';
+
 interface User {
     department: any;
 }
@@ -77,6 +78,50 @@ export class DetailsComponent implements OnInit {
       }
     )
 
+  }
+
+  approve(event, id: string){
+    event.preventDefault();
+    // $('#changeDetApproveLoading').show(50);
+    event.preventDefault();
+
+    this.auth.approveAchievement(id).subscribe(
+      (data) => {
+        if(data['bool']){
+          this.loc.back();
+          this.ac.snackbar('Approved successfully!');
+        }else{
+          this.ac.snackbar(data['message']);
+        }
+        // $('#changeApproveLoading').hide(50);
+      },
+      () =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
+        // $('#changeApproveLoading').hide(50);
+      }
+    )
+
+
+  }
+
+  unapprove(event, id: string){
+    event.preventDefault();
+
+    this.auth.unapproveAchievement(id).subscribe(
+      (data) => {
+        if(data['bool']){
+          this.loc.back();
+          this.ac.snackbar('Unapproved successfully!')
+        }else{
+          this.ac.snackbar(data['message'])
+        }
+        $('#changeApproveLoading').hide(50);
+      },
+      () =>{
+        this.ac.snackbar('Server is not responding, Please try later.');
+        $('#changeApproveLoading').hide(50);
+      }
+    )
   }
 
 }
