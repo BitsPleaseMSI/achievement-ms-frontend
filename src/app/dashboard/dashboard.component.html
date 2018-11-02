@@ -256,9 +256,9 @@
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Name</th>
-    <th>Enrollment No.</th>
+    <th>Enrll. No.</th>
     <th>Department</th>
-    <th>Section</th>
+    <th>Sec</th>
     <th>Shift</th>
     <th>Role</th>
     <th>Date</th>
@@ -272,7 +272,8 @@
     <td>{{ achievement.rollNo }}</td>
     <td>{{ achievement.department | uppercase }}</td>
     <td>{{ achievement.section | uppercase}}</td>
-    <td>{{ achievement.shift | uppercase }}</td>
+    <td *ngIf="achievement.shift=='morning'">Mor.</td>
+    <td *ngIf="achievement.shift=='evening'">Eve.</td>
     <td *ngIf="achievement.participated">PARTICIPANT</td>
     <td *ngIf="!achievement.participated">ORGANISER</td>
     <td>{{ achievement.date }}</td>

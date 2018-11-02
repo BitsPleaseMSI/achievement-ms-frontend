@@ -61,7 +61,6 @@ color: #F3875D;
 ----------------------------------------------------- */
 .wrapper {
     display: flex;
-    width:100%;
     align-items: stretch;
 
 }
@@ -195,6 +194,14 @@ a.article, a.article:hover {
     background-color:white;;
     width:100%;
 }
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    border:none;
+    color: #F3875D;
+    display: none;
+}
+
 
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -203,11 +210,15 @@ a.article, a.article:hover {
     #sidebar {
         margin-left: -250px;
     }
+
+    .wrapper{
+        margin-left: -250px;
+    }
     #sidebar.active {
         margin-left: 0;
     }
-    #sidebarCollapse span {
-        display: none;
+    #sidebarCollapse {
+        display: block;
     }
 }
 
@@ -227,9 +238,6 @@ a.article, a.article:hover {
     font-size: 17px;
 }
 
-.btn-show-hide{
-
-}
 #snackbar.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
@@ -258,9 +266,3 @@ a.article, a.article:hover {
 
 }
 
-#sidebarCollapse {
-    width: 40px;
-    height: 40px;
-    border:none;
-    color: #F3875D;
-}
