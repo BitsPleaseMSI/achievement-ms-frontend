@@ -21,7 +21,9 @@
     <br>
     <div class="input-group">
       <span class="input-group-addon">Enrollment No.</span>
-      <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No.">
+      <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No." (change)="autoBatch($event)">
+      <span class="input-group-addon">Batch:</span>
+      <input type="text" id="batch" class="form-control" readonly>
     </div>
     <br>
     <div class="input-group">
@@ -62,14 +64,6 @@
         <option value="morning">Morning</option>
         <option value="evening">Evening</option>
       </select>
-    </div>
-    <br>
-
-    <div class="input-group">
-      <span class="input-group-addon">Batch</span>
-      <input type="number" id="sessionFrom" class="form-control" placeholder="Begining year">
-      <span class="input-group-addon">-</span>
-      <input type="number" id="sessionTo" class="form-control" placeholder="Ending year">
     </div>
     <br>
     <div class="input-group">

@@ -15,10 +15,34 @@ export class AddAchievementComponent implements OnInit {
   info$: string;
   selectedFiles: FileList;
   fileName: string;
+  sessionFrom: number;
+  sessionTo: number;
 
   constructor(private data: DataAccessService, private ac: AppComponent) {}
 
   ngOnInit() {}
+
+  autoBatch(){
+    event.preventDefault();
+    let tmp = 0;
+    let roll = ($('#rollNo')[0] as HTMLInputElement).value.substr(-5);
+    if(roll == '')
+      return;
+
+    let year = roll.substr(-2);
+    let prog = roll.substr(0, 3);
+
+    if(prog == '021'){
+      tmp = Number(year) + 2;
+    }else{
+      tmp = Number(year) + 3;
+    }
+
+    ($('#batch')[0] as HTMLInputElement).value = '20' + year + '-' + '20' + tmp.toString();
+
+    this.sessionFrom = parseInt('20' + year);
+    this.sessionTo = parseInt('20' + tmp);
+  }
 
   detectFiles(event) {
     this.selectedFiles = event.target.files;
@@ -47,8 +71,8 @@ export class AddAchievementComponent implements OnInit {
       target.querySelector('#name').value,
       target.querySelector('#rollNo').value,
       target.querySelector('#section').value,
-      target.querySelector('#sessionFrom').value,
-      target.querySelector('#sessionTo').value,
+      this.sessionFrom,
+      this.sessionTo,
       target.querySelector('#semester').value,
       target.querySelector('#department').value,
       target.querySelector('#shift').value,

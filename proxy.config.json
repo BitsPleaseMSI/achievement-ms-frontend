@@ -1,0 +1,8 @@
+{
+  "/*/": {
+    "target": "https://ams-staging-295247097.us-east-2.elb.amazonaws.com",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+  }
+}

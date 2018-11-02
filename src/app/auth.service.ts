@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   validUser(): Promise<boolean>{
-    console.log('[currentUser]')
+    console.log('[validUser]')
     let token = ''
 
     if(localStorage.getItem('token')){
