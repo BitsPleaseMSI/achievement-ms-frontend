@@ -186,7 +186,7 @@ export class DashboardComponent implements OnInit {
   approve(event, id: string){
     $('#changeApproveLoading' + id).show(50);
     event.preventDefault();
-    return;
+
     this.auth.approveAchievement(id).subscribe(
       (data) => {
         if(data['bool']){
