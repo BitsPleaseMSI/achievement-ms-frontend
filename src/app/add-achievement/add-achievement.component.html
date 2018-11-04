@@ -127,4 +127,13 @@
   </div>
     </form>
 </div>
+
+<div *ngIf="error$" class="alert alert-danger">
+  <p>Error: {{ error$ }}</p>
+</div>
+
+<div *ngIf="info$" class="alert alert-success" >
+  <p>{{ info$ }}</p>
+</div>
+
 </div>

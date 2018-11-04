@@ -247,7 +247,7 @@
 <!-- <h2>Achievements</h2> -->
 
 <div id="dashboardLoading" hidden="true">
-  <h3>Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;">
+  <h3 style="display:inline-block;">Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;">
 </div>
 
 <h3 id="dashboardEmpty" hidden="true">No achievements found!</h3>
@@ -282,7 +282,9 @@
     <td>
       <button *ngIf="achievement.approved" class="btn btn-danger" type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
       <button *ngIf="!achievement.approved" class="btn btn-success" type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
-      <img id="changeApproveLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
+    </td>
+    <td>
+      <img id="changeApproveLoading{{achievement._id}}" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
     </td>
   </tr>
 </table>

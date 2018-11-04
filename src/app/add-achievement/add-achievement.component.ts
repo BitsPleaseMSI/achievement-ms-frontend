@@ -91,7 +91,7 @@ export class AddAchievementComponent implements OnInit {
 
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
         $('#addAchievementLoading').hide(50);
-        this.error$ = 'Input error. Please check ' + key;
+        this.error$ = 'Please check ' + key;
         this.info$ = undefined;
         return;
       }

@@ -184,9 +184,9 @@ export class DashboardComponent implements OnInit {
   }
 
   approve(event, id: string){
-    $('#changeApproveLoading').show(50);
+    $('#changeApproveLoading' + id).show(50);
     event.preventDefault();
-
+    return;
     this.auth.approveAchievement(id).subscribe(
       (data) => {
         if(data['bool']){
@@ -195,18 +195,18 @@ export class DashboardComponent implements OnInit {
         }else{
           this.ac.snackbar(data['message'])
         }
-        $('#changeApproveLoading').hide(50);
+        $('#changeApproveLoading' + id).hide(50);
       },
       () =>{
         this.ac.snackbar('Server is not responding, Please try later.');
-        $('#changeApproveLoading').hide(50);
+        $('#changeApproveLoading' + id).hide(50);
       }
     )
 
   }
 
   unapprove(event, id: string){
-    $('#changeApproveLoading').show(50);
+    $('#changeApproveLoading' + id).show(50);
     event.preventDefault();
 
     this.auth.unapproveAchievement(id).subscribe(
@@ -217,11 +217,11 @@ export class DashboardComponent implements OnInit {
         }else{
           this.ac.snackbar(data['message'])
         }
-        $('#changeApproveLoading').hide(50);
+        $('#changeApproveLoading' + id).hide(50);
       },
       () =>{
         this.ac.snackbar('Server is not responding, Please try later.');
-        $('#changeApproveLoading').hide(50);
+        $('#changeApproveLoading' + id).hide(50);
       }
     )
 
