@@ -44,8 +44,9 @@ export class AppComponent implements OnInit {
   getdata(){
     this.auth.currentUser().subscribe(
       (data) => {
-        if( data['email'] )
+        if( data['email'] ){
           this.userData$ = data;
+        }
       }
     )
   }

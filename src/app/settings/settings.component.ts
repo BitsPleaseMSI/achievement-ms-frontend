@@ -92,7 +92,7 @@ export class SettingsComponent implements OnInit {
                   }
                 }
               },
-              (error) => {
+              () => {
                 this.info$ = undefined;
                 this.ac.snackbar('Server is not responding, Please try later.');
               }

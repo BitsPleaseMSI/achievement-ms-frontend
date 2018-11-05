@@ -64,6 +64,7 @@ export class DashboardComponent implements OnInit {
       this.auth.currentUser().subscribe(
         (user) => {
           params += '&department=' +  user.department;
+          params += '&shift=' +  user.shift;
           this.data.getApprovedAchievements(params)
           .subscribe(
             (data) => {

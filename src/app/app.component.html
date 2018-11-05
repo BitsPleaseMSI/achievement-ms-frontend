@@ -81,7 +81,7 @@
       <div class="sidebar-header">
         <div>
           <!-- afetr 20 -->
-          <p id="date">version: 6</p>
+          <p id="date">version: 7</p>
           <br>
           <p id="date">{{date | date:'medium'}}</p>
 
@@ -95,6 +95,8 @@
             Science</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='education'">Department: <span class="highlight">Education</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='commerce'">Department: <span class="highlight">Commerce</span></h5>
+        <h5 *ngIf="userData$ && userData$['shift']=='morning'">Shift: <span class="highlight">Morning</span></h5>
+        <h5 *ngIf="userData$ && userData$['shift']=='evening'">Shift: <span class="highlight">Evening</span></h5>
 
       </div>
 
