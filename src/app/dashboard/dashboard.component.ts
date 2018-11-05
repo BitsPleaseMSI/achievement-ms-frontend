@@ -24,10 +24,10 @@ export class DashboardComponent implements OnInit {
   achievements$: Achievement;
   editId$: string;
   deleteId$: string;
-  user: Object;
   w$: Window = window;
   error$: string;
   info$: string;
+  fileName$: string;
 
   constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
     this.achievements$ = [];
@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
   refresh(arg?: string){
     $('#dashboardLoading').show(50);
     $('#dashboardEmpty').hide(50);
+    $('#downloadList').hide(50);
     this.achievements$ = [];
     let params = undefined;
     if(arg){
@@ -69,6 +70,8 @@ export class DashboardComponent implements OnInit {
               this.achievements$ = data;
               if(this.achievements$.length == 0){
                 $('#dashboardEmpty').show(50);
+              }else{
+                $('#downloadList').show(50);
               }
               $('#dashboardLoading').hide(50);
           },
@@ -90,6 +93,8 @@ export class DashboardComponent implements OnInit {
           this.achievements$ = data['data'];
           if(this.achievements$.length == 0){
             $('#dashboardEmpty').show(50);
+          }else{
+            $('#downloadList').show(50);
           }
           $('#dashboardLoading').hide(50);
         },
@@ -108,6 +113,8 @@ export class DashboardComponent implements OnInit {
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#dashboardEmpty').show(50);
+          }else{
+            $('#downloadList').show(50);
           }
           $('#dashboardLoading').hide(50);
         },
@@ -319,6 +326,81 @@ export class DashboardComponent implements OnInit {
     }, 8000);
 
     this.refresh();
+  }
+
+  downloadList(){
+    let replace, headers, concat;
+    if(window.location.pathname.includes('academic')){
+      this.fileName$ = 'Academic_Achievements.csv'
+      headers = [
+        'Name',
+        'Enrollment No.',
+        'Course',
+        'Batch',
+        'Category',
+      ]
+      replace = {
+        'category':{
+          'both': 'Gold Medalist & Exemplary Performance',
+          'exemplary': 'Exemplary Performance',
+          'goldmedalist': 'Gold Medalist',
+        },
+      }
+
+    }else{
+      if(window.location.pathname.includes('approved')){
+        this.fileName$ = this.ac.userData$['firstName'] + '_' + this.ac.userData$['lastName'] + '_Approved_Achievements.csv'
+      }else if(window.location.pathname.includes('unapproved')){
+        this.fileName$ = this.ac.userData$['firstName'] + '_' + this.ac.userData$['lastName'] + '_Unapproved_Achievements.csv'
+      }
+      headers = [
+        'Semester',
+        'Session From',
+        'Event name',
+        'Name',
+        'Role',
+        'Description',
+        'Enrollment No.',
+        'Shift',
+        'Session To',
+        'Section',
+        'Department',
+        'Date',
+        // 'Rating',
+        'Category',
+        'Title',
+        'Image Url',
+        'Status',
+        'Venue',
+      ]
+      replace = {
+        'approved':{
+          'true': 'Approved',
+          'false': 'Unapproved',
+        },
+        'participated':{
+          'true': 'Participated',
+          'false': 'Oraganized',
+        },
+      }
+      concat = {
+        'imageUrl':'http://13.59.95.13:8081/',
+      }
+
+    }
+
+    //Passing by value so that achievements are not modified.
+    let data = JSON.parse(JSON.stringify(this.achievements$));
+    let csv = this.data.objArrToCSV(data, replace, concat, headers);
+    let blob = new Blob([csv], { type: 'text/csv' });
+
+    let a = document.createElement("a");
+    let blobURL = URL.createObjectURL(blob);
+    a.download = this.fileName$;
+    a.href = blobURL;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
 }

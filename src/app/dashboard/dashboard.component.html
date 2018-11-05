@@ -252,6 +252,8 @@
 
 <h3 id="dashboardEmpty" hidden="true">No achievements found!</h3>
 
+<button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()">Download as CSV</button>
+
 <table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname.includes('/dashboard/approved') || w$.location.pathname.includes('/dashboard/unapproved'))">
   <tr id="table-heading">
     <th>S.No.</th>

@@ -162,6 +162,8 @@
 
   <h3 id="homeEmpty" hidden="true">No achievements found!</h3>
 
+  <button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()">Download as CSV</button>
+
   <div class="table-container">
   <table class="table-responsive" *ngIf="w$.location.pathname.includes('/home/achievements') && achievements$.length > 0">
     <tr id="table-heading">

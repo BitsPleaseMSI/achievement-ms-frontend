@@ -23,6 +23,7 @@ interface Achievement {
 export class HomeComponent implements OnInit {
   achievements$: Achievement;
   w$: Window = window;
+  fileName$: string;
 
   constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private ac: AppComponent){
     this.achievements$ = [];
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
 
   getdata(params: string){
     $('#homeEmpty').hide(50);
+    $('#downloadList').hide(50);
     $('#homeLoading').show(50);
     if(window.location.pathname.includes('/home/achievements')){
 
@@ -50,6 +52,8 @@ export class HomeComponent implements OnInit {
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#homeEmpty').show(50);
+          }else{
+            $('#downloadList').show(50);
           }
           $('#homeLoading').hide(50);
         },
@@ -66,6 +70,8 @@ export class HomeComponent implements OnInit {
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#homeEmpty').show(50);
+          }else{
+            $('#downloadList').show(50);
           }
           $('#homeLoading').hide(50);
         },
@@ -135,6 +141,80 @@ export class HomeComponent implements OnInit {
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
     this.getdata('?' + filters.toString());
+  }
+
+  downloadList(){
+    let replace, headers, concat;
+    if(window.location.pathname.includes('/home/academic')){
+      this.fileName$ = 'Academic_Achievements.csv'
+      headers = [
+        'Name',
+        'Enrollment No.',
+        'Course',
+        'Batch',
+        'Category',
+      ]
+      replace = {
+        'category':{
+          'both': 'Gold Medalist & Exemplary Performance',
+          'exemplary': 'Exemplary Performance',
+          'goldmedalist': 'Gold Medalist',
+        },
+      }
+
+    }else if(window.location.pathname.includes('/home/achievements')){
+      this.fileName$ = 'Approved_Achievements.csv'
+      headers = [
+        'Semester',
+        'Session From',
+        'Event name',
+        'Name',
+        'Role',
+        'Description',
+        'Enrollment No.',
+        'Shift',
+        'Session To',
+        'Section',
+        'Department',
+        'Date',
+        // 'Rating',
+        'Category',
+        'Title',
+        'Image Url',
+        'Status',
+        'Venue',
+      ]
+      replace = {
+        'approved':{
+          'true': 'Approved',
+          'false': 'Unapproved',
+        },
+        'participated':{
+          'true': 'Participated',
+          'false': 'Oraganized',
+        },
+      }
+      concat = {
+        'imageUrl':'http://13.59.95.13:8081/',
+      }
+
+    }else{
+      console.log("Error location not matched!");
+    }
+    //Passing by value so that achievements are not modified.
+
+    let data = JSON.parse(JSON.stringify(this.achievements$));
+    let csv = this.data.objArrToCSV(data, replace, concat, headers);
+    let blob = new Blob([csv], { type: 'text/csv' });
+
+    let a = document.createElement("a");
+    let blobURL = URL.createObjectURL(blob);
+    a.download = this.fileName$;
+    a.href = blobURL;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
   }
 
 }
