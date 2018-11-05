@@ -58,7 +58,6 @@
       </select>
     </div>
     <br>
-
     <div class="input-group">
       <span class="input-group-addon">Shift</span>
       <select id="shift" name="shift" class="form-control" placeholder="Shift">
@@ -128,4 +127,13 @@
   </div>
     </form>
 </div>
+
+<div *ngIf="error$" class="alert alert-danger">
+  <p>Error: {{ error$ }}</p>
+</div>
+
+<div *ngIf="info$" class="alert alert-success" >
+  <p>{{ info$ }}</p>
+</div>
+
 </div>

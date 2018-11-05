@@ -3,6 +3,7 @@ export class User{
     public firstName: string,
     public lastName: string,
     public department: string,
+    public shift: string,
     public email: string,
     public password: string,
     public code: string,

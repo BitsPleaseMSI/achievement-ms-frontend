@@ -1,3 +1,4 @@
+
 <h1 id="msi-header">Maharaja Surajmal Institute</h1>
 
 <h1><span>H</span>ome</h1>
@@ -164,6 +165,10 @@
 
   <h3 id="homeEmpty" hidden="true">No achievements found!</h3>
 
+  <button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()"><i class="material-icons">
+    cloud_download
+    </i> Download as CSV</button> 
+<br>
   <div class="table-container">
   <table class="table-responsive" *ngIf="w$.location.pathname.includes('/home/achievements') && achievements$.length > 0">
     <tr id="table-heading">
@@ -189,7 +194,11 @@
       <td *ngIf="achievement.participated">PARTICIPANT</td>
       <td *ngIf="!achievement.participated">ORGANISER</td>
       <td>{{ achievement.category | uppercase }}</td>
-      <td><button class="btn btn-blue" routerLink="/achievement/{{ achievement._id }}" id="detail-link">View details</button></td>
+      <td><button class="btn btn-blue" routerLink="/achievement/{{ achievement._id }}" id="detail-link"><i class="material-icons">
+        remove_red_eye
+        </i>
+        
+        View details</button></td>
     </tr>
   </table>
 </div>

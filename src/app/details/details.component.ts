@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 
 interface User {
     department: any;
+    shift: any;
 }
 
 @Component({
@@ -53,7 +54,7 @@ export class DetailsComponent implements OnInit {
 
   delete(event){
 
-    if(this.user$ && (this.user$.department != this.achievement$.department)){
+    if(this.user$ && ((this.user$.department != this.achievement$.department) || ((this.user$.shift != this.achievement$.shift)))){
       this.ac.snackbar('This achievement is not under your department.');
       return;
     }

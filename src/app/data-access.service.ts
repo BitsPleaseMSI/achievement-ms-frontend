@@ -13,6 +13,61 @@ export class DataAccessService {
 
   constructor(private http: HttpClient) { }
 
+  objArrToCSV(data: any, replace?: Object, concat?: Object, headers?: string[]): string{
+    const array = typeof data != 'object' ? JSON.parse(data) : data;
+    const index = Object.keys(array[0]);
+
+    let find = [''];
+    let str = '';
+
+    if(!replace) replace = {'':''};
+    if(!concat) concat = {'':''};
+
+    if(headers){
+      str = headers.join(',');
+      str += '\r\n';
+    }else{
+      str = '';
+    }
+
+    for(let i in array){
+      let line = '';
+      for(let col in index){
+
+        // blacklisting columns
+        if(index[col] == '_id') continue;
+        if(index[col] == 'approvedBy') continue;
+        if(index[col] == 'rating') continue;
+
+        if (line != '') line += ',';
+
+        // replacing values based on column names
+        if(replace[index[col]]){
+          find = Object.keys(replace[index[col]]);
+          array[i][index[col]] = array[i][index[col]].toString().replace(
+            RegExp(find.join('|'), 'i'), function(search){return replace[index[col]][search];}
+          )}
+
+        if(concat[index[col]]){
+          array[i][index[col]] = concat[index[col]].concat(array[i][index[col]].toString());
+        }
+
+        // sanitising newline and return characters
+        array[i][index[col]] = array[i][index[col]].toString().replace('\n','');
+        array[i][index[col]] = array[i][index[col]].toString().replace('\r','');
+
+        if(index[col] == 'rollNo')
+          line += '="' + array[i][index[col]] + '"';
+        else
+          line += '"' + array[i][index[col]] + '"';
+      }
+
+      str += line + '\r\n';
+    }
+    console.log(str);
+    return str;
+  }
+
   getAchievement(id: string): Promise<any>{
     console.log('[getAchievement]')
     return this.http.get<any>( api + '/achievements/get/' + id).toPromise()

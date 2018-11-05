@@ -15,9 +15,7 @@
 </head>
 
 <body>
-
-  <div class="wrapper">
-
+ 
     <div class="modal fade" id="loginModal" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -77,11 +75,14 @@
       </div>
     </div>
 
+  <div class="wrapper">
+   
+
     <nav id="sidebar">
       <div class="sidebar-header">
-       
-        <div id="img-div"><img src="/assets/header.png"></div>
-        <h1 id="sidebar-header">Student Achievement Management System</h1><br>
+      
+        <div id="img-div"><a href="http://msi-ggsip.org/"><img src="/assets/header.png"></a></div>
+        <h1 id="sidebar-header">Achievement Management System</h1><br>
         <h5 *ngIf="userData$">Welcome, <span class="highlight">{{userData$['firstName']}} {{userData$['lastName']}}</span></h5>
         <h5 *ngIf="!userData$">Welcome, <span class="highlight">Guest</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='management'">Department: <span class="highlight">Management</span></h5>
@@ -89,6 +90,8 @@
             Science</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='education'">Department: <span class="highlight">Education</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='commerce'">Department: <span class="highlight">Commerce</span></h5>
+        <h5 *ngIf="userData$ && userData$['shift']=='morning'">Shift: <span class="highlight">Morning</span></h5>
+        <h5 *ngIf="userData$ && userData$['shift']=='evening'">Shift: <span class="highlight">Evening</span></h5>
 
       </div>
 
@@ -102,23 +105,30 @@
         <li *ngIf="!userData$"><a data-toggle="modal" data-target="#loginModal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;<strong>Faculty
               Login</strong></a></li>
         <li [class.active]="w$.location.pathname=='/about'"><a routerLink="/about"><i class="material-icons">info</i>&nbsp;&nbsp;&nbsp;About</a></li>
-        
+
         <li *ngIf="userData$" (click)="logout()"><a routerLink="/home/achievements"><i class="material-icons">input</i><strong>&nbsp;&nbsp;&nbsp;Logout</strong></a></li>
       </ul>
     </nav>
-
-
+    
+    
     <div id="content">
-
       <div id="snackbar">
         <h4>{{ message$ }}</h4>
       </div>
-      <router-outlet></router-outlet>
+      <div>
+      <button type="button" id="sidebarCollapse" class="navbar-btn">
+         <span></span>
+         <span></span>
+         <span></span>
+      </button>
+    </div>
+            <router-outlet></router-outlet>
+           
     </div>
   </div>
-
-
-
+  
+  <a href="#content" id="myBtn" title="Go to top">Top</a>
 </body>
+
 
 </html>

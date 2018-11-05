@@ -44,8 +44,9 @@ export class AppComponent implements OnInit {
   getdata(){
     this.auth.currentUser().subscribe(
       (data) => {
-        if( data['email'] )
+        if( data['email'] ){
           this.userData$ = data;
+        }
       }
     )
   }
@@ -58,6 +59,18 @@ export class AppComponent implements OnInit {
       $('#sidebar').toggleClass('active');
       $(this).toggleClass('active');
     });
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+    
+    
 
   }
 
