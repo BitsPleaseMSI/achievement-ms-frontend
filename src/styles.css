@@ -11,7 +11,7 @@
 
 .material-icons.md-56{
     font-size: 10em;
-    color: #F3875D;
+    color: #D81E5B;
     text-align: center;
 }
 
@@ -34,26 +34,68 @@ form{
 
 .btn.btn-block{
     display:block;
-    background-color: #F3875D;
+    background-color: #D81E5B;
     width: auto;
     margin: 0 auto;
 }
 
 .btn.btn-crimson{
     font-size: 16px;   
-    background-color: #F3875D;
+    background-color: #D81E5B;
     color:white; 
 
 }
 
-.btn:hover.btn-crimson:hover{
+.btn.btn-green{
+    font-size: 16px;
+    background-color:#5cb85c;
+    color:white;
+}
+
+
+.btn:hover.btn-green:hover{
     background-color: white;
-    border:1px solid #F3875D;
+    border:1px solid #5cb85c;
     color:black;
     transition: 800ms;
 }
 
 
+.btn:hover.btn-crimson:hover{
+    background-color: white;
+    border:1px solid #D81E5B;
+    color:black;
+    transition: 800ms;
+}
+
+.btn.btn-blue{
+    font-size: 16px;
+    background-color:#2e6da4;
+    color:white;
+}
+
+
+.btn:hover.btn-blue:hover{
+    background-color: white;
+    border:1px solid #2e6da4;
+    color:black;
+    transition: 800ms;
+}
+
+
+.btn.btn-red{
+    font-size: 16px;
+    background-color:red;
+    color:white;
+}
+
+
+.btn:hover.btn-red:hover{
+    background-color: white;
+    border:1px solid red;
+    color:black;
+    transition: 800ms;
+}
 
 #btn-area{
     width:auto;
@@ -65,7 +107,7 @@ h5{
 }
 
 h1{
-    color: #F3875D;
+    color: #D81E5B;
 }
 
 .home-filters input{
@@ -102,3 +144,7 @@ tr:nth-child(even){
     font-weight: bold;
 }
 
+
+#msi-header{
+    color: #D81E5B
+}

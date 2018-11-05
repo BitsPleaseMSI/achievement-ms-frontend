@@ -186,7 +186,7 @@ export class DashboardComponent implements OnInit {
   approve(event, id: string){
     $('#changeApproveLoading').show(50);
     event.preventDefault();
-
+    return;
     this.auth.approveAchievement(id).subscribe(
       (data) => {
         if(data['bool']){
@@ -202,12 +202,14 @@ export class DashboardComponent implements OnInit {
         $('#changeApproveLoading').hide(50);
       }
     )
+    return ;
 
   }
 
   unapprove(event, id: string){
     $('#changeApproveLoading').show(50);
     event.preventDefault();
+    return ;
 
     this.auth.unapproveAchievement(id).subscribe(
       (data) => {
@@ -224,7 +226,6 @@ export class DashboardComponent implements OnInit {
         $('#changeApproveLoading').hide(50);
       }
     )
-
   }
 
   setAcademicDeleteId(event, id: string){

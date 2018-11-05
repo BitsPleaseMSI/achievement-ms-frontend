@@ -156,11 +156,19 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 .nav-pills > .active > a, .nav-pills > .active > a:hover {
-  background-color:#F3875D;
+  background-color:#81749C;
   color:white;
 }
 
 a:hover{
   color:#636e72;
+}
+
+#changeApproveLoading{
+  position: fixed;
+  z-index: 1000;
+  top:50%;
+  right:5%;
 }

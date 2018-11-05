@@ -1,3 +1,4 @@
+<h1 id="msi-header">Maharaja Surajmal Institute</h1>
 <h1><span>T</span>eacher Dashboard</h1>
 
     <div id="dashboard-taskbar">
@@ -5,7 +6,7 @@
         <ul class="nav nav-pills">
           <li><a routerLink="/achievement/add">Add achievement</a></li>
           <li><a routerLink="/academic/add">Add academic achievement</a></li>
-          <li><a routerLink="/user/settings">Settings</a></li>
+          <li><a routerLink="/user/settings">Update profile</a></li>
         </ul>
         </div>
 
@@ -278,10 +279,10 @@
     <td *ngIf="!achievement.participated">ORGANISER</td>
     <td>{{ achievement.date }}</td>
     <td>{{ achievement.category | uppercase }}</td>
-    <td><button class="btn btn-primary" routerLink="/achievement/{{ achievement._id }}">View Details</button></td>
+    <td><button class="btn btn-blue" routerLink="/achievement/{{ achievement._id }}">View Details</button></td>
     <td>
-      <button *ngIf="achievement.approved" class="btn btn-danger" type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
-      <button *ngIf="!achievement.approved" class="btn btn-success" type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
+      <button *ngIf="achievement.approved" class="btn btn-red" type="button" name="unapprove" (click)="unapprove($event, achievement._id)">Unpprove</button>
+      <button *ngIf="!achievement.approved" class="btn btn-green" type="button" name="approve" (click)="approve($event, achievement._id)">Approve</button>
       <img id="changeApproveLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
     </td>
   </tr>
@@ -309,10 +310,10 @@
       <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
       <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
       <td>
-        <button class="btn btn-danger" type="button" name="delete" data-toggle="modal" data-target="#editAcademicModal" (click)="editAcademicForm($event, achievement)">Edit</button>
+        <button class="btn btn-red" type="button" name="delete" data-toggle="modal" data-target="#editAcademicModal" (click)="editAcademicForm($event, achievement)">Edit</button>
       </td>
       <td>
-        <button class="btn btn-danger" type="button" name="delete" data-toggle="modal" data-target="#deleteAcademicModal" (click)="setAcademicDeleteId($event, achievement._id)">Delete</button>
+        <button class="btn btn-red" type="button" name="delete" data-toggle="modal" data-target="#deleteAcademicModal" (click)="setAcademicDeleteId($event, achievement._id)">Delete</button>
         <img id="deleteAcademicLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:50px;height:50px;" hidden="true">
       </td>
     </tr>

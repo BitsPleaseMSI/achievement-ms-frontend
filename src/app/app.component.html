@@ -79,15 +79,9 @@
 
     <nav id="sidebar">
       <div class="sidebar-header">
-        <div>
-          <!-- afetr 20 -->
-          <p id="date">version: 3</p>
-          <br>
-          <p id="date">{{date | date:'medium'}}</p>
-
-        </div>
+       
         <div id="img-div"><img src="/assets/header.png"></div>
-        <h1 id="sidebar-header">Achievement Management System</h1><br>
+        <h1 id="sidebar-header">Student Achievement Management System</h1><br>
         <h5 *ngIf="userData$">Welcome, <span class="highlight">{{userData$['firstName']}} {{userData$['lastName']}}</span></h5>
         <h5 *ngIf="!userData$">Welcome, <span class="highlight">Guest</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='management'">Department: <span class="highlight">Management</span></h5>
@@ -115,13 +109,6 @@
 
 
     <div id="content">
-        <!-- <button class="btn-show-hide" type="button" id="sidebarCollapse">
-          <i class="material-icons md-28" id="icon">
-            reorder
-          </i>
-
-        </button> -->
-
 
       <div id="snackbar">
         <h4>{{ message$ }}</h4>
