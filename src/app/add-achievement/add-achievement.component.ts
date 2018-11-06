@@ -50,7 +50,7 @@ export class AddAchievementComponent implements OnInit {
   }
 
   addAchievement(event){
-    $('#addAchievementLoading').show(50)
+    $('#addAchievementLoading').show(50);
     this.info$ = "Adding Achievement. Please wait.";
     this.error$ = undefined;
 

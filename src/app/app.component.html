@@ -6,129 +6,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Our Custom CSS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 </head>
 
 <body>
- 
-    <div class="modal fade" id="loginModal" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Login</h4>
+  <div class="modal fade" id="loginModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Login</h4>
+        </div>
+        <div class="modal-body">
+          <div id="form-area">
+          <p class="icon-para"><i class="material-icons md-56">person </i></p>
+          <div *ngIf="error$" class="alert alert-danger" >
+            <p>Error: {{ error$ }}</p>
           </div>
-          <div class="modal-body">
-
-            <div id="form-area">
-            <p class="icon-para"><i class="material-icons md-56">person </i></p>
-
-
-            <div *ngIf="error$" class="alert alert-danger" >
-              <p>Error: {{ error$ }}</p>
+          <div *ngIf="info$" class="alert alert-info" >
+            <p>Info: {{ info$ }}</p>
+          </div>
+          <form (submit)="loginUser($event)" action="/login">
+            <h5><i>Please enter your credentials to login</i></h5>
+            <div class="input-group">
+              <span class="input-group-addon">Email</span>
+              <input type="email" id="email" class="form-control" placeholder="Email">
             </div>
-
-            <div *ngIf="info$" class="alert alert-info" >
-              <p>Info: {{ info$ }}</p>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon">Password</span>
+              <input type="password" id="password" class="form-control" placeholder="Password">
             </div>
-
-            <form (submit)="loginUser($event)" action="/login">
-              <h5><i>Please enter your credentials to login</i></h5>
-              <div class="input-group">
-                <span class="input-group-addon">Email</span>
-                <input type="email" id="email" class="form-control" placeholder="Email">
-              </div>
-              <br>
-              <div class="input-group">
-                <span class="input-group-addon">Password</span>
-                <input type="password" id="password" class="form-control" placeholder="Password">
-              </div>
-              <br>
-              <div id="remember" class="checkbox">
-                <label>
-                    <input id="saveUser" type="checkbox" value="remember-me" checked> Remember me
-                </label>
-              </div>
-              <div id="btn-area">
-                <div class="row" style="display:inline-block;">
-                  <div class="col-xs-6">
-                    <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
-                  </div>
-                  <div class="col-xs-6">
-                    <img id="loading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
-                  </div>
+            <br>
+            <div id="remember" class="checkbox">
+              <label>
+                  <input id="saveUser" type="checkbox" value="remember-me" checked> Remember me
+              </label>
+            </div>
+            <div id="btn-area">
+              <div class="row" style="display:inline-block;">
+                <div class="col-xs-6">
+                  <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
+                </div>
+                <div class="col-xs-6">
+                  <img id="loading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
                 </div>
               </div>
-            </form>
             </div>
-
+          </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" #closeLogin>Close</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" #closeLogin>Close</button>
         </div>
       </div>
     </div>
+  </div>
 
+  <div id="snackbar">
+    <h4>{{ message$ }}</h4>
+  </div>
   <div class="wrapper">
-   
 
     <nav id="sidebar">
       <div class="sidebar-header">
-      
-        <div id="img-div"><a href="http://msi-ggsip.org/"><img src="/assets/header.png"></a></div>
+        <!-- version 20+  -->
+        <p>version: 8</p>
+        <p id="date">{{date | date:'medium'}}</p>
+        <div id="img-div"><a href="http://msi-ggsip.org/" target="_blank"><img src="/assets/header.png"></a></div>
         <h1 id="sidebar-header">Achievement Management System</h1><br>
         <h5 *ngIf="userData$">Welcome, <span class="highlight">{{userData$['firstName']}} {{userData$['lastName']}}</span></h5>
         <h5 *ngIf="!userData$">Welcome, <span class="highlight">Guest</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='management'">Department: <span class="highlight">Management</span></h5>
-        <h5 *ngIf="userData$ && userData$['department']=='computerscience'">Department: <span class="highlight">Computer
-            Science</span></h5>
+        <h5 *ngIf="userData$ && userData$['department']=='computerscience'">Department: <span class="highlight">Computer Science</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='education'">Department: <span class="highlight">Education</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='commerce'">Department: <span class="highlight">Commerce</span></h5>
         <h5 *ngIf="userData$ && userData$['shift']=='morning'">Shift: <span class="highlight">Morning</span></h5>
         <h5 *ngIf="userData$ && userData$['shift']=='evening'">Shift: <span class="highlight">Evening</span></h5>
-
       </div>
 
       <ul class="list-unstyled components">
         <li [class.active]="w$.location.pathname.includes('/home/')"><a routerLink="/home/achievements"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
-        <li [class.active]="w$.location.pathname=='/achievement/add'" *ngIf="!userData$"><a routerLink="/achievement/add"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;Add
-            achievement</a></li>
+        <li [class.active]="w$.location.pathname=='/achievement/add'" *ngIf="!userData$"><a routerLink="/achievement/add"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;Add achievement</a></li>
         <li [class.active]="w$.location.pathname.includes('/dashboard/')" *ngIf="userData$"><a routerLink="/dashboard/unapproved"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
-        <li [class.active]="w$.location.pathname=='/user/register'" *ngIf="!userData$"><a routerLink="/user/register"> <i class="material-icons">person_add</i>&nbsp;&nbsp;&nbsp;Register
-            new user</a></li>
-        <li *ngIf="!userData$"><a data-toggle="modal" data-target="#loginModal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;<strong>Faculty
-              Login</strong></a></li>
+        <li [class.active]="w$.location.pathname=='/user/register'" *ngIf="!userData$"><a routerLink="/user/register"> <i class="material-icons">person_add</i>&nbsp;&nbsp;&nbsp;Register new user</a></li>
+        <li *ngIf="!userData$"><a data-toggle="modal" data-target="#loginModal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;<strong>Faculty Login</strong></a></li>
         <li [class.active]="w$.location.pathname=='/about'"><a routerLink="/about"><i class="material-icons">info</i>&nbsp;&nbsp;&nbsp;About</a></li>
-
         <li *ngIf="userData$" (click)="logout()"><a routerLink="/home/achievements"><i class="material-icons">input</i><strong>&nbsp;&nbsp;&nbsp;Logout</strong></a></li>
       </ul>
     </nav>
-    
-    
+
     <div id="content">
-      <div id="snackbar">
-        <h4>{{ message$ }}</h4>
+      <div id>
+        <button type="button" id="sidebarCollapse" class="navbar-btn">
+           <span></span>
+           <span></span>
+           <span></span>
+        </button>
       </div>
-      <div>
-      <button type="button" id="sidebarCollapse" class="navbar-btn">
-         <span></span>
-         <span></span>
-         <span></span>
-      </button>
-    </div>
-            <router-outlet></router-outlet>
-           
+      <router-outlet></router-outlet>
     </div>
   </div>
-  
-  <a href="#content" id="myBtn" title="Go to top">Top</a>
-</body>
 
+  <a id="myBtn" (click)="w$.scrollTo(0,0)" title="Go to top">Top</a>
+</body>
 
 </html>

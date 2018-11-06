@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   fileName$: string;
 
   constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
+    // DO NOT REMOVE route DECLERATION. It is being used in the template.
     this.achievements$ = [];
   }
 
@@ -38,7 +39,6 @@ export class DashboardComponent implements OnInit {
     this.refresh(window.location.search);
 
     $('#filters').hide(50);
-
     $('#b').click(function(){
       $('#filters').toggle('fast');
     });
@@ -109,8 +109,6 @@ export class DashboardComponent implements OnInit {
       this.data.getAcademic(params)
       .subscribe(
         (data) => {
-          console.log('data.length')
-          console.log(data.length)
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#dashboardEmpty').show(50);
@@ -194,7 +192,7 @@ export class DashboardComponent implements OnInit {
   approve(event, id: string){
     $('#changeApproveLoading' + id).show(50);
     event.preventDefault();
-    return;
+
     this.auth.approveAchievement(id).subscribe(
       (data) => {
         if(data['bool']){
@@ -217,7 +215,6 @@ export class DashboardComponent implements OnInit {
   unapprove(event, id: string){
     $('#changeApproveLoading' + id).show(50);
     event.preventDefault();
-    return ;
 
     this.auth.unapproveAchievement(id).subscribe(
       (data) => {
