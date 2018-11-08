@@ -47,11 +47,10 @@
     <br>
       <div id="btn-area"><button id="img-btn" class="btn btn-crimson">Show Certificate</button></div>
     <br>
-      <div id="img-details" >
-        <img src="http://13.59.95.13:8081/{{ achievement$.imageUrl }}" alt="Certifiate" style="display:block;margin-left:auto;margin-right:auto;width:50%;border:2px solid black;">
-      
-      </div>
-      <br>
+    <div id="img-details">
+      <img src="http://13.59.95.13:8081/{{ achievement$.imageUrl }}" alt="Certifiate" style="display:block;margin-left:auto;margin-right:auto;width:50%;border:2px solid black;">
+    </div>
+    <br>
 </div>
     <h5 *ngIf="achievement$.approved">Approved by :<span class="highlight"><strong>{{achievement$.approvedBy }}</strong></span></h5>
     <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span class="highlight">{{ achievement$.approvedBy }}</span></h5>

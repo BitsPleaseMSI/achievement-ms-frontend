@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 interface Window {
     length: any;
     location: any;
+    scrollTo: any;
 }
 
 @Component({
@@ -69,8 +70,8 @@ export class AppComponent implements OnInit {
             document.getElementById("myBtn").style.display = "none";
         }
     }
-    
-    
+
+
 
   }
 
