@@ -179,10 +179,7 @@ export class DashboardComponent implements OnInit {
       if(params[key] != '')
         filters.append(key, params[key]);
     }
-
-    console.log('params');
-    console.log(params);
-
+    
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
     this.refresh('?'+filters.toString());
@@ -243,7 +240,6 @@ export class DashboardComponent implements OnInit {
     event.preventDefault();
     this.data.deleteAcademic(this.deleteId$).subscribe(
       (data) => {
-        console.log(data);
         if(data['partialText']){
           if(JSON.parse(data['partialText'])['bool']){
             this.ac.snackbar('Achievement deleted Successfully!');

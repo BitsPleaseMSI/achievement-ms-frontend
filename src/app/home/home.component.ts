@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { DataAccessService } from '../data-access.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { safe } from '../sanitise';
@@ -33,11 +32,9 @@ export class HomeComponent implements OnInit {
     this.getdata(window.location.search);
 
     $('#filters').hide(50);
-
     $('#b').click(function(){
       $('#filters').toggle('fast');
     });
-   
   }
 
   getdata(params: string){
@@ -131,7 +128,6 @@ export class HomeComponent implements OnInit {
       params['programme'] = target.querySelector('#programme').value
     }
 
-
     let filters = new URLSearchParams();
     for(let key in params){
       if((params[key] != '') || (!safe(params[key].toString())))
@@ -198,11 +194,9 @@ export class HomeComponent implements OnInit {
         'imageUrl':'http://13.59.95.13:8081/',
       }
 
-    }else{
-      console.log("Error location not matched!");
     }
-    //Passing by value so that achievements are not modified.
 
+    //Passing by value so that achievements are not modified.
     let data = JSON.parse(JSON.stringify(this.achievements$));
     let csv = this.data.objArrToCSV(data, replace, concat, headers);
     let blob = new Blob([csv], { type: 'text/csv' });

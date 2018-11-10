@@ -30,7 +30,6 @@ export class AuthService {
       token = sessionStorage.getItem('token');
     }
 
-    // console.log(api + '/users/isvalid?token=' + token)
     return this.http.get(api + '/users/isvalid?token=' + token)
   }
 
@@ -44,7 +43,6 @@ export class AuthService {
       token = sessionStorage.getItem('token');
     }
 
-    // console.log(api + '/users/isvalid?token=' + token)
     return this.http.get(api + '/users/isvalid?token=' + token).toPromise().then(
       (data) => {
         if(data['email']){
@@ -71,7 +69,6 @@ export class AuthService {
     body.set('password', password);
 
     if(!safe(body.toString())){
-      console.log('[UNSAFE DATA!]');
       return new Observable(() => {})
     }
 
@@ -92,7 +89,6 @@ export class AuthService {
     };
 
     if(!safe(body.toString())){
-      console.log('[UNSAFE DATA!]');
       return new Observable(() => {})
     }
 
@@ -113,7 +109,6 @@ export class AuthService {
     body.set('newpass', newpass);
 
     if(!safe(body.toString())){
-      console.log('[UNSAFE DATA!]');
       return new Observable(() => {})
     }
 

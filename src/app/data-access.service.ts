@@ -64,7 +64,6 @@ export class DataAccessService {
 
       str += line + '\r\n';
     }
-    console.log(str);
     return str;
   }
 
