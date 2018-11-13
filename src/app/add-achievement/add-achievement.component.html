@@ -23,7 +23,10 @@
     <div class="input-group">
       <span class="input-group-addon">Enrollment No.</span>
       <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No." (change)="autoBatch($event)">
-      <span class="input-group-addon">Batch:</span>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Batch</span>
       <input type="text" id="batch" class="form-control" readonly>
     </div>
     <br>
@@ -111,7 +114,7 @@
     </div>
     <br>
     <div class="input-group">
-      <span class="input-group-addon">Certifiate image</span>
+      <span class="input-group-addon">Upload a Certificate / Proof of event ( jpg / jpeg / png )</span>
       <input type="file" id="image" name="image" class="form-control" value="fileupload" (change)="detectFiles($event)" required>
    </div>
    <br>

@@ -57,8 +57,19 @@ export class AddAchievementComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
+    // Upload file check
     try{
-      this.selectedFiles.item(0);
+      if(
+        this.selectedFiles.item(0)['name'].substr(-4) != '.jpg' &&
+        this.selectedFiles.item(0)['name'].substr(-5) != '.jpeg' &&
+        this.selectedFiles.item(0)['name'].substr(-4) != '.png'
+      ){
+        $('#addAchievementLoading').hide(50);
+        this.error$ = 'Image upload error. Only jpg, jpeg, png formats allowed';
+        this.info$ = undefined;
+        this.ac.snackbar('Image upload error!');
+        return;
+      }
     }catch(err){
       $('#addAchievementLoading').hide(50);
       this.error$ = 'Image upload error!';
@@ -66,7 +77,7 @@ export class AddAchievementComponent implements OnInit {
       this.ac.snackbar('Image upload error!');
       return;
     }
-
+    
     let achievement = new Achievement(
       target.querySelector('#name').value,
       target.querySelector('#rollNo').value,
