@@ -52,7 +52,8 @@ export class DataAccessService {
           array[i][index[col]] = concat[index[col]].concat(array[i][index[col]].toString());
         }
 
-        // sanitising newline and return characters
+        // sanitising special characters
+        array[i][index[col]] = array[i][index[col]].toString().split('"').join('""');
         array[i][index[col]] = array[i][index[col]].toString().replace('\n','');
         array[i][index[col]] = array[i][index[col]].toString().replace('\r','');
 
