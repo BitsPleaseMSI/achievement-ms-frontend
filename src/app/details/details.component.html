@@ -37,13 +37,14 @@
   </div>
   <div id="student-event-details">
     <h5><span class="underline">Student's achievement details</span></h5><br>
-      <div class="zoom"><span>Event Name :</span><p>{{ achievement$.eventName |titlecase }}</p></div>
-      <div class="zoom"><span>Venue :</span><p>{{ achievement$.venue | titlecase}}</p></div>
-      <div class="zoom"><span>Event Date : </span><p>{{achievement$.date}} (YYYY-MM-DD)</p></div>
-      <div *ngIf="achievement$.participated"><span class="zoom">Role :</span><p>PARTICIPANT</p></div>
-      <div *ngIf="!achievement$.participated"><span class="zoom">Role :</span><p>ORGANISER</p></div>
-      <div class="zoom"><span>Event Category :</span><p>{{ achievement$.category | titlecase}}</p></div>
-      <div class="zoom"><span>Event description : </span><p>{{ achievement$.description }}</p></div>
+      <div class="zoom"><span>Event Name:</span><p>{{ achievement$.eventName |titlecase }}</p></div>
+      <div class="zoom"><span>Venue:</span><p>{{ achievement$.venue | titlecase}}</p></div>
+      <div class="zoom"><span>Event Date: </span><p>{{achievement$.date}} (YYYY-MM-DD)</p></div>
+      <div *ngIf="achievement$.participated"><span class="zoom">Role:</span><p>PARTICIPANT</p></div>
+      <div *ngIf="!achievement$.participated"><span class="zoom">Role:</span><p>ORGANISER</p></div>
+      <div class="zoom"><span>Event Category:</span><p>{{ achievement$.category | titlecase}}</p></div>
+      <div class="zoom"><span>Event description: </span><p>{{ achievement$.description }}</p></div>
+      <div class="zoom"><span>Title awarded: </span><p>{{ achievement$.title }}</p></div>
     <br>
       <div id="btn-area"><button id="img-btn" class="btn btn-crimson">Show Certificate</button></div>
     <br>
