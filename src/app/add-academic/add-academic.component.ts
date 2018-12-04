@@ -21,10 +21,10 @@ export class AddAcademicComponent implements OnInit {
     const target = event.target;
 
     if(
-      target.querySelector('#from').value == '' ||
-      target.querySelector('#from').value.length != 4 ||
-      target.querySelector('#to').value == '' ||
-      target.querySelector('#to').value.length != 4
+      target.querySelector('#from').value.trim() == '' ||
+      target.querySelector('#from').value.trim().length != 4 ||
+      target.querySelector('#to').value.trim() == '' ||
+      target.querySelector('#to').value.trim().length != 4
     ){
       $('#addAcademicLoading').hide(50);
       this.error$ = 'Input error. Please check batch';
@@ -33,11 +33,11 @@ export class AddAcademicComponent implements OnInit {
     }
 
     let achievement = new Object;
-    achievement['name'] = target.querySelector('#name').value;
-    achievement['rollNo'] = target.querySelector('#rollNo').value;
-    achievement['batch'] = target.querySelector('#from').value + '-' + target.querySelector('#to').value;
-    achievement['programme'] = target.querySelector('#programme').value;
-    achievement['category'] = target.querySelector('#category').value;
+    achievement['name'] = target.querySelector('#name').value.trim();
+    achievement['rollNo'] = target.querySelector('#rollNo').value.trim();
+    achievement['batch'] = target.querySelector('#from').value.trim() + '-' + target.querySelector('#to').value.trim();
+    achievement['programme'] = target.querySelector('#programme').value.trim();
+    achievement['category'] = target.querySelector('#category').value.trim();
 
     // Sanitising data
     for(let key in achievement){

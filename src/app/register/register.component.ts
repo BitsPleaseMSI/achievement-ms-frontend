@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
       return re.test(String(email).toLowerCase());
     }
 
-    if(!validateEmail(target.querySelector('#email').value)){
+    if(!validateEmail(target.querySelector('#email').value.trim())){
       $('#registerUserLoading').hide(50);
       this.info$ = undefined;
       this.error$ = "Invalid Email";
@@ -44,13 +44,13 @@ export class RegisterComponent implements OnInit {
       target.querySelector('#password').value == target.querySelector('#password2').value
     ){
       let user = new User(
-        target.querySelector('#firstName').value,
-        target.querySelector('#lastName').value,
-        target.querySelector('#department').value,
-        target.querySelector('#shift').value,
-        target.querySelector('#email').value,
-        target.querySelector('#password').value,
-        target.querySelector('#code').value,
+        target.querySelector('#firstName').value.trim(),
+        target.querySelector('#lastName').value.trim(),
+        target.querySelector('#department').value.trim(),
+        target.querySelector('#shift').value.trim(),
+        target.querySelector('#email').value.trim(),
+        target.querySelector('#password').value.trim(),
+        target.querySelector('#code').value.trim(),
       );
 
       // Sanitising data

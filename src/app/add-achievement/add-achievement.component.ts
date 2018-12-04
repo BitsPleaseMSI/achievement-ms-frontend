@@ -25,7 +25,7 @@ export class AddAchievementComponent implements OnInit {
   autoBatch(event){
     event.preventDefault();
     let tmp = 0;
-    let roll = ($('#rollNo')[0] as HTMLInputElement).value.substr(-5);
+    let roll = ($('#rollNo')[0] as HTMLInputElement).value.trim().substr(-5);
     if(roll == '')
       return;
 
@@ -77,23 +77,23 @@ export class AddAchievementComponent implements OnInit {
       this.ac.snackbar('Image upload error!');
       return;
     }
-    
+
     let achievement = new Achievement(
-      target.querySelector('#name').value,
-      target.querySelector('#rollNo').value,
+      target.querySelector('#name').value.trim(),
+      target.querySelector('#rollNo').value.trim(),
       target.querySelector('#section').value,
       this.sessionFrom,
       this.sessionTo,
       target.querySelector('#semester').value,
       target.querySelector('#department').value,
       target.querySelector('#shift').value,
-      target.querySelector('#eventName').value,
+      target.querySelector('#eventName').value.trim(),
       target.querySelector('#date').value,
-      target.querySelector('#title').value,
-      target.querySelector('#venue').value,
+      target.querySelector('#title').value.trim(),
+      target.querySelector('#venue').value.trim(),
       target.querySelector('#category').value,
       target.querySelector('#participated').checked,
-      target.querySelector('#description').value,
+      target.querySelector('#description').value.trim(),
       this.selectedFiles.item(0),
     )
     // Sanitising data
