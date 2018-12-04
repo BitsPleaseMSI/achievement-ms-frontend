@@ -51,6 +51,8 @@ export class AddAchievementComponent implements OnInit {
 
   addAchievement(event){
     $('#addAchievementLoading').show(50);
+    $('#addAchievementButton').attr('disabled', 'disabled');
+
     this.info$ = "Adding Achievement. Please wait.";
     this.error$ = undefined;
 
@@ -65,6 +67,7 @@ export class AddAchievementComponent implements OnInit {
         this.selectedFiles.item(0)['name'].substr(-4) != '.png'
       ){
         $('#addAchievementLoading').hide(50);
+        $('#addAchievementButton').removeAttr('disabled');
         this.error$ = 'Image upload error. Only jpg, jpeg, png formats allowed';
         this.info$ = undefined;
         this.ac.snackbar('Image upload error!');
@@ -72,6 +75,7 @@ export class AddAchievementComponent implements OnInit {
       }
     }catch(err){
       $('#addAchievementLoading').hide(50);
+      $('#addAchievementButton').removeAttr('disabled');
       this.error$ = 'Image upload error!';
       this.info$ = undefined;
       this.ac.snackbar('Image upload error!');
@@ -102,6 +106,7 @@ export class AddAchievementComponent implements OnInit {
 
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
         $('#addAchievementLoading').hide(50);
+        $('#addAchievementButton').removeAttr('disabled');
         this.error$ = 'Please check ' + key;
         this.info$ = undefined;
         return;
@@ -115,6 +120,7 @@ export class AddAchievementComponent implements OnInit {
           if(JSON.parse(data['partialText'])['bool']){
             error = false;
             $('#addAchievementLoading').hide(50);
+            $('#addAchievementButton').removeAttr('disabled');
             this.error$ = undefined;
             this.info$ = 'Achievement added Successfully.';
             this.ac.snackbar('Achievement added Successfully!');
@@ -125,6 +131,7 @@ export class AddAchievementComponent implements OnInit {
         this.info$ = undefined;
         this.ac.snackbar('Server is not responding, Please try later.');
         $('#addAchievementLoading').hide(50);
+        $('#addAchievementButton').removeAttr('disabled');
       }
     )
 
