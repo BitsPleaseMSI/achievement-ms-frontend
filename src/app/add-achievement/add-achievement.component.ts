@@ -107,6 +107,11 @@ export class AddAchievementComponent implements OnInit {
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
         $('#addAchievementLoading').hide(50);
         $('#addAchievementButton').removeAttr('disabled');
+        if(key == 'eventName')
+          key = 'event name'
+        if(key == 'rollNo')
+          key = 'enrollment no.'
+
         this.error$ = 'Please check ' + key;
         this.info$ = undefined;
         return;
@@ -120,10 +125,27 @@ export class AddAchievementComponent implements OnInit {
           if(JSON.parse(data['partialText'])['bool']){
             error = false;
             $('#addAchievementLoading').hide(50);
-            $('#addAchievementButton').removeAttr('disabled');
             this.error$ = undefined;
             this.info$ = 'Achievement added Successfully.';
             this.ac.snackbar('Achievement added Successfully!');
+
+            // Reseting form
+            // target.querySelector('#name').value = '';
+            // target.querySelector('#rollNo').value = '';
+            // target.querySelector('#section').value = 'A';
+            // target.querySelector('#batch').value = '';
+            // target.querySelector('#semester').value = '1';
+            // target.querySelector('#department').value = 'education';
+            // target.querySelector('#shift').value = 'morning';
+            target.querySelector('#eventName').value = '';
+            target.querySelector('#date').value = undefined;
+            target.querySelector('#title').value = '';
+            target.querySelector('#venue').value = '';
+            target.querySelector('#category').value = 'sports';
+            target.querySelector('#description').value = '';
+            target.querySelector('#image').value = '';
+
+            $('#addAchievementButton').removeAttr('disabled');
           }
         }
       },
