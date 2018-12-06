@@ -179,7 +179,7 @@ export class DashboardComponent implements OnInit {
       if(params[key] != '')
         filters.append(key, params[key]);
     }
-    
+
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
     this.refresh('?'+filters.toString());
@@ -343,10 +343,10 @@ export class DashboardComponent implements OnInit {
       }
 
     }else{
-      if(window.location.pathname.includes('approved')){
-        this.fileName$ = this.ac.userData$['firstName'] + '_' + this.ac.userData$['lastName'] + '_Approved_Achievements.csv'
-      }else if(window.location.pathname.includes('unapproved')){
-        this.fileName$ = this.ac.userData$['firstName'] + '_' + this.ac.userData$['lastName'] + '_Unapproved_Achievements.csv'
+      if(window.location.pathname.includes('/approved')){
+        this.fileName$ = 'Approved_Non-Academic_Achievements.csv'
+      }else if(window.location.pathname.includes('/unapproved')){
+        this.fileName$ = 'Unapproved_Non-Academic_Achievements.csv'
       }
       headers = [
         'Semester',

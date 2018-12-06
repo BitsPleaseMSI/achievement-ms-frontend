@@ -143,6 +143,19 @@ export class HomeComponent implements OnInit {
     let replace, headers, concat;
     if(window.location.pathname.includes('/home/academic')){
       this.fileName$ = 'Academic_Achievements.csv'
+      // var filters = window.location.search.substring(1).split('&');
+      // var delim = '-';
+      // for(let filter in filters){
+      //   if(filters[filter]){
+      //
+      //   }
+      //   this.fileName$ += delim + filters[filter];
+      //   delim = ',';
+      // }
+      // this.fileName$ += '.csv';
+      // console.log(this.fileName$);
+      // return;
+
       headers = [
         'Name',
         'Enrollment No.',
@@ -159,7 +172,7 @@ export class HomeComponent implements OnInit {
       }
 
     }else if(window.location.pathname.includes('/home/achievements')){
-      this.fileName$ = 'Approved_Achievements.csv'
+      this.fileName$ = 'Non-Academic_Achievements.csv'
       headers = [
         'Semester',
         'Session From',

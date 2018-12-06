@@ -42,7 +42,7 @@
         <div class="home-filters">
           <label for="semester">Semester:</label>&nbsp;
           <select id="semester" name="semester" value="{{this.route.snapshot.queryParams['semester']}}">&nbsp;
-            <option value="">Select Sem</option>
+            <option value="">Select semester</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -167,7 +167,7 @@
 
   <button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()"><i class="material-icons">
     cloud_download
-    </i> Download as CSV</button> 
+    </i> Download as CSV</button>
 <br>
   <div class="table-container">
   <table class="table-responsive" *ngIf="w$.location.pathname.includes('/home/achievements') && achievements$.length > 0">
@@ -197,7 +197,7 @@
       <td><button class="btn btn-blue" routerLink="/achievement/{{ achievement._id }}" id="detail-link"><i class="material-icons">
         remove_red_eye
         </i>
-        
+
         View details</button></td>
     </tr>
   </table>

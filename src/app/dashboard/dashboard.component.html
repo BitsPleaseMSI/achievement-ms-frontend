@@ -151,14 +151,15 @@
             <option>C</option>
           </select>
         </div>
-        <div class="home-filters">
+        <!-- We dont need this because they are already filterd based on user's shift -->
+        <!-- <div class="home-filters">
             <label for="shift" class="control-label">Shift:</label>&nbsp;
             <select id="shift" name="shift" placeholder="Shift" value="{{this.route.snapshot.queryParams['shift']}}">
               <option value="">Select shift</option>
               <option value="morning">Morning</option>
               <option value="evening">Evening</option>
             </select>
-          </div>
+          </div> -->
       </div>
 
       <div id="filter-area-two">
@@ -249,6 +250,7 @@
 
 <h3 id="dashboardEmpty" hidden="true">No achievements found!</h3>
 
+<br>
 <button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()"><i class="material-icons">
   cloud_download
   </i> Download as CSV</button>
