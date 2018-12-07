@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   w$: Window = window;
   fileName$: string;
 
-  constructor(private data: DataAccessService, private route: ActivatedRoute, private router: Router, private ac: AppComponent){
+  constructor(private data: DataAccessService, private route: ActivatedRoute, public router: Router, private ac: AppComponent){
     this.achievements$ = [];
   }
 
@@ -41,11 +41,17 @@ export class HomeComponent implements OnInit {
     $('#homeEmpty').hide(50);
     $('#downloadList').hide(50);
     $('#homeLoading').show(50);
-    if(window.location.pathname.includes('/home/achievements')){
+    console.log(this.router.url);
+    if(this.router.url.includes('/home/achievements')){
 
       this.data.getApprovedAchievements(params)
       .subscribe(
         (data) => {
+          // Sorting according to date (newest first)
+          data.sort(function(a, b){
+            return b.date.split('-').join('') - a.date.split('-').join('');
+          });
+
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#homeEmpty').show(50);
@@ -59,7 +65,7 @@ export class HomeComponent implements OnInit {
           this.ac.snackbar('Server is not responding, Please try later.');
       });
 
-    }else if(window.location.pathname.includes('/home/academic')){
+    }else if(this.router.url.includes('/home/academic')){
 
       this.data.getAcademic(params)
       .subscribe(
@@ -85,7 +91,7 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     let target = document.getElementById('filter') as HTMLFormElement;
     target.reset();
-    this.router.navigate([window.location.pathname]);
+    this.router.navigate([this.router.url]);
     this.getdata('');
   }
 
@@ -94,7 +100,7 @@ export class HomeComponent implements OnInit {
     const target = event.target;
     let params = {};
 
-    if(window.location.pathname.includes('/home/achievements')){
+    if(this.router.url.includes('/home/achievements')){
       params['sessionFrom'] = target.querySelector('#sessionFrom').value
       params['sessionTo'] = target.querySelector('#sessionTo').value
       params['dateFrom'] = target.querySelector('#dateFrom').value
@@ -106,7 +112,7 @@ export class HomeComponent implements OnInit {
       params['category'] = target.querySelector('#category').value
       params['department'] = target.querySelector('#department').value
 
-    }else if(window.location.pathname.includes('/home/academic')){
+    }else if(this.router.url.includes('/home/academic')){
 
       if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
 
@@ -135,13 +141,13 @@ export class HomeComponent implements OnInit {
     }
 
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
-    this.router.navigate([window.location.pathname], { queryParams: params });
+    this.router.navigate([this.router.url], { queryParams: params });
     this.getdata('?' + filters.toString());
   }
 
   downloadList(){
     let replace, headers, concat;
-    if(window.location.pathname.includes('/home/academic')){
+    if(this.router.url.includes('/home/academic')){
       this.fileName$ = 'Academic_Achievements.csv'
       // var filters = window.location.search.substring(1).split('&');
       // var delim = '-';
@@ -171,7 +177,7 @@ export class HomeComponent implements OnInit {
         },
       }
 
-    }else if(window.location.pathname.includes('/home/achievements')){
+    }else if(this.router.url.includes('/home/achievements')){
       this.fileName$ = 'Non-Academic_Achievements.csv'
       headers = [
         'Semester',

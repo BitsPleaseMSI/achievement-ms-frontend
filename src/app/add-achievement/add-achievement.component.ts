@@ -126,17 +126,10 @@ export class AddAchievementComponent implements OnInit {
             error = false;
             $('#addAchievementLoading').hide(50);
             this.error$ = undefined;
-            this.info$ = 'Achievement added Successfully.';
-            this.ac.snackbar('Achievement added Successfully!');
+            this.info$ = 'Achievement added successfully.';
+            this.ac.snackbar('Achievement added successfully!');
 
-            // Reseting form
-            // target.querySelector('#name').value = '';
-            // target.querySelector('#rollNo').value = '';
-            // target.querySelector('#section').value = 'A';
-            // target.querySelector('#batch').value = '';
-            // target.querySelector('#semester').value = '1';
-            // target.querySelector('#department').value = 'education';
-            // target.querySelector('#shift').value = 'morning';
+            // Reseting some form fields
             target.querySelector('#eventName').value = '';
             target.querySelector('#date').value = undefined;
             target.querySelector('#title').value = '';

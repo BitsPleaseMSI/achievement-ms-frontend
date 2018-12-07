@@ -13,9 +13,9 @@
 <div id="dashboard-achievements">
   <h4>Select achievement view</h4>
   <ul class="nav nav-pills nav-fill">
-    <li [class.active]="w$.location.pathname.includes('/dashboard/approved')"><a routerLink="/dashboard/approved">Approved achievements</a></li>
-    <li [class.active]="w$.location.pathname.includes('/dashboard/unapproved')"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
-    <li [class.active]="w$.location.pathname.includes('/dashboard/academic')"><a routerLink="/dashboard/academic">Academic achievements</a></li>
+    <li [class.active]="this.router.url.includes('/dashboard/approved')"><a routerLink="/dashboard/approved">Approved achievements</a></li>
+    <li [class.active]="this.router.url.includes('/dashboard/unapproved')"><a routerLink="/dashboard/unapproved">Unapproved achievements</a></li>
+    <li [class.active]="this.router.url.includes('/dashboard/academic')"><a routerLink="/dashboard/academic">Academic achievements</a></li>
   </ul>
 </div>
 
@@ -124,7 +124,7 @@
 </label>
 
 <div id="filters" hidden="true">
-  <form *ngIf="!w$.location.pathname.includes('/dashboard/academic')" (submit)="filter($event)" class="form-signin" action="" id="filter">
+  <form *ngIf="!this.router.url.includes('/dashboard/academic')" (submit)="filter($event)" class="form-signin" action="" id="filter">
     <div id="filter-area-one">
         <div class="home-filters">
           <label for="rollNo">Enrollment No.</label>
@@ -197,7 +197,7 @@
       </div>
   </form>
 
-  <form *ngIf="w$.location.pathname.includes('/dashboard/academic')" (submit)="filter($event)" class="form-inline" action="" id="filter">
+  <form *ngIf="this.router.url.includes('/dashboard/academic')" (submit)="filter($event)" class="form-inline" action="" id="filter">
     <div id="filter-area-one">
       <div class="home-filters">
         <label for="section" class="">Batch:</label>&nbsp;
@@ -255,7 +255,7 @@
   cloud_download
   </i> Download as CSV</button>
 <br>
-<table class="danger" *ngIf="achievements$.length != 0 && (w$.location.pathname.includes('/dashboard/approved') || w$.location.pathname.includes('/dashboard/unapproved'))">
+<table class="danger" *ngIf="achievements$.length != 0 && (this.router.url.includes('/dashboard/approved') || this.router.url.includes('/dashboard/unapproved'))">
   <tr id="table-heading">
     <th>S.No.</th>
     <th>Name</th>
@@ -297,7 +297,7 @@
   </tr>
 </table>
 
-<table class="danger" *ngIf="achievements$.length != 0 && w$.location.pathname.includes('/dashboard/academic')">
+<table class="danger" *ngIf="achievements$.length != 0 && this.router.url.includes('/dashboard/academic')">
   <tr id="table-heading">
     <tr id="table-heading">
       <th>S.No.</th>

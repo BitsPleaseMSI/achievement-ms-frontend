@@ -24,12 +24,11 @@ export class DashboardComponent implements OnInit {
   achievements$: Achievement;
   editId$: string;
   deleteId$: string;
-  w$: Window = window;
   error$: string;
   info$: string;
   fileName$: string;
 
-  constructor(private data: DataAccessService, private auth: AuthService, private router: Router, private route: ActivatedRoute, private ac: AppComponent) {
+  constructor(private data: DataAccessService, private auth: AuthService, public router: Router, public route: ActivatedRoute, private ac: AppComponent) {
     // DO NOT REMOVE route DECLERATION. It is being used in the template.
     this.achievements$ = [];
   }
@@ -56,7 +55,7 @@ export class DashboardComponent implements OnInit {
       params = window.location.search;
     }
 
-    if(window.location.pathname.includes('/dashboard/approved')){
+    if(this.router.url.includes('/dashboard/approved')){
       if(params==''){
         params='?';
       }
@@ -68,6 +67,11 @@ export class DashboardComponent implements OnInit {
           this.data.getApprovedAchievements(params)
           .subscribe(
             (data) => {
+              // Sorting according to date (newest first)
+              data.sort(function(a, b){
+                return b.date.split('-').join('') - a.date.split('-').join('');
+              });
+
               this.achievements$ = data;
               if(this.achievements$.length == 0){
                 $('#dashboardEmpty').show(50);
@@ -83,7 +87,7 @@ export class DashboardComponent implements OnInit {
         }
       )
 
-    }else if(window.location.pathname.includes('/dashboard/unapproved')){
+    }else if(this.router.url.includes('/dashboard/unapproved')){
       if(params==''){
         params='?';
       }
@@ -91,6 +95,11 @@ export class DashboardComponent implements OnInit {
       this.data.getUnapprovedAchievements(params)
       .subscribe(
         (data) => {
+          // Sorting according to date (newest first)
+          data['data'].sort(function(a, b){
+            return b.date.split('-').join('') - a.date.split('-').join('');
+          });
+
           this.achievements$ = data['data'];
           if(this.achievements$.length == 0){
             $('#dashboardEmpty').show(50);
@@ -104,7 +113,7 @@ export class DashboardComponent implements OnInit {
           $('#dashboardLoading').hide(50);
         });
 
-    }else if(window.location.pathname.includes('/dashboard/academic')){
+    }else if(this.router.url.includes('/dashboard/academic')){
 
       this.data.getAcademic(params)
       .subscribe(
@@ -129,7 +138,7 @@ export class DashboardComponent implements OnInit {
   resetFilters(event){
     event.preventDefault();
     (document.getElementById('filter') as HTMLFormElement).reset();
-    this.router.navigate([window.location.pathname]).then(
+    this.router.navigate([this.router.url]).then(
       () => {
         this.refresh('');
       }
@@ -141,7 +150,7 @@ export class DashboardComponent implements OnInit {
     const target = event.target;
     let params = {};
 
-    if (!window.location.pathname.includes('/dashboard/academic')) {
+    if (!this.router.url.includes('/dashboard/academic')) {
       params['sessionFrom'] = target.querySelector('#sessionFrom').value
       params['sessionTo'] = target.querySelector('#sessionTo').value
       params['dateFrom'] = target.querySelector('#dateFrom').value
@@ -152,7 +161,7 @@ export class DashboardComponent implements OnInit {
       params['shift'] = target.querySelector('#shift').value
       params['category'] = target.querySelector('#category').value
 
-    }else if(window.location.pathname.includes('/dashboard/academic')){
+    }else if(this.router.url.includes('/dashboard/academic')){
       if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
 
       }else if(
@@ -181,7 +190,7 @@ export class DashboardComponent implements OnInit {
     }
 
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
-    this.router.navigate([window.location.pathname], { queryParams: params });
+    this.router.navigate([this.router.url], { queryParams: params });
     this.refresh('?'+filters.toString());
 
   }
@@ -325,7 +334,7 @@ export class DashboardComponent implements OnInit {
 
   downloadList(){
     let replace, headers, concat;
-    if(window.location.pathname.includes('academic')){
+    if(this.router.url.includes('academic')){
       this.fileName$ = 'Academic_Achievements.csv'
       headers = [
         'Name',
@@ -343,9 +352,9 @@ export class DashboardComponent implements OnInit {
       }
 
     }else{
-      if(window.location.pathname.includes('/approved')){
+      if(this.router.url.includes('/approved')){
         this.fileName$ = 'Approved_Non-Academic_Achievements.csv'
-      }else if(window.location.pathname.includes('/unapproved')){
+      }else if(this.router.url.includes('/unapproved')){
         this.fileName$ = 'Unapproved_Non-Academic_Achievements.csv'
       }
       headers = [
