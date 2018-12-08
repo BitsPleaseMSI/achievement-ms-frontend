@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   title = 'achievement-ms-front';
   date = new Date();
   constructor(private auth: AuthService, public router: Router) {
-    console.log('AMS Version 35');
+    console.log('AMS Version 36');
     setInterval(() => {
       this.date = new Date();
     }, 1000)
