@@ -158,7 +158,7 @@ export class DashboardComponent implements OnInit {
       params['rollNo'] = target.querySelector('#rollNo').value
       params['section'] = target.querySelector('#section').value
       params['semester'] = target.querySelector('#semester').value
-      params['shift'] = target.querySelector('#shift').value
+      // params['shift'] = target.querySelector('#shift').value
       params['category'] = target.querySelector('#category').value
 
     }else if(this.router.url.includes('/dashboard/academic')){
