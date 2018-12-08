@@ -15,6 +15,8 @@
   </div> -->
 
   <form (submit)="addAchievement($event)" class="form-horizontal" action="achievement/add">
+    <br>
+    <h4 style="text-align:center">Student details</h4>
     <div class="input-group">
       <span class="input-group-addon">Name</span>
       <input type="text" id="name" class="form-control" placeholder="Your name">
@@ -69,6 +71,13 @@
       </select>
     </div>
     <br>
+    <h4 style="text-align:center">Event details</h4>
+    <div class="input-group">
+      <span class="input-group-addon">Event name</span>
+      <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Name of the event" required>
+    </div>
+    <br>
+
     <div class="input-group">
       <span class="input-group-addon">Event Category</span>
       <select  id="category" name="category" class="form-control" placeholder="Category">
@@ -77,11 +86,6 @@
         <option value="technical">Technical</option>
         <option value="others">Others</option>
       </select>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Event name</span>
-      <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Name of the event" required>
     </div>
     <br>
 

@@ -87,8 +87,8 @@
       </div>
 
       <ul class="list-unstyled components">
-        <li [class.active]="this.router.url.includes('/home/')"><a *ngIf="this.router.url.includes('/home/achievements')"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
-        <li [class.active]="this.router.url.includes('/home/')"><a *ngIf="!this.router.url.includes('/home/achievements')" routerLink="/home/achievements"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
+        <li [class.active]="this.router.url.includes('/home/')"><a *ngIf="this.router.url.includes('/home')"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
+        <li [class.active]="this.router.url.includes('/home/')"><a *ngIf="!this.router.url.includes('/home')" routerLink="/home/achievements"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
         <li [class.active]="this.router.url=='/achievement/add'" *ngIf="!userData$"><a routerLink="/achievement/add"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;Add achievement</a></li>
         <li [class.active]="this.router.url.includes('/dashboard/')" *ngIf="userData$"><a *ngIf="this.router.url.includes('/dashboard/unapproved')"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
         <li [class.active]="this.router.url.includes('/dashboard/')" *ngIf="userData$"><a *ngIf="!this.router.url.includes('/dashboard/unapproved')" routerLink="/dashboard/unapproved"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>

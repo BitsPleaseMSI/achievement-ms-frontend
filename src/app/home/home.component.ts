@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     $('#homeEmpty').hide(50);
     $('#downloadList').hide(50);
     $('#homeLoading').show(50);
-    console.log(this.router.url);
+    
     if(this.router.url.includes('/home/achievements')){
 
       this.data.getApprovedAchievements(params)

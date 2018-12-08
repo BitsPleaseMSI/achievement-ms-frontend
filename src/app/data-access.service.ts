@@ -86,7 +86,8 @@ export class DataAccessService {
     if(!params){
       params = ''
     }
-    return this.http.get<any>(api + '/achievements/all' + params)
+    console.log(api + '/achievements/all' + params);
+    return this.http.get<any>(api + '/achievements/all' + params);
   }
 
   getUnapprovedAchievements(params?: string): Observable<any>{
