@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit {
   resetFilters(event){
     event.preventDefault();
     (document.getElementById('filter') as HTMLFormElement).reset();
-    this.router.navigate([this.router.url]).then(
+    this.router.navigate([window.location.pathname]).then(
       () => {
         this.refresh('');
       }
@@ -190,7 +190,7 @@ export class DashboardComponent implements OnInit {
     }
 
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
-    this.router.navigate([this.router.url], { queryParams: params });
+    this.router.navigate([window.location.pathname], { queryParams: params });
     this.refresh('?'+filters.toString());
 
   }

@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     $('#homeEmpty').hide(50);
     $('#downloadList').hide(50);
     $('#homeLoading').show(50);
-    
+
     if(this.router.url.includes('/home/achievements')){
 
       this.data.getApprovedAchievements(params)
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
     let target = document.getElementById('filter') as HTMLFormElement;
     target.reset();
-    this.router.navigate([this.router.url]);
+    this.router.navigate([window.location.pathname]);
     this.getdata('');
   }
 
@@ -113,7 +113,6 @@ export class HomeComponent implements OnInit {
       params['department'] = target.querySelector('#department').value
 
     }else if(this.router.url.includes('/home/academic')){
-
       if(target.querySelector('#from').value == '' && target.querySelector('#to').value == ''){
 
       }else if(
@@ -121,6 +120,7 @@ export class HomeComponent implements OnInit {
         (target.querySelector('#to').value == '' && target.querySelector('#from').value != '')
       ){
         this.ac.snackbar('Clear or fill both fields for Batch!');
+        return;
       }else if(
         target.querySelector('#from').value.length != 4 ||
         target.querySelector('#to').value.length != 4
@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit {
     }
 
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
-    this.router.navigate([this.router.url], { queryParams: params });
+    this.router.navigate([window.location.pathname], { queryParams: params });
     this.getdata('?' + filters.toString());
   }
 

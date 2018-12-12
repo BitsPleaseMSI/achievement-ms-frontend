@@ -86,7 +86,6 @@ export class DataAccessService {
     if(!params){
       params = ''
     }
-    console.log(api + '/achievements/all' + params);
     return this.http.get<any>(api + '/achievements/all' + params);
   }
 
