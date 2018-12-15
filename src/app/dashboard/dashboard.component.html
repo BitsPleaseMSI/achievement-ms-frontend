@@ -331,5 +331,17 @@
       </td>
     </tr>
 </table>
+<br>
+
+<div *ngIf="this.router.url.includes('approved') && dataLength$ > 0" id="btn-area">
+  <div class="row" style="display:inline-block;">
+    <div class="col-xs-6">
+      <button class="btn btn-crimson btn-block" (click)="loadMore($event)">Load more</button>
+    </div>
+    <div class="col-xs-6">
+      <img id="loadMoreLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
+    </div>
+  </div>
+ </div>
 
 </div>

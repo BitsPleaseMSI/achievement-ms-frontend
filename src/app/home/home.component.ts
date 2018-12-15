@@ -20,12 +20,17 @@ interface Achievement {
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  achievements$: Achievement;
+  achievements$: Achievement[];
   w$: Window = window;
   fileName$: string;
+  dataLength$: number;
+  limit: number;
+  offset: number;
 
   constructor(private data: DataAccessService, private route: ActivatedRoute, public router: Router, private ac: AppComponent){
     this.achievements$ = [];
+    this.limit = 10;
+    this.offset = 0;
   }
 
   ngOnInit() {
@@ -37,6 +42,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  loadMore(event){
+    event.preventDefault();
+    this.offset+= this.limit;
+    this.getdata(window.location.search);
+  }
+
   getdata(params: string){
     $('#homeEmpty').hide(50);
     $('#downloadList').hide(50);
@@ -44,15 +55,18 @@ export class HomeComponent implements OnInit {
 
     if(this.router.url.includes('/home/achievements')){
 
-      this.data.getApprovedAchievements(params)
+      this.data.getApprovedAchievements(this.limit, this.offset, params)
       .subscribe(
         (data) => {
-          // Sorting according to date (newest first)
+          this.dataLength$ = data.length;
+
+          // Sorting accord ing to date (newest first)
           data.sort(function(a, b){
             return b.date.split('-').join('') - a.date.split('-').join('');
           });
 
-          this.achievements$ = data;
+          this.achievements$ = this.achievements$.concat(data);
+
           if(this.achievements$.length == 0){
             $('#homeEmpty').show(50);
           }else{
@@ -70,6 +84,7 @@ export class HomeComponent implements OnInit {
       this.data.getAcademic(params)
       .subscribe(
         (data) => {
+          this.dataLength$ = data.length;
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#homeEmpty').show(50);
@@ -92,6 +107,8 @@ export class HomeComponent implements OnInit {
     let target = document.getElementById('filter') as HTMLFormElement;
     target.reset();
     this.router.navigate([window.location.pathname]);
+    this.achievements$ = [];
+    this.offset = 0;
     this.getdata('');
   }
 
@@ -142,6 +159,8 @@ export class HomeComponent implements OnInit {
 
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
+    this.achievements$ = [];
+    this.offset = 0;
     this.getdata('?' + filters.toString());
   }
 

@@ -21,16 +21,21 @@ interface Achievement {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  achievements$: Achievement;
+  achievements$: Achievement[];
   editId$: string;
   deleteId$: string;
   error$: string;
   info$: string;
   fileName$: string;
+  dataLength$: number;
+  limit: number;
+  offset: number;
 
   constructor(private data: DataAccessService, private auth: AuthService, public router: Router, public route: ActivatedRoute, private ac: AppComponent) {
     // DO NOT REMOVE route DECLERATION. It is being used in the template.
     this.achievements$ = [];
+    this.limit = 10;
+    this.offset = 0;
   }
 
   ngOnInit(){
@@ -43,11 +48,17 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  loadMore(event){
+    event.preventDefault();
+    this.offset+= this.limit;
+    this.refresh(window.location.search);
+  }
+
   refresh(arg?: string){
     $('#dashboardLoading').show(50);
     $('#dashboardEmpty').hide(50);
     $('#downloadList').hide(50);
-    this.achievements$ = [];
+    // this.achievements$ = [];
     let params = undefined;
     if(arg){
       params = arg;
@@ -64,15 +75,16 @@ export class DashboardComponent implements OnInit {
         (user) => {
           params += '&department=' +  user.department;
           params += '&shift=' +  user.shift;
-          this.data.getApprovedAchievements(params)
+          this.data.getApprovedAchievements(this.limit, this.offset, params)
           .subscribe(
             (data) => {
+              this.dataLength$ = data.length;
               // Sorting according to date (newest first)
               data.sort(function(a, b){
                 return b.date.split('-').join('') - a.date.split('-').join('');
               });
 
-              this.achievements$ = data;
+              this.achievements$ = this.achievements$.concat(data);
               if(this.achievements$.length == 0){
                 $('#dashboardEmpty').show(50);
               }else{
@@ -92,15 +104,17 @@ export class DashboardComponent implements OnInit {
         params='?';
       }
 
-      this.data.getUnapprovedAchievements(params)
+      this.data.getUnapprovedAchievements(this.limit, this.offset, params)
       .subscribe(
         (data) => {
+          this.dataLength$ = data['data'].length;
+
           // Sorting according to date (newest first)
           data['data'].sort(function(a, b){
             return b.date.split('-').join('') - a.date.split('-').join('');
           });
 
-          this.achievements$ = data['data'];
+          this.achievements$ = this.achievements$.concat(data['data']);
           if(this.achievements$.length == 0){
             $('#dashboardEmpty').show(50);
           }else{
@@ -118,6 +132,7 @@ export class DashboardComponent implements OnInit {
       this.data.getAcademic(params)
       .subscribe(
         (data) => {
+          this.dataLength$ = data.length;
           this.achievements$ = data;
           if(this.achievements$.length == 0){
             $('#dashboardEmpty').show(50);
@@ -138,6 +153,8 @@ export class DashboardComponent implements OnInit {
   resetFilters(event){
     event.preventDefault();
     (document.getElementById('filter') as HTMLFormElement).reset();
+    this.achievements$ = [];
+    this.offset = 0;
     this.router.navigate([window.location.pathname]).then(
       () => {
         this.refresh('');
@@ -158,7 +175,6 @@ export class DashboardComponent implements OnInit {
       params['rollNo'] = target.querySelector('#rollNo').value
       params['section'] = target.querySelector('#section').value
       params['semester'] = target.querySelector('#semester').value
-      // params['shift'] = target.querySelector('#shift').value
       params['category'] = target.querySelector('#category').value
 
     }else if(this.router.url.includes('/dashboard/academic')){
@@ -191,8 +207,9 @@ export class DashboardComponent implements OnInit {
 
     Object.keys(params).forEach((key) => (params[key] == '') && delete params[key]);
     this.router.navigate([window.location.pathname], { queryParams: params });
+    this.achievements$ = [];
+    this.offset = 0;
     this.refresh('?'+filters.toString());
-
   }
 
   approve(event, id: string){
@@ -202,7 +219,10 @@ export class DashboardComponent implements OnInit {
     this.auth.approveAchievement(id).subscribe(
       (data) => {
         if(data['bool']){
-          this.refresh();
+          this.achievements$ = this.achievements$.filter(i => i['_id'] != id);
+          if(this.achievements$.length < 1){
+            this.refresh();
+          }
           this.ac.snackbar('Approved successfully!')
         }else{
           this.ac.snackbar(data['message'])
@@ -214,7 +234,7 @@ export class DashboardComponent implements OnInit {
         $('#changeApproveLoading' + id).hide(50);
       }
     )
-    return ;
+    return;
 
   }
 
@@ -225,7 +245,10 @@ export class DashboardComponent implements OnInit {
     this.auth.unapproveAchievement(id).subscribe(
       (data) => {
         if(data['bool']){
-          this.refresh();
+          this.achievements$ = this.achievements$.filter(i => i['_id'] != id);
+          if(this.achievements$.length < 1){
+            this.refresh();
+          }
           this.ac.snackbar('Unapproved successfully!')
         }else{
           this.ac.snackbar(data['message'])

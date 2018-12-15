@@ -81,15 +81,18 @@ export class DataAccessService {
     return this.http.get<any>(api + '/academic/getall' + params)
   }
 
-  getApprovedAchievements(params?: string): Observable<any>{
+  getApprovedAchievements(limit:number, offset:number, params?: string): Observable<any>{
     console.log('[getApprovedAchievements]')
+
     if(!params){
-      params = ''
+      params = '?'
     }
-    return this.http.get<any>(api + '/achievements/all' + params);
+
+    params += '&limit=' + limit + '&offset=' + offset;
+    return this.http.get<any>(api + '/achievements/all'+ params);
   }
 
-  getUnapprovedAchievements(params?: string): Observable<any>{
+  getUnapprovedAchievements(limit:number, offset:number, params?: string): Observable<any>{
     console.log('[getUnapprovedAchievements]')
     if(!params)
       params = '?'
@@ -100,6 +103,7 @@ export class DataAccessService {
       params += '&token=' + sessionStorage.getItem('token');
     }
 
+    params += '&limit=' + limit + '&offset=' + offset;
     return this.http.get<any>(api + '/achievements/unapproved' + params)
   }
 
