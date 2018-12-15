@@ -244,12 +244,6 @@
 
 </div>
 
-<div id="dashboardLoading" hidden="true">
-  <h3 style="display:inline-block;">Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;">
-</div>
-
-<h3 id="dashboardEmpty" hidden="true">No achievements found!</h3>
-
 <br>
 <button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()"><i class="material-icons">
   cloud_download
@@ -331,6 +325,12 @@
       </td>
     </tr>
 </table>
+
+<div id="dashboardLoading" hidden="true">
+  <h3 style="display:inline-block;">Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;">
+</div>
+
+<h3 id="dashboardEmpty" hidden="true">No achievements found!</h3>
 <br>
 
 <div *ngIf="this.router.url.includes('approved') && dataLength$ > 0" id="btn-area">

@@ -159,12 +159,6 @@
   </div>
   <br>
 
-  <div id="homeLoading" hidden="true">
-    <h3 style="display:inline-block;">Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;">
-  </div>
-
-  <h3 id="homeEmpty" hidden="true">No achievements found!</h3>
-
   <button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()"><i class="material-icons">
     cloud_download
     </i> Download as CSV</button>
@@ -222,6 +216,12 @@
       <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
     </tr>
   </table>
+  
+  <div id="homeLoading" hidden="true">
+    <h3 style="display:inline-block;">Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;">
+  </div>
+
+  <h3 id="homeEmpty" hidden="true">No achievements found!</h3>
 <br>
   <div *ngIf="this.router.url.includes('/home/achievements') && dataLength$ > 0" id="btn-area">
     <div class="row" style="display:inline-block;">
