@@ -223,7 +223,7 @@
     </tr>
   </table>
 <br>
-  <div *ngIf="dataLength$ > 0" id="btn-area">
+  <div *ngIf="this.router.url.includes('/home/achievements') && dataLength$ > 0" id="btn-area">
     <div class="row" style="display:inline-block;">
       <div class="col-xs-6">
         <button class="btn btn-crimson btn-block" (click)="loadMore($event)">Load more</button>
