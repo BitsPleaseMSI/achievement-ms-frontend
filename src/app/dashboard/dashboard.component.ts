@@ -80,9 +80,9 @@ export class DashboardComponent implements OnInit {
             (data) => {
               this.dataLength$ = data.length;
               // Sorting according to date (newest first)
-              data.sort(function(a, b){
-                return b.date.split('-').join('') - a.date.split('-').join('');
-              });
+              // data.sort(function(a, b){
+              //   return b.date.split('-').join('') - a.date.split('-').join('');
+              // });
 
               this.achievements$ = this.achievements$.concat(data);
               if(this.achievements$.length == 0){
@@ -110,9 +110,9 @@ export class DashboardComponent implements OnInit {
           this.dataLength$ = data['data'].length;
 
           // Sorting according to date (newest first)
-          data['data'].sort(function(a, b){
-            return b.date.split('-').join('') - a.date.split('-').join('');
-          });
+          // data['data'].sort(function(a, b){
+          //   return b.date.split('-').join('') - a.date.split('-').join('');
+          // });
 
           this.achievements$ = this.achievements$.concat(data['data']);
           if(this.achievements$.length == 0){

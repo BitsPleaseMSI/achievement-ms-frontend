@@ -60,10 +60,12 @@ export class HomeComponent implements OnInit {
         (data) => {
           this.dataLength$ = data.length;
 
+          console.log(data);
+
           // Sorting accord ing to date (newest first)
-          data.sort(function(a, b){
-            return b.date.split('-').join('') - a.date.split('-').join('');
-          });
+          // data.sort(function(a, b){
+          //   return b.date.split('-').join('') - a.date.split('-').join('');
+          // });
 
           this.achievements$ = this.achievements$.concat(data);
 
