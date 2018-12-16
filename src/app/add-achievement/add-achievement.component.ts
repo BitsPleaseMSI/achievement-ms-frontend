@@ -62,13 +62,12 @@ export class AddAchievementComponent implements OnInit {
     // Upload file check
     try{
       if(
-        this.selectedFiles.item(0)['name'].substr(-4) != '.jpg' &&
-        this.selectedFiles.item(0)['name'].substr(-5) != '.jpeg' &&
-        this.selectedFiles.item(0)['name'].substr(-4) != '.png'
+        this.selectedFiles.item(0)['type'].substr(0,5) != 'image' ||
+        this.selectedFiles.item(0)['size'] > 8000000
       ){
         $('#addAchievementLoading').hide(50);
         $('#addAchievementButton').removeAttr('disabled');
-        this.error$ = 'Image upload error. Only jpg, jpeg, png formats allowed';
+        this.error$ = 'Image upload error. Only jpg, jpeg, png formats allowed with a maximim limit of 8 MegaBytes';
         this.info$ = undefined;
         this.ac.snackbar('Image upload error!');
         return;

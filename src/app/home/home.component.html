@@ -216,9 +216,9 @@
       <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
     </tr>
   </table>
-  
-  <div id="homeLoading" hidden="true">
-    <h3 style="display:inline-block;">Loading...</h3><img src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;">
+
+  <div id="homeLoading" style="text-align:center;" hidden="true">
+    <img src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:60px;height:60px;">
   </div>
 
   <h3 id="homeEmpty" hidden="true">No achievements found!</h3>
@@ -227,9 +227,6 @@
     <div class="row" style="display:inline-block;">
       <div class="col-xs-6">
         <button class="btn btn-crimson btn-block" (click)="loadMore($event)">Load more</button>
-      </div>
-      <div class="col-xs-6">
-        <img id="loadMoreLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
       </div>
     </div>
    </div>
