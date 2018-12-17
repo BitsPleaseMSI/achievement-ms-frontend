@@ -73,9 +73,9 @@
 
     <nav id="sidebar">
       <div class="sidebar-header">
-        <p id="date">{{date | date:'medium'}}</p>
+        <!-- <p id="date">{{date | date:'medium'}}</p> -->
         <div id="img-div"><a href="http://msi-ggsip.org/" target="_blank"><img src="/assets/header.png" alt="Maharaja Surajmal Institute"></a></div>
-        <h1 id="sidebar-header">Achievement Management System</h1><br>
+        <h1 id="sidebar-header">Student Achievement Management System</h1><br>
         <h5 *ngIf="userData$">Welcome, <span class="highlight">{{userData$['firstName']}} {{userData$['lastName']}}</span></h5>
         <h5 *ngIf="!userData$">Welcome, <span class="highlight">Guest</span></h5>
         <h5 *ngIf="userData$ && userData$['department']=='management'">Department: <span class="highlight">Management</span></h5>
