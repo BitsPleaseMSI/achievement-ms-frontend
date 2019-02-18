@@ -19,9 +19,10 @@ export class AuthService {
     window.alert(message)
     this.router.navigate([route]);
   }
+  
 
   currentUser(): Observable<any>{
-    console.log('[currentUser]')
+    // console.log('[currentUser]')
     let token = ''
 
     if(localStorage.getItem('token')){
@@ -33,8 +34,9 @@ export class AuthService {
     return this.http.get(api + '/users/isvalid?token=' + token)
   }
 
+
   validUser(): Promise<boolean>{
-    console.log('[validUser]')
+    // console.log('[validUser]')
     let token = ''
 
     if(localStorage.getItem('token')){
@@ -58,8 +60,9 @@ export class AuthService {
 
   }
 
+
   login(email, password): Observable<any>{
-    console.log('[login]')
+    // console.log('[login]')
     let body = new URLSearchParams();
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -77,7 +80,7 @@ export class AuthService {
 
 
   register(user: Object): Observable<any>{
-    console.log('[register]')
+    // console.log('[register]')
 
     let body = new URLSearchParams();
 
@@ -96,8 +99,9 @@ export class AuthService {
 
   }
 
+
   reset(email, currentpass, newpass): Observable<any>{
-    console.log('[reset]')
+    // console.log('[reset]')
 
     let body = new URLSearchParams();
     let options = {
@@ -115,8 +119,9 @@ export class AuthService {
     return this.http.post(api + '/users/resetpass', body.toString(), options)
     }
 
+
   approveAchievement(id: string){
-    console.log('[approveAchievement]')
+    // console.log('[approveAchievement]')
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
@@ -135,8 +140,9 @@ export class AuthService {
     return this.http.post(url, '', options)
   }
 
+
   unapproveAchievement(id: string){
-    console.log('[unapproveAchievement]')
+    // console.log('[unapproveAchievement]')
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
@@ -155,8 +161,9 @@ export class AuthService {
     return this.http.post(url, '', options)
   }
 
+
   updateUser(params: Object){
-    console.log('[updateUser]')
+    // console.log('[updateUser]')
     const data: FormData = new FormData();
 
     for(let key in params)

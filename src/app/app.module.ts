@@ -36,7 +36,7 @@ import { AddAcademicComponent } from './add-academic/add-academic.component';
     HttpModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

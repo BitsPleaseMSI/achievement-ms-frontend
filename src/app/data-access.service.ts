@@ -69,12 +69,12 @@ export class DataAccessService {
   }
 
   getAchievement(id: string): Promise<any>{
-    console.log('[getAchievement]')
+    // console.log('[getAchievement]')
     return this.http.get<any>( api + '/achievements/get/' + id).toPromise()
   }
 
   getAcademic(params?: string): Observable<any>{
-    console.log('[getAcademicAchievements]')
+    // console.log('[getAcademicAchievements]')
     if(!params){
       params = ''
     }
@@ -82,7 +82,7 @@ export class DataAccessService {
   }
 
   getApprovedAchievements(limit:number, offset:number, params?: string): Observable<any>{
-    console.log('[getApprovedAchievements]')
+    // console.log('[getApprovedAchievements]')
 
     if(!params){
       params = '?'
@@ -93,7 +93,7 @@ export class DataAccessService {
   }
 
   getUnapprovedAchievements(limit:number, offset:number, params?: string): Observable<any>{
-    console.log('[getUnapprovedAchievements]')
+    // console.log('[getUnapprovedAchievements]')
     if(!params)
       params = '?'
 
@@ -108,7 +108,7 @@ export class DataAccessService {
   }
 
   addAchievement(achievement: Achievement): Observable<any>{
-    console.log('[addAchievement]')
+    // console.log('[addAchievement]')
 
     const data: FormData = new FormData();
 
@@ -124,7 +124,7 @@ export class DataAccessService {
   }
 
   deleteAchievement(id: string): Observable<any>{
-    console.log('[deleteAchievement]')
+    // console.log('[deleteAchievement]')
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
@@ -144,7 +144,7 @@ export class DataAccessService {
   }
 
   addAcademic(achievement: Object): Observable<any>{
-    console.log('[addAcademic]');
+    // console.log('[addAcademic]');
 
     const data: FormData = new FormData();
 
@@ -167,7 +167,7 @@ export class DataAccessService {
   }
 
   deleteAcademic(id: string){
-    console.log('[deleteAcademic]')
+    // console.log('[deleteAcademic]')
 
     const data: FormData = new FormData();
 
@@ -188,7 +188,7 @@ export class DataAccessService {
   }
 
   editAcademic(achievement: Object){
-    console.log('[editAcademic]');
+    // console.log('[editAcademic]');
 
     const data: FormData = new FormData();
     for(let key in achievement){

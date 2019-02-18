@@ -30,11 +30,12 @@ export class AppComponent implements OnInit {
   title = 'achievement-ms-front';
   date = new Date();
   constructor(private auth: AuthService, public router: Router) {
-    console.log('SAMS [Build 41]');
+    console.log('SAMS [Build 42]');
     setInterval(() => {
       this.date = new Date();
     }, 1000)
   }
+
 
   public snackbar(message: string){
     var x = document.getElementById("snackbar");
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
+
 
   getdata(){
     this.auth.currentUser().subscribe(
@@ -53,6 +55,7 @@ export class AppComponent implements OnInit {
     )
   }
 
+  
   ngOnInit() {
     $('#loading').hide(50);
     this.getdata();
@@ -72,9 +75,8 @@ export class AppComponent implements OnInit {
         }
     }
 
-
-
   }
+
 
   loginUser(event){
     $('#loading').show(50);
@@ -144,6 +146,7 @@ export class AppComponent implements OnInit {
     )
   }
 
+  
   logout(){
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');

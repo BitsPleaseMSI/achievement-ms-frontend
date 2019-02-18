@@ -108,9 +108,9 @@
       </div>
     </form>
 
-    <form *ngIf="this.router.url.includes('/home/academic')" (submit)="filter($event)" class="form-inline" action=""
-      id="filter">
-<div id="filter-area-one">
+  <form *ngIf="this.router.url.includes('/home/academic')" (submit)="filter($event)" class="form-inline" action=""
+    id="filter">
+    <div id="filter-area-one">
         <div class="home-filters">
         <label for="section" class="">Batch:</label>&nbsp;
         <input type="number" id="from"  placeholder="Begining year" value="{{!!this.route.snapshot.queryParams['batch']?this.route.snapshot.queryParams['batch'].split('-')[0]:''}}">&nbsp;
@@ -146,15 +146,15 @@
           <option value="both">Gold Medalist & Exemplary Performance</option>
         </select>
       </div>
-</div>
-      <br>
-      <div class="form-group-row">
-        <div id="button-area">
-          <button class="btn btn-crimson" type="submit">Apply filter</button>
-          &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
-        </div>
       </div>
-    </form>
+    <br>
+    <div class="form-group-row">
+      <div id="button-area">
+        <button class="btn btn-crimson" type="submit">Apply filter</button>
+        &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
+      </div>
+    </div>
+  </form>
 
   </div>
   <br>
