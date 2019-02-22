@@ -1,18 +1,8 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- Our Custom CSS -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+<html lang="en">
 
 <body>
+
   <div class="modal fade" id="loginModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -49,7 +39,7 @@
             <div id="btn-area">
               <div class="row" style="display:inline-block;">
                 <div class="col-xs-6">
-                  <button class="btn btn-crimson btn-block" type="submit">Sign in</button>
+                  <button class="btn btn-outline-secondary btn-block" type="submit">Sign in</button>
                 </div>
                 <div class="col-xs-6">
                   <img id="loading" src="/assets/loadingCustom.svg" alt="Loading..." style="width:30px;height:30px;">
@@ -57,61 +47,157 @@
               </div>
             </div>
           </form>
-          </div>
+        </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" #closeLogin>Close</button>
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" #closeLogin>Close</button>
         </div>
       </div>
     </div>
   </div>
+
 
   <div id="snackbar">
     <h4>{{ message$ }}</h4>
   </div>
-  <div class="wrapper">
 
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <!-- <p id="date">{{date | date:'medium'}}</p> -->
-        <div id="img-div"><a href="http://msi-ggsip.org/" target="_blank"><img src="/assets/header.png" alt="Maharaja Surajmal Institute"></a></div>
-        <h1 id="sidebar-header">Student Achievement Management System</h1><br>
-        <h5 *ngIf="userData$">Welcome, <span class="highlight">{{userData$['firstName']}} {{userData$['lastName']}}</span></h5>
-        <h5 *ngIf="!userData$">Welcome, <span class="highlight">Guest</span></h5>
-        <h5 *ngIf="userData$ && userData$['department']=='management'">Department: <span class="highlight">Management</span></h5>
-        <h5 *ngIf="userData$ && userData$['department']=='computerscience'">Department: <span class="highlight">Computer Science</span></h5>
-        <h5 *ngIf="userData$ && userData$['department']=='education'">Department: <span class="highlight">Education</span></h5>
-        <h5 *ngIf="userData$ && userData$['department']=='commerce'">Department: <span class="highlight">Commerce</span></h5>
-        <h5 *ngIf="userData$ && userData$['shift']=='morning'">Shift: <span class="highlight">Morning</span></h5>
-        <h5 *ngIf="userData$ && userData$['shift']=='evening'">Shift: <span class="highlight">Evening</span></h5>
+  <div class="container-scroller">
+    <!-- partial:./assets/partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+          <img src="./assets/sams3.jpg" alt="logo" />
       </div>
-
-      <ul class="list-unstyled components">
-        <li [class.active]="this.router.url.includes('/home/')"><a *ngIf="this.router.url.includes('/home')"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
-        <li [class.active]="this.router.url.includes('/home/')"><a *ngIf="!this.router.url.includes('/home')" routerLink="/home/achievements"><i class="material-icons">home</i>&nbsp;&nbsp;&nbsp;Home</a></li>
-        <li [class.active]="this.router.url=='/achievement/add'" *ngIf="!userData$"><a routerLink="/achievement/add"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;Add achievement</a></li>
-        <li [class.active]="this.router.url.includes('/dashboard/')" *ngIf="userData$"><a *ngIf="this.router.url.includes('/dashboard/unapproved')"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
-        <li [class.active]="this.router.url.includes('/dashboard/')" *ngIf="userData$"><a *ngIf="!this.router.url.includes('/dashboard/unapproved')" routerLink="/dashboard/unapproved"><i class="material-icons">dashboard</i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
-        <li [class.active]="this.router.url=='/user/register'" *ngIf="!userData$"><a routerLink="/user/register"> <i class="material-icons">person_add</i>&nbsp;&nbsp;&nbsp;Register new user</a></li>
-        <li *ngIf="!userData$"><a data-toggle="modal" data-target="#loginModal"><i class="material-icons">person</i>&nbsp;&nbsp;&nbsp;<strong>Faculty Login</strong></a></li>
-        <li [class.active]="this.router.url=='/about'"><a routerLink="/about"><i class="material-icons">info</i>&nbsp;&nbsp;&nbsp;About</a></li>
-        <li *ngIf="userData$" (click)="logout()"><a routerLink="/home/achievements"><i class="material-icons">input</i><strong>&nbsp;&nbsp;&nbsp;Logout</strong></a></li>
-      </ul>
+      <div class="navbar-menu-wrapper d-flex align-items-center">
+        <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+          <li class="nav-item">
+            <h1>Student Achievement Management System</h1>
+          </li>
+          <li class="nav-item">
+          </li>
+        </ul>
+      </div>
     </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:./assets/partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item text-center align-items-top row-fluid col-wrap justify-content-center">
+            <h5>Maharaja Surajmal Institute</h5>
+            <img src="./assets/header.png" alt="logo"/>
+          </li>
+          <li class="nav-item nav-profile">
+            <div class="nav-link">
+              <div class="user-wrapper">
+                <div class="profile-image">
+                  <i class="mdi mdi-account mdi-48px"></i>
+                </div>
+                <div class="text-wrapper" *ngIf="!userData$">
+                  <p class="profile-name" >Hello, Guest</p>
+                  <small class="designation text-muted" >Site user</small>
+                </div>
+                <div class="text-wrapper" *ngIf="userData$">
+                  <p class="profile-name" *ngIf="!userData$">Hello, Guest</p>
+                  <p class="profile-name" *ngIf="userData$">Hello, {{userData$['firstName']}} {{userData$['lastName']}}</p>
+                  <div>
+                    <small class="designation text-muted" *ngIf="userData$ && userData$['department']=='management'">Department: Management</small>
+                    <small class="designation text-muted" *ngIf="userData$ && userData$['department']=='computerscience'">Department: Computer Science</small>
+                    <small class="designation text-muted" *ngIf="userData$ && userData$['department']=='education'">Department: Education</small>
+                    <small class="designation text-muted" *ngIf="userData$ && userData$['department']=='commerce'">Department: Commerce</small>
+                    <br>
+                    <small class="designation text-muted" *ngIf="userData$ && userData$['shift']=='morning'">Shift: Morning</small>
+                    <small class="designation text-muted" *ngIf="userData$ && userData$['shift']=='evening'">Shift: Evening</small>
+                  </div>
 
-    <div id="content">
-      <div id>
-        <button type="button" id="sidebarCollapse" class="navbar-btn">
-           <span></span>
-           <span></span>
-           <span></span>
-        </button>
+                </div>
+              </div>
+              <button class="btn btn-success btn-block" routerLink="/achievement/add">Add Achievement
+                <i class="mdi mdi-18px mdi-plus"></i>
+              </button>
+              <button class="btn btn-success btn-block" *ngIf="userData$" routerLink="/academic/add">Add Academic
+                <i class="mdi mdi-18px mdi-plus"></i>
+              </button>
+              <button class="btn btn-warning btn-block" *ngIf="userData$" routerLink="/user/settings">Edit Profile
+                <i class="mdi mdi-18px mdi-pencil"></i>
+              </button>
+              
+            </div>
+          </li>
+          <li class="nav-item" [class.active]="this.router.url.includes('/home/')">
+            <a class="nav-link" href="" routerLink="/home/achievements">
+              <i class="menu-icon mdi mdi-18px mdi-home-circle"></i>
+              <span class="menu-title">Home</span>
+            </a>
+          </li>
+          <li class="nav-item" [class.active]="this.router.url=='/user/register'" *ngIf="!userData$">
+            <a class="nav-link" href="" routerLink="/user/register">
+              <i class="menu-icon mdi mdi-18px mdi-account-plus"></i>
+              <span class="menu-title">Register new user</span>
+            </a>
+          </li>
+          <li class="nav-item" [class.active]="this.router.url.includes('/dashboard/')" *ngIf="userData$">
+            <a class="nav-link" href="" routerLink="/dashboard/unapproved">
+              <i class="menu-icon mdi mdi-18px mdi-view-dashboard"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="!userData$">
+            <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">
+              <i class="menu-icon mdi mdi-18px mdi-login-variant"></i>
+              <span class="menu-title">Faculty Login</span>
+            </a>
+          </li>
+          <li class="nav-item" [class.active]="this.router.url=='/about'">
+            <a class="nav-link" href="" routerLink="/about">
+              <i class="menu-icon mdi mdi-18px mdi-information"></i>
+              <span class="menu-title">About</span>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="userData$" (click)="logout()">
+            <a class="nav-link" href="" routerLink="/home/achievements">
+              <i class="menu-icon mdi mdi-18px mdi-logout-variant"></i>
+              <span class="menu-title">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <router-outlet></router-outlet>
+          <br>
+          <div class="col-md-2 col-md-offset-10">
+            <a class="btn btn-outline-secondary btn-block" id="myBtn" (click)="w$.scrollTo(0,0)" title="Go to top">Go to top
+              <i class="menu-icon mdi mdi-18px mdi-arrow-up-bold"></i>
+            </a>
+          <div>
+        </div></div></div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="container-fluid clearfix">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
+              <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
+              <i class="mdi mdi-18px mdi-heart text-danger"></i>
+            </span>
+          </div>
+        </footer>
+        <!-- partial -->
       </div>
-      <router-outlet></router-outlet>
+      <!-- main-panel ends -->
     </div>
+    <!-- page-body-wrapper ends -->
   </div>
-
-  <a id="myBtn" (click)="w$.scrollTo(0,0)" title="Go to top">Top</a>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="../../vendors/js/vendor.bundle.addons.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/misc.js"></script>
+  <!-- endinject -->
 </body>
 
 </html>

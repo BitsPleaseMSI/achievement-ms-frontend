@@ -167,7 +167,7 @@ export class HomeComponent implements OnInit {
   downloadList(){
     let replace, headers, concat;
     if(this.router.url.includes('/home/academic')){
-      this.fileName$ = 'Academic_Achievements.csv'
+      this.fileName$ = 'Academic Achievements.csv'
       // var filters = window.location.search.substring(1).split('&');
       // var delim = '-';
       // for(let filter in filters){
@@ -197,7 +197,7 @@ export class HomeComponent implements OnInit {
       }
 
     }else if(this.router.url.includes('/home/achievements')){
-      this.fileName$ = 'Non-Academic_Achievements.csv'
+      this.fileName$ = 'Non-Academic Achievements.csv'
       headers = [
         'Semester',
         'Session From',

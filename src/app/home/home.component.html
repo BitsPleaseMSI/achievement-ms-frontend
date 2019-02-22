@@ -1,24 +1,21 @@
+<h1>Home</h1>
 
-<h1 id="msi-header">Maharaja Surajmal Institute</h1>
-
-<h1><span>H</span>ome</h1>
-<h4>Select achievement view</h4>
-<ul class="nav nav-pills nav-fill">
-  <li [class.active]="this.router.url.includes('/home/achievements')"><a routerLink="/home/achievements">Non - Academic achievements</a></li>
-  <li [class.active]="this.router.url.includes('/home/academic')"><a routerLink="/home/academic">Academic achievements</a></li>
-</ul>
+<div class="btn-group-lg" role="group" aria-label="View selector">
+  <button type="button" class="btn btn-primary" [class.active]="this.router.url.includes('/home/achievements')" routerLink="/home/achievements">Non-Academic Achievements</button>
+  <button type="button" class="btn btn-primary" [class.active]="this.router.url.includes('/home/academic')" routerLink="/home/academic">Academic Achievements</button>
+</div>
 <br>
 
 <div id="mainContent">
-
-  <h2 *ngIf="this.router.url.includes('/home/achievements')">List of Non - academic achievements</h2>
-  <h2 *ngIf="this.router.url.includes('/home/academic')">List of Academic achievements</h2>
-
+  <!--<div>
+    <h2 *ngIf="this.router.url.includes('/home/achievements')">Non-Academic achievements</h2>
+    <h2 *ngIf="this.router.url.includes('/home/academic')">Academic achievements</h2>
+  </div>
+  -->
   <h4>Filter options</h4>
   <label class="switch">
     <input id="b" type="checkbox">
     <span class="slider round"></span>
-
   </label>
   <div id="filters" hidden="true">
 
@@ -103,8 +100,8 @@
         </div>
       </div>
       <div id="button-area">
-        <button class="btn btn-crimson" type="submit">Apply filter</button>
-        &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
+        <button class="btn btn-outline-secondary" type="submit">Apply filter</button>
+        &nbsp;<button class="btn btn-outline-secondary" (click)="resetFilters($event)">Reset filter</button>
       </div>
     </form>
 
@@ -150,8 +147,8 @@
     <br>
     <div class="form-group-row">
       <div id="button-area">
-        <button class="btn btn-crimson" type="submit">Apply filter</button>
-        &nbsp;<button class="btn btn-crimson" (click)="resetFilters($event)">Reset filter</button>
+        <button class="btn btn-outline-secondary" type="submit">Apply filter</button>
+        &nbsp;<button class="btn btn-outline-secondary" (click)="resetFilters($event)">Reset filter</button>
       </div>
     </div>
   </form>
@@ -159,28 +156,32 @@
   </div>
   <br>
 
-  <button id="downloadList" hidden="true" class="btn btn-crimson btn-block" (click)="downloadList()"><i class="material-icons">
-    cloud_download
-    </i> Download as CSV</button>
+  <button id="downloadList" class="btn btn-primary" style="float:right;" (click)="downloadList()">
+    <i class="mdi mdi-18px mdi-download"></i>
+    Download this table
+  </button>
 <br>
-  <div class="table-container">
-  <table class="table-responsive" *ngIf="this.router.url.includes('/home/achievements') && achievements$.length > 0">
-    <tr id="table-heading">
-      <th>S.No.</th>
-      <th>Enrollment No.</th>
-      <th>Name</th>
-      <th>Department</th>
-      <th>Sem</th>
-      <th>Section</th>
-      <th>Event Name</th>
-      <th>Role</th>
-      <th>Category</th>
-      <th>Details</th>
-    </tr>
+
+  <div class="table table-hover">
+    <table class="table" *ngIf="this.router.url.includes('/home/achievements') && achievements$.length > 0">
+      <thead class="thead-light">
+        <tr id="table-heading" >
+          <th>S.No.</th>
+          <th>Enrollment No.</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Sem</th>
+          <th>Section</th>
+          <th>Event Name</th>
+          <th>Role</th>
+          <th>Category</th>
+          <th>Details</th>
+        </tr>
+      </thead>
     <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
       <td>{{ i+1 }}</td>
       <td>{{ achievement.rollNo |uppercase}}</td>
-      <td>{{ achievement.name | uppercase}}</td>
+      <td style="font-weight: bold;">{{ achievement.name | uppercase}}</td>
       <td>{{ achievement.department | uppercase }}</td>
       <td>{{achievement.semester}}</td>
       <td>{{ achievement.section | uppercase}}</td>
@@ -188,27 +189,30 @@
       <td *ngIf="achievement.participated">PARTICIPANT</td>
       <td *ngIf="!achievement.participated">ORGANISER</td>
       <td>{{ achievement.category | uppercase }}</td>
-      <td><button class="btn btn-blue" routerLink="/achievement/{{ achievement._id }}" id="detail-link"><i class="material-icons">
-        remove_red_eye
-        </i>
-
-        View details</button></td>
+      <td>
+        <button class="btn btn-outline-secondary btn-block" routerLink="/achievement/{{ achievement._id }}" id="detail-link">
+          <i class="mdi mdi-18px mdi-account-card-details"></i>
+          View details
+        </button>
+      </td>
     </tr>
   </table>
-</div>
-  <table *ngIf="this.router.url.includes('/home/academic') && achievements$.length > 0">
-    <tr id="table-heading">
-      <th>S.No.</th>
-      <th>Enrollment No.</th>
-      <th>Name</th>
-      <th>Batch</th>
-      <th>Programme</th>
-      <th>Category</th>
-    </tr>
+  
+  <table class="table" *ngIf="this.router.url.includes('/home/academic') && achievements$.length > 0">
+    <thead class="thead-light">
+      <tr id="table-heading">
+        <th>S.No.</th>
+        <th>Enrollment No.</th>
+        <th>Name</th>
+        <th>Batch</th>
+        <th>Programme</th>
+        <th>Category</th>
+      </tr>
+    </thead>
     <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
       <td>{{ i+1 }}</td>
       <td>{{ achievement.rollNo }}</td>
-      <td>{{ achievement.name }}</td>
+      <td style="font-weight: bold;">{{ achievement.name }}</td>
       <td>{{ achievement.batch }}</td>
       <td>{{ achievement.programme }}</td>
       <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
@@ -216,18 +220,15 @@
       <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
     </tr>
   </table>
+</div >
 
-  <div id="homeLoading" style="text-align:center;" hidden="true">
-    <img src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:60px;height:60px;">
+  <div id="homeLoading" style="text-align:center;">
+    <i class="mdi mdi-48px mdi-spin mdi-loading" alt="Loading..."></i>
   </div>
 
   <h3 id="homeEmpty" hidden="true">No achievements found!</h3>
 <br>
   <div *ngIf="this.router.url.includes('/home/achievements') && dataLength$ > 0" id="btn-area">
-    <div class="row" style="display:inline-block;">
-      <div class="col-xs-6">
-        <button class="btn btn-crimson btn-block" (click)="loadMore($event)">Load more</button>
-      </div>
-    </div>
-   </div>
+    <button class="btn btn-outline-secondary btn-block" (click)="loadMore($event)">Load more</button>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-#dashboard-taskbar{
+/* #dashboard-taskbar{
   padding:10px;
   margin-bottom:10px;
   border-bottom:2px solid gainsboro;
@@ -136,7 +136,7 @@ input:checked + .slider:before{
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
+/* Rounded sliders 
 .slider.round{
   border-radius: 34px;
 }
@@ -152,4 +152,4 @@ input:checked + .slider:before{
 
 a:hover{
   color:#636e72;
-}
+} */

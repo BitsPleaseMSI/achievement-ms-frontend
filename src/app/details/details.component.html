@@ -1,4 +1,3 @@
-<h1 id="msi-header">Maharaja Surajmal Institute</h1>
 <div id="mainContent">
 
   <div class="modal fade" id="deleteModal" role="dialog">
@@ -12,9 +11,9 @@
           <form (submit)="delete($event)" class="form">
             <div id="btn-area">
               <h3>Are you sure you want to delete this achievement?</h3>
-              <button type="button" name="delete" class="btn btn-crimson" (click)="delete($event)">Yes</button>
+              <button type="button" name="delete" class="btn btn-outline-secondary" (click)="delete($event)">Yes</button>
               <img id="deleteAchievementLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
-              &nbsp;<button type="button" name="delete" class="btn btn-crimson" data-dismiss="modal">No</button>
+              &nbsp;<button type="button" name="delete" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
             </div>
           </form>
         </div>
@@ -46,7 +45,7 @@
       <div class="zoom"><span>Event description: </span><p>{{ achievement$.description }}</p></div>
       <div class="zoom"><span>Title awarded: </span><p>{{ achievement$.title }}</p></div>
     <br>
-      <div id="btn-area"><button id="img-btn" class="btn btn-crimson">Show Certificate</button></div>
+      <div id="btn-area"><button id="img-btn" class="btn btn-outline-secondary">Show Certificate</button></div>
     <br>
     <div id="img-details">
       <img src="http://13.59.95.13:8081/{{ achievement$.imageUrl }}" alt="Certifiate" style="display:block;margin-left:auto;margin-right:auto;width:50%;border:2px solid black;">
