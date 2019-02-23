@@ -31,12 +31,12 @@ import { AddAcademicComponent } from './add-academic/add-academic.component';
     AddAcademicComponent,
   ],
   imports: [
-    NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
     FormsModule,
+    NgbModule.forRoot(),
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent]

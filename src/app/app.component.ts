@@ -15,9 +15,19 @@ interface Window {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  public sidebarOpened = false;
+  toggleOffcanvas() {
+    this.sidebarOpened = !this.sidebarOpened;
+    if(this.sidebarOpened) {
+      document.querySelector('.sidebar-offcanvas').classList.add('active');
+    }else{
+      document.querySelector('.sidebar-offcanvas').classList.remove('active');
+    }
+  }
 
   @ViewChild('closeLogin') closeLogin: ElementRef;
 
