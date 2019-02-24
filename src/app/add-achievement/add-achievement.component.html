@@ -1,147 +1,125 @@
 <h1>Add achievement</h1>
-
 <div id="mainContent">
-  <h4><i>Enter the following details to add student achievement.</i></h4>
-  <p><b>You are required to fill all the fields.</b></p>
-  <div id="form-area">
-
-  <!-- <div *ngIf="error$" class="alert alert-danger">
-    <p>Error: {{ error$ }}</p>
-  </div>
-
-  <div *ngIf="info$" class="alert alert-success" >
-    <p>{{ info$ }}</p>
-  </div> -->
-
-  <form (submit)="addAchievement($event)" class="form-horizontal" action="achievement/add">
-    <br>
-    <h4 style="text-align:center">Student details</h4>
-    <div class="input-group">
-      <span class="input-group-addon">Name</span>
-      <input type="text" id="name" class="form-control" placeholder="Your name">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Enrollment No.</span>
-      <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No." (change)="autoBatch($event)">
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Batch</span>
-      <input type="text" id="batch" class="form-control" readonly>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Department</span>
-      <select id="department" name="department" class="form-control">
-        <option value="education">Education</option>
-        <option value="computerscience">Computer Science</option>
-        <option value="management">Management</option>
-        <option value="commerce">Commerce</option>
-      </select>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Current semester</span>
-      <select id="semester" name="semester" class="form-control">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-      </select>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Section</span>
-      <select id="section" name="section" class="form-control" placeholder="Section">
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
-      </select>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Shift</span>
-      <select id="shift" name="shift" class="form-control" placeholder="Shift">
-        <option value="morning">Morning</option>
-        <option value="evening">Evening</option>
-      </select>
-    </div>
-    <br>
-    <h4 style="text-align:center">Event details</h4>
-    <div class="input-group">
-      <span class="input-group-addon">Event name</span>
-      <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Name of the event" required>
-    </div>
-    <br>
-
-    <div class="input-group">
-      <span class="input-group-addon">Event Category</span>
-      <select  id="category" name="category" class="form-control" placeholder="Category">
-        <option value="sports">Sports</option>
-        <option value="cultural">Cultural</option>
-        <option value="technical">Technical</option>
-        <option value="others">Others</option>
-      </select>
-    </div>
-    <br>
-
-    <div class="input-group">
-      <span class="input-group-addon">Event date</span>
-      <input type="date" id="date" name="date" class="form-control" placeholder="Date" required>
-    </div>
-    <br>
-
-    <div class="input-group">
-      <span class="input-group-addon">Event venue</span>
-      <input type="text" id="venue"  name="venue" class="form-control" placeholder="(eg: Maharaja Surajmal Institute, Delhi)" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Title awarded</span>
-      <input type="text" id="title"  name="title" class="form-control" placeholder="(First prize, participation certificate, etc.)">
-    </div>
-    <br>
-
-    <div class="input-group">
-      <input type="radio" id="participated" name="group1" checked>Participated
-      <br>
-      <input type="radio" id="organised" name="group1">Organised
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Description</span>
-      <input type="text" id="description"  name="description" class="form-control" placeholder="(Brief description of event)" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Certificate / Proof of event<br>( .jpg / .jpeg / .png )</span>
-   </div>
-   <div class="input-group">
-     <input type="file" id="image" name="image" class="form-control" value="fileupload" (change)="detectFiles($event)" required>
-   </div>
-   <br>
-  <div id="btn-area">
-    <div class="row" style="display:inline-block;">
-      <div class="col-xs-6">
-        <button id="addAchievementButton" class="btn btn-outline-secondary btn-block" type="submit">Add achievement</button>
+<div class="card">
+  <div class="card-body" style="background-color: rgb(237, 237, 237);">
+    <form (submit)="addAchievement($event)" action="achievement/add">
+      <h4 style="text-align:center">Student details</h4>
+      <div class="row">
+          <div class="form-group col">
+            <label>Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Your name">
+          </div>
       </div>
-      <div class="col-xs-6">
-        <img id="addAchievementLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
+      <div class="row">
+        <div class="form-group col">
+          <label>Enrollment No.</label>
+          <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No." (change)="autoBatch($event)">
+        </div>
+        <div class="form-group col">
+          <label>Batch</label>
+          <input type="text" id="batch" class="form-control">
+        </div>
       </div>
-    </div>
-  </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Current semester</label>
+          <select id="semester" name="semester" class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Section</label>
+          <select id="section" name="section" class="form-control" placeholder="Section">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Department</label>
+          <select id="department" name="department" class="form-control">
+            <option value="education">Education</option>
+            <option value="computerscience">Computer Science</option>
+            <option value="management">Management</option>
+            <option value="commerce">Commerce</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Shift</label>
+          <select id="shift" name="shift" class="form-control" placeholder="Shift">
+            <option value="morning">Morning</option>
+            <option value="evening">Evening</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <h4 style="text-align:center">Event details</h4>
+      <div class="row">
+        <div class="form-group col">
+          <label>Event name</label>
+          <input type="text" id="eventName" name="eventName" class="form-control" placeholder="Name of the event" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Event Category</label>
+          <select  id="category" name="category" class="form-control" placeholder="Category">
+            <option value="sports">Sports</option>
+            <option value="cultural">Cultural</option>
+            <option value="technical">Technical</option>
+            <option value="others">Others</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Event date</label>
+          <input type="date" id="date" name="date" class="form-control" placeholder="Date" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Event venue</label>
+          <input type="text" id="venue"  name="venue" class="form-control" placeholder="(eg: Maharaja Surajmal Institute, Delhi)" required>
+        </div>
+        <div class="form-group col">
+          <label>Title awarded</label>
+          <input type="text" id="title"  name="title" class="form-control" placeholder="(First prize, participation certificate, etc.)">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+            <input type="radio" id="participated" name="group1" checked>Participated
+            <br>
+            <input type="radio" id="organised" name="group1">Organised
+        </div>
+        <div class="form-group col">
+          <label>Description</label>
+          <input type="text" id="description"  name="description" class="form-control" placeholder="(Brief description of event)" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Certificate / Proof of event<br>( .jpg / .jpeg / .png )</label>
+          <br>
+          <input type="file" id="image" class="" value="fileupload" (change)="detectFiles($event)" required>
+        </div>
+      </div>
+      <h4 class="card-description">
+        <div *ngIf="error$" class="alert alert-danger" >
+          Error: {{ error$ }}
+        </div>
+        <div *ngIf="info$" class="alert alert-info" >
+          Info: {{ info$ }}
+        </div>
+      </h4>
+      <button id="addAchievementButton" class="btn btn-success btn-block" type="submit">Add achievement</button>
     </form>
+  </div>
 </div>
-
-<div *ngIf="error$" class="alert alert-danger">
-  <p>Error: {{ error$ }}</p>
-</div>
-
-<div *ngIf="info$" class="alert alert-success" >
-  <p>{{ info$ }}</p>
-</div>
-
 </div>

@@ -1,18 +1,26 @@
 <div id="mainContent">
 <h1>Home</h1>
-<div class="btn-group-lg" role="group" aria-label="View selector">
-  <button type="button" class="btn btn-primary" [class.active]="this.router.url.includes('/home/achievements')" routerLink="/home/achievements">Non-Academic Achievements</button>
-  <button type="button" class="btn btn-primary" [class.active]="this.router.url.includes('/home/academic')" routerLink="/home/academic">Academic Achievements</button>
+
+<!-- View selector -->
+<div class="row">
+  <div class="col" style="display:flex;justify-content:right;">
+      <button type="button" class="btn btn-outline-primary btn-lg btn-block" [class.active]="this.router.url.includes('/home/achievements')" routerLink="/home/achievements">Non-Academic Achievements</button>
+  </div>
+  <div class="col" style="display:flex;justify-content:left;">
+      <button type="button" class="btn btn-outline-primary btn-lg btn-block" [class.active]="this.router.url.includes('/home/academic')" routerLink="/home/academic">Academic Achievements</button>
+  </div>
+  <div class="col" style="display:flex;justify-content:right;">
+    <button class="btn btn-info btn-lg" type="button" id="b">Toggle filter options</button>
+  </div>
 </div>
 <br>
 
-<button class="btn btn-info" type="button" id="b">Toggle filter options</button>
-
 <div id="filters" class="card-body"
   style="background-color: rgb(230, 230, 230); border-style: solid; border-color: rgb(180, 180, 180);">
-  <!-- Filter form for non-academic view -->
+ 
+  <!-- Filter for non-academic view -->
   <form id="filter" class="form-sample" *ngIf="this.router.url.includes('/home/achievements')" (submit)="filter($event)" action="">
-    <div class="form-row">
+    <div class="form-group row">
       <div class="col">
         <label for="rollNo">Enrollment No.</label>
         <input class="form-control" type="number" id="rollNo" name="rollNo" placeholder="Enrollment No." value="{{this.route.snapshot.queryParams['rollNo']}}">
@@ -49,15 +57,7 @@
         </select>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-          <label for="shift" class="control-label">Shift:</label>
-          <select class="form-control" id="shift" name="shift" placeholder="Shift" value="{{this.route.snapshot.queryParams['shift']}}">
-            <option value="">Select shift</option>
-            <option value="morning">Morning</option>
-            <option value="evening">Evening</option>
-          </select>
-      </div>
+    <div class="form-group row">
       <div class="col">
         <label for="dateFrom" class="control-label">Starting from:</label>
         <input type="date" class="form-control" id="dateFrom" name="dateFrom" placeholder="Starting from date" value="{{this.route.snapshot.queryParams['dateFrom']}}">
@@ -65,6 +65,14 @@
       <div class="col">
         <label for="dateTo" class="control-label">Till date:</label>
         <input type="date" class="form-control" id="dateTo" name="dateTo" placeholder="Till date" value="{{this.route.snapshot.queryParams['dateTo']}}">
+      </div>
+      <div class="col">
+          <label for="shift" class="control-label">Shift:</label>
+          <select class="form-control" id="shift" name="shift" placeholder="Shift" value="{{this.route.snapshot.queryParams['shift']}}">
+            <option value="">Select shift</option>
+            <option value="morning">Morning</option>
+            <option value="evening">Evening</option>
+          </select>
       </div>
       <div class="col">
         <label for="category" class="control-label">Category:</label>
@@ -77,7 +85,7 @@
         </select>
       </div>
     </div>
-    <div class="row">
+    <div class="form-group row">
       <div class="col">
         <label for="sessionFrom" class="control-label">Batch:</label>
         <div class="input-group">
@@ -88,7 +96,7 @@
       </div>
     </div>
     <br>
-    <div class="row" style="display:flex;justify-content:center;">
+    <div class="form-group row" style="display:flex;justify-content:center;">
         <button class="btn btn-success" type="submit">Apply filter</button>
         <button class="btn btn-primary" style="margin-left:10px" (click)="resetFilters($event)">Reset filter</button>
     </div>
@@ -96,7 +104,7 @@
 
   <!-- Filter form for academic view -->
   <form id="filter" *ngIf="this.router.url.includes('/home/academic')" (submit)="filter($event)" class="form-sample" action="">
-    <div class="row">
+    <div class="form-group row">
       <div class="col">
         <label for="section" class="control-label">Batch:</label>
         <div class="input-group">
@@ -129,7 +137,7 @@
       </div>
     </div>
     <br>
-    <div class="row" style="display:flex;justify-content:center;">
+    <div class="form-group row" style="display:flex;justify-content:center;">
         <button class="btn btn-success" type="submit">Apply filter</button>
         <button class="btn btn-primary" style="margin-left:10px" (click)="resetFilters($event)">Reset filter</button>
     </div>
@@ -147,18 +155,17 @@
             <h2 class="" *ngIf="this.router.url.includes('/home/achievements')">Non-Academic Achievements</h2>
             <h2 class="" *ngIf="this.router.url.includes('/home/academic')">Academic Achievements</h2>
           </div>
+      
+          <!-- Download table button -->
           <div class="col">
             <div style="display:flex;justify-content:right;">
               <button id="downloadList" class="btn btn-primary" (click)="downloadList()">
-                <i class="mdi mdi-18px mdi-download"></i>
+                <i class="mdi mdi-download"></i>
                 Download this table
               </button>
             </div>
           </div>
         </div>
-        <h4 class="card-description">
-          Tap on an achievement to see details.
-        </h4>
         <div class="table-responsive">
 
           <!-- Non-academic table -->
@@ -170,32 +177,32 @@
                 <th>Name</th>
                 <th>Department</th>
                 <th>Sem</th>
-                <th>Section</th>
+                <!-- <th>Section</th> -->
                 <th>Event Name</th>
                 <th>Role</th>
                 <th>Category</th>
-                <!-- <th>Details</th> -->
+                <th>Details</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let achievement of achievements$; let i = index" target="_blank" routerLink="/achievement/{{ achievement._id }}">
+              <tr *ngFor="let achievement of achievements$; let i = index">
                 <td>{{ i+1 }}</td>
-                <td>{{ achievement.rollNo |uppercase}}</td>
-                <td style="font-weight: bold;">{{ achievement.name | uppercase}}</td>
+                <td>{{ achievement.rollNo }}</td>
+                <td style="font-weight: bold;">{{ achievement.name | uppercase }}</td>
                 <td>{{ achievement.department | uppercase }}</td>
-                <td>{{achievement.semester}}</td>
-                <td>{{ achievement.section | uppercase}}</td>
+                <td>{{ achievement.semester }}</td>
+                <!-- <td>{{ achievement.section | uppercase }}</td> -->
                 <td *ngIf="achievement.eventName.length > 30">{{ achievement.eventName | uppercase | slice:0:30 }} ...</td>
                 <td *ngIf="achievement.eventName.length <= 30">{{ achievement.eventName | uppercase }}</td>
                 <td *ngIf="achievement.participated">PARTICIPANT</td>
                 <td *ngIf="!achievement.participated">ORGANISER</td>
                 <td>{{ achievement.category | uppercase }}</td>
-                <!-- <td>
-                  <a class="btn btn-outline-secondary btn-block" target="_blank" routerLink="/achievement/{{ achievement._id }}" id="detail-link">
-                    <i class="mdi mdi-18px mdi-account-card-details"></i>
+                <td>
+                  <a class="btn btn-outline-secondary" target="_blank" href="./achievement/{{ achievement._id }}">
+                    <i class="mdi mdi-account-card-details"></i>
                     View details
                   </a>
-                </td> -->
+                </td>
               </tr>
             </tbody>
           </table>
@@ -223,7 +230,6 @@
             <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
           </tr>
         </table>
-
         </div>
       </div>
     </div>
@@ -236,11 +242,11 @@
 </div>
 
 <!-- No achievement message -->
-<h3 id="homeEmpty" hidden="true">No achievements found!</h3>
+<h3 id="homeEmpty">No achievements found!</h3>
 
 <!-- Load more button -->
 <div *ngIf="this.router.url.includes('/home/achievements') && dataLength$ > 0" id="btn-area">
-  <button class="btn btn-outline-secondary btn-block" (click)="loadMore($event)">Load more</button>
+  <button class="btn btn-secondary btn-block" (click)="loadMore($event)">Load more</button>
 </div>
 
 </div>

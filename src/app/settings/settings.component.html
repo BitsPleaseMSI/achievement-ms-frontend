@@ -1,43 +1,54 @@
 <h1>Profile settings</h1>
 <div id="mainContent">
-<div *ngIf="error$" class="alert alert-danger" >
-  <p>Error: {{ error$ }}</p>
+<div class="card">
+  <div class="card-body" style="background-color: rgb(237, 237, 237);">
+    <h4>Note: Only change what you want to update.</h4>
+    <form (submit)="update($event)" class="form-horizontal" action="user/settings">
+      <div class="row">
+          <div class="form-group col">
+            <label>First name</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name" autofocus required>
+          </div>
+        <div class="form-group col">
+          <label>Last name</label>
+          <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Email</label>
+          <input type="email" id="newEmail" name="newEmail" class="form-control" placeholder="Email" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Confirm current password to update profile.</label>
+          <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+      </div>
+      <h4 class="card-description">
+        <div *ngIf="error$" class="alert alert-danger">
+          Error: {{ error$ }}
+        </div>
+        <div *ngIf="info$" class="alert alert-success">
+          {{ info$ }}
+        </div>
+      </h4>
+      <div class="row">
+        <div class="form-group col">
+          <button class="btn btn-success btn-block" type="submit">Update</button>
+        </div>
+        <div class="form-group col">
+          <button class="btn btn-secondary btn-block" (click)="resetForm($event);">Reset</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
-
-<div *ngIf="info$" class="alert alert-success" >
-  <p>{{ info$ }}</p>
+<hr>
+<div class="card">
+  <div class="card-body" style="background-color: rgb(237, 237, 237);">
+    Click <a routerLink="/passwordreset">here</a> to change your password.
+  </div>
 </div>
-
-<h2>Profile details</h2>
-Click here to change your password:
-<button class="btn btn-outline-secondary" routerLink="/passwordreset">Reset password</button>
-
-<h5><i>Note: Change only those values that you want to update.</i></h5>
-<form (submit)="update($event)" class="form-horizontal" action="user/settings">
-  <div class="input-group">
-    <span class="input-group-addon">First name</span>
-    <input type="text" id="firstName" name="firstName"  class="form-control" placeholder="First name" autofocus required>
-  </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Last name</span>
-    <input type="text" id="lastName" name="lastName"  class="form-control" placeholder="Last name" required>
-  </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Email</span>
-    <input type="email" id="newEmail" name="newEmail"  class="form-control" placeholder="Email" required>
-  </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Confirm current password</span>
-    <input type="password" id="password" name="password"  class="form-control" placeholder="Enter current password" required>
-  </div>
-  <br>
-  <div id="btn-area">
-    <button class="btn btn-outline-secondary" type="submit">Update</button>
-    <img id="updateLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
-    &nbsp;<button class="btn btn-outline-secondary" (click)="resetForm($event);">Reset</button>
-  </div>
-</form>
 </div>

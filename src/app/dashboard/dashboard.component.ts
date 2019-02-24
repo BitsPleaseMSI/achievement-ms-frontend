@@ -55,6 +55,12 @@ export class DashboardComponent implements OnInit {
     this.refresh(window.location.search);
   }
   
+  clearMsgs(event){
+    event.preventDefault();
+    this.error$ = undefined;
+    this.info$ = undefined;
+  }
+
   refresh(arg?: string){
     $('#dashboardLoading').show(50);
     $('#dashboardEmpty').hide(50);
@@ -276,7 +282,6 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteAcademic(event){
-    $("#deleteAcademicLoading").show(50);
     event.preventDefault();
     this.data.deleteAcademic(this.deleteId$).subscribe(
       (data) => {
@@ -286,13 +291,9 @@ export class DashboardComponent implements OnInit {
             this.refresh();
           }
         }
-        $("#deleteAcademicLoading").hide(50);
-        $('#deleteAcademicModal .close').click();
       },
       () =>{
         this.ac.snackbar('Server is not responding, Please try later.');
-        $("#deleteAcademicLoading").hide(50);
-        $('#deleteAcademicModal .close').click();
         this.refresh();
       }
     )
@@ -341,6 +342,8 @@ export class DashboardComponent implements OnInit {
             this.ac.snackbar('Achievement edited Successfully!');
             this.info$ = 'Achievement edited Successfully.';
             this.error$ = undefined;
+            this.refresh();
+            $('#editModalClose').click();
           }
         }
         $('#editAcademicLoading').hide(50);
@@ -360,7 +363,6 @@ export class DashboardComponent implements OnInit {
       }
     }, 8000);
 
-    this.refresh();
   }
 
   downloadList(){
