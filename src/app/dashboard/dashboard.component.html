@@ -1,5 +1,4 @@
-<div id="mainContent">
-<h1>Dashboard</h1>
+<h1 class="text-center">Dashboard</h1>
 <!-- Delete modal -->
 <div class="modal fade" id="deleteAcademicModal" role="dialog">
   <div class="modal-dialog" >
@@ -27,7 +26,7 @@
       </div>
       <div class="modal-body">
         <div class="card">
-          <div class="card-body" style="background-color: rgb(237, 237, 237);">
+          <div class="card-body">
             <form (submit)="editAcademic($event)" action="user/settings">
               <div class="row">
                   <div class="form-group col">
@@ -97,25 +96,21 @@
 
 <!-- View selector -->
 <div class="row">
-  <div class="col" style="display:flex;justify-content:right;">
+  <div class="col">
   <button type="button" class="btn btn-outline-primary btn-lg btn-block" [class.active]="this.router.url.includes('/dashboard/approved')" routerLink="/dashboard/approved">Approved Achievements</button>
   </div>
-  <div class="col" style="display:flex;justify-content:left;">
+  <div class="col">
   <button type="button" class="btn btn-outline-primary btn-lg btn-block" [class.active]="this.router.url.includes('/dashboard/unapproved')" routerLink="/dashboard/unapproved">Unapproved Achievements</button>
   </div>
-  <div class="col" style="display:flex;justify-content:left;">
+  <div class="col">
   <button type="button" class="btn btn-outline-primary btn-lg btn-block" [class.active]="this.router.url.includes('/dashboard/academic')" routerLink="/dashboard/academic">Academic Achievements</button>
   </div>
   <!-- Filter options toggle -->
-  <div class="col" style="display:flex;justify-content:right;">
-    <button class="btn btn-info btn-lg" type="button" id="b">Toggle filter options</button>
+  <div class="col">
+    <button class="btn btn-info btn-lg" style="float:right;" type="button" id="b">Toggle filter options</button>
   </div>
 </div>
 <br>
-
-
-
-
 
 <div id="filters" class="card-body"
   style="background-color: rgb(230, 230, 230); border-style: solid; border-color: rgb(180, 180, 180);">
@@ -230,7 +225,7 @@
       </div>
     </div>
     <br>
-    <div class="form-group row" style="displayflex;justify-content:center;">
+    <div class="form-group row" style="display:flex;justify-content:center;">
         <button class="btn btn-success" type="submit">Apply filter</button>
         <button class="btn btn-primary" style="margin-left:10px" (click)="resetFilters($event)">Reset filter</button>
     </div>
@@ -252,12 +247,10 @@
           </div>
           <!-- Download table button -->
           <div class="col">
-            <div style="display:flex;justify-content:right;">
-              <button id="downloadList" class="btn btn-primary" (click)="downloadList()">
-                <i class="mdi mdi-download"></i>
-                Download this table
-              </button>
-            </div>
+            <button id="downloadList" class="btn btn-primary" style="float:right;" (click)="downloadList()">
+              <i class="mdi mdi-download"></i>
+              Download this table
+            </button>
           </div>
         </div>
         <div class="table-responsive">
@@ -367,6 +360,4 @@
       </div>
     </div>
   </div>
-</div>
-
 </div>

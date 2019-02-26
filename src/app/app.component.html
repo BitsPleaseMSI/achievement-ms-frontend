@@ -3,13 +3,13 @@
     <div class="modal-content">
       <div class="modal-body">
         <div class="card">
-          <div class="card-body" style="background-color: rgb(237, 237, 237);">
+          <div class="card-body">
             <h4 class="modal-title" style="text-align:center;">Login</h4>
             <div *ngIf="error$" class="alert alert-danger" >
-              <p>Error: {{ error$ }}</p>
+              Error: {{ error$ }}
             </div>
             <div *ngIf="info$" class="alert alert-info" >
-              <p>Info: {{ info$ }}</p>
+              Info: {{ info$ }}
             </div>
             <form (submit)="loginUser($event)" action="/login">
               <div class="form-group">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" #closeLogin>Close</button>
       </div>
     </div>
   </div>
@@ -48,20 +48,20 @@
   <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
       <a class="navbar-brand brand-logo" href="/">
-        <img src="./assets/sams.jpg" alt="logo"/>
+        <img src="./assets/sams-black.png" alt="logo"/>
       </a>
       <a class="navbar-brand brand-logo-mini" href="/">
-        <img src="./assets/header.jpg" alt="logo"/>
+        <img src="./assets/sams-black.png" alt="logo"/>
       </a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center">
-      <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+      <ul class="navbar-nav navbar-nav-left d-none d-md-flex">
+        <h1 style="color:black">Student Achievement Management System</h1>
         <li class="nav-item">
-          <h1>Student Achievement Management System</h1>
         </li>
       </ul>
       <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleOffcanvas()">
-        <span class="mdi mdi-menu"></span>
+        <span class="mdi mdi-menu mdi-dark"></span>
       </button>
     </div>
   </nav>
@@ -72,7 +72,7 @@
       <ul class="nav">
         <li class="nav-item text-center align-items-top row-fluid col-wrap justify-content-center">
           <br>
-          <h5>Maharaja Surajmal Institute</h5>
+          <p class="nav nav-item" style="font-size: 18px;">Maharaja Surajmal Institute</p>
           <img src="./assets/header.png" alt="logo"/>
         </li>
         <li class="nav-item nav-profile">
@@ -85,7 +85,7 @@
                 <p class="profile-name" >Hello, Guest</p>
                 <small class="designation text-muted" >Site user</small>
               </div>
-              <div class="text-wrapper" *ngIf="userData$">
+              <div class="text-wrapper" *ngIf="userData$" style="font-size: 15px;">
                 <p class="profile-name" *ngIf="!userData$">Hello, Guest</p>
                 <h5 class="profile-name" *ngIf="userData$">Hello, {{userData$['firstName']}} {{userData$['lastName']}}</h5>
                 <div>

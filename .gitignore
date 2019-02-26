@@ -33,6 +33,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 prod.bat
+test.bat
+test.sh
+prod.sh
 /typings
 
 # System Files
