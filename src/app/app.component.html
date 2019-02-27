@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <div class="card">
+        <div class="card card-inverse-primary">
           <div class="card-body">
             <h4 class="modal-title" style="text-align:center;">Login</h4>
             <div *ngIf="error$" class="alert alert-danger" >
@@ -83,7 +83,7 @@
               </div>
               <div class="text-wrapper" *ngIf="!userData$">
                 <p class="profile-name" >Hello, Guest</p>
-                <small class="designation text-muted" >Site user</small>
+                <small class="designation" >Site user</small>
               </div>
               <div class="text-wrapper" *ngIf="userData$" style="font-size: 15px;">
                 <p class="profile-name" *ngIf="!userData$">Hello, Guest</p>

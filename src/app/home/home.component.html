@@ -1,5 +1,4 @@
 <h1 class="text-center">Home</h1>
-
 <!-- View selector -->
 <div class="row">
   <div class="col">
@@ -13,10 +12,8 @@
   </div>
 </div>
 <br>
-
 <div id="filters" class="card-body"
   style="background-color: rgb(230, 230, 230); border-style: solid; border-color: rgb(180, 180, 180);">
- 
   <!-- Filter for non-academic view -->
   <form id="filter" class="form-sample" *ngIf="this.router.url.includes('/home/achievements')" (submit)="filter($event)" action="">
     <div class="form-group row">
@@ -100,7 +97,6 @@
         <button class="btn btn-primary" style="margin-left:10px" (click)="resetFilters($event)">Reset filter</button>
     </div>
   </form>
-
   <!-- Filter form for academic view -->
   <form id="filter" *ngIf="this.router.url.includes('/home/academic')" (submit)="filter($event)" class="form-sample" action="">
     <div class="form-group row">
@@ -143,7 +139,6 @@
   </form>
 </div>
 <br>
-
 <!-- Achievements table -->
 <div class="row">
   <div class="col grid-margin stretch-card">
@@ -154,7 +149,6 @@
             <h2 class="" *ngIf="this.router.url.includes('/home/achievements')">Non-Academic Achievements</h2>
             <h2 class="" *ngIf="this.router.url.includes('/home/academic')">Academic Achievements</h2>
           </div>
-      
           <!-- Download table button -->
           <div class="col">
             <button id="downloadList" class="btn btn-primary" style="float:right;" (click)="downloadList()">
@@ -163,12 +157,11 @@
             </button>
           </div>
         </div>
-
         <div class="table-responsive">
           <!-- Non-academic table -->
           <table class="table table-hover" *ngIf="this.router.url.includes('/home/achievements') && achievements$.length > 0">
             <thead class="thead-light">
-              <tr id="table-heading" >
+              <tr id="table-heading">
                 <th>S.No.</th>
                 <th>Enrollment No.</th>
                 <th>Name</th>
@@ -203,7 +196,6 @@
               </tr>
             </tbody>
           </table>
-
           <!-- Academic table -->
           <table class="table table-hover" *ngIf="this.router.url.includes('/home/academic') && achievements$.length > 0">
           <thead class="thead-light">
@@ -232,15 +224,12 @@
     </div>
   </div>
 </div>
-
 <!-- Loading icon -->
 <div id="homeLoading" style="text-align:center;">
   <i class="mdi mdi-48px mdi-spin mdi-loading" alt="Loading..."></i>
 </div>
-
 <!-- No achievement message -->
 <h3 id="homeEmpty">No achievements found!</h3>
-
 <!-- Load more button -->
 <div *ngIf="this.router.url.includes('/home/achievements') && dataLength$ > 0" id="btn-area">
   <button class="btn btn-secondary btn-block" (click)="loadMore($event)">Load more</button>

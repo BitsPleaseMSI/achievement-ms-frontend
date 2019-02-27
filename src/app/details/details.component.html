@@ -1,68 +1,84 @@
-<div id="mainContent">
-
-  <div class="modal fade" id="deleteModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Delete achievement</h4>
+<!-- Delete modal -->
+<div class="modal fade" id="deleteModal" role="dialog">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="text-center">Are you sure you want to delete this achievement?</h3>
+        <div class="row">
+        <div class="col">
+            <button type="button" name="delete" class="btn btn-primary btn-block" data-dismiss="modal" (click)="delete($event)">Yes</button>
         </div>
-        <div class="modal-body">
-          <form (submit)="delete($event)" class="form">
-            <div id="btn-area">
-              <h3>Are you sure you want to delete this achievement?</h3>
-              <button type="button" name="delete" class="btn btn-outline-secondary" (click)="delete($event)">Yes</button>
-              <img id="deleteAchievementLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
-              &nbsp;<button type="button" name="delete" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
-            </div>
-          </form>
+        <div class="col">
+            <button type="button" name="delete" class="btn btn-secondary btn-block" data-dismiss="modal">No</button>
+        </div>
         </div>
       </div>
     </div>
   </div>
-
-  <h1 id="student-name-header"><span class="highlight">Achievement of {{achievement$.name |uppercase}}</span></h1>
-
-  <div id="student-details">
-    <h5><span class="underline">Student's details</span></h5><br>
-        <div class="zoom"><span>Name :</span><p>{{ achievement$.name | titlecase}}</p></div>
-      <div class="zoom"><span>Roll No. :</span><p>{{ achievement$.rollNo}}</p></div>
-      <div class="zoom"><span>Department :</span><p>{{ achievement$.department | titlecase }}</p></div>
-      <div class="zoom"><span>Semester:</span><p>{{achievement$.semester}}</p></div>
-      <div class="zoom"><span>Section:</span><p>{{ achievement$.section | titlecase}}</p></div>
-      <div class="zoom"><span>Shift :</span><p>{{ achievement$.shift | titlecase}}</p></div>
-      <div class="zoom"><span>Batch :</span><p>{{ achievement$.sessionFrom}} - {{ achievement$.sessionTo}}</p></div>
-
-  </div>
-  <div id="student-event-details">
-    <h5><span class="underline">Student's achievement details</span></h5><br>
-      <div class="zoom"><span>Event Name:</span><p>{{ achievement$.eventName |titlecase }}</p></div>
-      <div class="zoom"><span>Venue:</span><p>{{ achievement$.venue | titlecase}}</p></div>
-      <div class="zoom"><span>Event Date: </span><p>{{achievement$.date}} (YYYY-MM-DD)</p></div>
-      <div *ngIf="achievement$.participated"><span class="zoom">Role:</span><p>PARTICIPANT</p></div>
-      <div *ngIf="!achievement$.participated"><span class="zoom">Role:</span><p>ORGANISER</p></div>
-      <div class="zoom"><span>Event Category:</span><p>{{ achievement$.category | titlecase}}</p></div>
-      <div class="zoom"><span>Event description: </span><p>{{ achievement$.description }}</p></div>
-      <div class="zoom"><span>Title awarded: </span><p>{{ achievement$.title }}</p></div>
-    <br>
-      <div id="btn-area"><button id="img-btn" class="btn btn-outline-secondary">Show Certificate</button></div>
-    <br>
-    <div id="img-details">
-      <img src="http://13.59.95.13:8081/{{ achievement$.imageUrl }}" alt="Certifiate" style="display:block;margin-left:auto;margin-right:auto;width:50%;border:2px solid black;">
+</div>
+<div class="card">
+  <div class="card-body">
+    <h1 class="" style="font-size:32px;text-align:center;">Achievement details of {{achievement$.name | uppercase}}</h1>    
+    <h3>Student Details</h3>
+    <div class="row" style="margin: auto">
+      <div class="col">
+        <h4 class="text-primary">Name: <h5 class="text-dark" style="display:inline;">{{ achievement$.name | titlecase}}</h5></h4>
+        <h4 class="text-primary">Roll No.: <h5 class="text-dark" style="display:inline;">{{ achievement$.rollNo}}</h5></h4>
+        <h4 class="text-primary">Department: <h5 class="text-dark" style="display:inline;">{{ achievement$.department | titlecase }}</h5></h4>
+        <h4 class="text-primary">Semester: <h5 class="text-dark" style="display:inline;">{{achievement$.semester}}</h5></h4>
+      </div>
+      <div class="col">
+        <h4 class="text-primary">Section: <h5 class="text-dark" style="display:inline;">{{ achievement$.section | titlecase}}</h5></h4>
+        <h4 class="text-primary">Shift: <h5 class="text-dark" style="display:inline;">{{ achievement$.shift | titlecase}}</h5></h4>
+        <h4 class="text-primary">Batch: <h5 class="text-dark" style="display:inline;">{{ achievement$.sessionFrom}} - {{ achievement$.sessionTo}}</h5></h4>
+      </div>
     </div>
-    <br>
-</div>
-    <h5 *ngIf="achievement$.approved">Approved by :<span class="highlight"><strong>{{achievement$.approvedBy }}</strong></span></h5>
-    <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :<span class="highlight">{{ achievement$.approvedBy }}</span></h5>
+    <hr>
+    <h3>Achievement Details</h3>
+    <div class="row" style="margin: auto">
+      <div class="col">
+        <h4 class="text-primary">Event Name: <h5 class="text-dark" style="display:inline;">{{ achievement$.eventName |titlecase }}</h5></h4>
+        <h4 class="text-primary">Venue: <h5 class="text-dark" style="display:inline;">{{ achievement$.venue | titlecase}}</h5></h4>
+        <h4 class="text-primary">Event Date: <h5 class="text-dark" style="display:inline;">{{achievement$.date}} (YYYY-MM-DD)</h5></h4>
+      </div>
+      <div class="col">
+        <h4 class="text-primary" *ngIf="achievement$.participated">Role: <h5 class="text-dark" style="display:inline;">PARTICIPANT</h5></h4><h4 class="text-primary" *ngIf="!achievement$.participated">Role: <h5 class="text-dark" style="display:inline;">ORGANISER</h5></h4>
+        <h4 class="text-primary">Event Category: <h5 class="text-dark" style="display:inline;">{{ achievement$.category | titlecase}}</h5></h4>
+        <h4 class="text-primary">Title awarded: <h5 class="text-dark" style="display:inline;">{{ achievement$.title }}</h5></h4>
+      </div>
+      <div class="row" style="margin: auto">
+        <div class="col">
+          <h4 class="text-primary">Event description: <h5 class="text-dark" style="display:inline;">{{ achievement$.description }}</h5></h4>
+        </div>
+      </div>
+    </div>
+    <div>
+      <br>
+        <div id="btn-area"><button id="img-btn" class="btn btn-primary">Show Certificate</button></div>
+      <br>
+      <div id="img-details">
+        <img src="http://13.59.95.13:8081/{{ achievement$.imageUrl }}" alt="Certifiate" style="display:block;margin-left:auto;margin-right:auto;width:50%;border:2px solid black;">
+      </div>
+      <br>
+    </div>
+    <h5 *ngIf="achievement$.approved">Approved by :<strong>{{achievement$.approvedBy }}</strong></h5>
+    <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :{{ achievement$.approvedBy }}</h5>
     <div id="btn-area">
-  <button *ngIf="user$ && user$.department == achievement$.department && user$.shift == achievement$.shift" class="btn btn-red" type="button" name="delete" data-toggle="modal" data-target="#deleteModal"><i class="material-icons">
-    delete
-    </i>Delete ?</button>&nbsp;
-  <button *ngIf="!achievement$.approved && user$ && user$.department == achievement$.department  && user$.shift == achievement$.shift" class="btn btn-green" type="button" name="approve" (click)="approve($event, achievement$._id)"><i class="material-icons">
-    done
-    </i>Approve</button>
-  <button *ngIf="achievement$.approved && user$ && user$.department == achievement$.department  && user$.shift == achievement$.shift" class="btn btn-red" type="button" name="unapprove" (click)="unapprove($event, achievement$._id)"><i class="material-icons">
-    clear
-    </i>Unapprove</button>
+    </div>
+  </div>
 </div>
+<hr>
+<div class="form-group row" style="display:flex;justify-content:center;">
+  <button *ngIf="!achievement$.approved && user$ && user$.department == achievement$.department  && user$.shift == achievement$.shift" class="btn btn-success" type="button" name="approve" (click)="approve($event, achievement$._id)">
+    <i class="mdi mdi-check"></i>
+    Approve
+  </button>
+  <button *ngIf="achievement$.approved && user$ && user$.department == achievement$.department  && user$.shift == achievement$.shift" class="btn btn-warning" type="button" name="unapprove" (click)="unapprove($event, achievement$._id)">
+    <i class="mdi mdi-close"></i>
+    Unapprove
+  </button>
+  <button *ngIf="user$ && user$.department == achievement$.department && user$.shift == achievement$.shift" class="btn btn-danger" type="button" name="delete" style="margin-left:10px" data-toggle="modal" data-target="#deleteModal">
+    <i class="mdi mdi-delete"></i>
+    Delete ?
+  </button>
 </div>
