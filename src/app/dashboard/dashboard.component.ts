@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit {
     $('#dashboardEmpty').hide(50);
     $('#loadMoreLoading').hide(50);
     $('#downloadList').hide(50);
+    $('#b').hide(50);
     // this.achievements$ = [];
     let params = undefined;
     if(arg){
@@ -97,6 +98,7 @@ export class DashboardComponent implements OnInit {
                 $('#dashboardEmpty').show(50);
               }else{
                 $('#downloadList').show(50);
+                $('#b').show(50);
               }
               $('#dashboardLoading').hide(50);
               $('#loadMoreLoading').hide(50);
@@ -129,6 +131,7 @@ export class DashboardComponent implements OnInit {
                   $('#dashboardEmpty').show(50);
                 }else{
                   $('#downloadList').show(50);
+                  $('#b').show(50);
                 }
                 $('#dashboardLoading').hide(50);
                 $('#loadMoreLoading').hide(50);
@@ -150,6 +153,7 @@ export class DashboardComponent implements OnInit {
               $('#dashboardEmpty').show(50);
             }else{
               $('#downloadList').show(50);
+              $('#b').show(50);
             }
             $('#dashboardLoading').hide(50);
             $('#loadMoreLoading').hide(50);
