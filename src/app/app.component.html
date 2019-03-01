@@ -71,7 +71,7 @@
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
         <li class="nav-item text-center align-items-top row-fluid col-wrap justify-content-center">
-          <br>
+          <br><br>
           <p class="nav nav-item" style="font-size:18px; color: white">Maharaja Surajmal Institute</p>
           <a target="_blank" href="https://msi-ggsip.org"><img src="./assets/header.png" alt="logo"/></a>
         </li>
@@ -82,20 +82,19 @@
                 <i class="mdi mdi-account mdi-48px"></i>
               </div>
               <div class="text-wrapper" *ngIf="!userData$">
-                <p class="profile-name" >Hello, Guest</p>
+                <h5 class="profile-name" >Hello, Guest</h5>
                 <small class="designation" >Site user</small>
               </div>
               <div class="text-wrapper" *ngIf="userData$" style="font-size: 15px;">
-                <p class="profile-name" *ngIf="!userData$">Hello, Guest</p>
-                <h5 class="profile-name" *ngIf="userData$">Hello, {{userData$['firstName']}} {{userData$['lastName']}}</h5>
-                <div>
-                  <small class="designation" *ngIf="userData$ && userData$['department']=='management'">Department: Management</small>
-                  <small class="designation" *ngIf="userData$ && userData$['department']=='computerscience'">Department: Computer Science</small>
-                  <small class="designation" *ngIf="userData$ && userData$['department']=='education'">Department: Education</small>
-                  <small class="designation" *ngIf="userData$ && userData$['department']=='commerce'">Department: Commerce</small>
-                  <br>
-                  <small class="designation" *ngIf="userData$ && userData$['shift']=='morning'">Shift: Morning</small>
-                  <small class="designation" *ngIf="userData$ && userData$['shift']=='evening'">Shift: Evening</small>
+                <h5 class="profile-name" style="padding-bottom: 2px" *ngIf="userData$">Hello, {{userData$['firstName']}} {{userData$['lastName']}}</h5>
+                <small class="designation" *ngIf="userData$ && userData$['department']=='management'">Dept.: Management</small>
+                <small class="designation" *ngIf="userData$ && userData$['department']=='computerscience'">Dept.: Computer Science</small>
+                <small class="designation" *ngIf="userData$ && userData$['department']=='education'">Dept.: Education</small>
+                <small class="designation" *ngIf="userData$ && userData$['department']=='commerce'">Dept.: Commerce</small>
+                <br>
+                <small class="designation" *ngIf="userData$ && userData$['shift']=='morning'">Shift: Morning</small>
+                <small class="designation" *ngIf="userData$ && userData$['shift']=='evening'">Shift: Evening</small>
+                <div style="padding-top:1px;">
                 </div>
 
               </div>

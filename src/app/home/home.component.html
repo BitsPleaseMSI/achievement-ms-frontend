@@ -3,18 +3,18 @@
 <!-- View selector -->
 <ul class="nav nav-tabs md-tabs">
   <li class="nav-item">
-      <button type="button" class="nav-link" style="font-size:26px;"
-        [class.text-muted]="this.router.url.includes('/home/academic')"
-        [class.active]="this.router.url.includes('/home/achievements')"
-        routerLink="/home/achievements">
-        Non-Academic Achievements</button>
+    <button type="button" class="nav-link" style="font-size:26px;"
+      [class.text-muted]="this.router.url.includes('/home/academic')"
+      [class.active]="this.router.url.includes('/home/achievements')"
+      routerLink="/home/achievements">
+      Non-Academic Achievements</button>
   </li>
   <li class="nav-item">
-      <button type="button" class="nav-link" style="font-size:26px;"
-        [class.text-muted]="this.router.url.includes('/home/achievements')"
-        [class.active]="this.router.url.includes('/home/academic')"
-        routerLink="/home/academic">
-        Academic Achievements</button>
+    <button type="button" class="nav-link" style="font-size:26px;"
+      [class.text-muted]="this.router.url.includes('/home/achievements')"
+      [class.active]="this.router.url.includes('/home/academic')"
+      routerLink="/home/academic">
+      Academic Achievements</button>
   </li>
 </ul>
 
@@ -38,7 +38,7 @@
             </button>
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="padding-top:10px;">
           <div class="col">
             <div id="filters" class="card-body"
             style="background-color: rgb(230, 230, 230); border-style: solid; border-color: rgb(180, 180, 180);">
