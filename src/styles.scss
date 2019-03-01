@@ -1,7 +1,14 @@
-$card-body-color: #EDEDED;
-$content-wrapper-color: #f8f6f0;
-$sidebar-color: #dedceb;
-$navbar-color: #dedceb;
+$card-body-color: #E9E6F2;
+$content-wrapper-color: #f5f5f5;
+$sidebar-color: #81749c;
+$navbar-color: #81749c;
+$sidebar-link-color: #ffffff;
+$sidebar-profile-hover-color: #ffffff;
+
+// $card-body-color: #EDEDED;
+// $content-wrapper-color: #f8f6f0;
+// $sidebar-color: #dedceb;
+// $navbar-color: #dedceb;
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -55,9 +62,6 @@ $navbar-color: #dedceb;
 @import "./assets/styles/utilities";
 @import "./assets/styles/demo";
 /* You can add global styles to this file, and also import other style files */
-
-
-
 
 /*------------------------------------------------------------------
  [Master Stylesheet]
@@ -13794,7 +13798,7 @@ input:focus {
       padding: 16px 35px;
       white-space: nowrap;
       height: 52px;
-      color: #4a4a4a; }
+      color: $sidebar-link-color; }
       .sidebar .nav .nav-item .nav-link i.menu-arrow {
         margin-left: auto;
         margin-right: 0;
@@ -13844,7 +13848,7 @@ input:focus {
       .sidebar .nav .nav-item .nav-link .badge {
         margin-left: auto; }
       .sidebar .nav .nav-item .nav-link:hover {
-        color: #3d3d3d; }
+        color: $sidebar-profile-hover-color; }
     .sidebar .nav .nav-item.active > .nav-link {
       background: #fafbfc;
       color: #308ee0; }
