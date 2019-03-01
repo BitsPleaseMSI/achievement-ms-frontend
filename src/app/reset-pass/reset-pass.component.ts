@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { safe } from '../sanitise';
 
 @Component({
   selector: 'app-reset-pass',
@@ -14,15 +15,25 @@ export class ResetPassComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router, private ac: AppComponent) { }
 
-  ngOnInit() {}
-
+  ngOnInit() { }
+  
   resetPass(event){
-    $('#resetPassLoading').show(50);
     event.preventDefault();
+    this.info$ = undefined;
+    this.error$ = undefined;
     const target = event.target;
 
+    if((target.querySelector('#currentpass').value == '') || (!safe(target.querySelector('#currentpass').value.toString()))){
+      this.error$ = 'Current password cannot be empty!';
+      this.info$ = undefined;
+      return;
+    }
+    if((target.querySelector('#newpass').value == '') || (!safe(target.querySelector('#newpass').value.toString()))){
+      this.error$ = 'New password cannot be empty!';
+      this.info$ = undefined;
+      return;
+    }
     if( target.querySelector('#newpass').value != target.querySelector('#newpass1').value ){
-      $('#resetPassLoading').hide(50);
       this.error$ = "New passwords do not match!"
       this.info$ = undefined;
       return;
@@ -58,11 +69,9 @@ export class ResetPassComponent implements OnInit {
               }
             )
           }
-
+          
       }
     )
-
-    $('#resetPassLoading').hide(50);
   }
 
 }
