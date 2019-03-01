@@ -61,10 +61,8 @@
       </div>
       <br>
     </div>
-    <h5 *ngIf="achievement$.approved">Approved by :<strong>{{achievement$.approvedBy }}</strong></h5>
-    <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by :{{ achievement$.approvedBy }}</h5>
-    <div id="btn-area">
-    </div>
+    <h5 *ngIf="achievement$.approved">Approved by: <strong>{{achievement$.approvedBy }}</strong></h5>
+    <h5 *ngIf="user$ && achievement$.approvedBy && (!achievement$.approved)">Last approved by: {{ achievement$.approvedBy }}</h5>
   </div>
 </div>
 <hr>

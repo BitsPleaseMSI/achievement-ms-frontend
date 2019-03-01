@@ -24,7 +24,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <button class="btn btn-primary" style="float:left;" id="b">
+            <button class="btn btn-secondary" style="float:left;" id="b">
               <i class="mdi mdi-filter"></i>
               Toggle filter options
             </button>
@@ -32,7 +32,7 @@
 
           <!-- Download table button -->
           <div class="col">
-            <button class="btn btn-primary" style="float:right;" id="downloadList" (click)="downloadList()">
+            <button class="btn btn-secondary" style="float:right;" id="downloadList" (click)="downloadList()">
               <i class="mdi mdi-download"></i>
               Download this table
             </button>
@@ -193,16 +193,17 @@
                 <td>{{ i+1 }}</td>
                 <td>{{ achievement.rollNo }}</td>
                 <td style="font-weight: bold;">{{ achievement.name | uppercase }}</td>
-                <td>{{ achievement.department | uppercase }}</td>
+                <td *ngIf="achievement.department == 'computerscience'">COMPUTER SCIENCE</td>
+                <td *ngIf="achievement.department != 'computerscience'">{{ achievement.department | uppercase }}</td>
                 <td>{{ achievement.semester }}</td>
                 <!-- <td>{{ achievement.section | uppercase }}</td> -->
-                <td *ngIf="achievement.eventName.length > 30">{{ achievement.eventName | uppercase | slice:0:30 }} ...</td>
-                <td *ngIf="achievement.eventName.length <= 30">{{ achievement.eventName | uppercase }}</td>
+                <td *ngIf="achievement.eventName.length > 30">{{ achievement.eventName | slice:0:30 }} ...</td>
+                <td *ngIf="achievement.eventName.length <= 30">{{ achievement.eventName }}</td>
                 <td *ngIf="achievement.participated">PARTICIPANT</td>
                 <td *ngIf="!achievement.participated">ORGANISER</td>
                 <td>{{ achievement.category | uppercase }}</td>
                 <td>
-                  <a class="btn btn-outline-secondary" target="_blank" href="./achievement/{{ achievement._id }}">
+                  <a class="btn btn-secondary" target="_blank" href="./achievement/{{ achievement._id }}">
                     <i class="mdi mdi-account-card-details"></i>
                     View details
                   </a>

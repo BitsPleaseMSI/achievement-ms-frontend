@@ -1,4 +1,4 @@
-<h1 class="text-center">Password Reset</h1>
+<h1 class="text-center">Change password</h1>
 <div class="card card-inverse-primary">
   <div class="card-body">
     <form (submit)="resetPass($event)" class="form-signin" action="/passwordreset">
@@ -22,7 +22,9 @@
           {{ info$ }}
         </div>
       </h4>
-      <button class="btn btn-success" type="submit">Submit</button>
+      <div class="form-group col text-center">
+        <button class="btn btn-success" type="submit">Submit</button>
+      </div>
     </form>
   </div>
 </div>

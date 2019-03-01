@@ -299,7 +299,7 @@
                 <td>{{ achievement.date }}</td>
                 <td>{{ achievement.category | uppercase }}</td>
                 <td>
-                  <button class="btn btn-outline-secondary btn-block" routerLink="/achievement/{{ achievement._id }}">
+                  <button class="btn btn-secondary btn-block" routerLink="/achievement/{{ achievement._id }}">
                     <i class="mdi mdi-account-card-details"></i>
                     View Details
                   </button>
@@ -362,7 +362,7 @@
           <br>
           <div *ngIf="this.router.url.includes('approved') && dataLength$ > 0">
             <div class="btn-area">
-              <button class="btn btn-outline-secondary btn-block" (click)="loadMore($event)">Load more</button>
+              <button class="btn btn-secondary btn-block" (click)="loadMore($event)">Load more</button>
             </div>
           </div>
         </div>
