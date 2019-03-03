@@ -50,14 +50,14 @@ export class AddAchievementComponent implements OnInit {
   }
 
   addAchievement(event){
+    event.preventDefault();
+    const target = event.target;
+
     $('#addAchievementLoading').show(50);
     $('#addAchievementButton').attr('disabled', 'disabled');
 
     this.info$ = "Adding Achievement. Please wait.";
     this.error$ = undefined;
-
-    event.preventDefault();
-    const target = event.target;
 
     // Upload file check
     try{
