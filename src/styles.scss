@@ -8506,7 +8506,7 @@ pre {
   }
   .table th,
   .table td {
-    padding: 10px 2px;
+    padding: 8px 2px;
     vertical-align: top;
     border-top: 1px solid #f2f2f2; }
   .table thead th {
@@ -13592,6 +13592,7 @@ body {
 
 .form-control,
 .form-control:focus {
+  box-shadow: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none; }
 
@@ -13994,7 +13995,7 @@ input:focus {
       background: #161a27; }
     .navbar.default-layout .navbar-brand-wrapper .navbar-brand {
       color: #ffffff;
-      font-size: 1.5rem;
+      font-size: 10.5rem;
       line-height: 48px;
       margin-right: 0;
       padding: 0.25rem 0;
@@ -16180,7 +16181,7 @@ ul {
   .table td,
   .table th {
     vertical-align: middle;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1;
     white-space: nowrap; }
     .table td img,
