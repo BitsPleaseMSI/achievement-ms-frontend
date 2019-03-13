@@ -1,68 +1,58 @@
-<h1 id="msi-header">Maharaja Surajmal Institute</h1>
-<h1>Add academic achievement</h1>
-
-<div id="mainContent">
-<h4><i>Enter the following details to add an academic achievement.</i></h4>
-  <p><b>You are required to fill all the fields.</b></p>
-  <div id="form-area">
-<div *ngIf="error$" class="alert alert-danger">
-  <p>Error: {{ error$ }}</p>
-</div>
-
-<div *ngIf="info$" class="alert alert-success" >
-  <p>{{ info$ }}</p>
-</div>
-
-<form (submit)="addAcademic($event)" class="form-horizontal">
-  <div class="input-group">
-    <span class="input-group-addon">Name</span>
-    <input type="text" id="name" class="form-control" placeholder="Your name">
+<h1 class="text-center">Add academic achievement</h1>
+<div class="card">
+  <div class="card-body">
+    <form (submit)="addAcademic($event)" class="form-horizontal">
+      <div class="row">
+          <div class="form-group col">
+            <label>Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Your name">
+          </div>
+        <div class="form-group col">
+          <label>Enrollment No.</label>
+          <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No.">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Batch</label>
+          <div class="input-group">
+            <input type="number" id="from" class="form-control" placeholder="Begining year">
+            <span class="input-group-addon">-</span>
+            <input type="number" id="to" class="form-control" placeholder="Ending year">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Programme</label>
+          <select  id="programme" name="programme" class="form-control">
+            <option>B. Ed.</option>
+            <option>BBA (H) 4 years</option>
+            <option>BBA (General)</option>
+            <option>BBA (B&I)</option>
+            <option>BBA (T&TM)</option>
+            <option>BCA</option>
+            <option>B.Com (H)</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Category</label>
+          <select  id="category" name="category" class="form-control">
+          <option value="exemplary">Exemplary Performance</option>
+          <option value="goldmedalist">Gold Medalist</option>
+          <option value="both">Gold Medalist & Exemplary Performance</option>
+        </select>
+        </div>
+      </div>
+      <h4 class="card-description">
+        <div *ngIf="error$" class="alert alert-danger">
+          Error: {{ error$ }}
+        </div>
+        <div *ngIf="info$" class="alert alert-success" >
+          {{ info$ }}
+        </div>
+      </h4>
+      <button class="btn btn-success btn-block" type="submit">Add achievement</button>
+    </form>
   </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Enrollment No.</span>
-    <input type="text" id="rollNo" class="form-control" placeholder="Enrollment No.">
-  </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Batch</span>
-    <input type="number" id="from" class="form-control" placeholder="Begining year">
-    <span class="input-group-addon">-</span>
-    <input type="number" id="to" class="form-control" placeholder="Ending year">
-  </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Programme</span>
-    <select  id="programme" name="programme" class="form-control">
-      <option>B. Ed.</option>
-      <option>BBA (H) 4 years</option>
-      <option>BBA (General)</option>
-      <option>BBA (B&I)</option>
-      <option>BBA (T&TM)</option>
-      <option>BCA</option>
-      <option>B.Com (H)</option>
-    </select>
-  </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Category</span>
-    <select  id="category" name="category" class="form-control">
-      <option value="exemplary">Exemplary Performance</option>
-      <option value="goldmedalist">Gold Medalist</option>
-      <option value="both">Gold Medalist & Exemplary Performance</option>
-    </select>
-  </div>
-  <br>
- <div id="btn-area">
-   <div class="row" style="display:inline-block;">
-     <div class="col-xs-6">
-       <button class="btn btn-crimson btn-block" type="submit">Add achievement</button>
-     </div>
-     <div class="col-xs-6">
-       <img id="addAcademicLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
-     </div>
-   </div>
-  </div>
-</form>
-</div>
 </div>

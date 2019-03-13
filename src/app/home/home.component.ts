@@ -17,7 +17,7 @@ interface Achievement {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   achievements$: Achievement[];
@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
         (data) => {
           this.dataLength$ = data.length;
 
+          // DO NOT REMOVE
           // Sorting accord ing to date (newest first)
           // data.sort(function(a, b){
           //   return b.date.split('-').join('') - a.date.split('-').join('');
@@ -167,7 +168,7 @@ export class HomeComponent implements OnInit {
   downloadList(){
     let replace, headers, concat;
     if(this.router.url.includes('/home/academic')){
-      this.fileName$ = 'Academic_Achievements.csv'
+      this.fileName$ = 'Academic Achievements.csv'
       // var filters = window.location.search.substring(1).split('&');
       // var delim = '-';
       // for(let filter in filters){
@@ -197,7 +198,7 @@ export class HomeComponent implements OnInit {
       }
 
     }else if(this.router.url.includes('/home/achievements')){
-      this.fileName$ = 'Non-Academic_Achievements.csv'
+      this.fileName$ = 'Non-Academic Achievements.csv'
       headers = [
         'Semester',
         'Session From',

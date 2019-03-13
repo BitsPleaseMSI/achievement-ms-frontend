@@ -1,1 +1,0 @@
-ng build --prod --base-href "https://sreejeet.github.io/" && ngh -b master -r https://github.com/sreejeet/sreejeet.github.io

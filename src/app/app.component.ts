@@ -15,9 +15,19 @@ interface Window {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  public sidebarOpened = false;
+  toggleOffcanvas() {
+    this.sidebarOpened = !this.sidebarOpened;
+    if(this.sidebarOpened) {
+      document.querySelector('.sidebar-offcanvas').classList.add('active');
+    }else{
+      document.querySelector('.sidebar-offcanvas').classList.remove('active');
+    }
+  }
 
   @ViewChild('closeLogin') closeLogin: ElementRef;
 
@@ -103,13 +113,13 @@ export class AppComponent implements OnInit {
     // Sanitising data
     if((target.querySelector('#email').value == '') || (!safe(target.querySelector('#email').value.toString()))){
       $('#loading').hide(50);
-      this.error$ = 'Input error. Please check username';
+      this.error$ = 'Please check username';
       this.info$ = undefined;
       return;
     }
     if((target.querySelector('#password').value == '') || (!safe(target.querySelector('#password').value.toString()))){
       $('#loading').hide(50);
-      this.error$ = 'Input error. Please check password';
+      this.error$ = 'Please check password';
       this.info$ = undefined;
       return;
     }

@@ -50,14 +50,23 @@ export class DashboardComponent implements OnInit {
 
   loadMore(event){
     event.preventDefault();
+    $('#dashboardLoading').show(50);
     this.offset+= this.limit;
     this.refresh(window.location.search);
+  }
+  
+  clearMsgs(event){
+    event.preventDefault();
+    this.error$ = undefined;
+    this.info$ = undefined;
   }
 
   refresh(arg?: string){
     $('#dashboardLoading').show(50);
     $('#dashboardEmpty').hide(50);
+    $('#loadMoreLoading').hide(50);
     $('#downloadList').hide(50);
+    $('#b').hide(50);
     // this.achievements$ = [];
     let params = undefined;
     if(arg){
@@ -65,12 +74,12 @@ export class DashboardComponent implements OnInit {
     }else{
       params = window.location.search;
     }
-
+    
     if(this.router.url.includes('/dashboard/approved')){
       if(params==''){
         params='?';
       }
-
+      
       this.auth.currentUser().subscribe(
         (user) => {
           params += '&department=' +  user.department;
@@ -81,75 +90,84 @@ export class DashboardComponent implements OnInit {
               this.dataLength$ = data.length;
               // Sorting according to date (newest first)
               // data.sort(function(a, b){
-              //   return b.date.split('-').join('') - a.date.split('-').join('');
-              // });
-
-              this.achievements$ = this.achievements$.concat(data);
+                //   return b.date.split('-').join('') - a.date.split('-').join('');
+                // });
+                
+                this.achievements$ = this.achievements$.concat(data);
               if(this.achievements$.length == 0){
                 $('#dashboardEmpty').show(50);
               }else{
                 $('#downloadList').show(50);
+                $('#b').show(50);
               }
               $('#dashboardLoading').hide(50);
+              $('#loadMoreLoading').hide(50);
+            },
+            () =>{
+              this.ac.snackbar('Server is not responding, Please try later.');
+              $('#dashboardLoading').hide(50);
+              $('#loadMoreLoading').hide(50);
+            });
+          }
+          )
+          
+        }else if(this.router.url.includes('/dashboard/unapproved')){
+          if(params==''){
+            params='?';
+          }
+          
+          this.data.getUnapprovedAchievements(this.limit, this.offset, params)
+          .subscribe(
+            (data) => {
+              this.dataLength$ = data['data'].length;
+              
+              // Sorting according to date (newest first)
+              // data['data'].sort(function(a, b){
+                //   return b.date.split('-').join('') - a.date.split('-').join('');
+                // });
+                
+                this.achievements$ = this.achievements$.concat(data['data']);
+                if(this.achievements$.length == 0){
+                  $('#dashboardEmpty').show(50);
+                }else{
+                  $('#downloadList').show(50);
+                  $('#b').show(50);
+                }
+                $('#dashboardLoading').hide(50);
+                $('#loadMoreLoading').hide(50);
+              },
+        () =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
+          $('#dashboardLoading').hide(50);
+          $('#loadMoreLoading').hide(50);
+        });
+        
+      }else if(this.router.url.includes('/dashboard/academic')){
+        
+        this.data.getAcademic(params)
+        .subscribe(
+          (data) => {
+            this.dataLength$ = data.length;
+            this.achievements$ = data;
+            if(this.achievements$.length == 0){
+              $('#dashboardEmpty').show(50);
+            }else{
+              $('#downloadList').show(50);
+              $('#b').show(50);
+            }
+            $('#dashboardLoading').hide(50);
+            $('#loadMoreLoading').hide(50);
           },
           () =>{
             this.ac.snackbar('Server is not responding, Please try later.');
             $('#dashboardLoading').hide(50);
+            $('#loadMoreLoading').hide(50);
           });
-        }
-      )
-
-    }else if(this.router.url.includes('/dashboard/unapproved')){
-      if(params==''){
-        params='?';
-      }
-
-      this.data.getUnapprovedAchievements(this.limit, this.offset, params)
-      .subscribe(
-        (data) => {
-          this.dataLength$ = data['data'].length;
-
-          // Sorting according to date (newest first)
-          // data['data'].sort(function(a, b){
-          //   return b.date.split('-').join('') - a.date.split('-').join('');
-          // });
-
-          this.achievements$ = this.achievements$.concat(data['data']);
-          if(this.achievements$.length == 0){
-            $('#dashboardEmpty').show(50);
-          }else{
-            $('#downloadList').show(50);
-          }
-          $('#dashboardLoading').hide(50);
-        },
-        () =>{
-          this.ac.snackbar('Server is not responding, Please try later.');
-          $('#dashboardLoading').hide(50);
-        });
-
-    }else if(this.router.url.includes('/dashboard/academic')){
-
-      this.data.getAcademic(params)
-      .subscribe(
-        (data) => {
-          this.dataLength$ = data.length;
-          this.achievements$ = data;
-          if(this.achievements$.length == 0){
-            $('#dashboardEmpty').show(50);
-          }else{
-            $('#downloadList').show(50);
-          }
-          $('#dashboardLoading').hide(50);
-        },
-        () =>{
-          this.ac.snackbar('Server is not responding, Please try later.');
-          $('#dashboardLoading').hide(50);
-      });
 
     }
-
+    
   }
-
+  
   resetFilters(event){
     event.preventDefault();
     (document.getElementById('filter') as HTMLFormElement).reset();
@@ -268,7 +286,6 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteAcademic(event){
-    $("#deleteAcademicLoading").show(50);
     event.preventDefault();
     this.data.deleteAcademic(this.deleteId$).subscribe(
       (data) => {
@@ -278,13 +295,9 @@ export class DashboardComponent implements OnInit {
             this.refresh();
           }
         }
-        $("#deleteAcademicLoading").hide(50);
-        $('#deleteAcademicModal .close').click();
       },
       () =>{
         this.ac.snackbar('Server is not responding, Please try later.');
-        $("#deleteAcademicLoading").hide(50);
-        $('#deleteAcademicModal .close').click();
         this.refresh();
       }
     )
@@ -333,6 +346,8 @@ export class DashboardComponent implements OnInit {
             this.ac.snackbar('Achievement edited Successfully!');
             this.info$ = 'Achievement edited Successfully.';
             this.error$ = undefined;
+            this.refresh();
+            $('#editModalClose').click();
           }
         }
         $('#editAcademicLoading').hide(50);
@@ -352,13 +367,12 @@ export class DashboardComponent implements OnInit {
       }
     }, 8000);
 
-    this.refresh();
   }
 
   downloadList(){
     let replace, headers, concat;
     if(this.router.url.includes('academic')){
-      this.fileName$ = 'Academic_Achievements.csv'
+      this.fileName$ = 'Academic Achievements.csv'
       headers = [
         'Name',
         'Enrollment No.',
@@ -376,9 +390,9 @@ export class DashboardComponent implements OnInit {
 
     }else{
       if(this.router.url.includes('/approved')){
-        this.fileName$ = 'Approved_Non-Academic_Achievements.csv'
+        this.fileName$ = 'Approved Non-Academic Achievements.csv'
       }else if(this.router.url.includes('/unapproved')){
-        this.fileName$ = 'Unapproved_Non-Academic_Achievements.csv'
+        this.fileName$ = 'Unapproved Non-Academic Achievements.csv'
       }
       headers = [
         'Semester',

@@ -1,35 +1,30 @@
-<h1 id="msi-header">Maharaja Surajmal Institute</h1>
-<h1>Password Reset</h1>
-<div id="mainContent">
-
-<h5><i>Enter the following details to reset your account password:</i></h5>
-<div *ngIf="error$" class="alert alert-danger" >
-  <p>Error: {{ error$ }}</p>
-</div>
-
-<div *ngIf="info$" class="alert alert-success" >
-  <p>{{ info$ }}</p>
-</div>
-
-<form (submit)="resetPass($event)" class="form-signin" action="/passwordreset">
-  <div class="input-group">
-    <span class="input-group-addon">Current password</span>
-    <input type="password" id="currentpass" name="psw" class="form-control" placeholder="Enter your current password" required>
+<h1 class="text-center">Change password</h1>
+<div class="card card-inverse-primary">
+  <div class="card-body">
+    <form (submit)="resetPass($event)" class="form-signin" action="/passwordreset">
+      <div class="form-group col">
+        <label>Current password</label>
+        <input type="password" id="currentpass" name="psw" class="form-control" placeholder="Enter your current password" required>
+      </div>
+      <div class="form-group col">
+        <label>New password</label>
+        <input type="password" id="newpass" name="psw" class="form-control" placeholder="Enter new password" required>
+      </div>
+      <div class="form-group col">
+        <label>Confirm new password</label>
+        <input type="password" id="newpass1" name="psw" class="form-control" placeholder="Confirm new Password" required>
+      </div>
+      <h4 class="card-description">
+        <div *ngIf="error$" class="alert alert-danger">
+          Error: {{ error$ }}
+        </div>
+        <div *ngIf="info$" class="alert alert-success">
+          {{ info$ }}
+        </div>
+      </h4>
+      <div class="form-group col text-center">
+        <button class="btn btn-success" type="submit">Submit</button>
+      </div>
+    </form>
   </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">New password</span>
-    <input type="password" id="newpass" name="psw" class="form-control" placeholder="Enter new password" required>
-  </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon">Confirm new password</span>
-    <input type="password" id="newpass1" name="psw" class="form-control" placeholder="Confirm new Password" required>
-  </div>
-  <br>
-  <div id="btn-area">
-    <button class="btn btn-crimson" type="submit">Submit</button>
-    <img id="resetPassLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
-  </div>
-</form>
 </div>

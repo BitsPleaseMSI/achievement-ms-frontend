@@ -1,77 +1,66 @@
-<h1 id="msi-header">Maharaja Surajmal Institute</h1>
-<h1>Faculty Registration</h1>
-
-<div id="mainContent">
-  <h5><i>Enter your details in the following fields to register as a faculty member:</i></h5>
-  <p><b>You are required to fill all the fields.</b></p>
-  <div id="form-area">
-<div *ngIf="error$" class="alert alert-danger" >
-  <p>Error: {{ error$ }}</p>
-</div>
-
-<div *ngIf="info$" class="alert alert-success" >
-  <p>{{ info$ }}</p>
-</div>
-
-<form (submit)="registerUser($event)" class="form-signin" action="/user/register">
-    <div class="input-group">
-      <span class="input-group-addon">First name</span>
-      <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"  autofocus required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon" >Last name</span>
-      <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Department</span>
-      <select  id="department" name="department" class="form-control">
-        <option value="education">Education</option>
-        <option value="computerscience">Computer Science</option>
-        <option value="management">Management</option>
-        <option value="commerce">Commerce</option>
-      </select>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Shift</span>
-      <select id="shift" name="shift" class="form-control" placeholder="Shift">
-        <option value="morning">Morning</option>
-        <option value="evening">Evening</option>
-      </select>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon" >E-mail</span>
-      <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon" >Password</span>
-      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Re-type password</span>
-      <input type="password" id="password2" name="password2" class="form-control" placeholder="Re-type password" required>
-    </div>
-    <br>
-    <div class="input-group">
-      <span class="input-group-addon">Invite code</span>
-      <input type="password" id="code" name="code" class="form-control" placeholder="Invite code">
-    </div>
-    <br>
-    <div id="btn-area">
-      <div class="row" style="display:inline-block;">
-        <div class="col-xs-6">
-          <button class="btn btn-crimson btn-block" type="submit">Register</button>
-        </div>
-        <div class="col-xs-6">
-          <img id="registerUserLoading" src="/assets/loadingCustom.svg" alt="Loading..." style="padding:5px;width:40px;height:40px;" hidden="true">
+<h1 class="text-center">Faculty Registration</h1>
+<div class="card">
+  <div class="card-body">
+    <form (submit)="registerUser($event)" class="form-signin" action="/user/register">
+      <div class="row">
+          <div class="form-group col">
+            <label>First name</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"  autofocus required>
+          </div>
+        <div class="form-group col">
+          <label>Last name</label>
+          <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" required>
         </div>
       </div>
-    </div>
-</form>
-</div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Department</label>
+          <select  id="department" name="department" class="form-control">
+            <option value="education">Education</option>
+            <option value="computerscience">Computer Science</option>
+            <option value="management">Management</option>
+            <option value="commerce">Commerce</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Shift</label>
+          <select id="shift" name="shift" class="form-control" placeholder="Shift">
+            <option value="morning">Morning</option>
+            <option value="evening">Evening</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>E-mail</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="form-group col">
+          <label>Re-type password</label>
+          <input type="password" id="password2" name="password2" class="form-control" placeholder="Re-type password" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label>Secret code / Invite code</label>
+          <input type="password" id="code" name="code" class="form-control" placeholder="Invite code">
+        </div>
+      </div>
+      <h4 class="card-description">
+        <div *ngIf="error$" class="alert alert-danger">
+          Error: {{ error$ }}
+        </div>
+        <div *ngIf="info$" class="alert alert-success">
+          {{ info$ }}
+        </div>
+      </h4>
+      <button class="btn btn-success btn-block" type="submit">Register</button>
+    </form>
+  </div>
 </div>
