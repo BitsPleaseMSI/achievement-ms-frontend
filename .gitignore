@@ -37,6 +37,8 @@ testem.log
 /test.sh
 /prod.sh
 /typings
+/debug.log
+/.editorconfig
 
 # System Files
 .DS_Store
