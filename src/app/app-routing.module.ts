@@ -10,6 +10,7 @@ import { DetailsComponent } from './details/details.component'
 import { AboutComponent } from './about/about.component'
 import { SettingsComponent } from './settings/settings.component'
 import { AddAcademicComponent } from './add-academic/add-academic.component'
+import { AddFacultyComponent } from './add-faculty/add-faculty.component'
 import { AuthGuard as AG } from './auth.guard'
 
 const routes: Routes = [
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: 'academic/add',
     component: AddAcademicComponent,
+    canActivate: [AG],
+  },
+  {
+    path: 'faculty/add',
+    component: AddFacultyComponent,
     canActivate: [AG],
   },
   {

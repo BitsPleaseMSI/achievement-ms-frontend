@@ -5,8 +5,8 @@ import 'zone.js/dist/zone-error';
 
 export const environment = {
   production: false,
-  // baseUrl: 'http://localhost:8080'
-  baseUrl: 'https://amsmsi.com'
+  baseUrl: 'http://localhost:8080'
+  // baseUrl: 'https://amsmsi.com'
 };
 
 /*

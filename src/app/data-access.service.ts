@@ -123,6 +123,7 @@ export class DataAccessService {
     return this.http.request(req);
   }
 
+
   deleteAchievement(id: string): Observable<any>{
     // console.log('[deleteAchievement]')
     let options = {
@@ -142,6 +143,7 @@ export class DataAccessService {
 
     return this.http.post(url, '', options)
   }
+
 
   addAcademic(achievement: Object): Observable<any>{
     // console.log('[addAcademic]');
@@ -165,6 +167,7 @@ export class DataAccessService {
 
     return this.http.request(req);
   }
+
 
   deleteAcademic(id: string){
     // console.log('[deleteAcademic]')
@@ -208,6 +211,31 @@ export class DataAccessService {
 
     return this.http.request(req);
 
+  }
+
+
+  addTAchievement(achievement: Object): Observable<any>{
+    // console.log('[addTAchievement]');
+
+    const data: FormData = new FormData();
+
+    for(let key in achievement){
+      data.append(key, achievement[key]);
+      console.log(key + ' ' + achievement[key]);
+    }
+
+    if(localStorage.getItem('token')){
+      data.append('token', localStorage.getItem('token'));
+    }else{
+      data.append('token', sessionStorage.getItem('token'));
+    }
+
+    const req = new HttpRequest('POST', api + '/tachievements/add', data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
   }
 
 }

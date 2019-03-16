@@ -19,7 +19,7 @@ export class AddAcademicComponent implements OnInit {
     event.preventDefault();
     const target = event.target;
 
-    this.info$ = 'Please wait...';
+    this.info$ = "Adding achievement. Please wait.";
     this.error$ = undefined;
 
     if(

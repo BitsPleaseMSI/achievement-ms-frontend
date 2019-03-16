@@ -104,15 +104,15 @@ export class AddAchievementComponent implements OnInit {
       if(key == 'participated'){
 
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
-        $('#addAchievementLoading').hide(50);
-        $('#addAchievementButton').removeAttr('disabled');
         if(key == 'eventName')
-          key = 'event name'
+        key = 'event name'
         if(key == 'rollNo')
-          key = 'enrollment no.'
-
+        key = 'enrollment no.'
+        
         this.error$ = 'Please check ' + key;
         this.info$ = undefined;
+        $('#addAchievementLoading').hide(50);
+        $('#addAchievementButton').removeAttr('disabled');
         return;
       }
     }
@@ -128,7 +128,7 @@ export class AddAchievementComponent implements OnInit {
             this.info$ = 'Achievement added successfully.';
             this.ac.snackbar('Achievement added successfully!');
 
-            // Reseting some form fields
+            // Reseting event form fields
             target.querySelector('#eventName').value = '';
             target.querySelector('#date').value = undefined;
             target.querySelector('#title').value = '';
