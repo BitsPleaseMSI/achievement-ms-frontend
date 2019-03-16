@@ -29,7 +29,7 @@ export class AddFacultyComponent implements OnInit {
 
     // Form data check
     if(target.querySelector('#taType').value == 'Select type'){
-      this.error$ = 'Input error. Please select achievement type';
+      this.error$ = 'Please select achievement type';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
@@ -38,7 +38,7 @@ export class AddFacultyComponent implements OnInit {
     if(
       target.querySelector('#msi').checked == false && target.querySelector('#otherCollege').checked == false
     ){
-      this.error$ = 'Input error. Please select college';
+      this.error$ = 'Please select college';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
@@ -47,21 +47,21 @@ export class AddFacultyComponent implements OnInit {
     if(
       target.querySelector('#international').checked == false && target.querySelector('#national').checked == false
     ){
-      this.error$ = 'Input error. Please select region';
+      this.error$ = 'Please select region';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
       return;
     }
     if(target.querySelector('#description').value.trim() == ''){
-      this.error$ = 'Input error. Please add description';
+      this.error$ = 'Please add description';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
       return;
     }
     if(target.querySelector('#date').value.trim() == ''){
-      this.error$ = 'Input error. Please check date';
+      this.error$ = 'Please check date';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');

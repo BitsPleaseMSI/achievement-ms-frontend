@@ -36,7 +36,7 @@ const routes: Routes = [
     canActivate: [AG],
   },
   {
-    path: 'faculty/add',
+    path: 'teacher/add',
     component: AddFacultyComponent,
     canActivate: [AG],
   },

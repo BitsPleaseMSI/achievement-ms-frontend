@@ -18,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddAcademicComponent } from './add-academic/add-academic.component';
 import { AddFacultyComponent } from './add-faculty/add-faculty.component';
+
 @NgModule({
   declarations: [
     AppComponent,

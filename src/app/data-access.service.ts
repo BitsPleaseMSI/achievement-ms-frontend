@@ -238,4 +238,14 @@ export class DataAccessService {
     return this.http.request(req);
   }
 
+
+  getTAchievements(params?: string): Observable<any>{
+    // console.log('[getTAchievements]')
+    if(!params){
+      params = ''
+    }
+    return this.http.get<any>(api + '/tachievements/all' + params)
+  }
+
+
 }

@@ -99,16 +99,26 @@
 
               </div>
             </div>
-            <button class="btn btn-success btn-block" routerLink="/achievement/add">Add Achievement
-              <i class="mdi mdi-plus"></i>
-            </button>
-            <button class="btn btn-success btn-block" *ngIf="userData$" routerLink="/academic/add">Add Academic
-              <i class="mdi mdi-plus"></i>
-            </button>
-            <button class="btn btn-warning btn-block" *ngIf="userData$" routerLink="/user/settings">Edit Profile
-              <i class="mdi mdi-pencil"></i>
-            </button>
-            
+
+            <li class="nav-items">
+              <div ngbDropdown class="d-inline-block" *ngIf="userData$">
+                <button class="btn btn-success btn-block" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                  Add Achievement
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                  <a class="dropdown-item" routerLink="/achievement/add">Non - Academic</a>
+                  <a class="dropdown-item" routerLink="/academic/add">Academic</a>
+                  <a class="dropdown-item" routerLink="/teacher/add">Teacher</a>
+                </div>
+              </div>
+              <button class="btn btn-success btn-block" *ngIf="!userData$" routerLink="/achievement/add">Add Achievement
+                <i class="mdi mdi-plus"></i>
+              </button>
+              <button class="btn btn-warning btn-block" *ngIf="userData$" routerLink="/user/settings">Edit Profile
+                <i class="mdi mdi-pencil"></i>
+              </button>
+            </li>
+              
           </div>
         </li>
         <li class="nav-item" [class.active]="this.router.url.includes('/home/')">
