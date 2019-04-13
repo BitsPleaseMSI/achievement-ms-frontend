@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  getdata(){
+  public getdata(){
     this.auth.currentUser().subscribe(
       (data) => {
         if( data['email'] ){

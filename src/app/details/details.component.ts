@@ -27,6 +27,7 @@ export class DetailsComponent implements OnInit {
       (data) => {
         if(data){
           this.achievement$ = data;
+          $('#detailLoading').hide(50);
         }
       },
       () =>{

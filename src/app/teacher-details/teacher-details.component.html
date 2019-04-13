@@ -1,0 +1,53 @@
+<!-- Delete modal -->
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3 class="text-center">Are you sure you want to delete this achievement?</h3>
+          <div class="row">
+          <div class="col">
+              <button type="button" name="delete" class="btn btn-primary btn-block" data-dismiss="modal" (click)="delete($event)">Yes</button>
+          </div>
+          <div class="col">
+              <button type="button" name="delete" class="btn btn-secondary btn-block" data-dismiss="modal">No</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div id="detailLoading" style="text-align:center;">
+      <i class="mdi mdi-48px mdi-spin mdi-loading" alt="Loading..."></i>
+    </div>
+    <div class="card-body" *ngIf="tName$">
+      <h1 class="" style="font-size:32px;text-align:center;">Achievement details of {{ tName$ }}</h1>
+      <br>
+      <div *ngFor="let item of achievement$; let i = index">
+        <h3>{{ item.taType | titlecase }}</h3>
+        <div name=details style="margin: auto">
+          <div class="row">
+            <div class="col">
+              <h4 *ngIf="item.msi" class="text-primary">College: <h5 class="text-dark" style="display:inline;">MSI</h5></h4>
+              <h4 *ngIf="!item.msi" class="text-primary">College: <h5 class="text-dark" style="display:inline;">Other</h5></h4>
+              <h4 *ngIf="item.international" class="text-primary">Level: <h5 class="text-dark" style="display:inline;">Iternational</h5></h4>
+              <h4 *ngIf="!item.international" class="text-primary">Level: <h5 class="text-dark" style="display:inline;">National</h5></h4>
+            </div>
+            <div class="col">
+              <h4 class="text-primary"><h5 class="text-dark" style="display:inline;">{{ item.date }}</h5></h4>
+            </div>
+          </div>
+          <div class="row" style="margin: inherit">
+            <h4 class="text-primary"><h5 class="text-dark" style="display:inline;">{{ item.description }}</h5></h4>
+          </div>
+        </div>
+        <div class="form-group row" style="display:flex;justify-content:flex-end;">
+          <button *ngIf="user$ && user$.id == item.user" class="btn btn-danger" type="button" name="delete" style="margin-left:10px" data-toggle="modal" data-target="#deleteModal">
+            <i class="mdi mdi-delete"></i>
+            Delete
+          </button>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>

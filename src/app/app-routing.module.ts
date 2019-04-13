@@ -7,10 +7,11 @@ import { ResetPassComponent } from './reset-pass/reset-pass.component'
 import { RegisterComponent } from './register/register.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { DetailsComponent } from './details/details.component'
+import { TeacherDetailsComponent } from './teacher-details/teacher-details.component'
 import { AboutComponent } from './about/about.component'
 import { SettingsComponent } from './settings/settings.component'
 import { AddAcademicComponent } from './add-academic/add-academic.component'
-import { AddFacultyComponent } from './add-faculty/add-faculty.component'
+import { AddFacultyComponent } from './add-tachievement/add-tachievement.component'
 import { AuthGuard as AG } from './auth.guard'
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
   },
   {
     path: 'home/academic',
+    component: HomeComponent,
+  },
+  {
+    path: 'home/teacher-achievements',
     component: HomeComponent,
   },
   {
@@ -72,6 +77,10 @@ const routes: Routes = [
   {
     path: 'achievement/:id',
     component: DetailsComponent,
+  },
+  {
+    path: 'teacher-achievement/:id',
+    component: TeacherDetailsComponent,
   },
   {
     path: '**',

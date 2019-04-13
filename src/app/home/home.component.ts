@@ -52,9 +52,9 @@ export class HomeComponent implements OnInit {
     $('#homeEmpty').hide(50);
     $('#downloadList').hide(50);
     $('#homeLoading').show(50);
-
+    
     if(this.router.url.includes('/home/achievements')){
-
+      
       this.data.getApprovedAchievements(this.limit, this.offset, params)
       .subscribe(
         (data) => {
@@ -83,6 +83,25 @@ export class HomeComponent implements OnInit {
     }else if(this.router.url.includes('/home/academic')){
 
       this.data.getAcademic(params)
+      .subscribe(
+        (data) => {
+          this.dataLength$ = data.length;
+          this.achievements$ = data;
+          if(this.achievements$.length == 0){
+            $('#homeEmpty').show(50);
+          }else{
+            $('#downloadList').show(50);
+          }
+          $('#homeLoading').hide(50);
+        },
+        () =>{
+          $('#homeLoading').hide(50);
+          this.ac.snackbar('Server is not responding, Please try later.');
+      });
+
+    }else if(this.router.url.includes('/home/teacher-achievements')){
+
+      this.data.getTAchievements(params)
       .subscribe(
         (data) => {
           this.dataLength$ = data.length;

@@ -68,10 +68,12 @@ export class DataAccessService {
     return str;
   }
 
+
   getAchievement(id: string): Promise<any>{
     // console.log('[getAchievement]')
     return this.http.get<any>( api + '/achievements/get/' + id).toPromise()
   }
+
 
   getAcademic(params?: string): Observable<any>{
     // console.log('[getAcademicAchievements]')
@@ -80,6 +82,7 @@ export class DataAccessService {
     }
     return this.http.get<any>(api + '/academic/getall' + params)
   }
+
 
   getApprovedAchievements(limit:number, offset:number, params?: string): Observable<any>{
     // console.log('[getApprovedAchievements]')
@@ -91,6 +94,7 @@ export class DataAccessService {
     params += '&limit=' + limit + '&offset=' + offset;
     return this.http.get<any>(api + '/achievements/all'+ params);
   }
+
 
   getUnapprovedAchievements(limit:number, offset:number, params?: string): Observable<any>{
     // console.log('[getUnapprovedAchievements]')
@@ -106,6 +110,7 @@ export class DataAccessService {
     params += '&limit=' + limit + '&offset=' + offset;
     return this.http.get<any>(api + '/achievements/unapproved' + params)
   }
+
 
   addAchievement(achievement: Achievement): Observable<any>{
     // console.log('[addAchievement]')
@@ -190,6 +195,7 @@ export class DataAccessService {
     return this.http.request(req);
   }
 
+
   editAcademic(achievement: Object){
     // console.log('[editAcademic]');
 
@@ -248,4 +254,10 @@ export class DataAccessService {
   }
 
 
+  getTAchievement(id: string): Promise<any>{
+    // console.log('[getTAchievement]')
+    return this.http.get<any>( api + '/tachievements/allUserid?userId=' + id).toPromise()
+  }
+
+  
 }

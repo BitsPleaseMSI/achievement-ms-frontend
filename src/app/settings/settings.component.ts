@@ -84,6 +84,7 @@ export class SettingsComponent implements OnInit {
                     this.ac.snackbar('Profile updated successfully!');
                     this.error$ = undefined;
                     this.info$ = 'Profile updated successfully.';
+                    this.ac.getdata();
                   }else if(!JSON.parse(data['body'])['bool']){
                     error = false;
                     this.ac.snackbar(JSON.parse(data['body'])['message']);

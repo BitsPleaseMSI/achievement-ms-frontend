@@ -17,7 +17,8 @@ import { DetailsComponent } from './details/details.component';
 import { AboutComponent } from './about/about.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddAcademicComponent } from './add-academic/add-academic.component';
-import { AddFacultyComponent } from './add-faculty/add-faculty.component';
+import { AddFacultyComponent } from './add-tachievement/add-tachievement.component';
+import { TeacherDetailsComponent } from './teacher-details/teacher-details.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddFacultyComponent } from './add-faculty/add-faculty.component';
     SettingsComponent,
     AddAcademicComponent,
     AddFacultyComponent,
+    TeacherDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -127,7 +127,6 @@ export class AddAchievementComponent implements OnInit {
             this.error$ = undefined;
             this.info$ = 'Achievement added successfully.';
             this.ac.snackbar('Achievement added successfully!');
-
             // Reseting event form fields
             target.querySelector('#eventName').value = '';
             target.querySelector('#date').value = undefined;
@@ -136,7 +135,13 @@ export class AddAchievementComponent implements OnInit {
             target.querySelector('#category').value = 'sports';
             target.querySelector('#description').value = '';
             target.querySelector('#image').value = '';
-
+            $('#addAchievementButton').removeAttr('disabled');
+          } else {
+            error = false;
+            $('#addAchievementLoading').hide(50);
+            this.error$ = JSON.parse(data['partialText'])['message'];
+            this.info$ = undefined;
+            this.ac.snackbar(JSON.parse(data['partialText'])['message']);            
             $('#addAchievementButton').removeAttr('disabled');
           }
         }

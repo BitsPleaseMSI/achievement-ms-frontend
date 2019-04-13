@@ -4,17 +4,24 @@
 <ul class="nav nav-tabs md-tabs">
   <li class="nav-item">
     <button type="button" class="nav-link" style="font-size:26px;"
-      [class.text-muted]="this.router.url.includes('/home/academic')"
+      [class.text-muted]="!this.router.url.includes('/home/achievements')"
       [class.active]="this.router.url.includes('/home/achievements')"
       routerLink="/home/achievements">
       Non-Academic Achievements</button>
   </li>
   <li class="nav-item">
     <button type="button" class="nav-link" style="font-size:26px;"
-      [class.text-muted]="this.router.url.includes('/home/achievements')"
+      [class.text-muted]="!this.router.url.includes('/home/academic')"
       [class.active]="this.router.url.includes('/home/academic')"
       routerLink="/home/academic">
       Academic Achievements</button>
+</li>
+  <li class="nav-item">
+    <button type="button" class="nav-link" style="font-size:26px;"
+      [class.text-muted]="!this.router.url.includes('/home/teacher-achievements')"
+      [class.active]="this.router.url.includes('/home/teacher-achievements')"
+      routerLink="/home/teacher-achievements">
+      Teacher Achievements</button>
   </li>
 </ul>
 
@@ -214,27 +221,53 @@
 
           <!-- Academic table -->
           <table class="table table-hover" *ngIf="this.router.url.includes('/home/academic') && achievements$.length > 0">
-          <thead class="thead-light">
-            <tr id="table-heading">
-              <th>S.No.</th>
-              <th>Enrollment No.</th>
-              <th>Name</th>
-              <th>Batch</th>
-              <th>Programme</th>
-              <th>Category</th>
+            <thead class="thead-light">
+              <tr id="table-heading">
+                <th>S.No.</th>
+                <th>Enrollment No.</th>
+                <th>Name</th>
+                <th>Batch</th>
+                <th>Programme</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ achievement.rollNo }}</td>
+              <td style="font-weight: bold;">{{ achievement.name }}</td>
+              <td>{{ achievement.batch }}</td>
+              <td>{{ achievement.programme }}</td>
+              <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
+              <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
+              <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
             </tr>
-          </thead>
-          <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
-            <td>{{ i+1 }}</td>
-            <td>{{ achievement.rollNo }}</td>
-            <td style="font-weight: bold;">{{ achievement.name }}</td>
-            <td>{{ achievement.batch }}</td>
-            <td>{{ achievement.programme }}</td>
-            <td *ngIf="achievement.category=='goldmedalist'">Gold Medalist</td>
-            <td *ngIf="achievement.category=='exemplary'">Exemplary Performance</td>
-            <td *ngIf="achievement.category=='both'">Gold Medalist & Exemplary Performance</td>
-          </tr>
-        </table>
+          </table>
+
+          <!-- Teachers table -->
+          <table class="table table-hover" *ngIf="this.router.url.includes('/home/teacher') && achievements$.length > 0">
+            <thead class="thead-light">
+              <tr id="table-heading">
+                <th>S.No.</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Shift</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
+              <td>{{ i+1 }}</td>
+              <td style="font-weight: bold;">{{ achievement.firstName + " " + achievement.lastName }}</td>
+              <td *ngIf="achievement.department == 'computerscience'">COMPUTER SCIENCE</td>
+              <td *ngIf="achievement.department != 'computerscience'">{{ achievement.department | uppercase }}</td>
+              <td>{{ achievement.shift | uppercase}}</td>
+              <td>
+                <a class="btn btn-secondary" target="_blank" href="./teacher-achievement/{{ achievement.id }}">
+                  <i class="mdi mdi-account-card-details"></i>
+                  View details
+                </a>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>

@@ -1,0 +1,93 @@
+<h1 class="text-center">Add faculty achievement</h1>
+<div class="card">
+  <div class="card-body">
+    <form (submit)="addTAchievement($event)" #form>
+      <div class="row">
+        <div class="form-group col">
+          <label>Publication type</label>
+          <select (change)="showControls($event)" id="taType" name="programme" class="form-control">
+            <option value="">Select type</option>
+            <option value="Book">Book published</option>
+            <option value="Journal">Journal published</option>
+            <option value="Conference">Conference published/presented</option>
+            <option value="SeminarAttended">Seminar/ Conference/ Workshop/ FDP</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" id="basicControl">
+        <div class="form-group col">
+          <label>Topic</label>
+          <input type="textarea" id="topic" class="form-control" placeholder="Publication topic">
+        </div>
+        <div class="form-group col">
+          <label>Date</label>
+          <input type="date" id="date" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col" id="reviewedControl">
+          <label for="college">Reviewed</label>
+          <div class="col">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" id="reviewed">Yes
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" id="notReviewed">No
+              </label>
+            </div>
+          </div>
+        </div>    
+        <div class="form-group col" id="levelControl">
+          <label for="college">Select level</label>
+          <div class="col">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" id="international">International
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" id="national">National
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col" id="fundingControl">
+          <label for="college">Funding</label>
+          <div class="col">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" id="sponsored">Sponsored
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" id="notSponsored">Self financed
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col" id="publishedControl">
+          <label id="pubLabel">Published / Presented at with ISSN No.</label>
+          <input type="textarea" id="published" class="form-control" placeholder="State publication / presentation">
+        </div>
+        <div class="form-group col" id="placeControl">
+          <label>Place</label>
+          <input type="textarea" id="place" class="form-control" placeholder="Place">
+        </div>  
+      </div>
+      <h4 class="card-description">
+        <div *ngIf="error$" class="alert alert-danger" >
+          Error: {{ error$ }}
+        </div>
+        <div *ngIf="info$" class="alert alert-info" >
+          Info: {{ info$ }}
+        </div>
+        <!-- Loading icon -->
+        <div id="addAchievementLoading" style="text-align:center;">
+          <i class="mdi mdi-24px mdi-spin mdi-loading" alt="Loading..."></i>
+        </div>
+      </h4>
+      <button id="addAchievementButton" class="btn btn-success btn-block" type="submit">Add achievement</button>
+    </form>
+  </div>
+</div>

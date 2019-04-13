@@ -3,6 +3,10 @@
   <div class="card-body">
     <form (submit)="addAchievement($event)" action="achievement/add">
       <h4 style="text-align:center">Student details</h4>
+      <div class="alert alert-success" >
+        NOTE: Achievements will only be displayed on the home page once they are approved by your class co-ordiantor.
+      </div>
+
       <div class="row">
           <div class="form-group col">
             <label>Name</label>
@@ -16,7 +20,7 @@
         </div>
         <div class="form-group col">
           <label>Batch</label>
-          <input type="text" id="batch" class="form-control">
+          <input type="text" id="batch" style="" class="form-control">
         </div>
       </div>
       <div class="row">

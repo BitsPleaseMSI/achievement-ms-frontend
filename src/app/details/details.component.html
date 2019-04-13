@@ -17,42 +17,47 @@
   </div>
 </div>
 <div class="card">
-  <div class="card-body">
-    <h1 class="" style="font-size:32px;text-align:center;">Achievement details of {{achievement$.name | uppercase}}</h1>    
+  <div id="detailLoading" style="text-align:center;">
+    <i class="mdi mdi-48px mdi-spin mdi-loading" alt="Loading..."></i>
+  </div>
+  <div *ngIf="achievement$.name" class="card-body">
+    <h1 class="" style="font-size:32px;text-align:center;">Achievement details of {{ achievement$.name }}</h1>
     <h3>Student Details</h3>
-    <div class="row" style="margin: auto">
-      <div class="col">
-        <h4 class="text-primary">Name: <h5 class="text-dark" style="display:inline;">{{ achievement$.name | titlecase}}</h5></h4>
-        <h4 class="text-primary">Roll No.: <h5 class="text-dark" style="display:inline;">{{ achievement$.rollNo}}</h5></h4>
-        <h4 class="text-primary">Department: <h5 class="text-dark" style="display:inline;">{{ achievement$.department | titlecase }}</h5></h4>
-        <h4 class="text-primary">Semester: <h5 class="text-dark" style="display:inline;">{{achievement$.semester}}</h5></h4>
-      </div>
-      <div class="col">
-        <h4 class="text-primary">Section: <h5 class="text-dark" style="display:inline;">{{ achievement$.section | titlecase}}</h5></h4>
-        <h4 class="text-primary">Shift: <h5 class="text-dark" style="display:inline;">{{ achievement$.shift | titlecase}}</h5></h4>
-        <h4 class="text-primary">Batch: <h5 class="text-dark" style="display:inline;">{{ achievement$.sessionFrom}} - {{ achievement$.sessionTo}}</h5></h4>
-      </div>
-    </div>
-    <hr>
-    <h3>Achievement Details</h3>
-    <div class="row" style="margin: auto">
-      <div class="col">
-        <h4 class="text-primary">Event Name: <h5 class="text-dark" style="display:inline;">{{ achievement$.eventName |titlecase }}</h5></h4>
-        <h4 class="text-primary">Venue: <h5 class="text-dark" style="display:inline;">{{ achievement$.venue | titlecase}}</h5></h4>
-        <h4 class="text-primary">Event Date: <h5 class="text-dark" style="display:inline;">{{achievement$.date}} (YYYY-MM-DD)</h5></h4>
-      </div>
-      <div class="col">
-        <h4 class="text-primary" *ngIf="achievement$.participated">Role: <h5 class="text-dark" style="display:inline;">PARTICIPANT</h5></h4><h4 class="text-primary" *ngIf="!achievement$.participated">Role: <h5 class="text-dark" style="display:inline;">ORGANISER</h5></h4>
-        <h4 class="text-primary">Event Category: <h5 class="text-dark" style="display:inline;">{{ achievement$.category | titlecase}}</h5></h4>
-        <h4 class="text-primary">Title awarded: <h5 class="text-dark" style="display:inline;">{{ achievement$.title }}</h5></h4>
-      </div>
-      <div class="row" style="margin: auto">
+    <div name="details" style="margin-left: auto;">
+      <div class="row">
         <div class="col">
-          <h4 class="text-primary">Event description: <h5 class="text-dark" style="display:inline;">{{ achievement$.description }}</h5></h4>
+          <h4 class="text-primary">Name: <h5 class="text-dark" style="display:inline;">{{ achievement$.name | titlecase}}</h5></h4>
+          <h4 class="text-primary">Roll No.: <h5 class="text-dark" style="display:inline;">{{ achievement$.rollNo}}</h5></h4>
+          <h4 class="text-primary">Department: <h5 class="text-dark" style="display:inline;">{{ achievement$.department | titlecase }}</h5></h4>
+          <h4 class="text-primary">Semester: <h5 class="text-dark" style="display:inline;">{{achievement$.semester}}</h5></h4>
+        </div>
+        <div class="col">
+          <h4 class="text-primary">Section: <h5 class="text-dark" style="display:inline;">{{ achievement$.section | titlecase}}</h5></h4>
+          <h4 class="text-primary">Shift: <h5 class="text-dark" style="display:inline;">{{ achievement$.shift | titlecase}}</h5></h4>
+          <h4 class="text-primary">Batch: <h5 class="text-dark" style="display:inline;">{{ achievement$.sessionFrom}} - {{ achievement$.sessionTo}}</h5></h4>
         </div>
       </div>
+      <hr>
     </div>
-    <div>
+    <h3>Achievement Details</h3>
+    <div name="details" style="margin-left: auto;">
+      <div class="row">
+        <div class="col">
+          <h4 class="text-primary">Event Name: <h5 class="text-dark" style="display:inline;">{{ achievement$.eventName |titlecase }}</h5></h4>
+          <h4 class="text-primary">Venue: <h5 class="text-dark" style="display:inline;">{{ achievement$.venue | titlecase}}</h5></h4>
+          <h4 class="text-primary">Event Date: <h5 class="text-dark" style="display:inline;">{{achievement$.date}} (YYYY-MM-DD)</h5></h4>
+        </div>
+        <div class="col">
+          <h4 class="text-primary" *ngIf="achievement$.participated">Role: <h5 class="text-dark" style="display:inline;">PARTICIPANT</h5></h4><h4 class="text-primary" *ngIf="!achievement$.participated">Role: <h5 class="text-dark" style="display:inline;">ORGANISER</h5></h4>
+          <h4 class="text-primary">Event Category: <h5 class="text-dark" style="display:inline;">{{ achievement$.category | titlecase}}</h5></h4>
+          <h4 class="text-primary">Title awarded: <h5 class="text-dark" style="display:inline;">{{ achievement$.title }}</h5></h4>
+        </div>
+      </div>
+      <div class="row" style="margin-left: auto;">
+          <h4 class="text-primary">Event description: <h5 class="text-dark" style="display:inline;">{{ achievement$.description }}</h5></h4>
+      </div>
+    </div>
+    <div class="text-center">
       <br>
         <div id="btn-area"><button id="img-btn" class="btn btn-primary">Show Certificate</button></div>
       <br>
