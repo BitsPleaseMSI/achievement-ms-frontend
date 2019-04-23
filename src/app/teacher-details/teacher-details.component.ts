@@ -47,4 +47,6 @@ export class TeacherDetailsComponent implements OnInit {
     )
   }
 
+  delete(event){}  
+
 }

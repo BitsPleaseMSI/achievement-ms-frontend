@@ -5,6 +5,7 @@ export class User{
     public department: string,
     public shift: string,
     public email: string,
+    public designation: string,
     public password: string,
     public code: string,
   ){ }

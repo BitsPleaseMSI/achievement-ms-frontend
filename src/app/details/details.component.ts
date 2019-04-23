@@ -43,14 +43,10 @@ export class DetailsComponent implements OnInit {
         this.user$ = data;
       }
     )
+  }
 
-    $("#img-details").hide();
-    $("#img-btn").click(function(){
-      $(this).text(function(i, text){
-        return text === "Show Certificate" ? "Hide Certificate" : "Show Certificate";
-    });
-      $("#img-details").slideToggle(50);
-    });
+  toggle_visibility(id) {
+    $("#img-details").slideToggle(50);
   }
 
   delete(event){
@@ -92,6 +88,7 @@ export class DetailsComponent implements OnInit {
         if(data['bool']){
           this.loc.back();
           this.ac.snackbar('Approved successfully!');
+          window.location.reload();
         }else{
           this.ac.snackbar(data['message']);
         }
@@ -114,6 +111,7 @@ export class DetailsComponent implements OnInit {
         if(data['bool']){
           this.loc.back();
           this.ac.snackbar('Unapproved successfully!')
+          window.location.reload();
         }else{
           this.ac.snackbar(data['message'])
         }

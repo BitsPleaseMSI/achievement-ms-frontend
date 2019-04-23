@@ -20,6 +20,7 @@ export class SettingsComponent implements OnInit {
         (document.getElementById('firstName') as HTMLInputElement).value = data['firstName'];
         (document.getElementById('lastName') as HTMLInputElement).value = data['lastName'];
         (document.getElementById('newEmail') as HTMLInputElement).value = data['email'];
+        (document.getElementById('designation') as HTMLInputElement).value = data['designation'];
         (document.getElementById('password') as HTMLInputElement).value = '';
       },
       (error) => {

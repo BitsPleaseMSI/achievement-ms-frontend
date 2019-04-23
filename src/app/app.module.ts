@@ -19,6 +19,10 @@ import { SettingsComponent } from './settings/settings.component';
 import { AddAcademicComponent } from './add-academic/add-academic.component';
 import { AddFacultyComponent } from './add-tachievement/add-tachievement.component';
 import { TeacherDetailsComponent } from './teacher-details/teacher-details.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
+
 
 @NgModule({
   declarations: [
@@ -42,6 +46,8 @@ import { TeacherDetailsComponent } from './teacher-details/teacher-details.compo
     HttpModule,
     FormsModule,
     NgbModule.forRoot(),
+    MatRadioModule,
+    MatButtonToggleModule,
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent]

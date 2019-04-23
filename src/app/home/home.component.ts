@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   limit: number;
   offset: number;
 
-  constructor(private data: DataAccessService, private route: ActivatedRoute, public router: Router, private ac: AppComponent){
+  constructor(private data: DataAccessService, public route: ActivatedRoute, public router: Router, private ac: AppComponent){
     this.achievements$ = [];
     this.limit = 10;
     this.offset = 0;

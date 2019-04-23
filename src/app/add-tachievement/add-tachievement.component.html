@@ -1,7 +1,7 @@
 <h1 class="text-center">Add faculty achievement</h1>
 <div class="card">
   <div class="card-body">
-    <form (submit)="addTAchievement($event)" #form>
+    <form (submit)="addTAchievement($event)" id="form">
       <div class="row">
         <div class="form-group col">
           <label>Publication type</label>
@@ -10,7 +10,20 @@
             <option value="Book">Book published</option>
             <option value="Journal">Journal published</option>
             <option value="Conference">Conference published/presented</option>
-            <option value="SeminarAttended">Seminar/ Conference/ Workshop/ FDP</option>
+            <option value="SeminarAttended">Seminar / Conference / Workshop / FDP</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" id="typeControl">
+        <div class="form-group col">
+          <label>Sub type</label>
+          <select id="subType" class="form-control">
+            <option value="">Select sub type</option>
+            <option value="SEMINAR">Seminar</option>
+            <option value="CONFERENCE">Conference</option>
+            <option value="WORKSHOP">Workshop</option>
+            <option value="FDP">FDP</option>
+            <option value="FDP1WEEK">FDP one week</option>
           </select>
         </div>
       </div>
@@ -21,49 +34,46 @@
         </div>
         <div class="form-group col">
           <label>Date</label>
-          <input type="date" id="date" class="form-control">
+          <input type="date" id="date" class="form-control" placeholder="01/01/2019">
         </div>
       </div>
       <div class="row">
         <div class="form-group col" id="reviewedControl">
-          <label for="college">Reviewed</label>
+          <label>Review status</label>
           <div class="col">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" id="reviewed">Yes
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" id="notReviewed">No
-              </label>
-            </div>
+            <mat-button-toggle-group>
+              <mat-button-toggle [checked]="this.reviewed == true" (click)="this.reviewed = true">Reviewed</mat-button-toggle>
+              <mat-button-toggle [checked]="this.reviewed == false" (click)="this.reviewed = false">Not reviewed</mat-button-toggle>
+            </mat-button-toggle-group>
           </div>
-        </div>    
+        </div>
         <div class="form-group col" id="levelControl">
-          <label for="college">Select level</label>
+          <label>Level</label>
           <div class="col">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" id="international">International
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" id="national">National
-              </label>
-            </div>
+            <mat-button-toggle-group>
+              <mat-button-toggle [checked]="this.international == true" (click)="this.international = true">International</mat-button-toggle>
+              <mat-button-toggle [checked]="this.international == false" (click)="this.international = false">National</mat-button-toggle>
+            </mat-button-toggle-group>
           </div>
         </div>
         <div class="form-group col" id="fundingControl">
-          <label for="college">Funding</label>
+          <label>Funding</label>
           <div class="col">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" id="sponsored">Sponsored
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" id="notSponsored">Self financed
-              </label>
-            </div>
+            <mat-button-toggle-group>
+              <mat-button-toggle [checked]="this.sponsored == true" (click)="this.sponsored = true">Sponsored</mat-button-toggle>
+              <mat-button-toggle [checked]="this.sponsored == false" (click)="this.sponsored = false">Self funded</mat-button-toggle>
+            </mat-button-toggle-group>
           </div>
         </div>
+        <div class="form-group col" id="collegeControl">
+          <label>College</label>
+          <div class="col">
+            <mat-button-toggle-group>
+              <mat-button-toggle [checked]="this.msi == true" (click)="this.msi = true">MSI</mat-button-toggle>
+              <mat-button-toggle [checked]="this.msi == false" (click)="this.msi = false">Other</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </div>  
       </div>
       <div class="row">
         <div class="form-group col" id="publishedControl">
@@ -74,6 +84,12 @@
           <label>Place</label>
           <input type="textarea" id="place" class="form-control" placeholder="Place">
         </div>  
+      </div>
+      <div class="row">
+        <div class="form-group col" id="descControl">
+          <label>Description (optional)</label>
+          <input type="textarea" id="description" class="form-control" placeholder="Optional description">
+        </div>
       </div>
       <h4 class="card-description">
         <div *ngIf="error$" class="alert alert-danger" >

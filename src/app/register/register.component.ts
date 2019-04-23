@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
         target.querySelector('#department').value.trim(),
         target.querySelector('#shift').value.trim(),
         target.querySelector('#email').value.trim(),
+        target.querySelector('#designation').value.trim(),
         target.querySelector('#password').value.trim(),
         target.querySelector('#code').value.trim(),
       );

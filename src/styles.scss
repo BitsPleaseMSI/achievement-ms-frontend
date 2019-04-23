@@ -13774,8 +13774,10 @@ input:focus {
   -moz-box-shadow: -3px 0 20px 0 #555;
   -webkit-box-shadow: -3px 0 20px 0 #555;
   box-shadow: -3px 0 20px 0 #555;
-  min-height: calc(100vh - 63px);
+  // min-height: calc(100vh - 63px);
   background: $sidebar-color;
+  background-image: url("./assets/ams-sidebar.png");
+  background-attachment: fixed;
   font-family: "Poppins", sans-serif;
   padding: 0;
   width: 255px;
@@ -13905,51 +13907,6 @@ input:focus {
         .sidebar .nav.sub-menu .nav-item:hover > .nav-link:before {
           background: #000; }
 
-.sidebar-dark .sidebar {
-  background: #161a27; }
-  .sidebar-dark .sidebar .nav .nav-item .collapse.show,
-  .sidebar-dark .sidebar .nav .nav-item .collapsing {
-    background: #1f2537; }
-  .sidebar-dark .sidebar .nav .nav-item {
-    color: #e2e2e2; } 
-  .sidebar-dark .sidebar .nav .nav-item .nav-link {
-    color: #cccccc; }
-    .sidebar-dark .sidebar .nav .nav-item .nav-link[aria-expanded="true"] {
-      background: #1f2537; }
-    .sidebar-dark .sidebar .nav .nav-item .nav-link i {
-      color: #404852; }
-      .sidebar-dark .sidebar .nav .nav-item .nav-link i.menu-arrow:before {
-        color: rgba(160, 160, 160, 0.5); }
-    .sidebar-dark .sidebar .nav .nav-item .nav-link:hover {
-      color: #939393; }
-  .sidebar-dark .sidebar .nav .nav-item.nav-profile .profile-name .name {
-    color: #404852; }
-  .sidebar-dark .sidebar .nav .nav-item.nav-profile .profile-name .designation {
-    color: #8d9498; }
-  .sidebar-dark .sidebar .nav .nav-item.nav-profile .notification-panel:before {
-    background: #404852; }
-  .sidebar-dark .sidebar .nav .nav-item.nav-profile .notification-panel > span {
-    background: #1f2537; }
-    .sidebar-dark .sidebar .nav .nav-item.nav-profile .notification-panel > span i {
-      color: #8ba2b5; }
-  .sidebar-dark .sidebar .nav .nav-item.active > .nav-link {
-    color: #ffffff; }
-  .sidebar-dark .sidebar .nav .nav-item .sidebar-sticker {
-    background: #1f2537; }
-  .sidebar-dark .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link {
-    background: #1f2537;
-    color: #a0a0a0; }
-  .sidebar-dark .sidebar .nav.sub-menu .nav-item .nav-link {
-    color: #a0a0a0; }
-    .sidebar-dark .sidebar .nav.sub-menu .nav-item .nav-link.active {
-      color: #ffffff; }
-      .sidebar-dark .sidebar .nav.sub-menu .nav-item .nav-link.active:before {
-        background: #ffffff; }
-  .sidebar-dark .sidebar .nav.sub-menu .nav-item:hover > .nav-link {
-    background: initial;
-    color: #000; }
-    .sidebar-dark .sidebar .nav.sub-menu .nav-item:hover > .nav-link:before {
-      background: #000; }
 
 /* style for off-canvas menu*/
 @media screen and (max-width: 991px) {

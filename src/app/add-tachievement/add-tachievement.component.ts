@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { DataAccessService } from '../data-access.service';
 import { AppComponent } from '../app.component';
+import { safe } from '../sanitise';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-add-tachievement',
@@ -10,31 +13,57 @@ import { AppComponent } from '../app.component';
 export class AddFacultyComponent implements OnInit {
   error$: string;
   info$: string;
+  international: Boolean;
+  reviewed: Boolean;
+  sponsored: Boolean;
+  msi: Boolean;
 
   constructor(private data: DataAccessService, private ac: AppComponent) { }
 
   hideControls(){
     $('#basicControl').hide();
+    $('#typeControl').hide();
     $('#levelControl').hide();
     $('#reviewedControl').hide();
     $('#fundingControl').hide();
     $('#publishedControl').hide();
-    $('#placeControl').hide();    
+    $('#placeControl').hide();
+    $('#descControl').hide();
+    $('#collegeControl').hide();
   }
 
   ngOnInit() {
     $('#addAchievementLoading').hide();
     this.hideControls();
   }
-  
+
+  resetFields(target){
+    // Clearing all fields
+    // target.querySelector('#taType').value = '';
+    target.querySelector('#subType').value = '';
+    target.querySelector('#date').value = '';
+    target.querySelector('#topic').value = '';
+    target.querySelector('#published').value = '';
+    this.international = undefined;
+    this.reviewed = undefined;
+    this.sponsored = undefined;
+    this.msi = undefined;
+
+  }
+
   showControls(event){
     const target = event.target;
     this.hideControls();
+    this.resetFields(target.parentNode.parentNode.parentNode);
 
-    if(  target.value == "Journal"){
+    if(target.value == "Journal"){
       $('#pubLabel').text("Published at (with ISSN No.)");
     }else{
       $('#pubLabel').text("Published / Presented at");
+    }
+
+    if (target.value != "Book" && target.value != "") {
+      $('#collegeControl').show();
     }
 
     if(
@@ -42,17 +71,20 @@ export class AddFacultyComponent implements OnInit {
       target.value == "Journal" ||
       target.value == "Conference"
     ){
-      $('#basicControl').show();
-      $('#levelControl').show();
       $('#reviewedControl').show();
       $('#publishedControl').show();
-    }else if(target.value == "SeminarAttended"){
       $('#basicControl').show();
       $('#levelControl').show();
+      $('#descControl').show();  
+    }else if(target.value == "SeminarAttended"){
+      $('#typeControl').show();
       $('#placeControl').show();
       $('#fundingControl').show();
+      $('#basicControl').show();
+      $('#levelControl').show();
+      $('#descControl').show();
     }
-    
+
   }
 
   addTAchievement(event){
@@ -91,38 +123,127 @@ export class AddFacultyComponent implements OnInit {
       return;
     }
     // Level
-    if(
-      target.querySelector('#taType').value == 'Book' &&
-      target.querySelector('#international').checked == false &&
-      target.querySelector('#national').checked == false
-    ){
+    if( this.international == undefined ){
       this.error$ = 'Please select level';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
       return;
     }
-    // Description
-    if(target.querySelector('#description').value.trim() == ''){
-      this.error$ = 'Please add description';
+    // Reviewed
+    if(
+      (target.querySelector('#taType').value == 'Book' ||
+      target.querySelector('#taType').value == 'Journal' ||
+      target.querySelector('#taType').value == 'Conference') &&
+      this.reviewed == undefined
+    ){
+      this.error$ = 'Please select reviewed';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
       return;
     }
+    // Sub type
+    if(
+      target.querySelector('#taType').value == 'SeminarAttended' &&
+      target.querySelector('#subType').value.trim() == ""
+    ){
+      this.error$ = 'Please select a sub type';
+      this.info$ = undefined;
+      $('#addAchievementLoading').hide(50);
+      $('#addAchievementButton').removeAttr('disabled');
+      return;
+    }
+    // Funding
+    if(
+      target.querySelector('#taType').value == 'SeminarAttended' &&
+      this.sponsored == undefined
+    ){
+      this.error$ = 'Please select funding';
+      this.info$ = undefined;
+      $('#addAchievementLoading').hide(50);
+      $('#addAchievementButton').removeAttr('disabled');
+      return;
+    }
+    // Published desc
+    if(
+      target.querySelector('#taType').value != 'SeminarAttended' &&
+      target.querySelector('#published').value.trim() == ""
+    ){
+      this.error$ = 'Please check published description';
+      this.info$ = undefined;
+      $('#addAchievementLoading').hide(50);
+      $('#addAchievementButton').removeAttr('disabled');
+      return;
+    }
+    // Palce
+    if(
+      target.querySelector('#taType').value == 'SeminarAttended' &&
+      target.querySelector('#place').value.trim() == ""
+    ){
+      this.error$ = 'Please check place';
+      this.info$ = undefined;
+      $('#addAchievementLoading').hide(50);
+      $('#addAchievementButton').removeAttr('disabled');
+      return;
+    }
+    // College
+    if(
+      target.querySelector('#taType').value != 'Book' &&
+      this.msi == undefined
+    ){
+      this.error$ = 'Please select college';
+      this.info$ = undefined;
+      $('#addAchievementLoading').hide(50);
+      $('#addAchievementButton').removeAttr('disabled');
+      return;
+    }
+    
 
     let achievement = new Object;
     achievement['taType'] = target.querySelector('#taType').value.trim();
-    achievement['msi'] = target.querySelector('#msi').checked;
+    achievement['topic'] = target.querySelector('#topic').value.trim();
     achievement['date'] = target.querySelector('#date').value.trim();
-    achievement['international'] = target.querySelector('#international').checked;
-    achievement['description'] = target.querySelector('#description').value.trim();
+    achievement['published'] = target.querySelector('#published').value.trim();
 
+    if (target.querySelector('#place').value.trim() != "") {
+      achievement['place'] = target.querySelector('#place').value.trim();
+    }
+    if (target.querySelector('#subType').value.trim() != "") {
+      achievement['subType'] = target.querySelector('#subType').value.trim();
+    }
+    if (target.querySelector('#description').value.trim() != "") {
+      achievement['description'] = target.querySelector('#description').value.trim();
+    }
+    if (this.reviewed != undefined) {
+      achievement['reviewed'] = this.reviewed;
+    }
+    if (this.international != undefined) {
+      achievement['international'] = this.international;
+    }
+    if (this.sponsored != undefined) {
+      achievement['sponsored'] = this.sponsored;
+    }
+    if (this.msi != undefined) {
+      achievement['msi'] = this.msi;
+    }
+    
+
+    // Sanitising data
     for(let key in achievement){
-      console.log(key + " " +achievement[key])
+      if(!safe(achievement[key].toString())){
+        this.error$ = 'Please check ' + key;
+        this.info$ = undefined;
+        $('#addAchievementLoading').hide(50);
+        $('#addAchievementButton').removeAttr('disabled');
+        return;
+      }
     }
 
-    return;
+
+    for(let key in achievement){
+      console.log(key.padStart(13) + ": " +achievement[key])
+    }
     
     let error = true;
     this.data.addTAchievement(achievement).subscribe(
@@ -134,14 +255,7 @@ export class AddFacultyComponent implements OnInit {
             this.error$ = undefined;
             this.info$ = 'Achievement added successfully.';
             this.ac.snackbar('Achievement added successfully!');
-            target.querySelector('#taType').value = "";
-            target.querySelector('#msi').checked = false;
-            target.querySelector('#otherCollege').checked = false;
-            target.querySelector('#international').checked = false;
-            target.querySelector('#national').checked = false;
-            target.querySelector('#description').value = '';
-            target.querySelector('#date').value = undefined;
-            console.log("cleaned form");
+            this.resetFields(target);
             $('#addAchievementButton').removeAttr('disabled');
           }
         }
