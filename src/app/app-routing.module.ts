@@ -55,7 +55,7 @@ const routes: Routes = [
     canActivate: [AG],
   },
   {
-    path: 'passwordreset',
+    path: 'password/reset',
     component: ResetPassComponent,
     canActivate: [AG],
   },

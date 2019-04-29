@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   dataLength$: number;
   limit: number;
   offset: number;
+  table: any;
 
   constructor(private data: DataAccessService, public route: ActivatedRoute, public router: Router, private ac: AppComponent){
     this.achievements$ = [];
@@ -102,7 +103,7 @@ export class HomeComponent implements OnInit {
     }else if(this.router.url.includes('/home/teacher-achievements')){
 
       this.data.getTAchievements(params)
-      .subscribe(
+      .then(
         (data) => {
           this.dataLength$ = data.length;
           this.achievements$ = data;
@@ -216,6 +217,8 @@ export class HomeComponent implements OnInit {
         },
       }
 
+      this.createCSV(this.achievements$, replace, concat, headers);    
+
     }else if(this.router.url.includes('/home/achievements')){
       this.fileName$ = 'Non-Academic Achievements.csv'
       headers = [
@@ -252,11 +255,55 @@ export class HomeComponent implements OnInit {
         'imageUrl':'http://13.59.95.13:8081/',
       }
 
+      this.createCSV(this.achievements$, replace, concat, headers);    
+
+    }else if(this.router.url.includes('/home/teacher-achievements')){
+      this.fileName$ = 'Teacher Achievements.csv'
+
+      headers = [
+        'Semester',
+        'Venue',
+      ]
+      replace = {
+        'approved':{
+          'true': 'Approved',
+          'false': 'Unapproved',
+        },
+        'participated':{
+          'true': 'Participated',
+          'false': 'Oraganized',
+        },
+      }
+      concat = {
+        'imageUrl':'http://13.59.95.13:8081/',
+      }
+
+      let filters = new URLSearchParams();
+      filters.append("taType", 'Book')
+
+      this.data.getTAchievements("?"+filters.toString())
+      .then(
+        (data) => {
+          let achs = [];
+          data.forEach(function (user) {
+            user['achievements'].forEach(function (achievements) {
+              achs.push(achievements)
+            });
+          });
+          
+          console.log(achs)
+          // this.createCSV(data, replace, concat, headers);
+        },
+        () =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
+      });
+
     }
 
-    //Passing by value so that achievements are not modified.
-    let data = JSON.parse(JSON.stringify(this.achievements$));
-    let csv = this.data.objArrToCSV(data, replace, concat, headers);
+  }
+
+  createCSV(table, replace, concat, headers){
+    let csv = this.data.objArrToCSV(table, replace, concat, headers);
     let blob = new Blob([csv], { type: 'text/csv' });
 
     let a = document.createElement("a");
@@ -266,7 +313,6 @@ export class HomeComponent implements OnInit {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-
   }
 
 }

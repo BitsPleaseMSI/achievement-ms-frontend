@@ -87,9 +87,8 @@ export class DataAccessService {
   getApprovedAchievements(limit:number, offset:number, params?: string): Observable<any>{
     // console.log('[getApprovedAchievements]')
 
-    if(!params){
+    if(!params)
       params = '?'
-    }
 
     params += '&limit=' + limit + '&offset=' + offset;
     return this.http.get<any>(api + '/achievements/all'+ params);
@@ -245,18 +244,24 @@ export class DataAccessService {
   }
 
 
-  getTAchievements(params?: string): Observable<any>{
+  getTAchievements(params?: string): Promise<any>{
     // console.log('[getTAchievements]')
-    if(!params){
-      params = ''
-    }
-    return this.http.get<any>(api + '/tachievements/all' + params)
+    if(!params)
+      params = '?'
+  
+    return this.http.get<any>(api + '/tachievements/all' + params).toPromise()
   }
 
 
   getTAchievement(id: string): Promise<any>{
     // console.log('[getTAchievement]')
     return this.http.get<any>( api + '/tachievements/allUserid?userId=' + id).toPromise()
+  }
+
+
+  getTAchievementAggregate(): Promise<any>{
+    // console.log('[getTAchievementAggregate]')
+    return this.http.get<any>( api + '/tachievements/allagg').toPromise()
   }
 
   

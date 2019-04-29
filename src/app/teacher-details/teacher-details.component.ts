@@ -29,6 +29,9 @@ export class TeacherDetailsComponent implements OnInit {
         if(data){
           this.tName$ = data["user"]["firstName"] + " " + data["user"]["lastName"];
           this.achievement$ = data["achs"];
+
+          console.log(this.achievement$)
+
           $('#detailLoading').hide(50);
         }
       },
@@ -47,6 +50,8 @@ export class TeacherDetailsComponent implements OnInit {
     )
   }
 
-  delete(event){}  
+  delete(event){
+    
+  }  
 
 }
