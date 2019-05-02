@@ -1,5 +1,53 @@
 <h1 class="text-center">Home</h1>
 
+<div class="modal fade" id="exportModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card card-inverse-primary">
+          <div class="card-body">
+            <h4 class="modal-title" style="text-align:center;">Export teacher achievements</h4>
+            <br>
+            <form (submit)="downloadList($event)">
+              <div class="form-group">
+                <select id="taType" name="programme" class="form-control">
+                  <option value="">Select achievement type</option>
+                  <option value="Book">Book published</option>
+                  <option value="Journal">Journal published</option>
+                  <option value="Conference">Conference paper published / presented</option>
+                  <option value="SeminarAttended">Seminar / Conference / Workshop / FDP Attended</option>
+                </select>
+              </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label>From</label>
+                  <input type="date" id="fromDate" class="form-control">        
+                </div>
+                <div class="form-group col">
+                  <label>Till</label>
+                  <input type="date" id="toDate" class="form-control">        
+                </div>
+              </div>
+              <h4 class="card-description">
+                <div *ngIf="error$" class="alert alert-danger" >
+                  Error: {{ error$ }}
+                </div>
+                <div *ngIf="info$" class="alert alert-info" >
+                  Info: {{ info$ }}
+                </div>
+              </h4>
+              <button type="submit" class="btn btn-success btn-block">Download CSV</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" #closeLogin>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- View selector -->
 <ul class="nav nav-tabs md-tabs">
   <li class="nav-item">
@@ -38,12 +86,19 @@
           </div>
 
           <!-- Download table button -->
-          <div class="col">
+          <div class="col" *ngIf="!this.router.url.includes('/home/teacher-achievements')">
             <button class="btn btn-secondary" style="float:right;" id="downloadList" (click)="downloadList()">
               <i class="mdi mdi-download"></i>
               Download this table
             </button>
           </div>
+          <div class="col" *ngIf="this.router.url.includes('/home/teacher-achievements')">
+            <button class="btn btn-secondary" style="float:right;" data-toggle="modal" data-target="#exportModal">
+              <i class="mdi mdi-download"></i>
+              Export teacher achievements
+            </button>
+          </div>
+
         </div>
         <div class="row" style="padding-top:10px;">
           <div class="col">

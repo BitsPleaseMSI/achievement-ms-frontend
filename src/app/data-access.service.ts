@@ -38,6 +38,7 @@ export class DataAccessService {
         if(index[col] == '_id') continue;
         if(index[col] == 'approvedBy') continue;
         if(index[col] == 'rating') continue;
+        if(index[col] == 'user') continue;
 
         if (line != '') line += ',';
 
@@ -46,7 +47,8 @@ export class DataAccessService {
           find = Object.keys(replace[index[col]]);
           array[i][index[col]] = array[i][index[col]].toString().replace(
             RegExp(find.join('|'), 'i'), function(search){return replace[index[col]][search];}
-          )}
+          )
+        }
 
         if(concat[index[col]]){
           array[i][index[col]] = concat[index[col]].concat(array[i][index[col]].toString());

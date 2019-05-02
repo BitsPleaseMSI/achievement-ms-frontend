@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
   limit: number;
   offset: number;
   table: any;
+  error$: string;
+  info$: string;
 
   constructor(private data: DataAccessService, public route: ActivatedRoute, public router: Router, private ac: AppComponent){
     this.achievements$ = [];
@@ -184,15 +186,198 @@ export class HomeComponent implements OnInit {
     this.offset = 0;
     this.getdata('?' + filters.toString());
   }
+  
+  downloadList(event?){
 
-  downloadList(){
+    this.info$ = undefined;
+    this.error$ = undefined;
+
     let replace, headers, concat;
-    if(this.router.url.includes('/home/academic')){
-      this.fileName$ = 'Academic Achievements.csv'
-      // var filters = window.location.search.substring(1).split('&');
-      // var delim = '-';
-      // for(let filter in filters){
-      //   if(filters[filter]){
+
+    if(event){
+      event.preventDefault()
+      let target = event.target;
+
+      if (target.querySelector("#taType").value == "") {
+        this.error$ = "Please select achievement type.";  
+        this.info$ = undefined;  
+        return;
+      }
+
+      let type = target.querySelector("#taType").value;
+      
+      let filters = new URLSearchParams();
+      filters.append("taType", type)
+
+      if (target.querySelector("#fromDate").value != "") {
+        filters.append("fromDate", target.querySelector("#fromDate").value)
+      }
+      if (target.querySelector("#fromDate").value != "") {
+        filters.append("toDate", target.querySelector("#toDate").value)
+      }
+      
+      this.data.getTAchievements("?"+filters.toString())
+      .then(
+        (data) => {
+
+          if (data.length == 0) {
+            this.error$ = "No achievements found. Please adjust the filters.";  
+            this.info$ = undefined;  
+            return;
+          }
+
+          let achs = [];
+          data.forEach(function (user) {
+            user['achievements'].forEach(function (achievement) {
+
+              let ach = {};
+
+              // Order of adding keys MUST be maintained
+              ach['name'] = user['firstName'] + " " + user['lastName']
+              ach['designation'] = user['designation']
+
+              if (achievement.hasOwnProperty('subType')){
+                ach['subType'] = achievement['subType']
+              }
+
+              ach['international'] = achievement['international']
+
+              if (achievement.hasOwnProperty('msi')){
+                ach['msi'] = achievement['msi']
+              }
+
+              ach['topic'] = achievement['topic']
+
+              if (achievement.hasOwnProperty('place')){
+                ach['place'] = achievement['place']
+              }
+
+              if (achievement.hasOwnProperty('sponsored')){
+                ach['sponsored'] = achievement['sponsored']
+              }
+
+              if (achievement.hasOwnProperty('published')){
+                ach['published'] = achievement['published']
+              }
+
+              if (achievement.hasOwnProperty('reviewed')){
+                ach['reviewed'] = achievement['reviewed']
+              }
+
+              ach['date'] = achievement['date']
+              
+              // Description is a must in all types
+              if (achievement.hasOwnProperty('description')){
+                ach['description'] = achievement['description']
+              }else{
+                ach['description'] = ''
+              }
+
+              achs.push(ach)
+            });
+          });
+          
+          this.fileName$ = 'Teacher Achievements.csv'
+
+          if (type == 'Book'){
+            headers = [
+              'Name of faculty',
+              'Designation',
+              'Level',
+              'Topic',
+              'College',
+              'Published',
+              'Reviewed',
+              'Date',
+              'Description',
+            ]
+  
+          }else if (type == 'Journal'){
+            headers = [
+              'Name of faculty',
+              'Designation',
+              'Level',
+              'College',
+              'Topic',
+              'Published at (with ISSN No.)',
+              'Reviewed',
+              'Date',
+              'Description',
+            ]
+
+          }else if (type == 'Conference'){
+            headers = [
+              'Name of faculty',
+              'Designation',
+              'Level',
+              'College',
+              'Topic',
+              'Published',
+              'Reviewed',
+              'Date',
+              'Description',
+            ]
+
+          }else if (type == 'SeminarAttended'){
+            headers = [
+              'Name of faculty',
+              'Designation',
+              'Type',
+              'Level',
+              'College',
+              'Topic',
+              'Place',
+              'Sponsored',
+              'Date',
+              'Description',
+            ]
+
+          }
+
+          replace = {
+            'msi':{
+              'true': 'MSI',
+              'false': 'Other',
+            },
+            'international':{
+              'true': 'International',
+              'false': 'National',
+            },
+            'reviewed':{
+              'true': 'Reviewed',
+              'false': 'Not reviewed',
+            },
+            'sponsored':{
+              'true': 'Sponsored',
+              'false': 'Self funded',
+            },
+            'subType':{
+              'SEMINAR': 'Seminar',
+              'CONFERENCE': 'Conference',
+              'WORKSHOP': 'Workshop',
+            //'FDP': 'FDP', Kept for sake of completion.
+              'FDP1WEEK': 'FDP one week or more',
+            },
+          }
+          
+          console.log(Object.keys(achs))
+          console.log(achs)
+          this.createCSV(achs, replace, concat, headers);
+
+          this.info$ = "Successfully exported."
+        },
+        () =>{
+          this.ac.snackbar('Server is not responding, Please try later.');
+        });
+        return;
+      }
+      
+      if(this.router.url.includes('/home/academic')){
+        this.fileName$ = 'Academic Achievements.csv'
+        // var filters = window.location.search.substring(1).split('&');
+        // var delim = '-';
+        // for(let filter in filters){
+          //   if(filters[filter]){
       //
       //   }
       //   this.fileName$ += delim + filters[filter];
@@ -234,7 +419,6 @@ export class HomeComponent implements OnInit {
         'Section',
         'Department',
         'Date',
-        // 'Rating',
         'Category',
         'Title',
         'Image Url',
@@ -256,47 +440,6 @@ export class HomeComponent implements OnInit {
       }
 
       this.createCSV(this.achievements$, replace, concat, headers);    
-
-    }else if(this.router.url.includes('/home/teacher-achievements')){
-      this.fileName$ = 'Teacher Achievements.csv'
-
-      headers = [
-        'Semester',
-        'Venue',
-      ]
-      replace = {
-        'approved':{
-          'true': 'Approved',
-          'false': 'Unapproved',
-        },
-        'participated':{
-          'true': 'Participated',
-          'false': 'Oraganized',
-        },
-      }
-      concat = {
-        'imageUrl':'http://13.59.95.13:8081/',
-      }
-
-      let filters = new URLSearchParams();
-      filters.append("taType", 'Book')
-
-      this.data.getTAchievements("?"+filters.toString())
-      .then(
-        (data) => {
-          let achs = [];
-          data.forEach(function (user) {
-            user['achievements'].forEach(function (achievements) {
-              achs.push(achievements)
-            });
-          });
-          
-          console.log(achs)
-          // this.createCSV(data, replace, concat, headers);
-        },
-        () =>{
-          this.ac.snackbar('Server is not responding, Please try later.');
-      });
 
     }
 

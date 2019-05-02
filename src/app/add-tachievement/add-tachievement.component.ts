@@ -226,6 +226,9 @@ export class AddFacultyComponent implements OnInit {
     }
     if (this.msi != undefined) {
       achievement['msi'] = this.msi;
+    }else{
+      // Because API is not perfectly implemented
+      achievement['msi'] = false;
     }
     
 
@@ -255,7 +258,7 @@ export class AddFacultyComponent implements OnInit {
             this.error$ = undefined;
             this.info$ = 'Achievement added successfully.';
             this.ac.snackbar('Achievement added successfully!');
-            this.resetFields(target);
+            // this.resetFields(target);
             $('#addAchievementButton').removeAttr('disabled');
           }
         }

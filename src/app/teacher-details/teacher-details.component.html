@@ -32,20 +32,19 @@
       <div name=details style="margin: auto">
         <div class="row">
           <div class="col">
-            <h4 class="text-primary">College: <h5 class="text-dark" style="padding-left:20px;display:inline;">{{ item.msi?"MSI":"Other" }}</h5></h4>
+            <h4 *ngIf="item.hasOwnProperty('msi')" class="text-primary">College: <h5 class="text-dark" style="display:inline;">{{ item.msi?"MSI":"Other" }}</h5></h4>
             <h4 class="text-primary">Topic: <h5 class="text-dark" style="display:inline;">{{ item.topic }}</h5></h4>
-            <h4 class="text-primary">Level: <h5 class="text-dark" style="display:inline;">{{ item.international?"International":"National" }}</h5></h4>
-            <h4 class="text-primary">Place: <h5 class="text-dark" style="display:inline;">{{ item.place }}</h5></h4>
-            <h4 class="text-primary">Published: <h5 class="text-dark" style="display:inline;">{{ item.published }}</h5></h4>
-            <h4 class="text-primary">Reviewed: <h5 class="text-dark" style="display:inline;">{{ item.reviewed?"Reviewed":"Not reviewed" }}</h5></h4>
-            <h4 class="text-primary">Place: <h5 class="text-dark" style="display:inline;">{{ item.place }}</h5></h4>
+            <h4 *ngIf="item.hasOwnProperty('published')" class="text-primary">Published: <h5 class="text-dark" style="display:inline;">{{ item.published }}</h5></h4>
+            <h4 *ngIf="item.hasOwnProperty('place')" class="text-primary">Place: <h5 class="text-dark" style="display:inline;">{{ item.place }}</h5></h4>
           </div>
           <div class="col">
             <h4 class="text-primary"><h5 class="text-dark" style="display:inline;">{{ item.date }}</h5></h4>
+            <h4 class="text-primary">Level: <h5 class="text-dark" style="display:inline;">{{ item.international?"International":"National" }}</h5></h4>
+            <h4 *ngIf="item.hasOwnProperty('reviewed')" class="text-primary">Reviewed: <h5 class="text-dark" style="display:inline;">{{ item.reviewed?"Reviewed":"Not reviewed" }}</h5></h4>
           </div>
         </div>
         <div class="row" style="margin: inherit">
-          <h4 class="text-primary"><h5 class="text-dark" style="display:inline;">{{ item.description }}</h5></h4>
+          <h4 *ngIf="item.hasOwnProperty('description')" class="text-primary">Description: <h5 class="text-dark" style="display:inline;">{{ item.description }}</h5></h4>
         </div>
       </div>
       <div class="form-group row" style="display:flex;justify-content:flex-end;">
