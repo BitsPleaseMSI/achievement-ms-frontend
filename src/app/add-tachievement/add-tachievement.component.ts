@@ -43,6 +43,7 @@ export class AddFacultyComponent implements OnInit {
     target.querySelector('#date').value = '';
     target.querySelector('#topic').value = '';
     target.querySelector('#published').value = '';
+    target.querySelector('#description').value = '';
     this.international = undefined;
     this.reviewed = undefined;
     this.sponsored = undefined;
