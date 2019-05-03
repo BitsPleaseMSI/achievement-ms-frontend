@@ -33,9 +33,6 @@ export class TeacherDetailsComponent implements OnInit {
           this.serverResponse = data["achs"];
           this.tName$ = data["user"]["firstName"] + " " + data["user"]["lastName"];
           this.achievement$ = data["achs"];
-
-          console.log(this.achievement$)
-
           $('#detailLoading').hide(50);
         }
       },

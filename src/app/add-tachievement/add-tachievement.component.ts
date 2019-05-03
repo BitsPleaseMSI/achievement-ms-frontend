@@ -230,11 +230,6 @@ export class AddFacultyComponent implements OnInit {
       }
     }
 
-
-    for(let key in achievement){
-      console.log(key.padStart(13) + ": " +achievement[key])
-    }
-    
     let error = true;
     this.data.addTAchievement(achievement).subscribe(
       data => {

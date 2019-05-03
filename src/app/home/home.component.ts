@@ -360,8 +360,6 @@ export class HomeComponent implements OnInit {
             },
           }
           
-          console.log(Object.keys(achs))
-          console.log(achs)
           this.createCSV(achs, replace, concat, headers);
 
           this.info$ = "Successfully exported."

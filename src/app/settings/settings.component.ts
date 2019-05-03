@@ -38,6 +38,7 @@ export class SettingsComponent implements OnInit {
         (document.getElementById('firstName') as HTMLInputElement).value = data['firstName'];
         (document.getElementById('lastName') as HTMLInputElement).value = data['lastName'];
         (document.getElementById('newEmail') as HTMLInputElement).value = data['email'];
+        (document.getElementById('designation') as HTMLInputElement).value = data['designation'];
         (document.getElementById('password') as HTMLInputElement).value = '';
       },
       (error) => {
@@ -63,6 +64,7 @@ export class SettingsComponent implements OnInit {
             params['email'] = data['email'];
             params['newEmail'] = target.querySelector('#newEmail').value;
             params['password'] = target.querySelector('#password').value;
+            params['designation'] = target.querySelector('#designation').value;
 
             for(let key in params){
               if((params[key] == '') || (!safe(params[key].toString()))){

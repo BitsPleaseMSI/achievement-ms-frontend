@@ -13774,7 +13774,8 @@ input:focus {
   -moz-box-shadow: -3px 0 20px 0 #555;
   -webkit-box-shadow: -3px 0 20px 0 #555;
   box-shadow: -3px 0 20px 0 #555;
-  // min-height: calc(100vh - 63px);
+  // background-size: 2000px;
+  // min-height: max-content;
   background: $sidebar-color;
   background-image: url("./assets/ams-sidebar.png");
   background-attachment: fixed;
