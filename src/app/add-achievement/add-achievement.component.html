@@ -2,11 +2,11 @@
 <div class="card">
   <div class="card-body">
     <form (submit)="addAchievement($event)" action="achievement/add">
-      <h4 style="text-align:center">Student details</h4>
-      <div class="alert alert-success" >
+      <h4 style="text-align:center">
         NOTE: Achievements will only be displayed on the home page once they are approved by your class co-ordiantor.
-      </div>
-
+      </h4>
+      <br>
+      <h4 style="text-align:center">Student details</h4>
       <div class="row">
           <div class="form-group col">
             <label>Name</label>
@@ -27,6 +27,7 @@
         <div class="form-group col">
           <label>Current semester</label>
           <select id="semester" name="semester" class="form-control">
+            <option value="">Select semester</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -38,6 +39,7 @@
         <div class="form-group col">
           <label>Section</label>
           <select id="section" name="section" class="form-control" placeholder="Section">
+            <option value="">Select section</option>
             <option>A</option>
             <option>B</option>
             <option>C</option>
@@ -48,6 +50,7 @@
         <div class="form-group col">
           <label>Department</label>
           <select id="department" name="department" class="form-control">
+            <option value="">Select department</option>
             <option value="education">Education</option>
             <option value="computerscience">Computer Science</option>
             <option value="management">Management</option>
@@ -57,6 +60,7 @@
         <div class="form-group col">
           <label>Shift</label>
           <select id="shift" name="shift" class="form-control" placeholder="Shift">
+            <option value="">Select shift</option>
             <option value="morning">Morning</option>
             <option value="evening">Evening</option>
           </select>
@@ -74,6 +78,7 @@
         <div class="form-group col">
           <label>Event Category</label>
           <select  id="category" name="category" class="form-control" placeholder="Category">
+            <option value="">Select category</option>
             <option value="sports">Sports</option>
             <option value="cultural">Cultural</option>
             <option value="technical">Technical</option>
@@ -97,12 +102,20 @@
       </div>
       <div class="row">
         <div class="form-group col">
+          <label>Role</label>
+          <div class="col">
+            <mat-button-toggle-group>
+              <mat-button-toggle [checked]="this.role == true" (click)="this.role = true">Participant</mat-button-toggle>
+              <mat-button-toggle [checked]="this.role == false" (click)="this.role = false">Organiszer</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+<!--   
           <label for="group1">Role</label>
           <div class="col">
             <input type="radio" id="participated" name="group1" checked>Participated
             <br>
             <input type="radio" id="organised" name="group1">Organised
-          </div>
+          </div> -->
         </div>
         <div class="form-group col">
           <label>Description</label>

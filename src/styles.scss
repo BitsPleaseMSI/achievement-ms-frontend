@@ -13779,6 +13779,7 @@ input:focus {
   background: $sidebar-color;
   background-image: url("./assets/ams-sidebar.png");
   background-attachment: fixed;
+  background-repeat: repeat;
   font-family: "Poppins", sans-serif;
   padding: 0;
   width: 255px;

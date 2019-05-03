@@ -17,6 +17,7 @@ export class AddAchievementComponent implements OnInit {
   fileName: string;
   sessionFrom: number;
   sessionTo: number;
+  role: boolean;
 
   constructor(private data: DataAccessService, private ac: AppComponent) {}
 
@@ -95,14 +96,21 @@ export class AddAchievementComponent implements OnInit {
       target.querySelector('#title').value.trim(),
       target.querySelector('#venue').value.trim(),
       target.querySelector('#category').value,
-      target.querySelector('#participated').checked,
+      this.role,
       target.querySelector('#description').value.trim(),
       this.selectedFiles.item(0),
     )
+
     // Sanitising data
     for(let key in achievement){
       if(key == 'participated'){
-
+        if (achievement[key] == undefined) {
+          this.error$ = 'Please check role';
+          this.info$ = undefined;
+          $('#addAchievementLoading').hide(50);
+          $('#addAchievementButton').removeAttr('disabled');
+          return;
+        }
       }else if((achievement[key] == '') || (!safe(achievement[key].toString()))){
         if(key == 'eventName')
         key = 'event name'
@@ -132,8 +140,9 @@ export class AddAchievementComponent implements OnInit {
             target.querySelector('#date').value = undefined;
             target.querySelector('#title').value = '';
             target.querySelector('#venue').value = '';
-            target.querySelector('#category').value = 'sports';
+            target.querySelector('#category').value = '';
             target.querySelector('#description').value = '';
+            this.role = undefined;
             target.querySelector('#image').value = '';
             $('#addAchievementButton').removeAttr('disabled');
           } else {
