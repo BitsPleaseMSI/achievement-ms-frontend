@@ -1,15 +1,15 @@
 <!-- Delete modal -->
 <div class="modal fade" id="deleteModal" role="dialog">
-  <div class="modal-dialog" >
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
         <h3 class="text-center">Are you sure you want to delete this achievement?</h3>
         <div class="row">
           <div class="col">
-              <button type="button" name="delete" class="btn btn-primary btn-block" data-dismiss="modal" (click)="delete($event)">Yes</button>
+              <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" (click)="delete($event)">Yes</button>
           </div>
           <div class="col">
-              <button type="button" name="delete" class="btn btn-secondary btn-block" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">No</button>
           </div>
         </div>
       </div>
@@ -23,19 +23,40 @@
   </div>
   <div class="card-body" *ngIf="tName$">
     <h1 class="" style="font-size:32px;text-align:center;">Achievement details of {{ tName$ }}</h1>
-    <br>
+
+    <!-- Filter for non-academic view -->
+    <form id="filter" class="form-sample"(submit)="filter($event)" action="">
+      <div class="form-group row">
+        <div class="col">
+          <label>Publication type:</label>
+          <select id="taType" class="form-control">
+            <option value="">Select achievement type</option>
+            <option value="Book">Book published</option>
+            <option value="Journal">Journal published</option>
+            <option value="Conference">Conference paper published / presented</option>
+            <option value="SeminarAttended">Seminar / Conference / Workshop / FDP Attended</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="form-group row" style="display:flex;justify-content:center;">
+        <button class="btn btn-success" type="submit">Apply filter</button>
+        <button class="btn btn-primary" style="margin-left:10px" (click)="resetFilters($event)">Reset filter</button>
+      </div>
+    </form>
+
+
     <div *ngFor="let item of achievement$; let i = index">
-      <h3 *ngIf="item.taType == 'Book'">Book</h3>
-      <h3 *ngIf="item.taType == 'Journal'">Journal</h3>
-      <h3 *ngIf="item.taType == 'Conference'">Conference</h3>
-      <h3 *ngIf="item.taType == 'SeminarAttended'">Seminar attended</h3>
+      <h3>{{ item.topic }}</h3>
       <div name=details style="margin: auto">
         <div class="row">
           <div class="col">
+            <h4 class="text-primary" *ngIf="item.taType == 'Book'">Type: <h5 class="text-dark" style="display:inline;">Book</h5></h4>
+            <h4 class="text-primary" *ngIf="item.taType == 'Journal'">Type: <h5 class="text-dark" style="display:inline;">Journal</h5></h4>
+            <h4 class="text-primary" *ngIf="item.taType == 'Conference'">Type: <h5 class="text-dark" style="display:inline;">Conference</h5></h4>
+            <h4 class="text-primary" *ngIf="item.taType == 'SeminarAttended'">Type: <h5 class="text-dark" style="display:inline;">Seminar attended</h5></h4>
             <h4 *ngIf="item.hasOwnProperty('msi')" class="text-primary">College: <h5 class="text-dark" style="display:inline;">{{ item.msi?"MSI":"Other" }}</h5></h4>
-            <h4 class="text-primary">Topic: <h5 class="text-dark" style="display:inline;">{{ item.topic }}</h5></h4>
-            <h4 *ngIf="item.hasOwnProperty('published')" class="text-primary">Published: <h5 class="text-dark" style="display:inline;">{{ item.published }}</h5></h4>
-            <h4 *ngIf="item.hasOwnProperty('place')" class="text-primary">Place: <h5 class="text-dark" style="display:inline;">{{ item.place }}</h5></h4>
+            <h4 class="text-primary">{{item.taType=="SeminarAttended"?"Place":"Published"}}: <h5 class="text-dark" style="display:inline;">{{ item.published }}</h5></h4>
           </div>
           <div class="col">
             <h4 class="text-primary"><h5 class="text-dark" style="display:inline;">{{ item.date }}</h5></h4>
@@ -48,7 +69,7 @@
         </div>
       </div>
       <div class="form-group row" style="display:flex;justify-content:flex-end;">
-        <button *ngIf="user$ && user$.id == item.user" class="btn btn-danger" type="button" name="delete" style="margin-left:10px" data-toggle="modal" data-target="#deleteModal">
+        <button (click)="deleteId$=item._id" *ngIf="user$ && user$.id == item.user" class="btn btn-danger" type="button" style="margin-left:10px" data-toggle="modal" data-target="#deleteModal">
           <i class="mdi mdi-delete"></i>
           Delete
         </button>

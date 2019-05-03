@@ -27,7 +27,6 @@ export class AddFacultyComponent implements OnInit {
     $('#reviewedControl').hide();
     $('#fundingControl').hide();
     $('#publishedControl').hide();
-    $('#placeControl').hide();
     $('#descControl').hide();
     $('#collegeControl').hide();
   }
@@ -58,8 +57,13 @@ export class AddFacultyComponent implements OnInit {
 
     if(target.value == "Journal"){
       $('#pubLabel').text("Published at (with ISSN No.)");
+      $('#published').attr("placeholder", "Published");
+    }else if(target.value == "SeminarAttended"){
+      $('#pubLabel').text("Place");
+      $('#published').attr("placeholder", "Place");
     }else{
       $('#pubLabel').text("Published / Presented at");
+      $('#published').attr("placeholder", "Published");
     }
 
     if (target.value != "Book" && target.value != "") {
@@ -78,7 +82,7 @@ export class AddFacultyComponent implements OnInit {
       $('#descControl').show();  
     }else if(target.value == "SeminarAttended"){
       $('#typeControl').show();
-      $('#placeControl').show();
+      $('#publishedControl').show();
       $('#fundingControl').show();
       $('#basicControl').show();
       $('#levelControl').show();
@@ -166,22 +170,8 @@ export class AddFacultyComponent implements OnInit {
       return;
     }
     // Published desc
-    if(
-      target.querySelector('#taType').value != 'SeminarAttended' &&
-      target.querySelector('#published').value.trim() == ""
-    ){
+    if(target.querySelector('#published').value.trim() == ""){
       this.error$ = 'Please check published description';
-      this.info$ = undefined;
-      $('#addAchievementLoading').hide(50);
-      $('#addAchievementButton').removeAttr('disabled');
-      return;
-    }
-    // Palce
-    if(
-      target.querySelector('#taType').value == 'SeminarAttended' &&
-      target.querySelector('#place').value.trim() == ""
-    ){
-      this.error$ = 'Please check place';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
@@ -206,9 +196,6 @@ export class AddFacultyComponent implements OnInit {
     achievement['date'] = target.querySelector('#date').value.trim();
     achievement['published'] = target.querySelector('#published').value.trim();
 
-    if (target.querySelector('#place').value.trim() != "") {
-      achievement['place'] = target.querySelector('#place').value.trim();
-    }
     if (target.querySelector('#subType').value.trim() != "") {
       achievement['subType'] = target.querySelector('#subType').value.trim();
     }

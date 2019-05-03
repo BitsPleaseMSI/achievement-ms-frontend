@@ -265,7 +265,7 @@
                 <td *ngIf="!achievement.participated">ORGANISER</td>
                 <td>{{ achievement.category | uppercase }}</td>
                 <td>
-                  <a class="btn btn-secondary" target="_blank" href="./achievement/{{ achievement._id }}">
+                  <a class="btn btn-secondary" routerLink="/achievement/{{ achievement._id }}">
                     <i class="mdi mdi-account-card-details"></i>
                     View details
                   </a>
@@ -316,7 +316,7 @@
               <td *ngIf="achievement.department != 'computerscience'">{{ achievement.department | uppercase }}</td>
               <td>{{ achievement.shift | uppercase}}</td>
               <td>
-                <a class="btn btn-secondary" target="_blank" href="./teacher-achievement/{{ achievement.id }}">
+                <a class="btn btn-secondary" routerLink="/teacher-achievement/{{ achievement.id }}">
                   <i class="mdi mdi-account-card-details"></i>
                   View details
                 </a>

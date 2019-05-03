@@ -266,5 +266,20 @@ export class DataAccessService {
     return this.http.get<any>( api + '/tachievements/allagg').toPromise()
   }
 
-  
+
+  deleteTAchievement(id: string){
+    // console.log('[deleteTAchievement]')
+
+    let params = '?id=' + id;
+
+    if(localStorage.getItem('token')){
+      params += '&token=' + localStorage.getItem('token');
+    }else{
+      params += '&token=' + sessionStorage.getItem('token');
+    }
+
+    return this.http.delete<any>(api + '/tachievements/delete' + params)
+  }
+
+
 }
