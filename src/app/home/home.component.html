@@ -11,7 +11,7 @@
             <form (submit)="downloadList($event)">
               <div class="form-group">
                 <select id="taType" name="programme" class="form-control">
-                  <option value="">Select achievement type</option>
+                  <option value="">Select category</option>
                   <option value="Book">Book published</option>
                   <option value="Journal">Journal published</option>
                   <option value="Conference">Conference paper published / presented</option>
@@ -304,6 +304,7 @@
               <tr id="table-heading">
                 <th>S.No.</th>
                 <th>Name</th>
+                <th>Designation</th>
                 <th>Department</th>
                 <th>Shift</th>
                 <th>Details</th>
@@ -312,6 +313,7 @@
             <tr class="tr-hover" *ngFor="let achievement of achievements$; let i = index">
               <td>{{ i+1 }}</td>
               <td style="font-weight: bold;">{{ achievement.firstName + " " + achievement.lastName }}</td>
+              <td>{{ achievement.designation }}</td>
               <td *ngIf="achievement.department == 'computerscience'">COMPUTER SCIENCE</td>
               <td *ngIf="achievement.department != 'computerscience'">{{ achievement.department | uppercase }}</td>
               <td>{{ achievement.shift | uppercase}}</td>
