@@ -119,9 +119,9 @@ export class AddFacultyComponent implements OnInit {
       $('#addAchievementButton').removeAttr('disabled');
       return;
     }
-    // Topic
+    // Title
     if(target.querySelector('#topic').value.trim() == ''){
-      this.error$ = 'Please check topic';
+      this.error$ = 'Please check title';
       this.info$ = undefined;
       $('#addAchievementLoading').hide(50);
       $('#addAchievementButton').removeAttr('disabled');
