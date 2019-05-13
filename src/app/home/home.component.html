@@ -78,7 +78,7 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col">
+          <div class="col" *ngIf="!this.router.url.includes('/home/teacher-achievements')">
             <button class="btn btn-secondary" style="float:left;" id="b">
               <i class="mdi mdi-filter"></i>
               Toggle filter options
